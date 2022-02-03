@@ -17,7 +17,6 @@ import CharacterItems from "./CharacterItems.vue";
 
 <style lang="scss">
 .character {
-  margin: 60px auto 0;
   width: 620px;
 }
 </style>

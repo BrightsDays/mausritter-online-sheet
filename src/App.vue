@@ -1,16 +1,25 @@
 <template>
-  <character />
+  <div class="app">
+    <main-menu />
+    <character />
+  </div>
 </template>
 
 <script setup lang="ts">
 import Character from "./components/Character.vue";
+import MainMenu from "./components/mainMenu.vue";
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+.app {
+  display: flex;
+  width: 900px;
+  justify-content: space-between;
+  margin: 60px auto 0;
+  font-family: 'Ubuntu', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  gap: 15px;
 }
 </style>

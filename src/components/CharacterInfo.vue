@@ -15,7 +15,7 @@ import Stats from "./Stats.vue";
 .info {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 15px;
   margin-top: 15px;
 
   &__description {
@@ -26,6 +26,7 @@ import Stats from "./Stats.vue";
 
   &__stats {
     width: 40%;
+    margin-top: 90px;
   }
 }
 

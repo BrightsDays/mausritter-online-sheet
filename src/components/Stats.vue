@@ -1,5 +1,7 @@
 <template>
   <div class="stats">
+    <span class="stats__info stats__max">Max</span>
+    <span class="stats__info stats__current">Current</span>
     <div class="stats__list">
       <div
           class="stats__item"
@@ -41,8 +43,25 @@ const stats = {
 
 <style lang="scss">
 .stats {
-  width: 100%;
-  margin-top: 150px;
+  position: relative;
+  padding-top: 20px;
+
+  &__info {
+    position: absolute;
+    top: 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--second);
+    font-size: 1.4em;
+    line-height: 1;
+  }
+
+  &__max {
+    right: 100px;
+  }
+
+  &__current {
+    right: 25px;
+  }
 
   &__list {
     display: flex;
@@ -50,7 +69,7 @@ const stats = {
     border: 2px solid var(--main);
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   &__hp {

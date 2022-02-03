@@ -35,7 +35,7 @@
 .about {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 15px;
 
   &__bio,&__details {
     display: flex;
