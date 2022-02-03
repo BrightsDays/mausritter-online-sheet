@@ -20,7 +20,7 @@ import { ref } from 'vue'
 const props = defineProps({
   title: {type: String, default: 'Title'}
 })
-let isOpen = ref(true)
+let isOpen = ref(false)
 
 const toggleDetails = () => {
   isOpen.value = !isOpen.value
@@ -32,7 +32,6 @@ const toggleDetails = () => {
   padding: 15px;
   border-top: 1px solid var(--summary);
   border-bottom: 1px solid var(--summary);
-  margin-top: -1px;
 
   &__summary {
     position: relative;
@@ -41,6 +40,8 @@ const toggleDetails = () => {
     font-weight: 500;
     cursor: pointer;
     transition: padding 0.3s;
+    text-align: left;
+    color: var(--main);
 
     &:before, &:after {
       content: '';
