@@ -1,9 +1,15 @@
 <template>
   <header class="items__header">
     <h2 class="items__heading">Inventory</h2>
+    <div class="grit-input">
+      <label class="grit-input__label">Grit</label>
+      <input class="grit-input__input" />
+      <span class="grit-input__devider">/ </span>
+      <input class="grit-input__input" />
+    </div>
     <div class="pips-input">
-      <label class="pips-input__label" for="pips">Pips</label>
-      <input class="pips-input__input" id="pips" />
+      <label class="pips-input__label">Pips</label>
+      <input class="pips-input__input" />
     </div>
   </header>
   <inventory :bodyItems="bodyItems" :packItems="packItems" />
@@ -36,6 +42,7 @@ const packItems = [
     justify-content: space-between;
     align-items: center;
     margin: 15px 0;
+    gap: 15px;
   }
 
   &__heading {
@@ -48,7 +55,7 @@ const packItems = [
   }
 }
 
-.pips-input {
+.pips-input,.grit-input {
   position: relative;
   border: 2px solid var(--main);
   font-family: 'Ubuntu', sans-serif;
@@ -72,12 +79,31 @@ const packItems = [
   &__input {
     display: inline-block;
     width: 80px;
-    padding: 10px 45px 10px 10px;
+    padding: 8px 45px 8px 10px;
     color: var(--main);
     font-family: 'Ubuntu', sans-serif;
+    text-align: center;
     font-size: 1.4em;
     border: none;
     outline: none;
+  }
+}
+
+.grit-input {
+  margin-left: auto;
+
+  &:after {
+    content: '';
+  }
+
+  &__input {
+    width: 35px;
+    padding: 8px 10px;
+  }
+
+  &__devider {
+    font-size: 1.4em;
+    color: var(--main);
   }
 }
 </style>

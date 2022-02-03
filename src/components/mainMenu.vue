@@ -7,7 +7,10 @@
 <!--          @click="changeColorMode()"-->
 <!--      />-->
     </div>
-    <div class="menu__cards">
+    <div class="menu__options">
+      <ui-details title="Actions">
+
+      </ui-details>
       <ui-details title="Items">
 
       </ui-details>
@@ -42,7 +45,7 @@ import UiDetails from "./ui/uiDetails.vue"
     font-size: 1.4em;
   }
 
-  &__cards {
+  &__options {
     border-bottom: 1px solid var(--main);
   }
 }

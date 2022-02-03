@@ -3,7 +3,15 @@
     <div class="info__description">
       <label class="description-input__label">Portrait/description</label>
     </div>
-    <stats class="info__stats" />
+    <div class="info__stats">
+      <div class="exp-input">
+        <label class="exp-input__label">Level / Exp</label>
+        <input class="exp-input__input exp-input__level" />
+        <span class="exp-input__devider">/</span>
+        <input class="exp-input__input exp-input__exp" />
+      </div>
+      <stats />
+    </div>
   </div>
 </template>
 
@@ -26,7 +34,47 @@ import Stats from "./Stats.vue";
 
   &__stats {
     width: 40%;
-    margin-top: 90px;
+  }
+}
+
+.exp-input {
+  display: flex;
+  margin: 0 0 60px;
+  align-items: center;
+  border: 2px solid var(--main);
+  border-radius: 10px;
+  overflow: hidden;
+
+  &__label {
+    width: 45%;
+    padding: 10px;
+    font-size: 1.4em;
+    color: var(--main);
+    background-color: var(--second-background);
+  }
+
+  &__input {
+    padding: 8px;
+    font-family: 'Cookie', sans-serif;
+    font-size: 1.8em;
+    line-height: 1;
+    color: var(--main);
+    outline: none;
+    border: none;
+    text-align: center;
+  }
+
+  &__level {
+    width: 20%;
+  }
+
+  &__exp {
+    width: 45%;
+  }
+
+  &__devider {
+    font-size: 1.8em;
+    color: var(--main);
   }
 }
 
