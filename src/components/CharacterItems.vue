@@ -6,21 +6,12 @@
       <input class="pips-input__input" id="pips" />
     </div>
   </header>
-  <div class="items__tables">
-    <div class="body-items">
-      <div class="body-items__item" v-for="item in bodyItems" :key="item">
-        <span class="body-items__name">{{ item.name }}</span>
-      </div>
-    </div>
-    <div class="pack-items">
-      <div class="pack-items__item"  v-for="item in packItems">
-        <span class="pack-items__name">{{ item.name }}</span>
-      </div>
-    </div>
-  </div>
+  <inventory :bodyItems="bodyItems" :packItems="packItems" />
 </template>
 
 <script setup lang="ts">
+import Inventory from "./Inventory.vue";
+
 const bodyItems = {
   mainPaw: {name: 'Main paw'},
   firstBody: {name: 'Body'},
@@ -55,11 +46,6 @@ const packItems = [
     line-height: 1;
     color: var(--main);
   }
-
-  &__tables {
-    display: flex;
-    justify-content: space-between;
-  }
 }
 
 .pips-input {
@@ -92,53 +78,6 @@ const packItems = [
     font-size: 1.4em;
     border: none;
     outline: none;
-  }
-}
-
-.body-items {
-  display: grid;
-  position: relative;
-  grid-template-columns: 120px 120px;
-  grid-template-rows: 120px 120px;
-  border: 2px dashed var(--second);
-  overflow: hidden;
-
-  &__item {
-    border: 2px dashed var(--second);
-    margin: -2px;
-  }
-
-  &__name {
-    display: inline-block;
-    text-align: center;
-    font-family: 'Pirata One', sans-serif;
-    font-size: 2em;
-    line-height: 1;
-    color: var(--second);
-    margin-top: 10px;
-  }
-}
-
-.pack-items {
-  display: grid;
-  grid-template-columns: 120px 120px 120px;
-  grid-template-rows: 120px 120px;
-  border: 2px solid var(--main);
-  overflow: hidden;
-
-  &__item {
-    border: 2px dashed var(--second);
-    margin: -2px;
-  }
-
-  &__name {
-    display: inline-block;
-    text-align: center;
-    font-family: 'Pirata One', sans-serif;
-    font-size: 4em;
-    line-height: 1;
-    color: var(--second);
-    margin-top: 40px;
   }
 }
 </style>

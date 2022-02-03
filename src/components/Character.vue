@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import CharacterInfo from "./CharacterInfo.vue";
-import CharacterStats from "./CharacterStats.vue";
+import CharacterInfo from "./CharacterAbout.vue";
+import CharacterStats from "./CharacterInfo.vue";
 import CharacterItems from "./CharacterItems.vue";
 </script>
 
