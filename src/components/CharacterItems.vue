@@ -1,0 +1,144 @@
+<template>
+  <header class="items__header">
+    <h2 class="items__heading">Inventory</h2>
+    <div class="pips-input">
+      <label class="pips-input__label" for="pips">Pips</label>
+      <input class="pips-input__input" id="pips" />
+    </div>
+  </header>
+  <div class="items__tables">
+    <div class="body-items">
+      <div class="body-items__item" v-for="item in bodyItems" :key="item">
+        <span class="body-items__name">{{ item.name }}</span>
+      </div>
+    </div>
+    <div class="pack-items">
+      <div class="pack-items__item"  v-for="item in packItems">
+        <span class="pack-items__name">{{ item.name }}</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+const bodyItems = {
+  mainPaw: {name: 'Main paw'},
+  firstBody: {name: 'Body'},
+  offPaw: {name: 'Second Paw'},
+  secondBody: {name: 'Body'}
+}
+
+const packItems = [
+  {name: '1'},
+  {name: '2'},
+  {name: '3'},
+  {name: '4'},
+  {name: '5'},
+  {name: '6'}
+]
+</script>
+
+<style lang="scss">
+.items {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+  }
+
+  &__heading {
+    display: inline-block;
+    font-family: 'Pirata One', sans-serif;
+    font-size: 4em;
+    font-weight: normal;
+    line-height: 1;
+    color: var(--main);
+  }
+
+  &__tables {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.pips-input {
+  position: relative;
+  border: 2px solid var(--main);
+  font-family: 'Ubuntu', sans-serif;
+  color: var(--main);
+
+  &:after {
+    content: '/ 250';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.4em;
+  }
+
+  &__label {
+    display: inline-block;
+    padding: 10px;
+    font-size: 1.4em;
+    background: var(--second-background);
+  }
+
+  &__input {
+    display: inline-block;
+    width: 80px;
+    padding: 10px 45px 10px 10px;
+    color: var(--main);
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.4em;
+    border: none;
+    outline: none;
+  }
+}
+
+.body-items {
+  display: grid;
+  position: relative;
+  grid-template-columns: 120px 120px;
+  grid-template-rows: 120px 120px;
+  border: 2px dashed var(--second);
+  overflow: hidden;
+
+  &__item {
+    border: 2px dashed var(--second);
+    margin: -2px;
+  }
+
+  &__name {
+    display: inline-block;
+    text-align: center;
+    font-family: 'Pirata One', sans-serif;
+    font-size: 2em;
+    line-height: 1;
+    color: var(--second);
+    margin-top: 10px;
+  }
+}
+
+.pack-items {
+  display: grid;
+  grid-template-columns: 120px 120px 120px;
+  grid-template-rows: 120px 120px;
+  border: 2px solid var(--main);
+  overflow: hidden;
+
+  &__item {
+    border: 2px dashed var(--second);
+    margin: -2px;
+  }
+
+  &__name {
+    display: inline-block;
+    text-align: center;
+    font-family: 'Pirata One', sans-serif;
+    font-size: 4em;
+    line-height: 1;
+    color: var(--second);
+    margin-top: 40px;
+  }
+}
+</style>
