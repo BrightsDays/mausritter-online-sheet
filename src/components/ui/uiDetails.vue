@@ -74,5 +74,9 @@ const toggleDetails = () => {
       }
     }
   }
+
+  &__content {
+    padding-top: 10px;
+  }
 }
 </style>
