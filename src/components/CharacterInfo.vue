@@ -15,7 +15,7 @@
         <input
             class="exp-input__input exp-input__exp"
             v-model="exp"
-            @input="changeExp($event)"
+            @input="changeStat('exp', $event)"
         />
       </div>
       <stats />
@@ -27,6 +27,7 @@
 import Stats from './Stats.vue'
 import {useStore} from 'vuex'
 import {computed} from 'vue'
+import changeStat from '../plugins/changeStat'
 
 const store = useStore()
 
@@ -40,14 +41,6 @@ const level = computed(() => {
 
   return result
 })
-
-const changeExp = (event: Event) => {
-  const value = (event.target as HTMLInputElement).value
-  store.dispatch('setStat', {
-    statName: 'exp',
-    statValue: value
-  })
-}
 </script>
 
 <style lang="scss">

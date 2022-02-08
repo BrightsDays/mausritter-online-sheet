@@ -8,6 +8,7 @@ const state = {
     wil: 0,
     startHp: 0,
     hp: 0,
+    startPips: 0,
     pips: 0
 }
 

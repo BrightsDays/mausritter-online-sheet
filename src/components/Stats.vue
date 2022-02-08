@@ -9,36 +9,51 @@
           :key="item.name"
       >
         <label class="stats__label">{{ item.name }}</label>
-        <input class="stats__input" />
+        <input
+            class="stats__input"
+            v-model="item.max"
+            @input="changeStat(item.name, $event)"
+        />
         <input class="stats__input" />
       </div>
     </div>
     <div class="stats__hp stats__item">
       <label class="stats__label">HP</label>
-      <input class="stats__input" />
+      <input
+          class="stats__input"
+          v-model="hp"
+          @input="changeStat('hp', $event)"
+      />
       <input class="stats__input" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {useStore} from 'vuex'
+import {computed} from 'vue'
+import changeStat from '../plugins/changeStat'
+
+const store = useStore()
+
 const stats = {
   str: {
-    name: 'STR',
-    max: {type: Number},
+    name: 'str',
+    max: computed(() => store.state.str).value,
     current: {type: Number}
   },
   dex: {
-    name: 'DEX',
-    max: {type: Number},
+    name: 'dex',
+    max: computed(() => store.state.dex).value,
     current: {type: Number}
   },
   wil: {
-    name: 'WIL',
-    max: {type: Number},
+    name: 'wil',
+    max: computed(() => store.state.wil).value,
     current: {type: Number}
   }
 }
+const hp = computed(() => store.state.hp)
 </script>
 
 <style lang="scss">
@@ -91,6 +106,7 @@ const stats = {
     line-height: 1;
     color: var(--main);
     background-color: var(--second-background);
+    text-transform: uppercase;
   }
 
   &__input {
