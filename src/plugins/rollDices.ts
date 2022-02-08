@@ -1,4 +1,4 @@
-export default (dices: number, facets: number, remove: string | null) => {
+export default (dices: number, facets: number, remove?: string): number => {
     let result = [];
 
     for (let i = 0; i < dices; i++) {
