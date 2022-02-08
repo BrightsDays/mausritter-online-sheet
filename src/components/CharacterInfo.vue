@@ -6,9 +6,17 @@
     <div class="info__stats">
       <div class="exp-input">
         <label class="exp-input__label">Level / Exp</label>
-        <input class="exp-input__input exp-input__level" />
+        <input
+            class="exp-input__input exp-input__level"
+            v-model="level"
+            readonly
+        />
         <span class="exp-input__devider">/</span>
-        <input class="exp-input__input exp-input__exp" />
+        <input
+            class="exp-input__input exp-input__exp"
+            v-model="exp"
+            @input="changeExp($event)"
+        />
       </div>
       <stats />
     </div>
@@ -16,7 +24,30 @@
 </template>
 
 <script setup lang="ts">
-import Stats from "./Stats.vue";
+import Stats from './Stats.vue'
+import {useStore} from 'vuex'
+import {computed} from 'vue'
+
+const store = useStore()
+
+const exp = computed(() => store.state.exp)
+const level = computed(() => {
+  let result = 1
+
+  if (exp.value >= 1000) result = 2
+  if (exp.value >= 3000) result = 3
+  if (exp.value >= 6000) result = 3 + Math.floor(exp.value / 6000)
+
+  return result
+})
+
+const changeExp = (event: Event) => {
+  const value = (event.target as HTMLInputElement).value
+  store.dispatch('setStat', {
+    statName: 'exp',
+    statValue: value
+  })
+}
 </script>
 
 <style lang="scss">
