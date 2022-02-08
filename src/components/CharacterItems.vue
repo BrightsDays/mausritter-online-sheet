@@ -9,14 +9,25 @@
     </div>
     <div class="pips-input">
       <label class="pips-input__label">Pips</label>
-      <input class="pips-input__input" />
+      <input
+          class="pips-input__input"
+          v-model="pips"
+          @click="changeStat('pips', $event)"
+      />
     </div>
   </header>
   <inventory :bodyItems="bodyItems" :packItems="packItems" />
 </template>
 
 <script setup lang="ts">
-import Inventory from "./Inventory.vue";
+import Inventory from './Inventory.vue'
+import {useStore} from 'vuex'
+import {computed} from 'vue'
+import changeStat from '../plugins/changeStat'
+
+const store = useStore()
+
+const pips = computed(() => store.state.pips)
 
 const bodyItems = {
   mainPaw: {name: 'Main paw'},

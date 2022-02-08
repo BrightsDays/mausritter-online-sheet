@@ -36,23 +36,23 @@ import changeStat from '../plugins/changeStat'
 
 const store = useStore()
 
-const stats = {
-  str: {
+const stats = computed(() => [
+  {
     name: 'str',
-    max: computed(() => store.state.str).value,
+    max: store.state.str,
     current: {type: Number}
   },
-  dex: {
+  {
     name: 'dex',
-    max: computed(() => store.state.dex).value,
+    max: store.state.dex,
     current: {type: Number}
   },
-  wil: {
+  {
     name: 'wil',
-    max: computed(() => store.state.wil).value,
+    max: store.state.wil,
     current: {type: Number}
   }
-}
+])
 const hp = computed(() => store.state.hp)
 </script>
 
