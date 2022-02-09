@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import Character from "./components/Character.vue";
-import MainMenu from "./components/MainMenu.vue";
+import Character from './components/Character.vue'
+import MainMenu from './components/MainMenu.vue'
 </script>
 
 <style lang="scss">

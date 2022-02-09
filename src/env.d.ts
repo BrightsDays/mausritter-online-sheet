@@ -23,3 +23,11 @@ interface Background {
   itemA: string,
   itemB: string
 }
+
+interface ConditionsList {
+  [key: string] : {
+    title: string,
+    description: string,
+    clear: string
+  }
+}

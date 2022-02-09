@@ -23,7 +23,7 @@
 
       </ui-details>
       <ui-details title="Conditions">
-
+        <conditions />
       </ui-details>
     </div>
     <div class="menu__bank">
@@ -38,6 +38,7 @@
 import UiDetails from './ui/uiDetails.vue'
 import {useStore} from 'vuex'
 import rollDices from '../plugins/rollDices'
+import Conditions from './menu/Conditions.vue'
 
 const store = useStore()
 

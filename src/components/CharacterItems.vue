@@ -3,9 +3,17 @@
     <h2 class="items__heading">Inventory</h2>
     <div class="grit-input">
       <label class="grit-input__label">Grit</label>
-      <input class="grit-input__input" />
+      <input
+          class="grit-input__input"
+             v-model="grit"
+             readonly
+      />
       <span class="grit-input__devider">/ </span>
-      <input class="grit-input__input" />
+      <input
+          class="grit-input__input"
+          v-model="maxGrit"
+          readonly
+      />
     </div>
     <div class="pips-input">
       <label class="pips-input__label">Pips</label>
@@ -16,7 +24,7 @@
       />
     </div>
   </header>
-  <inventory :bodyItems="bodyItems" :packItems="packItems" />
+  <inventory />
 </template>
 
 <script setup lang="ts">
@@ -28,22 +36,18 @@ import changeStat from '../plugins/changeStat'
 const store = useStore()
 
 const pips = computed(() => store.state.pips)
+const grit = computed(() => store.state.grit)
+const exp = computed(() => store.state.exp)
 
-const bodyItems = {
-  mainPaw: {name: 'Main paw'},
-  firstBody: {name: 'Body'},
-  offPaw: {name: 'Second Paw'},
-  secondBody: {name: 'Body'}
-}
+const maxGrit = computed(() => {
+  let result = 0
 
-const packItems = [
-  {name: '1'},
-  {name: '2'},
-  {name: '3'},
-  {name: '4'},
-  {name: '5'},
-  {name: '6'}
-]
+  if (exp.value >= 1000) result = 1
+  if (exp.value >= 3000) result = 2
+  if (exp.value >= 6000) result = 2 + Math.floor(exp.value / 6000)
+
+  return result
+})
 </script>
 
 <style lang="scss">
