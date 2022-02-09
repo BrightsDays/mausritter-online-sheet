@@ -3,11 +3,21 @@
     <div class="about__bio">
       <div class="about__name about-input">
         <label class="about-input__label" for="name">Name</label>
-        <input class="about-input__input" id="name" />
+        <input
+            class="about-input__input"
+            id="name"
+            v-model="name"
+            @input="changeStat('name', $event)"
+        />
       </div>
       <div class="about__background about-input">
         <label class="about-input__label about-input__label--small" for="background">Background</label>
-        <input class="about-input__input about-input__input--small" id="background" />
+        <input
+            class="about-input__input about-input__input--small"
+            id="background"
+            v-model="background"
+            readonly
+        />
       </div>
     </div>
     <div class="about__details">
@@ -28,7 +38,20 @@
 </template>
 
 <script setup lang="ts">
+import {useStore} from 'vuex'
+import {computed} from 'vue'
+import backgroundData from '../data/backgroundList.json'
+import changeStat from '../plugins/changeStat'
 
+const store = useStore()
+const backgroundList: BackgroundList = backgroundData
+
+const name = computed(() => store.state.name)
+const background = computed(() => {
+  if (store.state.startHp !== 0 && store.state.startPips !== 0) {
+    return backgroundList[store.state.startHp][store.state.startPips].background
+  }
+})
 </script>
 
 <style lang="scss">

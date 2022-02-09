@@ -11,3 +11,15 @@ interface Payload {
   statName: string,
   statValue: number
 }
+
+interface BackgroundList {
+  [key: string] : {
+    [key: string] : Background
+  }
+}
+
+interface Background {
+  background: string,
+  itemA: string,
+  itemB: string
+}
