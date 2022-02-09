@@ -53,6 +53,14 @@ const createCharacter = () => {
       statName: item,
       statValue: value
     })
+    if (item === 'hp') store.dispatch('setStat', {
+      statName: 'startHp',
+      statValue: value
+    })
+    if (item === 'pips') store.dispatch('setStat', {
+      statName: 'startPips',
+      statValue: value
+    })
   })
 }
 </script>
