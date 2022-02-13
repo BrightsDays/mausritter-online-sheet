@@ -40,8 +40,8 @@
 <script setup lang="ts">
 import {useStore} from 'vuex'
 import {computed} from 'vue'
-import backgroundData from '../data/backgroundList.json'
-import changeStat from '../plugins/changeStat'
+import backgroundData from '../../data/backgroundList.json'
+import changeStat from '../../plugins/changeStat'
 
 const store = useStore()
 const backgroundList: BackgroundList = backgroundData
