@@ -1,0 +1,86 @@
+{
+  "improvised": {
+    "title": "Improvised",
+    "stat": "d6",
+    "image": "",
+    "type": "Improvised",
+    "group": "items"
+  },
+  "needle": {
+    "title": "Needle",
+    "stat": "d6",
+    "image":  "",
+    "type": "Light",
+    "group":  "items"
+  },
+  "dagger": {
+    "title": "Dagger",
+    "stat": "d6",
+    "image":  "",
+    "type": "Light",
+    "group":  "items"
+  },
+  "sword": {
+    "title": "Sword",
+    "stat": "d6/d8",
+    "image":  "",
+    "type": "Medium",
+    "group":  "items"
+  },
+  "axe": {
+    "title": "Axe",
+    "stat": "d6/d8",
+    "image":  "",
+    "type": "Medium",
+    "group":  "items"
+  },
+  "mace": {
+    "title": "Mace",
+    "stat": "d6/d8",
+    "image":  "",
+    "type": "Medium",
+    "group":  "items"
+  },
+  "sling": {
+    "title": "Sling",
+    "stat": "d6",
+    "image":  "",
+    "type": "Light ranged",
+    "group":  "items"
+  },
+  "stones": {
+    "title": "Stones",
+    "stat": "",
+    "image": "",
+    "type": "Ammunition",
+    "group": "items"
+  },
+  "arrows": {
+    "title": "Arrows",
+    "stat": "",
+    "image": "",
+    "type": "Ammunition",
+    "group": "items"
+  },
+  "torches": {
+    "title": "Torches",
+    "stat": "",
+    "image": "",
+    "type": "Utility",
+    "group": "items"
+  },
+  "lantern": {
+    "title": "Lantern",
+    "stat": "",
+    "image": "",
+    "type": "Utility",
+    "group": "items"
+  },
+  "rations": {
+    "title": "Rations",
+    "stat": "",
+    "image": "",
+    "type": "Utility",
+    "group": "items"
+  }
+}

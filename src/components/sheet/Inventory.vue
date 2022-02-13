@@ -27,7 +27,7 @@
             <span class="items__title">{{ item.title }}</span>
             <div class="items__status">
               <ui-item-checkbox />
-              <span class="items__stat">{{ item.stat }}</span>
+              <span v-if="item.stat" class="items__stat">{{ item.stat }}</span>
             </div>
             <span class="items__type">{{ item.type }}</span>
           </div>

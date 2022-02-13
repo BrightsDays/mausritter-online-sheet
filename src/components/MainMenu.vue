@@ -23,6 +23,9 @@
       <ui-details title="Items">
         <items />
       </ui-details>
+      <ui-details title="Spells">
+
+      </ui-details>
       <ui-details title="Conditions">
         <conditions />
       </ui-details>
