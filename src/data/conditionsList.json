@@ -2,26 +2,31 @@
   "exhausted": {
     "title": "Exhausted",
     "description": "",
-    "clear": "After long rest"
+    "clear": "After long rest",
+    "group": "conditions"
   },
   "frightened": {
     "title": "Frightened",
     "description": "WIL save to approach\nsource of fear.",
-    "clear": "After short rest"
+    "clear": "After short rest",
+    "group": "conditions"
   },
   "hungry": {
     "title": "Hungry",
     "description": "",
-    "clear": "After meal"
+    "clear": "After meal",
+    "group": "conditions"
   },
   "injured": {
     "title": "Injured",
     "description": "Disadvantage on\nSTR & DEX saves",
-    "clear": "After full rest"
+    "clear": "After full rest",
+    "group": "conditions"
   },
   "drained": {
     "title": "Drained",
     "description": "Disadvantage on\nWIL saves",
-    "clear": "After full rest"
+    "clear": "After full rest",
+    "group": "conditions"
   }
 }
