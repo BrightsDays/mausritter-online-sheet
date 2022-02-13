@@ -11,15 +11,27 @@
           v-model="packItems"
           group="items"
       >
-        <div
-            class="pack-items__item conditions__item"
-            v-for="item in packItems"
-            :key="item.title"
-        >
-          <span class="conditions__title">{{ item.title}}</span>
-          <span class="conditions__description">{{item.description}}</span>
-          <span class="conditions__clear"><b class="conditions__clear">Clear:</b><br>{{item.clear}}</span>
-        </div>
+        <template v-for="item in packItems" :key="item.title">
+          <div
+              v-if="item.group === 'conditions'"
+              class="pack-items__item conditions__item"
+          >
+            <span class="conditions__title">{{ item.title}}</span>
+            <span class="conditions__description">{{item.description}}</span>
+            <span class="conditions__clear"><b class="conditions__clear">Clear:</b><br>{{item.clear}}</span>
+          </div>
+          <div
+              v-if="item.group === 'items'"
+              class="pack-items__item items__item"
+          >
+            <span class="items__title">{{ item.title }}</span>
+            <div class="items__status">
+              <ui-item-checkbox />
+              <span class="items__stat">{{ item.stat }}</span>
+            </div>
+            <span class="items__type">{{ item.type }}</span>
+          </div>
+        </template>
       </vue-draggable-next>
       <div class="pack-items__back" v-for="item in packBack" :key="item.name">
         <span class="pack-items__name">{{ item.name }}</span>
@@ -32,6 +44,7 @@
 import { VueDraggableNext } from 'vue-draggable-next'
 import {computed} from 'vue'
 import {useStore} from 'vuex'
+import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
 
 const store = useStore()
 
@@ -124,37 +137,6 @@ const packBack = [
     line-height: 1;
     color: var(--second);
     margin-top: 40px;
-  }
-}
-
-.conditions {
-  &__item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 124px;
-    height: 124px;
-    padding: 10px;
-    border: 2px solid var(--main);
-    color: var(--main);
-    cursor: move;
-  }
-
-  &__title {
-    font-family: 'Pirata One', sans-serif;
-    font-size: 2em;
-    line-height: 1;
-  }
-
-  &__description {
-    font-size: 1.1em;
-    text-align: left;
-  }
-
-  &__clear {
-    font-size: 1.1em;
-    text-align: left;
   }
 }
 </style>

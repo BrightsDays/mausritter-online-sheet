@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import {useStore} from 'vuex'
 import {computed} from 'vue'
-import changeStat from '../plugins/changeStat'
+import changeStat from '../../plugins/changeStat'
 
 const store = useStore()
 

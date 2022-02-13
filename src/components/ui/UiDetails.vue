@@ -77,6 +77,11 @@ const toggleDetails = () => {
 
   &__content {
     padding-top: 10px;
+
+    .points {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 }
 </style>

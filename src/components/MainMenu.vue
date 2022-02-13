@@ -17,10 +17,11 @@
         </button>
         <button class="menu__item" disabled>Upload character</button>
         <button class="menu__item" disabled>Download character</button>
+        <button class="menu__item" disabled>Save to local storage</button>
         <button class="menu__item" disabled>Save as PDF</button>
       </ui-details>
       <ui-details title="Items">
-
+        <items />
       </ui-details>
       <ui-details title="Conditions">
         <conditions />
@@ -35,10 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import UiDetails from './ui/uiDetails.vue'
+import UiDetails from './ui/UiDetails.vue'
 import {useStore} from 'vuex'
 import rollDices from '../plugins/rollDices'
 import Conditions from './menu/Conditions.vue'
+import Items from './menu/items.vue'
 
 const store = useStore()
 
