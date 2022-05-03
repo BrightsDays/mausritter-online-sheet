@@ -6,8 +6,8 @@
         <input
             class="about-input__input"
             id="name"
-            v-model="name"
-            @input="changeStat('name', $event)"
+            v-model="pin.name"
+            @input="pin.setStat('name', ($event.target as HTMLInputElement).value)"
         />
       </div>
       <div class="about__background about-input">
@@ -38,20 +38,23 @@
 </template>
 
 <script setup lang="ts">
-import {useStore} from 'vuex'
-import {computed} from 'vue'
+// import {useStore} from 'vuex'
+// import changeStat from '../../plugins/changeStat'
+import { computed } from 'vue'
 import backgroundData from '../../data/backgroundList.json'
-import changeStat from '../../plugins/changeStat'
+import { useStore } from '../../store/pin'
 
-const store = useStore()
+// const store = useStore()
 const backgroundList: BackgroundList = backgroundData
 
-const name = computed(() => store.state.name)
+// const name = computed(() => store.state.name)
 const background = computed(() => {
-  if (store.state.startHp !== 0 && store.state.startPips !== 0) {
-    return backgroundList[store.state.startHp][store.state.startPips].background
+  if (pin.startHp !== 0 && pin.startPips !== 0) {
+    return backgroundList[pin.startHp][pin.startPips].background
   }
 })
+
+const pin = useStore()
 </script>
 
 <style lang="scss">
