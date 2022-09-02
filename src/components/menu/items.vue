@@ -19,12 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from 'vuex'
 import itemsData from '../../data/itemsList.json'
-// import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
 import { Item } from '../../types'
-
-const store = useStore()
 
 const itemsList: Item[] = []
 Object.values(itemsData).forEach(item => itemsList.push(item))
@@ -48,8 +44,8 @@ const onDragging = (event: DragEvent) => {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    width: 124px;
-    height: 124px;
+    width: 121px;
+    height: 121px;
     padding: 5px;
     border: 1px solid var(--main);
     color: var(--main);

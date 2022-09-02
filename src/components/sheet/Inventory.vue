@@ -1,8 +1,25 @@
 <template>
   <div class="inventory">
     <div class="body-items">
-      <div class="body-items__item" v-for="item in bodyBack" :key="item">
-        <span class="body-items__name">{{ item.name }}</span>
+      <div 
+        class="body-items__item" 
+        v-for="item in bodyBack"
+        :key="item.name"
+        :id="item.name.toString()"
+        @drop="event => drop(event, 'bodyBack')"
+        @dragover="allowDrop">
+        <span v-if="!item.item" class="body-items__name">{{ item.name }}</span>
+        <div
+          v-else
+          class="pack-items__item items__item"
+          >
+          <span class="items__title">{{ findItem(item.item)?.title }}</span>
+          <div class="items__status">
+            <ui-item-checkbox />
+            <span v-if="findItem(item.item)?.stat" class="items__stat">{{ findItem(item.item)?.stat }}</span>
+          </div>
+          <span class="items__type">{{ findItem(item.item)?.type }}</span>
+        </div>
       </div>
     </div>
     <div class="pack-items">
@@ -11,7 +28,7 @@
         v-for="item in packBack"
         :key="item.name"
         :id="item.name.toString()"
-        @drop="drop"
+        @drop="event => drop(event, 'packBack')"
         @dragover="allowDrop"
         >
         <span v-if="!item.item" class="pack-items__name">{{ item.name }}</span>
@@ -59,31 +76,38 @@ const findItem = (title: string): Item | null => {
   return findedItem[0] ? findedItem[0] : null
 }
 
-const bodyBack = store.bodyBack
+const bodyBack = computed(() => store.bodyBack)
 const packBack = computed(() => store.packBack)
 
 const allowDrop = (event: DragEvent) => event.preventDefault()
 
-const drop = (event: DragEvent) => {
+const drop = (event: DragEvent, type: string) => {
   event.preventDefault()
 
-  let data = event.dataTransfer 
+  let data = event.dataTransfer
     ? event.dataTransfer.getData('text')
     : null
 
   if (data && event.target?.id) {
-    const updatedPack = {
-      ...packBack.value,
-      [event.target.id]: {
-        name: event.target.id,
-        item: data
-      }
+    if (type === 'bodyBack') {
+      store.updateItems('bodyBack', {
+        ...bodyBack.value,
+        [event.target.id]: {
+          name: event.target.id,
+          item: data
+        }
+      })
     }
-      
-    store.updateItems(
-      'packBack',
-      updatedPack
-    )
+
+    if (type === 'packBack') {
+      store.updateItems('packBack', {
+        ...packBack.value,
+        [event.target.id]: {
+          name: event.target.id,
+          item: data
+        }
+      })
+    }
   }
 }
 </script>
@@ -99,12 +123,11 @@ const drop = (event: DragEvent) => {
   position: relative;
   grid-template-columns: 120px 120px;
   grid-template-rows: 120px 120px;
-  border: 2px dashed var(--second);
+  border: 2px solid var(--main);
   overflow: hidden;
 
   &__item {
-    border: 2px dashed var(--second);
-    margin: -2px;
+    border: 1px dashed var(--second);
   }
 
   &__name {
@@ -143,8 +166,7 @@ const drop = (event: DragEvent) => {
   }
 
   &__back {
-    border: 2px dashed var(--second);
-    margin: -2px;
+    border: 1px dashed var(--second);
   }
 
   &__name {

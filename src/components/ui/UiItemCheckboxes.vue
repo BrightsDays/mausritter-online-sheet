@@ -35,7 +35,7 @@ const useItem = (index: number) => points[index].isUsed.value = ! points[index].
 .points {
   display: flex;
   flex-direction: row;
-  gap: 5px;
+  gap: 3px;
 
   &__item {
     display: block;

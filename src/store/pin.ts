@@ -14,20 +14,20 @@ export const useStore = defineStore('pin',{
     pips: 0,
     grit: 0,
     bodyBack: {
-        1: {
+        'Main paw': {
           name: 'Main paw',
           item: null
         },
-        2: {
-          name: 'Body',
+        'Main Body': {
+          name: 'Main Body',
           item: null
         },
-        3: {
+        'Second Paw': {
           name: 'Second Paw',
           item: null
         },
-        4: {
-          name: 'Body',
+        'Second Body': {
+          name: 'Second Body',
           item: null
         }
     },
