@@ -128,6 +128,26 @@ const drop = (event: DragEvent, type: string) => {
 
   &__item {
     border: 1px dashed var(--second);
+
+    &:nth-child(1) {
+      border-left: none;
+      border-top: none;
+    }
+    
+    &:nth-child(2) {
+      border-right: none;
+      border-top: none;
+    }
+
+    &:nth-child(3) {
+      border-left: none;
+      border-bottom: none;
+    }
+
+    &:nth-child(4) {
+      border-right: none;
+      border-bottom: none;
+    }
   }
 
   &__name {

@@ -50,6 +50,8 @@ const onDragging = (event: DragEvent) => {
     border: 1px solid var(--main);
     color: var(--main);
     cursor: move;
+    position: relative;
+    left: 0.5px;
   }
 
   &__title {

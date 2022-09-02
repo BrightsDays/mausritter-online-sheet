@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { Payload } from 'vuex';
 
 export const useStore = defineStore('pin',{
   state: () => ({
     name: '',
+    background: '',
     exp: 0,
     str: 0,
     dex: 0,
@@ -59,7 +59,9 @@ export const useStore = defineStore('pin',{
     }
   }),
   actions: {
-    setStat (statName: String, statValue: String) {
+    setStat (statName: String, statValue: String | number) {
+      console.log(statName, statValue);
+      
       this[statName] = statValue
     },
     updateItems(packName: String, payload: any) {

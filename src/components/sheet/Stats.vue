@@ -30,8 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import {useStore} from 'vuex'
-import {computed} from 'vue'
+import { useStore } from '../../store/pin'
+import { computed } from 'vue'
 import changeStat from '../../plugins/changeStat'
 
 const store = useStore()
@@ -39,21 +39,21 @@ const store = useStore()
 const stats = computed(() => [
   {
     name: 'str',
-    max: store.state.str,
+    max: store.str,
     current: {type: Number}
   },
   {
     name: 'dex',
-    max: store.state.dex,
+    max: store.dex,
     current: {type: Number}
   },
   {
     name: 'wil',
-    max: store.state.wil,
+    max: store.wil,
     current: {type: Number}
   }
 ])
-const hp = computed(() => store.state.hp)
+const hp = computed(() => store.hp)
 </script>
 
 <style lang="scss">

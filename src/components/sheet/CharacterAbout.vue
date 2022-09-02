@@ -7,7 +7,6 @@
             class="about-input__input"
             id="name"
             v-model="pin.name"
-            @input="changeStat('name', $event)"
         />
       </div>
       <div class="about__background about-input">
@@ -15,7 +14,7 @@
         <input
             class="about-input__input about-input__input--small"
             id="background"
-            v-model="background"
+            v-model="pin.background"
             readonly
         />
       </div>
@@ -38,21 +37,20 @@
 </template>
 
 <script setup lang="ts">
-// import {useStore} from 'vuex'
 import changeStat from '../../plugins/changeStat'
-import { computed } from 'vue'
-import backgroundData from '../../data/backgroundList.json'
+// import { computed } from 'vue'
+// import backgroundData from '../../data/backgroundList.json'
 import { useStore } from '../../store/pin'
 
 // const store = useStore()
-const backgroundList: BackgroundList = backgroundData
+// const backgroundList: BackgroundList = backgroundData
 
 // const name = computed(() => store.state.name)
-const background = computed(() => {
-  if (pin.startHp !== 0 && pin.startPips !== 0) {
-    return backgroundList[pin.startHp][pin.startPips].background
-  }
-})
+// const background = computed(() => {
+//   if (pin.startHp !== 0 && pin.startPips !== 0) {
+//     return backgroundList[pin.startHp][pin.startPips].background
+//   }
+// })
 
 const pin = useStore()
 </script>

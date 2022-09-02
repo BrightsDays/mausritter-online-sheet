@@ -40,10 +40,11 @@
 
 <script setup lang="ts">
 import UiDetails from './ui/UiDetails.vue'
-import {useStore} from 'vuex'
+import { useStore } from '../store/pin'
 import rollDices from '../plugins/rollDices'
 import Conditions from './menu/Conditions.vue'
 import Items from './menu/items.vue'
+import backgroundList from '../data/backgroundList.json'
 
 const store = useStore()
 
@@ -55,19 +56,16 @@ const createCharacter = () => {
         rollDices(1, 6) :
         rollDices(3, 6, 'min')
 
-    store.dispatch('setStat', {
-      statName: item,
-      statValue: value
-    })
-    if (item === 'hp') store.dispatch('setStat', {
-      statName: 'startHp',
-      statValue: value
-    })
-    if (item === 'pips') store.dispatch('setStat', {
-      statName: 'startPips',
-      statValue: value
-    })
+    store.setStat(item, value)
+
+    if (item === 'hp') store.setStat('startHp', value)
+
+    if (item === 'pips') store.setStat('startPips', value)
   })
+  
+  const background = backgroundList[store.hp][store.pips].background
+
+  store.setStat('background', background)
 }
 </script>
 

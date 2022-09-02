@@ -29,15 +29,15 @@
 
 <script setup lang="ts">
 import Inventory from './Inventory.vue'
-import {useStore} from 'vuex'
-import {computed} from 'vue'
+import { useStore } from '../../store/pin'
+import { computed } from 'vue'
 import changeStat from '../../plugins/changeStat'
 
 const store = useStore()
 
-const pips = computed(() => store.state.pips)
-const grit = computed(() => store.state.grit)
-const exp = computed(() => store.state.exp)
+const pips = computed(() => store.pips)
+const grit = computed(() => store.grit)
+const exp = computed(() => store.exp)
 
 const maxGrit = computed(() => {
   let result = 0
