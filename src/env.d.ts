@@ -6,28 +6,3 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-
-interface Payload {
-  statName: string,
-  statValue: number
-}
-
-interface BackgroundList {
-  [key: string] : {
-    [key: string] : Background
-  }
-}
-
-interface Background {
-  background: string,
-  itemA: string,
-  itemB: string
-}
-
-interface ConditionsList {
-  [key: string] : {
-    title: string,
-    description: string,
-    clear: string
-  }
-}

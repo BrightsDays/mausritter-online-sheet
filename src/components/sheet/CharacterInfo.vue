@@ -25,8 +25,8 @@
 
 <script setup lang="ts">
 import Stats from './Stats.vue'
-import {useStore} from 'vuex'
-import {computed} from 'vue'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 import changeStat from '../../plugins/changeStat'
 
 const store = useStore()
@@ -63,7 +63,7 @@ const level = computed(() => {
 
 .exp-input {
   display: flex;
-  margin: 0 0 60px;
+  margin: 0 0 5px;
   align-items: center;
   border: 2px solid var(--main);
   border-radius: 10px;

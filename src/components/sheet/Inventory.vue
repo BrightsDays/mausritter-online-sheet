@@ -6,68 +6,86 @@
       </div>
     </div>
     <div class="pack-items">
-      <vue-draggable-next
-          class="pack-items__list"
-          v-model="packItems"
-          group="items"
-      >
-        <template v-for="item in packItems" :key="item.title">
-          <div
+      <div
+        class="pack-items__back" 
+        v-for="item in packBack"
+        :key="item.name"
+        :id="item.name.toString()"
+        @drop="drop"
+        @dragover="allowDrop"
+        >
+        <span v-if="!item.item" class="pack-items__name">{{ item.name }}</span>
+        <div
+          v-else
+          class="pack-items__item items__item"
+          >
+          <span class="items__title">{{ findItem(item.item)?.title }}</span>
+          <div class="items__status">
+            <ui-item-checkbox />
+            <span v-if="findItem(item.item)?.stat" class="items__stat">{{ findItem(item.item)?.stat }}</span>
+          </div>
+          <span class="items__type">{{ findItem(item.item)?.type }}</span>
+        </div>
+
+        <!-- <div
               v-if="item.group === 'conditions'"
               class="pack-items__item conditions__item"
           >
             <span class="conditions__title">{{ item.title}}</span>
             <span class="conditions__description">{{item.description}}</span>
             <span class="conditions__clear"><b class="conditions__clear">Clear:</b><br>{{item.clear}}</span>
-          </div>
-          <div
-              v-if="item.group === 'items'"
-              class="pack-items__item items__item"
-          >
-            <span class="items__title">{{ item.title }}</span>
-            <div class="items__status">
-              <ui-item-checkbox />
-              <span v-if="item.stat" class="items__stat">{{ item.stat }}</span>
-            </div>
-            <span class="items__type">{{ item.type }}</span>
-          </div>
-        </template>
-      </vue-draggable-next>
-      <div class="pack-items__back" v-for="item in packBack" :key="item.name">
-        <span class="pack-items__name">{{ item.name }}</span>
+          </div> -->
+          
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { VueDraggableNext } from 'vue-draggable-next'
-import {computed} from 'vue'
-import {useStore} from 'vuex'
+import { computed } from 'vue';
+import { useStore } from '../../store/pin'
 import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
+import itemsData from '../../data/itemsList.json'
+import { Item } from '../../types';
 
 const store = useStore()
 
-const packItems = computed({
-  get: () => store.state.items,
-  set: (value) => store.dispatch('updateItems', value)
-})
+const itemsList: Item[] = []
+Object.values(itemsData).forEach(item => itemsList.push(item))
 
-const bodyBack = {
-  mainPaw: {name: 'Main paw'},
-  firstBody: {name: 'Body'},
-  offPaw: {name: 'Second Paw'},
-  secondBody: {name: 'Body'}
+const findItem = (title: string): Item | null => {
+  const findedItem = itemsList.filter(item => item.title === title)
+
+  return findedItem[0] ? findedItem[0] : null
 }
 
-const packBack = [
-  {name: '1'},
-  {name: '2'},
-  {name: '3'},
-  {name: '4'},
-  {name: '5'},
-  {name: '6'}
-]
+const bodyBack = store.bodyBack
+const packBack = computed(() => store.packBack)
+
+const allowDrop = (event: DragEvent) => event.preventDefault()
+
+const drop = (event: DragEvent) => {
+  event.preventDefault()
+
+  let data = event.dataTransfer 
+    ? event.dataTransfer.getData('text')
+    : null
+
+  if (data && event.target?.id) {
+    const updatedPack = {
+      ...packBack.value,
+      [event.target.id]: {
+        name: event.target.id,
+        item: data
+      }
+    }
+      
+    store.updateItems(
+      'packBack',
+      updatedPack
+    )
+  }
+}
 </script>
 
 <style lang="scss">

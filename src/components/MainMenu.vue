@@ -2,10 +2,10 @@
   <aside class="menu">
     <div class="menu__header menu--bordered">
       <h1 class="menu__heading">Character Sheet v.0.0.0</h1>
-<!--      <button-->
-<!--          class="menu__toggle"-->
-<!--          @click="changeColorMode()"-->
-<!--      />-->
+     <!-- <button
+         class="menu__toggle"
+         @click="changeColorMode()"
+     /> -->
     </div>
     <div class="menu__options menu--bordered">
       <ui-details title="Actions" class="menu--bordered">
@@ -74,6 +74,8 @@ const createCharacter = () => {
 <style lang="scss">
 .menu {
   width: 250px;
+  max-height: 100vh;
+  overflow: scroll;
 
   &__header {
     padding: 15px;

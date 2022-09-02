@@ -14,8 +14,9 @@ import MainMenu from './components/MainMenu.vue'
 .app {
   display: flex;
   width: 900px;
+  height: 776px;
   justify-content: space-between;
-  margin: 60px auto 0;
+  margin: 30px auto 0;
   font-family: 'Ubuntu', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

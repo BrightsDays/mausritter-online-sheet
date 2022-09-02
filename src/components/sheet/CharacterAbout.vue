@@ -7,7 +7,7 @@
             class="about-input__input"
             id="name"
             v-model="pin.name"
-            @input="pin.setStat('name', ($event.target as HTMLInputElement).value)"
+            @input="changeStat('name', $event)"
         />
       </div>
       <div class="about__background about-input">
@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 // import {useStore} from 'vuex'
-// import changeStat from '../../plugins/changeStat'
+import changeStat from '../../plugins/changeStat'
 import { computed } from 'vue'
 import backgroundData from '../../data/backgroundList.json'
 import { useStore } from '../../store/pin'

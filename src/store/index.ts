@@ -1,4 +1,5 @@
 import { createStore, Commit } from 'vuex'
+import { Payload } from 'vuex'
 
 const state = {
     name: '',

@@ -1,14 +1,12 @@
 <template>
-  <vue-draggable-next
-      class="items"
-      :list="itemsList"
-      :group="{ name: 'items', pull: 'clone', put: false }"
-      :sort="true"
-  >
+  <div class="items">
     <div
         class="items__item"
         v-for="item in itemsList"
         :key="item.title"
+        :id="item.title"
+        draggable="true" 
+        @dragstart="onDragging"
     >
       <span class="items__title">{{ item.title }}</span>
       <div class="items__status">
@@ -17,19 +15,26 @@
       </div>
       <span class="items__type">{{ item.type }}</span>
     </div>
-  </vue-draggable-next>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { VueDraggableNext } from 'vue-draggable-next'
-import {useStore} from 'vuex'
-import conditionsData from '../../data/itemsList.json'
-import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
+import { useStore } from 'vuex'
+import itemsData from '../../data/itemsList.json'
+// import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
+import { Item } from '../../types'
 
 const store = useStore()
 
-const itemsList = []
-Object.values(conditionsData).forEach(item => itemsList.push(item))
+const itemsList: Item[] = []
+Object.values(itemsData).forEach(item => itemsList.push(item))
+
+const onDragging = (event: DragEvent) => {
+  if (event.dataTransfer) {
+    event.dataTransfer.setData('text', (event.target as Element).id)
+  }
+}
+
 </script>
 
 <style lang="scss">
