@@ -39,33 +39,70 @@
 </template>
 
 <script setup lang="ts">
-import UiDetails from './ui/UiDetails.vue'
-import { useStore } from '../store/pin'
-import rollDices from '../plugins/rollDices'
-import Conditions from './menu/Conditions.vue'
-import Items from './menu/items.vue'
-import backgroundList from '../data/backgroundList.json'
+  import { computed } from 'vue'
+  import UiDetails from './ui/UiDetails.vue'
+  import { useStore } from '../store/pin'
+  import rollDices from '../plugins/rollDices'
+  import Conditions from './menu/Conditions.vue'
+  import Items from './menu/items.vue'
+  import detailsList from '../data/detailsList.json'
+  import backgroundList from '../data/backgroundList.json'
 
-const store = useStore()
+  const store = useStore()
 
-const createCharacter = () => {
-  const statList = ['str', 'dex', 'wil', 'hp', 'pips']
+  const createCharacter = () => {
+    const statList = ['str', 'dex', 'wil', 'hp', 'pips']
 
-  statList.forEach(item => {
-    const value = (item === 'hp' || item === 'pips') ?
-        rollDices(1, 6) :
-        rollDices(3, 6, 'min')
+    statList.forEach(item => {
+      const value = (item === 'hp' || item === 'pips') ?
+          rollDices(1, 6) :
+          rollDices(3, 6, 'min')
 
-    store.setStat(item, value)
+      store.setStat(item, value)
+      store.setStat(`max${item.charAt(0).toUpperCase() + item.slice(1)}`, value)
 
-    if (item === 'hp') store.setStat('startHp', value)
+      if (item === 'hp') {
+        store.setStat('hp', value)
+        store.setStat('maxHp', value)
+      }
 
-    if (item === 'pips') store.setStat('startPips', value)
-  })
-  
-  const background = backgroundList[store.hp][store.pips].background
+      if (item === 'pips') store.setStat('startPips', value)
+    })
+    
+    const background = backgroundList[store.maxHp][store.pips].background
+    store.setStat('background', background)
 
-  store.setStat('background', background)
+    const packBack = computed(() => store.packBack)
+
+    store.updateItems('packBack', {
+          ...packBack.value,
+          1: {
+            name: '1',
+            item: 'Torches'
+          },
+          2: {
+            name: '2',
+            item: 'Rations'
+          },
+          3: {
+            name: '2',
+            item: backgroundList[store.hp][store.pips].itemA
+          },
+          4: {
+            name: '2',
+            item: backgroundList[store.hp][store.pips].itemB
+          }
+        })
+
+    const birthSign = ['Star', 'Wheel', 'Acorn', 'Storm', 'Moon', 'Mother']
+    store.setStat('birthSign', birthSign[rollDices(1, 6) - 1])
+
+    const color = ['Chocolate', 'Black', 'White', 'Tan', 'Grey', 'Blue']
+    const pattern = ['Solid', 'Brindle', 'Patchy', 'Banded', 'Marbled', 'Flecked']
+    
+    store.setStat('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
+
+    store.setStat('details', detailsList[rollDices(1, detailsList.length) - 1])
 }
 </script>
 

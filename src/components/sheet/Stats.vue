@@ -10,21 +10,33 @@
       >
         <label class="stats__label">{{ item.name }}</label>
         <input
-            class="stats__input"
-            v-model="item.max"
-            @input="changeStat(item.name, $event)"
+          type="number"
+          class="stats__input"
+          v-model="item.max"
+          readonly
         />
-        <input class="stats__input" />
+        <input
+          type="number"
+          class="stats__input"
+          v-model="item.current"
+          @input="changeStat(item.name, $event)"
+        />
       </div>
     </div>
     <div class="stats__hp stats__item">
       <label class="stats__label">HP</label>
       <input
-          class="stats__input"
-          v-model="hp"
-          @input="changeStat('hp', $event)"
+        type="number"
+        class="stats__input"
+        v-model="maxHp"
+        readonly
       />
-      <input class="stats__input" />
+      <input
+        type="number"
+        class="stats__input"
+        v-model="hp"
+        @input="changeStat('hp', $event)"
+      />
     </div>
   </div>
 </template>
@@ -39,20 +51,22 @@ const store = useStore()
 const stats = computed(() => [
   {
     name: 'str',
-    max: store.str,
-    current: {type: Number}
+    max: store.maxStr,
+    current: store.str
   },
   {
     name: 'dex',
-    max: store.dex,
-    current: {type: Number}
+    max: store.maxDex,
+    current: store.dex
   },
   {
     name: 'wil',
-    max: store.wil,
-    current: {type: Number}
+    max: store.maxWil,
+    current: store.wil
   }
 ])
+
+const maxHp = computed(() => store.maxHp)
 const hp = computed(() => store.hp)
 </script>
 

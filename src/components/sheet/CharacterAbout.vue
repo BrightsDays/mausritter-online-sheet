@@ -22,22 +22,31 @@
     <div class="about__details">
       <div class="details-input">
         <label class="details-input__label" for="birthsign">Birthsign</label>
-        <input class="details-input__input" id="birthsign" />
+        <input
+          class="details-input__input"
+          id="birthsign"
+          v-model="pin.birthSign"
+          readonly
+        />
       </div>
       <div class="details-input">
         <label class="details-input__label" for="coat">Coat</label>
-        <input class="details-input__input" id="coat" />
+        <input
+          class="details-input__input"
+          id="coat"
+          v-model="pin.coat"
+        />
       </div>
       <div class="details-input">
         <label class="details-input__label" for="look">Look</label>
-        <input class="details-input__input" id="look" />
+        <input class="details-input__input" id="look" v-model="pin.details" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import changeStat from '../../plugins/changeStat'
+// import changeStat from '../../plugins/changeStat'
 // import { computed } from 'vue'
 // import backgroundData from '../../data/backgroundList.json'
 import { useStore } from '../../store/pin'

@@ -36,6 +36,7 @@
           v-else
           class="pack-items__item items__item"
           >
+          {{item.item}}
           <span class="items__title">{{ findItem(item.item)?.title }}</span>
           <div class="items__status">
             <ui-item-checkbox />
@@ -59,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 import { useStore } from '../../store/pin'
 import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
 import itemsData from '../../data/itemsList.json'

@@ -8,6 +8,6 @@ export default (dices: number, facets: number, remove?: string): number => {
 
     if (remove === 'min') result.sort().shift()
     if (remove === 'max') result.sort().pop()
-
+    
     return result.reduce((a, b) => a + b, 0)
 }

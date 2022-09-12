@@ -3,16 +3,18 @@ import { defineStore } from 'pinia'
 export const useStore = defineStore('pin',{
   state: () => ({
     name: '',
-    background: '',
     exp: 0,
+    maxStr: 0,
     str: 0,
+    maxDex: 0,
     dex: 0,
+    maxWil: 0,
     wil: 0,
-    startHp: 0,
+    maxHp: 0,
     hp: 0,
     startPips: 0,
     pips: 0,
-    grit: 0,
+    background: '',
     bodyBack: {
         'Main paw': {
           name: 'Main paw',
@@ -56,12 +58,14 @@ export const useStore = defineStore('pin',{
           name: 6,
           item: null
         },
-    }
+    },
+    birthSign: '',
+    coat: '',
+    details: '',
+    grit: 0
   }),
   actions: {
     setStat (statName: String, statValue: String | number) {
-      console.log(statName, statValue);
-      
       this[statName] = statValue
     },
     updateItems(packName: String, payload: any) {
