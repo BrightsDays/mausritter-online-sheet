@@ -20,11 +20,14 @@
         <button class="menu__item" disabled>Save to local storage</button>
         <button class="menu__item" disabled>Save as PDF</button>
       </ui-details>
-      <ui-details title="Items">
-        <items />
+      <ui-details title="Weapons">
+        
       </ui-details>
       <ui-details title="Spells">
-
+        <spells />
+      </ui-details>
+      <ui-details title="Items">
+        <items />
       </ui-details>
       <ui-details title="Conditions">
         <conditions />
@@ -39,12 +42,12 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
   import UiDetails from './ui/UiDetails.vue'
   import { useStore } from '../store/pin'
   import rollDices from '../plugins/rollDices'
   import Conditions from './menu/Conditions.vue'
   import Items from './menu/items.vue'
+  import Spells from './menu/Spells.vue'
   import detailsList from '../data/detailsList.json'
   import backgroundList from '../data/backgroundList.json'
 

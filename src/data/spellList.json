@@ -1,0 +1,9 @@
+{
+  "magicMissle": {
+    "title": "Magic missile",
+    "stat": "",
+    "image": "",
+    "type": "Spell",
+    "group": "items"
+  }
+}

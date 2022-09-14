@@ -69,15 +69,19 @@ import { computed } from 'vue'
 import { useStore } from '../../store/pin'
 import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
 import itemsData from '../../data/itemsList.json'
+import spellsData from '../../data/spellList.json'
 import { Item } from '../../types';
 
 const store = useStore()
 
 const itemsList: Item[] = []
 Object.values(itemsData).forEach(item => itemsList.push(item))
+const spellsList: Item[] = []
+Object.values(spellsData).forEach(item => itemsList.push(item))
 
 const findItem = (title: string): Item | null => {
   const findedItem = itemsList.filter(item => item.title === title)
+    || spellsList.filter(spell => spell.title === title)
 
   return findedItem[0] ? findedItem[0] : null
 }
