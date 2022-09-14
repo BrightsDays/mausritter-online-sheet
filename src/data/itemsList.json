@@ -1,65 +1,17 @@
 {
-  "improvised": {
-    "title": "Improvised",
-    "stat": "d6",
+
+  "leadCoat": {
+    "title": "Lead coat",
+    "stat": "1 def",
     "image": "",
-    "type": "Improvised",
+    "type": "Heavy armor",
     "group": "items"
   },
-  "needle": {
-    "title": "Needle",
-    "stat": "d6",
-    "image":  "",
-    "type": "Light",
-    "group":  "items"
-  },
-  "dagger": {
-    "title": "Dagger",
-    "stat": "d6",
-    "image":  "",
-    "type": "Light",
-    "group":  "items"
-  },
-  "sword": {
-    "title": "Sword",
-    "stat": "d6/d8",
-    "image":  "",
-    "type": "Medium",
-    "group":  "items"
-  },
-  "axe": {
-    "title": "Axe",
-    "stat": "d6/d8",
-    "image":  "",
-    "type": "Medium",
-    "group":  "items"
-  },
-  "mace": {
-    "title": "Mace",
-    "stat": "d6/d8",
-    "image":  "",
-    "type": "Medium",
-    "group":  "items"
-  },
-  "sling": {
-    "title": "Sling",
-    "stat": "d6",
-    "image":  "",
-    "type": "Light ranged",
-    "group":  "items"
-  },
-  "stones": {
-    "title": "Stones",
-    "stat": "",
+  "shieldJerkin": {
+    "title": "Shield & jerkin",
+    "stat": "1 def",
     "image": "",
-    "type": "Ammunition",
-    "group": "items"
-  },
-  "arrows": {
-    "title": "Arrows",
-    "stat": "",
-    "image": "",
-    "type": "Ammunition",
+    "type": "Light armor",
     "group": "items"
   },
   "torches": {
@@ -81,20 +33,6 @@
     "stat": "",
     "image": "",
     "type": "Utility",
-    "group": "items"
-  },
-  "leadCoat": {
-    "title": "Lead coat",
-    "stat": "1 def",
-    "image": "",
-    "type": "Heavy armor",
-    "group": "items"
-  },
-  "shieldJerkin": {
-    "title": "Shield & jerkin",
-    "stat": "1 def",
-    "image": "",
-    "type": "Light armor",
     "group": "items"
   }
 }

@@ -21,7 +21,7 @@
         <button class="menu__item" disabled>Save as PDF</button>
       </ui-details>
       <ui-details title="Weapons">
-        
+        <weapons />
       </ui-details>
       <ui-details title="Spells">
         <spells />
@@ -50,6 +50,7 @@
   import Spells from './menu/Spells.vue'
   import detailsList from '../data/detailsList.json'
   import backgroundList from '../data/backgroundList.json'
+  import Weapons from './menu/Weapons.vue'
 
   const store = useStore()
 

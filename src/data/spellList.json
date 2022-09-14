@@ -5,5 +5,26 @@
     "image": "",
     "type": "Spell",
     "group": "items"
+  },
+  "beUnderstood": {
+    "title": "Be understood",
+    "stat": "",
+    "image": "",
+    "type": "Spell",
+    "group": "items"
+  },
+  "heal": {
+    "title": "Heal",
+    "stat": "",
+    "image": "",
+    "type": "Spell",
+    "group": "items"
+  },
+  "restore": {
+    "title": "Restore",
+    "stat": "",
+    "image": "",
+    "type": "Spell",
+    "group": "items"
   }
 }
