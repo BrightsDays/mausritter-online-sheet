@@ -9,8 +9,7 @@
   "dependencies": {
     "pinia": "^2.0.13",
     "sass": "^1.49.0",
-    "vue": "^3.2.25",
-    "vuex": "^4.0.2"
+    "vue": "^3.2.25"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",

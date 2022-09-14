@@ -25,13 +25,13 @@
 
 <script setup lang="ts">
 import Stats from './Stats.vue'
-import { useStore } from 'vuex'
+import { useStore } from '../../store/pin'
 import { computed } from 'vue'
 import changeStat from '../../plugins/changeStat'
 
 const store = useStore()
 
-const exp = computed(() => store.state.exp)
+const exp = computed(() => store.exp)
 const level = computed(() => {
   let result = 1
 

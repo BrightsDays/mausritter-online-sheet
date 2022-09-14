@@ -1,4 +1,3 @@
-// import store from '../store'
 import { useStore } from '../store/pin'
 
 export default (statName: string, event: Event) => {
@@ -6,9 +5,4 @@ export default (statName: string, event: Event) => {
     const value = (event.target as HTMLInputElement).value
 
     pin.setStat(statName, value)
-
-    // store.dispatch('setStat', {
-    //     statName: statName,
-    //     statValue: value
-    // })
 }
