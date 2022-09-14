@@ -7,12 +7,15 @@
         :key="item.name"
         :id="item.name.toString()"
         @drop="event => drop(event, 'bodyBack')"
-        @dragover="allowDrop">
+        @dragover="allowDrop"
+        @dragleave="leaveDrag">
         <span v-if="!item.item" class="body-items__name">{{ item.name }}</span>
         <div
           v-else
           class="pack-items__item items__item"
-          >
+          draggable="true"
+          @dragstart="onDragging"
+        >
           <span class="items__title">{{ findItem(item.item)?.title }}</span>
           <div class="items__status">
             <ui-item-checkbox />
@@ -30,13 +33,15 @@
         :id="item.name.toString()"
         @drop="event => drop(event, 'packBack')"
         @dragover="allowDrop"
+        @dragleave="leaveDrag"
         >
         <span v-if="!item.item" class="pack-items__name">{{ item.name }}</span>
         <div
           v-else
           class="pack-items__item items__item"
-          >
-          {{item.item}}
+          draggable="true"
+          @dragstart="onDragging"
+        >
           <span class="items__title">{{ findItem(item.item)?.title }}</span>
           <div class="items__status">
             <ui-item-checkbox />
@@ -80,36 +85,80 @@ const findItem = (title: string): Item | null => {
 const bodyBack = computed(() => store.bodyBack)
 const packBack = computed(() => store.packBack)
 
-const allowDrop = (event: DragEvent) => event.preventDefault()
+const onDragging = (event: DragEvent) => {
+  if (event.dataTransfer) {
+    event.dataTransfer.setData('text', (event.target as Element).childNodes[0].textContent)
+    event.dataTransfer.setData('id', (event.target as Element).parentNode.id)
+  }
+}
+
+const allowDrop = (event: DragEvent) => {
+  event.preventDefault()
+  event.target.classList.add('droppable')
+}
+
+const leaveDrag = (event: DragEvent) => {
+  event.preventDefault()
+  event.target.classList.remove('droppable')
+}
 
 const drop = (event: DragEvent, type: string) => {
   event.preventDefault()
+  
+  if (event.target.childNodes[0].classList.contains('body-items__name')
+      || event.target.childNodes[0].classList.contains('pack-items__name')) {
+    const slotId = event.dataTransfer.getData('id')
+  
+    if (slotId) {
+      if (Object.keys(bodyBack.value).includes(slotId)) {      
+        store.updateItems('bodyBack', {
+          ...bodyBack.value,
+          [slotId]: {
+            name: slotId,
+            item: null
+          }
+        })
+      }
 
-  let data = event.dataTransfer
-    ? event.dataTransfer.getData('text')
-    : null
-
-  if (data && event.target?.id) {
-    if (type === 'bodyBack') {
-      store.updateItems('bodyBack', {
-        ...bodyBack.value,
-        [event.target.id]: {
-          name: event.target.id,
-          item: data
-        }
-      })
+      if (Object.keys(packBack.value).includes(slotId)) {
+        store.updateItems('packBack', {
+          ...packBack.value,
+          [slotId]: {
+            name: slotId,
+            item: null
+          }
+        })
+      }
     }
 
-    if (type === 'packBack') {
-      store.updateItems('packBack', {
-        ...packBack.value,
-        [event.target.id]: {
-          name: event.target.id,
-          item: data
-        }
-      })
+    let data = event.dataTransfer
+      ? event.dataTransfer.getData('text')
+      : null
+
+    if (data && event.target?.id) {
+      if (type === 'bodyBack') {
+        store.updateItems('bodyBack', {
+          ...bodyBack.value,
+          [event.target.id]: {
+            name: event.target.id,
+            item: data
+          }
+        })
+      }
+
+      if (type === 'packBack') {
+        store.updateItems('packBack', {
+          ...packBack.value,
+          [event.target.id]: {
+            name: event.target.id,
+            item: data
+          }
+        })
+      }
     }
   }
+
+  event.target.classList.remove('droppable')
 }
 </script>
 
@@ -159,6 +208,8 @@ const drop = (event: DragEvent, type: string) => {
     line-height: 1;
     color: var(--second);
     margin-top: 10px;
+    pointer-events: none;
+    background: top;
   }
 }
 
@@ -198,6 +249,8 @@ const drop = (event: DragEvent, type: string) => {
     line-height: 1;
     color: var(--second);
     margin-top: 40px;
+    pointer-events: none;
+    background: top;
   }
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="points">
     <div
         v-for="(item, index) in points"
-        :key="item"
+        :key="`pt_${index}`"
         class="points__item"
         :class="{ 'points__item--used': item.isUsed.value }"
         @click="useItem(index)"
@@ -36,6 +36,7 @@ const useItem = (index: number) => points[index].isUsed.value = ! points[index].
   display: flex;
   flex-direction: row;
   gap: 3px;
+  background: top;
 
   &__item {
     display: block;
@@ -46,6 +47,7 @@ const useItem = (index: number) => points[index].isUsed.value = ! points[index].
     border-radius: 50%;
     z-index: 1;
     cursor: pointer;
+    background: top;
 
     &--used {
       background: var(--main);

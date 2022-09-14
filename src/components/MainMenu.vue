@@ -71,11 +71,27 @@
     
     const background = backgroundList[store.maxHp][store.pips].background
     store.setStat('background', background)
-
-    const packBack = computed(() => store.packBack)
+    
+    store.updateItems('bodyBack', {
+      'Main paw': {
+          name: 'Main paw',
+          item: null
+        },
+        'Main Body': {
+          name: 'Main Body',
+          item: null
+        },
+        'Second Paw': {
+          name: 'Second Paw',
+          item: null
+        },
+        'Second Body': {
+          name: 'Second Body',
+          item: null
+        }
+    })
 
     store.updateItems('packBack', {
-          ...packBack.value,
           1: {
             name: '1',
             item: 'Torches'
@@ -85,12 +101,20 @@
             item: 'Rations'
           },
           3: {
-            name: '2',
+            name: '3',
             item: backgroundList[store.hp][store.pips].itemA
           },
           4: {
-            name: '2',
+            name: '4',
             item: backgroundList[store.hp][store.pips].itemB
+          },
+          5: {
+            name: '5',
+            item: null
+          },
+          6: {
+            name: '6',
+            item: null
           }
         })
 

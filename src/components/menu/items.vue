@@ -5,7 +5,7 @@
         v-for="item in itemsList"
         :key="item.title"
         :id="item.title"
-        draggable="true" 
+        draggable="true"
         @dragstart="onDragging"
     >
       <span class="items__title">{{ item.title }}</span>
@@ -25,11 +25,10 @@ const itemsList: Item[] = []
 Object.values(itemsData).forEach(item => itemsList.push(item))
 
 const onDragging = (event: DragEvent) => {
-  if (event.dataTransfer) {
-    event.dataTransfer.setData('text', (event.target as Element).id)
+  if (event.dataTransfer) {    
+    event.dataTransfer.setData('text', event.target.childNodes[0].textContent)
   }
 }
-
 </script>
 
 <style lang="scss">
@@ -64,6 +63,8 @@ const onDragging = (event: DragEvent) => {
     font-size: 1.8em;
     line-height: 1;
     border-bottom: 1px solid var(--main);
+    pointer-events: none;
+    background: top;
   }
 
   &__status {
@@ -72,6 +73,8 @@ const onDragging = (event: DragEvent) => {
     width: 100%;
     height: max-content;
     margin: 5px 0 auto;
+    background: top;
+    pointer-events: none;//TODO: status control
   }
 
   &__stat {
@@ -79,11 +82,15 @@ const onDragging = (event: DragEvent) => {
     padding: 5px;
     font-size: 1.6em;
     border: 1px solid var(--main);
+    pointer-events: none;
+    background: top;
   }
 
   &__type {
     font-size: 1.4em;
     text-align: left;
+    pointer-events: none;
+    background: top;
   }
 }
 </style>
