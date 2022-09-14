@@ -1,6 +1,14 @@
 <template>
   <header class="items__header">
     <h2 class="items__heading">Inventory</h2>
+    <div
+      class="drop-input"
+      @drop="event => dropItem(event, 'bodyBack')"
+      @dragover="allowDrop"
+      @dragleave="leaveDrag"
+    >
+      <label class="drop-input__label">Drop item</label>
+    </div>
     <div class="grit-input">
       <label class="grit-input__label">Grit</label>
       <input
@@ -39,6 +47,9 @@ const pips = computed(() => store.pips)
 const grit = computed(() => store.grit)
 const exp = computed(() => store.exp)
 
+const bodyBack = computed(() => store.bodyBack)
+const packBack = computed(() => store.packBack)
+
 const maxGrit = computed(() => {
   let result = 0
 
@@ -48,6 +59,46 @@ const maxGrit = computed(() => {
 
   return result
 })
+
+const allowDrop = (event: DragEvent) => {
+  event.preventDefault()
+  event.target.classList.add('droppable')
+}
+
+const leaveDrag = (event: DragEvent) => {
+  event.preventDefault()
+  event.target.classList.remove('droppable')
+}
+
+const dropItem = (event: DragEvent, type: string) => {
+  event.preventDefault()
+  
+  const slotId = event.dataTransfer.getData('id')
+  
+  if (slotId) {
+    if (Object.keys(bodyBack.value).includes(slotId)) {      
+      store.updateItems('bodyBack', {
+        ...bodyBack.value,
+        [slotId]: {
+          name: slotId,
+          item: null
+        }
+      })
+    }
+
+    if (Object.keys(packBack.value).includes(slotId)) {
+      store.updateItems('packBack', {
+        ...packBack.value,
+        [slotId]: {
+          name: slotId,
+          item: null
+        }
+      })
+    }
+  }
+
+  event.target.classList.remove('droppable')
+}
 </script>
 
 <style lang="scss">
@@ -70,7 +121,7 @@ const maxGrit = computed(() => {
   }
 }
 
-.pips-input,.grit-input {
+.pips-input,.grit-input,.drop-input {
   position: relative;
   border: 2px solid var(--main);
   font-family: 'Ubuntu', sans-serif;
@@ -104,16 +155,26 @@ const maxGrit = computed(() => {
   }
 }
 
-.grit-input {
+.drop-input {
   margin-left: auto;
 
+  &__label {
+    background: var(--background);
+  }
+  
+  &:after {
+    content: '';
+  }
+}
+
+.grit-input {
   &:after {
     content: '';
   }
 
   &__input {
-    width: 35px;
-    padding: 8px 10px;
+    width: 29px;
+    padding: 8px 0px;
   }
 
   &__devider {

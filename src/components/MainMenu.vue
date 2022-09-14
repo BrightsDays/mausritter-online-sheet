@@ -71,7 +71,7 @@
     
     const background = backgroundList[store.maxHp][store.pips].background
     store.setStat('background', background)
-    
+
     store.updateItems('bodyBack', {
       'Main paw': {
           name: 'Main paw',
@@ -116,7 +116,7 @@
             name: '6',
             item: null
           }
-        })
+        })//TODO: fix start items generate and choose
 
     const birthSign = ['Star', 'Wheel', 'Acorn', 'Storm', 'Moon', 'Mother']
     store.setStat('birthSign', birthSign[rollDices(1, 6) - 1])
