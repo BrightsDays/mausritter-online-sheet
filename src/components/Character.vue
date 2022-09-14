@@ -3,9 +3,6 @@
     <character-info />
     <character-stats />
     <character-items />
-    <div class="conditions">
-
-    </div>
   </div>
 </template>
 

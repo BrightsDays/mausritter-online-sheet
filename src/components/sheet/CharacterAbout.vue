@@ -49,7 +49,7 @@
 // import changeStat from '../../plugins/changeStat'
 // import { computed } from 'vue'
 // import backgroundData from '../../data/backgroundList.json'
-import { useStore } from '../../store/pin'
+import { useStore } from '../../store/character'
 
 // const store = useStore()
 // const backgroundList: BackgroundList = backgroundData

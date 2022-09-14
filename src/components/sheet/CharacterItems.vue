@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import Inventory from './Inventory.vue'
-import { useStore } from '../../store/pin'
+import { useStore } from '../../store/character'
 import { computed } from 'vue'
 import changeStat from '../../plugins/changeStat'
 

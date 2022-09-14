@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '../../store/pin'
+import { useStore } from '../../store/character'
 import { computed } from 'vue'
 import changeStat from '../../plugins/changeStat'
 

@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import Stats from './Stats.vue'
-import { useStore } from '../../store/pin'
+import { useStore } from '../../store/character'
 import { computed } from 'vue'
 import changeStat from '../../plugins/changeStat'
 

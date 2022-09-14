@@ -19,10 +19,7 @@
 
 <script setup lang="ts">
 import { VueDraggableNext } from 'vue-draggable-next'
-import {useStore} from 'vuex'
 import conditionsData from '../../data/conditionsList.json'
-
-const store = useStore()
 
 const conditionsList = []
 Object.values(conditionsData).forEach(item => conditionsList.push(item))

@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
   import UiDetails from './ui/UiDetails.vue'
-  import { useStore } from '../store/pin'
+  import { useStore } from '../store/character'
   import rollDices from '../plugins/rollDices'
   import Conditions from './menu/Conditions.vue'
   import Items from './menu/items.vue'

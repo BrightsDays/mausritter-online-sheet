@@ -1,4 +1,4 @@
-import { useStore } from '../store/pin'
+import { useStore } from '../store/character'
 
 export default (statName: string, event: Event) => {
     const pin = useStore()

@@ -66,7 +66,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useStore } from '../../store/pin'
+import { useStore } from '../../store/character'
 import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
 import itemsData from '../../data/itemsList.json'
 import spellsData from '../../data/spellList.json'
