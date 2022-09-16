@@ -2,7 +2,7 @@
   <div class="items">
     <div
         class="items__item"
-        v-for="item in itemsList"
+        v-for="item in props.itemsList"
         :key="item.title"
         :id="item.title"
         draggable="true"
@@ -18,11 +18,15 @@
 </template>
 
 <script setup lang="ts">
-import itemsData from '../../data/itemsList.json'
 import { Item } from '../../types'
+import { type PropType } from 'vue'
 
-const itemsList: Item[] = []
-Object.values(itemsData).forEach(item => itemsList.push(item))
+const props = defineProps({
+    itemsList: {
+        type: Object as PropType<Item[]>,
+        required: true,
+    }
+})
 
 const onDragging = (event: DragEvent) => {
   if (event.dataTransfer) {    

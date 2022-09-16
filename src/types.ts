@@ -13,10 +13,6 @@ export enum ItemType {
   Utility = 'Utility'
 }
 
-export enum ItemGroup {
-  Items = 'items'
-}
-
 export interface BackgroundList {
   [key: string] : {
     [key: string] : Background
@@ -38,15 +34,16 @@ export interface ConditionsList {
 }
 
 export interface Condition {
-  title: string,
-  description: string,
+  title: string
+  description: string
   clear: string
+  group: 'conditions'
 }
 
 export interface Item {
-  title: string;
-  stat: ItemStat;
-  image: string;
-  type: ItemType;
-  group: ItemGroup;
+  title: string
+  stat: ItemStat
+  image: string
+  type: ItemType
+  group: 'items'
 }

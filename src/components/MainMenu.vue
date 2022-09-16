@@ -21,13 +21,13 @@
         <button class="menu__item" disabled>Save as PDF</button>
       </ui-details>
       <ui-details title="Weapons">
-        <weapons />
+        <items :itemsList="weapons.list" />
       </ui-details>
       <ui-details title="Spells">
-        <spells />
+        <items :itemsList="spells.list" />
       </ui-details>
       <ui-details title="Utilities">
-        <items />
+        <items :itemsList="utilities.list" />
       </ui-details>
       <ui-details title="Conditions">
         <conditions />
@@ -48,12 +48,13 @@
   import UiDetails from './ui/UiDetails.vue'
   import { useStore } from '../store/character'
   import rollDices from '../plugins/rollDices'
-  import Conditions from './menu/Conditions.vue'
   import Items from './menu/items.vue'
-  import Spells from './menu/Spells.vue'
+  import utilities from '../data/utilityList.json'
+  import weapons from '../data/weaponList.json'
+  import spells from '../data/spellList.json'
   import detailsList from '../data/detailsList.json'
   import backgroundList from '../data/backgroundList.json'
-  import Weapons from './menu/Weapons.vue'
+  import Conditions from './menu/Conditions.vue'
 
   const store = useStore()
 

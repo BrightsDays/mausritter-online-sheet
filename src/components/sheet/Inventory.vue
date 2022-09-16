@@ -35,7 +35,7 @@
         @dragover="allowDrop"
         @dragleave="leaveDrag"
         >
-
+        
         <span v-if="!item.item" class="pack-items__name">{{ item.name }}</span>
 
         <div
@@ -72,33 +72,36 @@
 import { computed } from 'vue'
 import { useStore } from '../../store/character'
 import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
-import itemsData from '../../data/itemsList.json'
-import spellsData from '../../data/spellList.json'
-import weaponsData from '../../data/weaponList.json'
-import conditionData from '../../data/conditionsList.json'
+import items from '../../data/utilityList.json'
+import spells from '../../data/spellList.json'
+import weapons from '../../data/weaponList.json'
+import conditions from '../../data/conditionsList.json'
 import { Item, Condition } from '../../types'
 
 const store = useStore()
 
-const itemsList: Item[] = []
-Object.values(itemsData).forEach(item => itemsList.push(item))
-const spellsList: Item[] = []
-Object.values(spellsData).forEach(item => itemsList.push(item))
-const weaponsList: Item[] = []
-Object.values(weaponsData).forEach(item => itemsList.push(item))
-const conditionList: Item[] = []
-Object.values(conditionData).forEach(item => itemsList.push(item))
-
 const findItem = (title: string): Item | Condition | null => {
-  const findedItem = itemsList.filter(item => item.title === title)
-    || spellsList.filter(spell => spell.title === title)
-    || weaponsList.filter(weapon => weapon.title === title)
-    || conditionList.filter(condition => {condition.title === title})
+  let findedItem = {}
 
-    console.log('run');
-    
+  if (spells.list.filter(spell => spell.title === title).length) {
+    findedItem = spells.list.filter(spell => spell.title === title)[0]
+  }
+
+  if (items.list.filter(spell => spell.title === title).length) {
+    findedItem = items.list.filter(spell => spell.title === title)[0]
+  }
+
+  if (weapons.list.filter(spell => spell.title === title).length) {
+    findedItem = weapons.list.filter(spell => spell.title === title)[0]
+  }
+
+  if (conditions.list.filter(spell => spell.title === title).length) {
+    findedItem = conditions.list.filter(spell => spell.title === title)[0]
+  }
+
+  console.log('run', findedItem);
   
-  return findedItem[0] ? findedItem[0] : null
+  return findedItem ? findedItem : null
 }
 
 const bodyBack = computed(() => store.bodyBack)

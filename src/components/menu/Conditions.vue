@@ -2,7 +2,7 @@
   <div class="conditions">
     <div
         class="conditions__item"
-        v-for="item in conditionsList"
+        v-for="item in conditions.list"
         :key="item.title"
         draggable="true"
         @dragstart="onDragging"
@@ -15,10 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import conditionsData from '../../data/conditionsList.json'
-
-const conditionsList = []
-Object.values(conditionsData).forEach(item => conditionsList.push(item))
+import conditions from '../../data/conditionsList.json'
 
 const onDragging = (event: DragEvent) => {
   if (event.dataTransfer) {    

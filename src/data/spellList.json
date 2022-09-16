@@ -1,30 +1,32 @@
 {
-  "magicMissle": {
-    "title": "Magic missile",
-    "stat": "",
-    "image": "",
-    "type": "Spell",
-    "group": "items"
-  },
-  "beUnderstood": {
-    "title": "Be understood",
-    "stat": "",
-    "image": "",
-    "type": "Spell",
-    "group": "items"
-  },
-  "heal": {
-    "title": "Heal",
-    "stat": "",
-    "image": "",
-    "type": "Spell",
-    "group": "items"
-  },
-  "restore": {
-    "title": "Restore",
-    "stat": "",
-    "image": "",
-    "type": "Spell",
-    "group": "items"
-  }
+  "list": [
+    {
+      "title": "Magic missile",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items"
+    },
+    {
+      "title": "Be understood",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items"
+    },
+    {
+      "title": "Heal",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items"
+    },
+    {
+      "title": "Restore",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items"
+    }
+  ]
 }
