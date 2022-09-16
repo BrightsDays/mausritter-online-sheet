@@ -21,13 +21,13 @@
         <button class="menu__item" disabled>Save as PDF</button>
       </ui-details>
       <ui-details title="Weapons">
-        <items :itemsList="(weapons.list as Item[])" />
+        <items :itemsList="weaponList" />
       </ui-details>
       <ui-details title="Spells">
-        <items :itemsList="(spells.list as Item[])" />
+        <items :itemsList="spellList" />
       </ui-details>
       <ui-details title="Utilities">
-        <items :itemsList="(utilities.list as Item[])" />
+        <items :itemsList="utilityList" />
       </ui-details>
       <ui-details title="Conditions">
         <conditions />
@@ -49,15 +49,19 @@
   import { useStore } from '../store/character'
   import rollDices from '../plugins/rollDices'
   import Items from './menu/items.vue'
-  import utilities from '../data/utilityList.json'
-  import weapons from '../data/weaponList.json'
-  import spells from '../data/spellList.json'
+  import utilityData from '../data/utilityList.json'
+  import weaponData from '../data/weaponList.json'
+  import spellData from '../data/spellList.json'
   import detailsList from '../data/detailsList.json'
   import backgroundList from '../data/backgroundList.json'
   import Conditions from './menu/Conditions.vue'
   import { Item } from '../types'
 
   const store = useStore()
+
+  const utilityList = utilityData.list as Item[]
+  const weaponList = weaponData.list as Item[]
+  const spellList = spellData.list as Item[]
 
   const createCharacter = () => {
     const statList = ['str', 'dex', 'wil', 'hp', 'pips']
