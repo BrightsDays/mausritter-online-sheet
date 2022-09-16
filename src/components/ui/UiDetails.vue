@@ -4,7 +4,7 @@
         :class="['details__summary', {'details__summary--open': isOpen}]"
         @click="toggleDetails()"
     >
-      {{ title }}
+      {{ props.title }}
     </div>
     <transition name="fade">
       <div v-if="isOpen" class="details__content">
@@ -20,6 +20,7 @@ import { ref } from 'vue'
 const props = defineProps({
   title: {type: String, default: 'Title'}
 })
+
 let isOpen = ref(false)
 
 const toggleDetails = () => {

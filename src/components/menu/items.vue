@@ -22,10 +22,10 @@ import { Item } from '../../types'
 import { type PropType } from 'vue'
 
 const props = defineProps({
-    itemsList: {
-        type: Object as PropType<Item[]>,
-        required: true,
-    }
+  itemsList: {
+    type: Object as PropType<Item[]>,
+    required: true,
+  }
 })
 
 const onDragging = (event: DragEvent) => {

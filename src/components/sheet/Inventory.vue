@@ -81,27 +81,13 @@ import { Item, Condition } from '../../types'
 const store = useStore()
 
 const findItem = (title: string): Item | Condition | null => {
-  let findedItem = {}
+  const listToFind = [...items.list, ...spells.list, ...weapons.list, ...conditions.list]
 
-  if (spells.list.filter(spell => spell.title === title).length) {
-    findedItem = spells.list.filter(spell => spell.title === title)[0]
-  }
+  const findedItem = listToFind.filter(item => item.title === title)[0]
 
-  if (items.list.filter(spell => spell.title === title).length) {
-    findedItem = items.list.filter(spell => spell.title === title)[0]
-  }
-
-  if (weapons.list.filter(spell => spell.title === title).length) {
-    findedItem = weapons.list.filter(spell => spell.title === title)[0]
-  }
-
-  if (conditions.list.filter(spell => spell.title === title).length) {
-    findedItem = conditions.list.filter(spell => spell.title === title)[0]
-  }
-
-  console.log('run', findedItem);
-  
-  return findedItem ? findedItem : null
+  return findedItem 
+    ? findedItem as Item | Condition 
+    : null
 }
 
 const bodyBack = computed(() => store.bodyBack)

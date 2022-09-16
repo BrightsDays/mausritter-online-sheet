@@ -6,7 +6,7 @@
         <input
             class="about-input__input"
             id="name"
-            v-model="pin.name"
+            v-model="character.name"
         />
       </div>
       <div class="about__background about-input">
@@ -14,7 +14,7 @@
         <input
             class="about-input__input about-input__input--small"
             id="background"
-            v-model="pin.background"
+            v-model="character.background"
             readonly
         />
       </div>
@@ -25,7 +25,7 @@
         <input
           class="details-input__input"
           id="birthsign"
-          v-model="pin.birthSign"
+          v-model="character.birthSign"
           readonly
         />
       </div>
@@ -34,34 +34,21 @@
         <input
           class="details-input__input"
           id="coat"
-          v-model="pin.coat"
+          v-model="character.coat"
         />
       </div>
       <div class="details-input">
         <label class="details-input__label" for="look">Look</label>
-        <input class="details-input__input" id="look" v-model="pin.details" />
+        <input class="details-input__input" id="look" v-model="character.details" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// import changeStat from '../../plugins/changeStat'
-// import { computed } from 'vue'
-// import backgroundData from '../../data/backgroundList.json'
 import { useStore } from '../../store/character'
 
-// const store = useStore()
-// const backgroundList: BackgroundList = backgroundData
-
-// const name = computed(() => store.state.name)
-// const background = computed(() => {
-//   if (pin.startHp !== 0 && pin.startPips !== 0) {
-//     return backgroundList[pin.startHp][pin.startPips].background
-//   }
-// })
-
-const pin = useStore()
+const character = useStore()
 </script>
 
 <style lang="scss">

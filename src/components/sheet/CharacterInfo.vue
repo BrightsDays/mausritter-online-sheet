@@ -32,6 +32,7 @@ import changeStat from '../../plugins/changeStat'
 const store = useStore()
 
 const exp = computed(() => store.exp)
+
 const level = computed(() => {
   let result = 1
 
