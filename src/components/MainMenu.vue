@@ -21,13 +21,13 @@
         <button class="menu__item" disabled>Save as PDF</button>
       </ui-details>
       <ui-details title="Weapons">
-        <items :itemsList="weapons.list" />
+        <items :itemsList="(weapons.list as Item[])" />
       </ui-details>
       <ui-details title="Spells">
-        <items :itemsList="spells.list" />
+        <items :itemsList="(spells.list as Item[])" />
       </ui-details>
       <ui-details title="Utilities">
-        <items :itemsList="utilities.list" />
+        <items :itemsList="(utilities.list as Item[])" />
       </ui-details>
       <ui-details title="Conditions">
         <conditions />
@@ -55,6 +55,7 @@
   import detailsList from '../data/detailsList.json'
   import backgroundList from '../data/backgroundList.json'
   import Conditions from './menu/Conditions.vue'
+  import { Item } from '../types'
 
   const store = useStore()
 
