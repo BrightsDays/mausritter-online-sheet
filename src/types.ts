@@ -13,24 +13,10 @@ export enum ItemType {
   Utility = 'Utility'
 }
 
-export interface BackgroundList {
-  [key: string] : {
-    [key: string] : Background
-  }
-}
-
 export interface Background {
   background: string,
   itemA: string,
   itemB: string
-}
-
-export interface ConditionsList {
-  [key: string] : {
-    title: string,
-    description: string,
-    clear: string
-  }
 }
 
 export interface Condition {
@@ -47,3 +33,29 @@ export interface Item {
   type: ItemType
   group: 'items'
 }
+
+export interface Character {
+  name: string
+  exp: number
+  maxStr: number
+  str: number
+  maxDex: number
+  dex: number
+  maxWil: number
+  wil: number
+  maxHp: number
+  hp: number
+  startPips: number
+  pips: number
+  background: ''
+  bodyBack: {}
+  packBack: {}
+  birthSign: string
+  coat: string
+  details: string
+  grit: number
+}
+
+export type CharacterKeys = 'name' | 'exp' | 'maxStr' | 'str' | 'maxDex' | 'dex'
+  | 'maxWil' | 'wil' | 'maxHp' | 'hp' | 'startPips' | 'pips' | 'background' | 'birthSign'
+  | 'coat' | 'details' | 'grit'

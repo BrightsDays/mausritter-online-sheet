@@ -1,7 +1,7 @@
 export default (event: DragEvent) => {
-  if (event.dataTransfer) {    
+  if (event.dataTransfer) {
     const content = (event.target as Node).childNodes[0].textContent
-    const id =  (event.target as Node).parentElement?.id
+    const id = (event.target as Node).parentElement?.id
       ? (event.target as Node).parentElement?.id
       : null
     

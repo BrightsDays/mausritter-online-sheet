@@ -3,13 +3,14 @@
     class="pack-items__item items__item"
     draggable="true"
     @dragstart="onDragging"
+    v-if="findedItem"
   >
-    <span class="items__title">{{ item.title }}</span>
+    <span class="items__title">{{ findedItem.title }}</span>
     <div class="items__status">
       <ui-item-checkbox />
-      <span v-if="item.stat" class="items__stat">{{ item.stat }}</span>
+      <span v-if="findedItem.stat" class="items__stat">{{ findedItem.stat }}</span>
     </div>
-    <span class="items__type">{{ item.type }}</span>
+    <span class="items__type">{{ findedItem.type }}</span>
   </div>
 </template>
 
@@ -38,7 +39,7 @@ const findItem = (title: string): Item | null => {
     : null
 }
 
-const item = findItem(props.item)
+const findedItem = findItem(props.item)
 </script>
 
 <style>

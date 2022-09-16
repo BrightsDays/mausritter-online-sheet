@@ -11,7 +11,7 @@
         @dragleave="leaveDrag"
       >
 
-        <span v-if="!item.item" class="body-items__name">{{ item.name }}</span>
+        <span v-if="!item.item || isCondition(item.item)" class="body-items__name">{{ item.name }}</span>
 
         <ui-item-card
           v-else
@@ -50,7 +50,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useStore } from '../../store/character'
-import conditions from '../../data/conditionsList.json'
+import conditions from '../../data/conditionList.json'
 import UiItemCard from '../ui/UiItemCard.vue'
 import UiConditionCard from '../ui/uiConditionCard.vue'
 
@@ -75,12 +75,16 @@ const leaveDrag = (event: DragEvent) => {
 const drop = (event: DragEvent, type: string) => {
   event.preventDefault()
   
-  if (event.target.childNodes[0].classList.contains('body-items__name')
-      || event.target.childNodes[0].classList.contains('pack-items__name')) {
-    const slotId = event.dataTransfer.getData('id')
+  const firstChild: ChildNode = (event.target as Node).childNodes[0]
+
+  if ((firstChild as HTMLElement).classList.contains('body-items__name')
+      || (firstChild as HTMLElement).classList.contains('pack-items__name')) {
+    const slotId = event.dataTransfer
+      ? event.dataTransfer.getData('id')
+      : null
   
     if (slotId) {
-      if (Object.keys(bodyBack.value).includes(slotId)) {      
+      if (Object.keys(bodyBack.value).includes(slotId)) {     
         store.updateItems('bodyBack', {
           ...bodyBack.value,
           [slotId]: {
@@ -101,16 +105,20 @@ const drop = (event: DragEvent, type: string) => {
       }
     }
 
-    let data = event.dataTransfer
+    const data = event.dataTransfer
       ? event.dataTransfer.getData('text')
       : null
 
-    if (data && event.target?.id) {
+    const id = (event.target as HTMLElement).id
+      ? (event.target as HTMLElement).id
+      : null
+
+    if (data && id) {
       if (type === 'bodyBack') {
         store.updateItems('bodyBack', {
           ...bodyBack.value,
-          [event.target.id]: {
-            name: event.target.id,
+          [id]: {
+            name: id,
             item: data
           }
         })
@@ -119,8 +127,8 @@ const drop = (event: DragEvent, type: string) => {
       if (type === 'packBack') {
         store.updateItems('packBack', {
           ...packBack.value,
-          [event.target.id]: {
-            name: event.target.id,
+          [id]: {
+            name: id,
             item: data
           }
         })
@@ -128,8 +136,8 @@ const drop = (event: DragEvent, type: string) => {
     }
   }
 
-  event.target.classList.remove('droppable')
-}
+  (event.target as HTMLElement).classList.remove('droppable')
+}//TODO: stop set store of paws by conditions
 </script>
 
 <style lang="scss">

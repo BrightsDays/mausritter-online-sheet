@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import conditions from '../../data/conditionsList.json'
+import conditions from '../../data/conditionList.json'
 import onDragging from '../../plugins/onDragging'
 </script>
 
