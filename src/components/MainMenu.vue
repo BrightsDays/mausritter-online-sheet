@@ -115,11 +115,11 @@
           },
           3: {
             name: '3',
-            item: backgroundList[store.hp][store.pips].itemA
+            item: backgroundList[store.maxHp][store.pips].itemA
           },
           4: {
             name: '4',
-            item: backgroundList[store.hp][store.pips].itemB
+            item: backgroundList[store.maxHp][store.pips].itemB
           },
           5: {
             name: '5',
@@ -140,7 +140,7 @@
     store.setStat('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
 
     store.setStat('details', detailsList[rollDices(1, detailsList.length) - 1])
-}
+  }
 </script>
 
 <style lang="scss">

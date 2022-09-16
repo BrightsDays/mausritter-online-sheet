@@ -16,12 +16,7 @@
 
 <script setup lang="ts">
 import conditions from '../../data/conditionsList.json'
-
-const onDragging = (event: DragEvent) => {
-  if (event.dataTransfer) {    
-    event.dataTransfer.setData('text', event.target.childNodes[0].textContent)
-  }
-}
+import onDragging from '../../plugins/onDragging'
 </script>
 
 <style lang="scss">

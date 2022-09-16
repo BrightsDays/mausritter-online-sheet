@@ -61,43 +61,45 @@ const maxGrit = computed(() => {
 })
 
 const allowDrop = (event: DragEvent) => {
-  event.preventDefault()
-  event.target.classList.add('droppable')
+  event.preventDefault();
+  (event.target as HTMLElement).classList.add('droppable')
 }
 
 const leaveDrag = (event: DragEvent) => {
-  event.preventDefault()
-  event.target.classList.remove('droppable')
+  event.preventDefault();
+  (event.target as HTMLElement).classList.remove('droppable')
 }
 
 const dropItem = (event: DragEvent, type: string) => {
   event.preventDefault()
+
+  if (event.dataTransfer) {
+    const slotId = event.dataTransfer.getData('id')
   
-  const slotId = event.dataTransfer.getData('id')
-  
-  if (slotId) {
-    if (Object.keys(bodyBack.value).includes(slotId)) {      
-      store.updateItems('bodyBack', {
-        ...bodyBack.value,
-        [slotId]: {
-          name: slotId,
-          item: null
-        }
-      })
+    if (slotId) {
+      if (Object.keys(bodyBack.value).includes(slotId)) {      
+        store.updateItems('bodyBack', {
+          ...bodyBack.value,
+          [slotId]: {
+            name: slotId,
+            item: null
+          }
+        })
+      }
+
+      if (Object.keys(packBack.value).includes(slotId)) {
+        store.updateItems('packBack', {
+          ...packBack.value,
+          [slotId]: {
+            name: slotId,
+            item: null
+          }
+        })
+      }
     }
 
-    if (Object.keys(packBack.value).includes(slotId)) {
-      store.updateItems('packBack', {
-        ...packBack.value,
-        [slotId]: {
-          name: slotId,
-          item: null
-        }
-      })
-    }
+    (event.target as HTMLElement).classList.remove('droppable')
   }
-
-  event.target.classList.remove('droppable')
 }
 </script>
 

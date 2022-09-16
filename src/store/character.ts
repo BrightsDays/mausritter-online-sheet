@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useStore = defineStore('pin',{
+export const useStore = defineStore('character',{
   state: () => ({
     name: '',
     exp: 0,
@@ -65,7 +65,7 @@ export const useStore = defineStore('pin',{
     grit: 0
   }),
   actions: {
-    setStat (statName: String, statValue: String | number) {
+    setStat (statName: String, statValue: String | number | null) {
       this[statName] = statValue
     },
     updateItems(packName: String, payload: any) {

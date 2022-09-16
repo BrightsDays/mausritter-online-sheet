@@ -8,21 +8,15 @@
         :id="item.name.toString()"
         @drop="event => drop(event, 'bodyBack')"
         @dragover="allowDrop"
-        @dragleave="leaveDrag">
+        @dragleave="leaveDrag"
+      >
+
         <span v-if="!item.item" class="body-items__name">{{ item.name }}</span>
-        <div
+
+        <ui-item-card
           v-else
-          class="pack-items__item items__item"
-          draggable="true"
-          @dragstart="onDragging"
-        >
-          <span class="items__title">{{ findItem(item.item)?.title }}</span>
-          <div class="items__status">
-            <ui-item-checkbox />
-            <span v-if="findItem(item.item)?.stat" class="items__stat">{{ findItem(item.item)?.stat }}</span>
-          </div>
-          <span class="items__type">{{ findItem(item.item)?.type }}</span>
-        </div>
+          :item="item.item"
+        />
       </div>
     </div>
     <div class="pack-items">
@@ -34,34 +28,19 @@
         @drop="event => drop(event, 'packBack')"
         @dragover="allowDrop"
         @dragleave="leaveDrag"
-        >
+      >
         
         <span v-if="!item.item" class="pack-items__name">{{ item.name }}</span>
 
-        <div
-          v-else-if="findItem(item.item)?.group === 'conditions'"
-          class="pack-items__item conditions__item"
-          draggable="true"
-          @dragstart="onDragging"
-        >
-          <span class="conditions__title">{{ findItem(item.item)?.title}}</span>
-          <span class="conditions__description">{{findItem(item.item)?.description}}</span>
-          <span class="conditions__clear"><b class="conditions__clear">Clear:</b><br>{{findItem(item.item)?.clear}}</span>
-        </div>
+        <ui-condition-card
+          v-else-if="isCondition(item.item)"
+          :condition="item.item"
+        />
 
-        <div
+        <ui-item-card
           v-else
-          class="pack-items__item items__item"
-          draggable="true"
-          @dragstart="onDragging"
-        >
-          <span class="items__title">{{ findItem(item.item)?.title }}</span>
-          <div class="items__status">
-            <ui-item-checkbox />
-            <span v-if="findItem(item.item)?.stat" class="items__stat">{{ findItem(item.item)?.stat }}</span>
-          </div>
-          <span class="items__type">{{ findItem(item.item)?.type }}</span>
-        </div>
+          :item="item.item"
+        />
           
       </div>
     </div>
@@ -71,43 +50,26 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useStore } from '../../store/character'
-import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
-import items from '../../data/utilityList.json'
-import spells from '../../data/spellList.json'
-import weapons from '../../data/weaponList.json'
 import conditions from '../../data/conditionsList.json'
-import { Item, Condition } from '../../types'
+import UiItemCard from '../ui/UiItemCard.vue'
+import UiConditionCard from '../ui/uiConditionCard.vue'
 
 const store = useStore()
 
-const findItem = (title: string): Item | Condition | null => {
-  const listToFind = [...items.list, ...spells.list, ...weapons.list, ...conditions.list]
-
-  const findedItem = listToFind.filter(item => item.title === title)[0]
-
-  return findedItem 
-    ? findedItem as Item | Condition 
-    : null
-}
+const isCondition = (title: string): Boolean =>
+  conditions.list.filter(item => item.title === title).length ? true : false
 
 const bodyBack = computed(() => store.bodyBack)
 const packBack = computed(() => store.packBack)
 
-const onDragging = (event: DragEvent) => {
-  if (event.dataTransfer) {
-    event.dataTransfer.setData('text', (event.target as Element).childNodes[0].textContent)
-    event.dataTransfer.setData('id', (event.target as Element).parentNode.id)
-  }
-}
-
 const allowDrop = (event: DragEvent) => {
-  event.preventDefault()
-  event.target.classList.add('droppable')
+  event.preventDefault();
+  (event.target as HTMLElement).classList.add('droppable')
 }
 
 const leaveDrag = (event: DragEvent) => {
-  event.preventDefault()
-  event.target.classList.remove('droppable')
+  event.preventDefault();
+  (event.target as HTMLElement).classList.remove('droppable')
 }
 
 const drop = (event: DragEvent, type: string) => {

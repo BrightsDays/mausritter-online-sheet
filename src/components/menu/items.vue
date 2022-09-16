@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import { Item } from '../../types'
 import { type PropType } from 'vue'
+import onDragging from '../../plugins/onDragging'
 
 const props = defineProps({
   itemsList: {
@@ -27,12 +28,6 @@ const props = defineProps({
     required: true,
   }
 })
-
-const onDragging = (event: DragEvent) => {
-  if (event.dataTransfer) {    
-    event.dataTransfer.setData('text', event.target.childNodes[0].textContent)
-  }
-}
 </script>
 
 <style lang="scss">
