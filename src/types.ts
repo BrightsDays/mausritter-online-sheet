@@ -37,6 +37,12 @@ export interface ConditionsList {
   }
 }
 
+export interface Condition {
+  title: string,
+  description: string,
+  clear: string
+}
+
 export interface Item {
   title: string;
   stat: ItemStat;

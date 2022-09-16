@@ -35,7 +35,20 @@
         @dragover="allowDrop"
         @dragleave="leaveDrag"
         >
+
         <span v-if="!item.item" class="pack-items__name">{{ item.name }}</span>
+
+        <div
+          v-else-if="findItem(item.item)?.group === 'conditions'"
+          class="pack-items__item conditions__item"
+          draggable="true"
+          @dragstart="onDragging"
+        >
+          <span class="conditions__title">{{ findItem(item.item)?.title}}</span>
+          <span class="conditions__description">{{findItem(item.item)?.description}}</span>
+          <span class="conditions__clear"><b class="conditions__clear">Clear:</b><br>{{findItem(item.item)?.clear}}</span>
+        </div>
+
         <div
           v-else
           class="pack-items__item items__item"
@@ -49,15 +62,6 @@
           </div>
           <span class="items__type">{{ findItem(item.item)?.type }}</span>
         </div>
-
-        <!-- <div
-              v-if="item.group === 'conditions'"
-              class="pack-items__item conditions__item"
-          >
-            <span class="conditions__title">{{ item.title}}</span>
-            <span class="conditions__description">{{item.description}}</span>
-            <span class="conditions__clear"><b class="conditions__clear">Clear:</b><br>{{item.clear}}</span>
-          </div> -->
           
       </div>
     </div>
@@ -71,7 +75,8 @@ import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
 import itemsData from '../../data/itemsList.json'
 import spellsData from '../../data/spellList.json'
 import weaponsData from '../../data/weaponList.json'
-import { Item } from '../../types';
+import conditionData from '../../data/conditionsList.json'
+import { Item, Condition } from '../../types'
 
 const store = useStore()
 
@@ -81,12 +86,18 @@ const spellsList: Item[] = []
 Object.values(spellsData).forEach(item => itemsList.push(item))
 const weaponsList: Item[] = []
 Object.values(weaponsData).forEach(item => itemsList.push(item))
+const conditionList: Item[] = []
+Object.values(conditionData).forEach(item => itemsList.push(item))
 
-const findItem = (title: string): Item | null => {
+const findItem = (title: string): Item | Condition | null => {
   const findedItem = itemsList.filter(item => item.title === title)
     || spellsList.filter(spell => spell.title === title)
     || weaponsList.filter(weapon => weapon.title === title)
+    || conditionList.filter(condition => {condition.title === title})
 
+    console.log('run');
+    
+  
   return findedItem[0] ? findedItem[0] : null
 }
 
@@ -247,6 +258,34 @@ const drop = (event: DragEvent, type: string) => {
 
   &__back {
     border: 1px dashed var(--second);
+
+    &:nth-child(1) {
+      border-left: none;
+      border-top: none;
+    }
+    
+    &:nth-child(2) {
+      border-top: none;
+    }
+
+    &:nth-child(3) {
+      border-top: none;
+      border-right: none;
+    }
+
+    &:nth-child(4) {
+      border-left: none;
+      border-bottom: none;
+    }
+
+    &:nth-child(5) {
+      border-bottom: none;
+    }
+
+    &:nth-child(6) {
+      border-right: none;
+      border-bottom: none;
+    }
   }
 
   &__name {

@@ -8,7 +8,7 @@
      /> -->
     </div>
     <div class="menu__options menu--bordered">
-      <ui-details title="Actions" class="menu--bordered">
+      <ui-details title="Options" class="menu--bordered">
         <button
             class="menu__item"
             @click="createCharacter()"
@@ -26,7 +26,7 @@
       <ui-details title="Spells">
         <spells />
       </ui-details>
-      <ui-details title="Items">
+      <ui-details title="Utilities">
         <items />
       </ui-details>
       <ui-details title="Conditions">
@@ -34,6 +34,9 @@
       </ui-details>
     </div>
     <div class="menu__bank">
+      <ui-details title="Hirelings">
+        
+      </ui-details>
       <ui-details title="Banked items">
 
       </ui-details>
@@ -137,7 +140,7 @@
 <style lang="scss">
 .menu {
   width: 250px;
-  max-height: 100vh;
+  max-height: calc(100vh - 60px);
   overflow: scroll;
 
   &__header {

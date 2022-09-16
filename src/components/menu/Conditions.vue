@@ -1,28 +1,30 @@
 <template>
-  <vue-draggable-next
-      class="conditions"
-      :list="conditionsList"
-      :group="{ name: 'items', pull: 'clone', put: false }"
-      :sort="true"
-  >
+  <div class="conditions">
     <div
         class="conditions__item"
         v-for="item in conditionsList"
         :key="item.title"
+        draggable="true"
+        @dragstart="onDragging"
     >
       <span class="conditions__title">{{ item.title}}</span>
       <span class="conditions__description">{{item.description}}</span>
       <span class="conditions__clear"><b class="conditions__clear">Clear:</b><br>{{item.clear}}</span>
     </div>
-  </vue-draggable-next>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { VueDraggableNext } from 'vue-draggable-next'
 import conditionsData from '../../data/conditionsList.json'
 
 const conditionsList = []
 Object.values(conditionsData).forEach(item => conditionsList.push(item))
+
+const onDragging = (event: DragEvent) => {
+  if (event.dataTransfer) {    
+    event.dataTransfer.setData('text', event.target.childNodes[0].textContent)
+  }
+}
 </script>
 
 <style lang="scss">
@@ -36,8 +38,8 @@ Object.values(conditionsData).forEach(item => conditionsList.push(item))
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    width: 124px;
-    height: 124px;
+    width: 121px;
+    height: 121px;
     padding: 10px;
     border: 1px solid var(--main);
     color: var(--main);
