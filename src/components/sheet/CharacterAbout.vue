@@ -2,44 +2,63 @@
   <div class="about">
     <div class="about__bio">
       <div class="about__name about-input">
-        <label class="about-input__label" for="name">Name</label>
+        <label
+          class="about-input__label"
+          for="name"
+        >Name</label>
         <input
-            class="about-input__input"
-            id="name"
-            v-model="character.name"
-        />
+          id="name"
+          v-model="character.name"
+          class="about-input__input"
+        >
       </div>
       <div class="about__background about-input">
-        <label class="about-input__label about-input__label--small" for="background">Background</label>
+        <label
+          class="about-input__label about-input__label--small"
+          for="background"
+        >Background</label>
         <input
-            class="about-input__input about-input__input--small"
-            id="background"
-            v-model="character.background"
-            readonly
-        />
+          id="background"
+          v-model="character.background"
+          class="about-input__input about-input__input--small"
+          readonly
+        >
       </div>
     </div>
     <div class="about__details">
       <div class="details-input">
-        <label class="details-input__label" for="birthsign">Birthsign</label>
+        <label
+          class="details-input__label"
+          for="birthsign"
+        >Birthsign</label>
         <input
-          class="details-input__input"
           id="birthsign"
           v-model="character.birthSign"
+          class="details-input__input"
           readonly
-        />
+        >
       </div>
       <div class="details-input">
-        <label class="details-input__label" for="coat">Coat</label>
+        <label
+          class="details-input__label"
+          for="coat"
+        >Coat</label>
         <input
-          class="details-input__input"
           id="coat"
           v-model="character.coat"
-        />
+          class="details-input__input"
+        >
       </div>
       <div class="details-input">
-        <label class="details-input__label" for="look">Look</label>
-        <input class="details-input__input" id="look" v-model="character.details" />
+        <label
+          class="details-input__label"
+          for="look"
+        >Look</label>
+        <input
+          id="look"
+          v-model="character.details"
+          class="details-input__input"
+        >
       </div>
     </div>
   </div>

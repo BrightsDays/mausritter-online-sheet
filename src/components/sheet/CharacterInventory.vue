@@ -2,16 +2,18 @@
   <div class="inventory">
     <div class="body-items">
       <div 
-        class="body-items__item" 
-        v-for="item in bodyBack"
-        :key="item.name"
+        v-for="item in bodyBack" 
         :id="item.name.toString()"
+        :key="item.name"
+        class="body-items__item"
         @drop="event => drop(event, 'bodyBack')"
         @dragover="allowDrop"
         @dragleave="leaveDrag"
       >
-
-        <span v-if="!item.item || isCondition(item.item)" class="body-items__name">{{ item.name }}</span>
+        <span
+          v-if="!item.item || isCondition(item.item)"
+          class="body-items__name"
+        >{{ item.name }}</span>
 
         <ui-item-card
           v-else
@@ -21,16 +23,18 @@
     </div>
     <div class="pack-items">
       <div
-        class="pack-items__back" 
-        v-for="item in packBack"
-        :key="item.name"
+        v-for="item in packBack" 
         :id="item.name.toString()"
+        :key="item.name"
+        class="pack-items__back"
         @drop="event => drop(event, 'packBack')"
         @dragover="allowDrop"
         @dragleave="leaveDrag"
       >
-        
-        <span v-if="!item.item" class="pack-items__name">{{ item.name }}</span>
+        <span
+          v-if="!item.item"
+          class="pack-items__name"
+        >{{ item.name }}</span>
 
         <ui-condition-card
           v-else-if="isCondition(item.item)"
@@ -41,7 +45,6 @@
           v-else
           :item="item.item"
         />
-          
       </div>
     </div>
   </div>
@@ -53,14 +56,15 @@ import { useStore } from '../../store/character'
 import conditions from '../../data/conditionList.json'
 import UiItemCard from '../ui/UiItemCard.vue'
 import UiConditionCard from '../ui/uiConditionCard.vue'
+import { BodyBack, PackBack } from '../../types'
 
 const store = useStore()
 
 const isCondition = (title: string): Boolean =>
   conditions.list.filter(item => item.title === title).length ? true : false
 
-const bodyBack = computed(() => store.bodyBack)
-const packBack = computed(() => store.packBack)
+const bodyBack: BodyBack = computed(() => store.bodyBack)
+const packBack: PackBack = computed(() => store.packBack)
 
 const allowDrop = (event: DragEvent) => {
   event.preventDefault();
@@ -75,6 +79,7 @@ const leaveDrag = (event: DragEvent) => {
 const drop = (event: DragEvent, type: string) => {
   event.preventDefault()
   
+  // eslint-disable-next-line no-undef
   const firstChild: ChildNode = (event.target as Node).childNodes[0]
 
   if ((firstChild as HTMLElement).classList.contains('body-items__name')

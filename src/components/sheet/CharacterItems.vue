@@ -1,9 +1,11 @@
 <template>
   <header class="items__header">
-    <h2 class="items__heading">Inventory</h2>
+    <h2 class="items__heading">
+      Inventory
+    </h2>
     <div
       class="drop-input"
-      @drop="event => dropItem(event, 'bodyBack')"
+      @drop="event => dropItem(event)"
       @dragover="allowDrop"
       @dragleave="leaveDrag"
     >
@@ -12,31 +14,31 @@
     <div class="grit-input">
       <label class="grit-input__label">Grit</label>
       <input
-          class="grit-input__input"
-             v-model="grit"
-             readonly
-      />
+        v-model="grit"
+        class="grit-input__input"
+        readonly
+      >
       <span class="grit-input__devider">/ </span>
       <input
-          class="grit-input__input"
-          v-model="maxGrit"
-          readonly
-      />
+        v-model="maxGrit"
+        class="grit-input__input"
+        readonly
+      >
     </div>
     <div class="pips-input">
       <label class="pips-input__label">Pips</label>
       <input
-          class="pips-input__input"
-          v-model="pips"
-          @click="changeStat('pips', $event)"
-      />
+        v-model="pips"
+        class="pips-input__input"
+        @click="changeStat('pips', $event)"
+      >
     </div>
   </header>
-  <inventory />
+  <character-inventory />
 </template>
 
 <script setup lang="ts">
-import Inventory from './Inventory.vue'
+import CharacterInventory from './CharacterInventory.vue'
 import { useStore } from '../../store/character'
 import { computed } from 'vue'
 import changeStat from '../../plugins/changeStat'
@@ -70,7 +72,7 @@ const leaveDrag = (event: DragEvent) => {
   (event.target as HTMLElement).classList.remove('droppable')
 }
 
-const dropItem = (event: DragEvent, type: string) => {
+const dropItem = (event: DragEvent) => {
   event.preventDefault()
 
   if (event.dataTransfer) {

@@ -4,39 +4,39 @@
     <span class="stats__info stats__current">Current</span>
     <div class="stats__list">
       <div
-          class="stats__item"
-          v-for="item in stats"
-          :key="item.name"
+        v-for="item in stats"
+        :key="item.name"
+        class="stats__item"
       >
         <label class="stats__label">{{ item.name }}</label>
         <input
-          type="number"
-          class="stats__input"
           v-model="item.max"
-          readonly
-        />
-        <input
           type="number"
           class="stats__input"
+          readonly
+        >
+        <input
           v-model="item.current"
+          type="number"
+          class="stats__input"
           @input="changeStat(item.name, $event)"
-        />
+        >
       </div>
     </div>
     <div class="stats__hp stats__item">
       <label class="stats__label">HP</label>
       <input
-        type="number"
-        class="stats__input"
         v-model="maxHp"
-        readonly
-      />
-      <input
         type="number"
         class="stats__input"
+        readonly
+      >
+      <input
         v-model="hp"
+        type="number"
+        class="stats__input"
         @input="changeStat('hp', $event)"
-      />
+      >
     </div>
   </div>
 </template>

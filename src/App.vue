@@ -1,13 +1,13 @@
 <template>
   <div class="app">
     <main-menu />
-    <character />
+    <character-list />
   </div>
 </template>
 
 <script setup lang="ts">
-import Character from './components/Character.vue'
 import MainMenu from './components/MainMenu.vue'
+import CharacterList from './components/CharacterList.vue'
 </script>
 
 <style lang="scss">

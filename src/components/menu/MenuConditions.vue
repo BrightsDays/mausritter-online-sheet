@@ -1,15 +1,15 @@
 <template>
   <div class="conditions">
     <div
-        class="conditions__item"
-        v-for="item in conditions.list"
-        :key="item.title"
-        draggable="true"
-        @dragstart="onDragging"
+      v-for="item in conditions.list"
+      :key="item.title"
+      class="conditions__item"
+      draggable="true"
+      @dragstart="onDragging"
     >
-      <span class="conditions__title">{{ item.title}}</span>
-      <span class="conditions__description">{{item.description}}</span>
-      <span class="conditions__clear"><b class="conditions__clear">Clear:</b><br>{{item.clear}}</span>
+      <span class="conditions__title">{{ item.title }}</span>
+      <span class="conditions__description">{{ item.description }}</span>
+      <span class="conditions__clear"><b class="conditions__clear">Clear:</b><br>{{ item.clear }}</span>
     </div>
   </div>
 </template>

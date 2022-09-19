@@ -1,16 +1,19 @@
 <template>
   <div class="items">
     <div
-        class="items__item"
-        v-for="item in props.itemsList"
-        :key="item.title"
-        :id="item.title"
-        draggable="true"
-        @dragstart="onDragging"
+      v-for="item in props.itemsList"
+      :id="item.title"
+      :key="item.title"
+      class="items__item"
+      draggable="true"
+      @dragstart="onDragging"
     >
       <span class="items__title">{{ item.title }}</span>
       <div class="items__status">
-        <span v-if="item.stat" class="items__stat">{{ item.stat }}</span>
+        <span
+          v-if="item.stat"
+          class="items__stat"
+        >{{ item.stat }}</span>
       </div>
       <span class="items__type">{{ item.type }}</span>
     </div>

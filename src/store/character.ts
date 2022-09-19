@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { Character, CharacterKeys } from '../types'
+import { BodyBack, Character, StatKeys, DescriptionKeys, PackBack } from '../types'
 
-export const useStore = defineStore('character',{
+export const useStore = defineStore('character', {
   state: (): Character => ({
     name: '',
     exp: 0,
@@ -17,8 +17,8 @@ export const useStore = defineStore('character',{
     pips: 0,
     background: '',
     bodyBack: {
-        'Main paw': {
-          name: 'Main paw',
+        'Main Paw': {
+          name: 'Main Paw',
           item: null
         },
         'Main Body': {
@@ -66,10 +66,13 @@ export const useStore = defineStore('character',{
     grit: 0
   }),
   actions: {
-    setStat (statName: CharacterKeys, statValue: string | number | null) {
-      this[statName] = statValue
+    setStat(statName: StatKeys, payload: number) {
+        this[statName] = payload
     },
-    updateItems(packName: 'bodyBack' | 'packBack', payload: any) {
+    setDescription(descName: DescriptionKeys, payload: string) {
+      this[descName] = payload
+    },
+    updateItems(packName: 'bodyBack' | 'packBack', payload: BodyBack | PackBack) {
       this[packName] = payload
     }
   }

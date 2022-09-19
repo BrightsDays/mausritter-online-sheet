@@ -34,6 +34,31 @@ export interface Item {
   group: 'items'
 }
 
+export interface CardCell {
+  name: 'Main Paw' | 'Second Paw' | 'Main Body' | 'Second Body' | '1' | '2' | '3' | '4' | '5' | '6'
+  item: string | null
+}
+
+export interface BodyBack {
+  'Main Paw': CardCell,
+  'Main Body': CardCell,
+  'Second Paw': CardCell,
+  'Second Body': CardCell
+}
+
+export interface StoreBodyBack {
+  value: BodyBack
+}
+
+export interface PackBack {
+  1: CardCell
+  2: CardCell
+  3: CardCell
+  4: CardCell
+  5: CardCell
+  6: CardCell
+}
+
 export interface Character {
   name: string
   exp: number
@@ -47,7 +72,7 @@ export interface Character {
   hp: number
   startPips: number
   pips: number
-  background: ''
+  background: string
   bodyBack: {}
   packBack: {}
   birthSign: string
@@ -56,6 +81,8 @@ export interface Character {
   grit: number
 }
 
-export type CharacterKeys = 'name' | 'exp' | 'maxStr' | 'str' | 'maxDex' | 'dex'
-  | 'maxWil' | 'wil' | 'maxHp' | 'hp' | 'startPips' | 'pips' | 'background' | 'birthSign'
-  | 'coat' | 'details' | 'grit'
+export type StatKeys = 'exp' | 'maxStr' | 'str' | 'maxDex' | 'dex' | 'maxWil' | 'wil' | 'maxHp' | 'hp' | 'startPips' | 'pips' | 'grit'
+
+export type DescriptionKeys = 'name' | 'background' | 'birthSign' | 'coat' | 'details'
+
+export type BackgroundKeys = 1 | 2 | 3 | 4 | 5 | 6

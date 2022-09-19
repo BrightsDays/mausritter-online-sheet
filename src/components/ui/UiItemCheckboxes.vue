@@ -1,11 +1,11 @@
 <template>
   <div class="points">
     <div
-        v-for="(item, index) in points"
-        :key="`pt_${index}`"
-        class="points__item"
-        :class="{ 'points__item--used': item.isUsed.value }"
-        @click="useItem(index)"
+      v-for="(item, index) in points"
+      :key="`pt_${index}`"
+      class="points__item"
+      :class="{ 'points__item--used': item.isUsed.value }"
+      @click="useItem(index)"
     />
   </div>
 </template>

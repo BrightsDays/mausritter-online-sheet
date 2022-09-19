@@ -4,11 +4,11 @@
     draggable="true"
     @dragstart="onDragging"
   >
-    <span class="conditions__title">{{ condition.title}}</span>
-    <span class="conditions__description">{{condition.description}}</span>
+    <span class="conditions__title">{{ condition.title }}</span>
+    <span class="conditions__description">{{ condition.description }}</span>
     <span class="conditions__clear">
       <b class="conditions__clear">Clear:</b><br>
-      {{condition.clear}}
+      {{ condition.clear }}
     </span>
   </div>
 </template>

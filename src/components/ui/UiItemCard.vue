@@ -1,14 +1,17 @@
 <template>
   <div
+    v-if="findedItem"
     class="pack-items__item items__item"
     draggable="true"
     @dragstart="onDragging"
-    v-if="findedItem"
   >
     <span class="items__title">{{ findedItem.title }}</span>
     <div class="items__status">
       <ui-item-checkbox />
-      <span v-if="findedItem.stat" class="items__stat">{{ findedItem.stat }}</span>
+      <span
+        v-if="findedItem.stat"
+        class="items__stat"
+      >{{ findedItem.stat }}</span>
     </div>
     <span class="items__type">{{ findedItem.type }}</span>
   </div>

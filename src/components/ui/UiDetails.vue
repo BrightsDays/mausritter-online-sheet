@@ -1,13 +1,16 @@
 <template>
   <div class="details">
     <div
-        :class="['details__summary', {'details__summary--open': isOpen}]"
-        @click="toggleDetails()"
+      :class="['details__summary', {'details__summary--open': isOpen}]"
+      @click="toggleDetails()"
     >
       {{ props.title }}
     </div>
     <transition name="fade">
-      <div v-if="isOpen" class="details__content">
+      <div
+        v-if="isOpen"
+        class="details__content"
+      >
         <slot />
       </div>
     </transition>

@@ -7,24 +7,24 @@
       <div class="exp-input">
         <label class="exp-input__label">Level / Exp</label>
         <input
-            class="exp-input__input exp-input__level"
-            v-model="level"
-            readonly
-        />
+          v-model="level"
+          class="exp-input__input exp-input__level"
+          readonly
+        >
         <span class="exp-input__devider">/</span>
         <input
-            class="exp-input__input exp-input__exp"
-            v-model="exp"
-            @input="changeStat('exp', $event)"
-        />
+          v-model="exp"
+          class="exp-input__input exp-input__exp"
+          @input="changeStat('exp', $event)"
+        >
       </div>
-      <stats />
+      <character-stats />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Stats from './Stats.vue'
+import CharacterStats from './CharacterStats.vue'
 import { useStore } from '../../store/character'
 import { computed } from 'vue'
 import changeStat from '../../plugins/changeStat'
