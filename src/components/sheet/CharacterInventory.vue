@@ -23,9 +23,9 @@
     </div>
     <div class="pack-items">
       <div
-        v-for="item in packBack" 
+        v-for="item, index in packBack"
         :id="item.name.toString()"
-        :key="item.name"
+        :key="`pb_${index}_${item.item}`"
         class="pack-items__back"
         @drop="event => drop(event, 'packBack')"
         @dragover="allowDrop"
@@ -142,7 +142,7 @@ const drop = (event: DragEvent, type: string) => {
   }
 
   (event.target as HTMLElement).classList.remove('droppable')
-}//TODO: stop set store of paws by conditions
+}
 </script>
 
 <style lang="scss">

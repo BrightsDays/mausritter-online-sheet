@@ -2,39 +2,39 @@
   "1": {
     "1": {
       "background": "Test subject",
-      "itemA": "Spell: Magic missile",
-      "itemB": "Lead coat (Heavy armour)"
+      "itemA": "Magic missile",
+      "itemB": "Lead coat"
     },
     "2": {
       "background": "Kitchen forager",
-      "itemA":  "Shield & jerkin (Light armour)",
+      "itemA":  "Shield & jerkin",
       "itemB":  "Cookpots"
     },
     "3": {
       "background": "Cage dweller",
-      "itemA":  "Spell: Be understood",
+      "itemA":  "Be understood",
       "itemB":  "Bottle of milk"
     },
     "4": {
       "background": "Hedge witch",
-      "itemA":  "Spell: Heal",
+      "itemA":  "Heal",
       "itemB":  "Incense stick"
     },
     "5": {
       "background": "Leatherworker",
-      "itemA":  "Shield & jerkin (Light armour)",
+      "itemA":  "Shield & jerkin",
       "itemB":  "Shears"
     },
     "6": {
       "background": "Street tough",
-      "itemA":  "Dagger (Light, d6)",
+      "itemA":  "Dagger",
       "itemB":  "Flask of coffee"
     }
   },
   "2": {
     "1": {
       "background": "Mendicant priest",
-      "itemA":  "Spell: Restore",
+      "itemA":  "Restore",
       "itemB":  "Holy symbol"
     },
     "2": {
@@ -50,11 +50,11 @@
     "4": {
       "background": "Fishermouse",
       "itemA":  "Net",
-      "itemB":  "Needle (Light, d6)"
+      "itemB":  "Needle"
     },
     "5": {
       "background": "Blacksmith",
-      "itemA":  "Hammer (Medium, d6/d8)",
+      "itemA":  "Hammer",
       "itemB":  "Metal file"
     },
     "6": {
@@ -66,22 +66,22 @@
   "3": {
     "1": {
       "background": "Woodcutter",
-      "itemA":  "Axe (Medium, d6/d8)",
+      "itemA":  "Axe",
       "itemB":  "Twine, roll"
     },
     "2": {
       "background": "Bat cultist",
-      "itemA":  "Spell: Darkness",
+      "itemA":  "Darkness",
       "itemB":  "Bag of bat teeth"
     },
     "3": {
       "background": "Tin miner",
-      "itemA":  "Pickaxe (Medium, d6/d8)",
+      "itemA":  "Pickaxe",
       "itemB":  "Lantern"
     },
     "4": {
       "background": "Trash collector",
-      "itemA":  "Trashhook (Heavy, d10)",
+      "itemA":  "Trashhook",
       "itemB":  "Mirror"
     },
     "5": {
@@ -98,7 +98,7 @@
   "4": {
     "1": {
       "background": "Raft crew",
-      "itemA":  "Hammer (Medium, d6/d8)",
+      "itemA":  "Hammer",
       "itemB":  "Wooden spikes"
     },
     "2": {
@@ -119,11 +119,11 @@
     "5": {
       "background": "Prison guard",
       "itemA":  "Chain, 6\"",
-      "itemB":  "Spear (Heavy, d10)"
+      "itemB":  "Spear"
     },
     "6": {
       "background": "Fungus farmer",
-      "itemA":  "Dried mushroom (as rations)",
+      "itemA":  "Dried mushroom",
       "itemB":  "Spore mask"
     }
   },
@@ -150,7 +150,7 @@
     },
     "5": {
       "background": "Grain farmer",
-      "itemA":  "Spear (Heavy, d10)",
+      "itemA":  "Spear",
       "itemB":  "Whistle"
     },
     "6": {

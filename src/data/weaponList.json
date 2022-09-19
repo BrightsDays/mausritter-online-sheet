@@ -62,6 +62,34 @@
       "image": "",
       "type": "Ammunition",
       "group": "items"
+    },
+    {
+      "title": "Hammer",
+      "stat": "d6/d8",
+      "image": "",
+      "type": "Medium",
+      "group": "items"
+    },
+    {
+      "title": "Pickaxe",
+      "stat": "d6/d8",
+      "image": "",
+      "type": "Medium",
+      "group": "items"
+    },
+    {
+      "title": "Trashhook",
+      "stat": "d10",
+      "image": "",
+      "type": "Heavy",
+      "group": "items"
+    },
+    {
+      "title": "Spear",
+      "stat": "d10",
+      "image": "",
+      "type": "Heavy",
+      "group": "items"
     }
   ]
 }

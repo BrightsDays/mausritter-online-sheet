@@ -27,6 +27,13 @@
       "image": "",
       "type": "Spell",
       "group": "items"
+    },
+    {
+      "title": "Darkness",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items"
     }
   ]
 }
