@@ -73,8 +73,8 @@ export interface Character {
   startPips: number
   pips: number
   background: string
-  bodyBack: {}
-  packBack: {}
+  bodyBack: BodyBack
+  packBack: PackBack
   birthSign: string
   coat: string
   details: string

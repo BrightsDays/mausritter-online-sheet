@@ -36,27 +36,27 @@ export const useStore = defineStore('character', {
     },
     packBack: {
         1: {
-          name: 1,
+          name: '1',
           item: null
         },
         2: {
-          name: 2,
+          name: '2',
           item: null
         },
         3: {
-          name: 3,
+          name: '3',
           item: null
         },
         4: {
-          name: 4,
+          name: '4',
           item: null
         },
         5: {
-          name: 5,
+          name: '5',
           item: null
         },
         6: {
-          name: 6,
+          name: '6',
           item: null
         },
     },
@@ -67,7 +67,7 @@ export const useStore = defineStore('character', {
   }),
   actions: {
     setStat(statName: StatKeys, payload: number) {
-        this[statName] = payload
+      this[statName] = payload
     },
     setDescription(descName: DescriptionKeys, payload: string) {
       this[descName] = payload

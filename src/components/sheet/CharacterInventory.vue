@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ComputedRef } from 'vue'
 import { useStore } from '../../store/character'
 import conditions from '../../data/conditionList.json'
 import UiItemCard from '../ui/UiItemCard.vue'
@@ -63,8 +63,8 @@ const store = useStore()
 const isCondition = (title: string): Boolean =>
   conditions.list.filter(item => item.title === title).length ? true : false
 
-const bodyBack: BodyBack = computed(() => store.bodyBack)
-const packBack: PackBack = computed(() => store.packBack)
+const bodyBack: ComputedRef<BodyBack> = computed(() => store.bodyBack)
+const packBack: ComputedRef<PackBack> = computed(() => store.packBack)
 
 const allowDrop = (event: DragEvent) => {
   event.preventDefault();

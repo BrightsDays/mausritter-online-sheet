@@ -1,5 +1,5 @@
 export default (dices: number, facets: number, remove?: string): number => {
-    let result = [];
+    const result = []
 
     for (let i = 0; i < dices; i++) {
         const roll = Math.floor( Math.random() * facets ) + 1
