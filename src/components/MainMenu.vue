@@ -59,109 +59,127 @@
       </ui-details>
     </div>
     <div class="menu__bank">
-      <ui-details title="Hirelings" />
+      <ui-details title="Hirelings">
+        {{ hireling }}
+      </ui-details>
       <ui-details title="Banked items" />
     </div>
   </aside>
 </template>
 
 <script setup lang="ts">
-  import UiDetails from './ui/UiDetails.vue'
-  import { useStore } from '../store/character'
-  import rollDices from '../plugins/rollDices'
-  import MenuItems from './menu/MenuItems.vue'
-  import MenuConditions from './menu/MenuConditions.vue'
-  import utilityData from '../data/utilityList.json'
-  import weaponData from '../data/weaponList.json'
-  import spellData from '../data/spellList.json'
-  import detailsList from '../data/detailsList.json'
-  import backgroundList from '../data/backgroundList.json'
-  import { Item, StatKeys, BackgroundKeys } from '../types'
+import UiDetails from './ui/UiDetails.vue'
+import { useStore } from '../store/character'
+import rollDices from '../plugins/rollDices'
+import MenuItems from './menu/MenuItems.vue'
+import MenuConditions from './menu/MenuConditions.vue'
+import utilityData from '../data/utilityList.json'
+import weaponData from '../data/weaponList.json'
+import spellData from '../data/spellList.json'
+import detailsList from '../data/detailsList.json'
+import backgroundList from '../data/backgroundList.json'
+import { Item, StatKeys, BackgroundKeys } from '../types'
+import { computed } from 'vue'
 
-  const store = useStore()
+const store = useStore()
 
-  const utilityList = utilityData.list as Item[]
-  const weaponList = weaponData.list as Item[]
-  const spellList = spellData.list as Item[]
+const utilityList = utilityData.list as Item[]
+const weaponList = weaponData.list as Item[]
+const spellList = spellData.list as Item[]
+const hireling = computed(() => store.hireling)
 
-  const createCharacter = () => {
-    const statList = ['str', 'dex', 'wil', 'hp', 'pips']
+const createCharacter = () => {
+  store.setDescription('hireling', '')
 
-    statList.forEach(item => {
-      const value = (item === 'hp' || item === 'pips') ?
-          rollDices(1, 6) :
-          rollDices(3, 6, 'min')
+  const statList = ['str', 'dex', 'wil', 'hp', 'pips']
 
-      store.setStat(item as StatKeys, value)
-      store.setStat((`max${item.charAt(0).toUpperCase() + item.slice(1)}` as StatKeys), value)
+  statList.forEach(item => {
+    const value = (item === 'hp' || item === 'pips') ?
+        rollDices(1, 6) :
+        rollDices(3, 6, 'min')
 
-      if (item === 'hp') {
-        store.setStat('hp', value)
-        store.setStat('maxHp', value)
-      }
+    store.setStat(item as StatKeys, value)
+    store.setStat((`max${item.charAt(0).toUpperCase() + item.slice(1)}` as StatKeys), value)
 
-      if (item === 'pips') store.setStat('startPips', value)
-    })
+    if (item === 'hp') {
+      store.setStat('hp', value)
+      store.setStat('maxHp', value)
+    }
+
+    if (item === 'pips') store.setStat('startPips', value)
+  })
     
-    const background = backgroundList[store.maxHp as BackgroundKeys][store.pips as BackgroundKeys].background
-    store.setDescription('background', background)
+  const background = backgroundList[store.maxHp as BackgroundKeys][store.pips as BackgroundKeys].background
+  store.setDescription('background', background)
 
-    store.updateItems('bodyBack', {
-      'Main Paw': {
-        name: 'Main Paw',
-        item: null
-      },
-      'Main Body': {
-        name: 'Main Body',
-        item: null
-      },
-      'Second Paw': {
-        name: 'Second Paw',
-        item: null
-      },
-      'Second Body': {
-        name: 'Second Body',
-        item: null
-      }
-    })
+  store.updateItems('bodyBack', {
+    'Main Paw': {
+      name: 'Main Paw',
+      item: null
+    },
+    'Main Body': {
+      name: 'Main Body',
+      item: null
+    },
+    'Second Paw': {
+      name: 'Second Paw',
+      item: null
+    },
+    'Second Body': {
+      name: 'Second Body',
+      item: null
+    }
+  })
 
-    store.updateItems('packBack', {
-      1: {
-        name: '1',
-        item: 'Torches'
-      },
-      2: {
-        name: '2',
-        item: 'Rations'
-      },
-      3: {
-        name: '3',
-        item: backgroundList[store.maxHp as BackgroundKeys][store.pips as BackgroundKeys].itemA
-      },
-      4: {
-        name: '4',
-        item: backgroundList[store.maxHp as BackgroundKeys][store.pips as BackgroundKeys].itemB
-      },
-      5: {
-        name: '5',
-        item: null
-      },
-      6: {
-        name: '6',
-        item: null
-      }
-    })//TODO: fix start items generate and choose
+  const itemA = backgroundList[store.maxHp as BackgroundKeys][store.pips as BackgroundKeys].itemA
+  const itemB = backgroundList[store.maxHp as BackgroundKeys][store.pips as BackgroundKeys].itemB
 
-    const birthSign = ['Star', 'Wheel', 'Acorn', 'Storm', 'Moon', 'Mother']
-    store.setDescription('birthSign', birthSign[rollDices(1, 6) - 1])
-
-    const color = ['Chocolate', 'Black', 'White', 'Tan', 'Grey', 'Blue']
-    const pattern = ['Solid', 'Brindle', 'Patchy', 'Banded', 'Marbled', 'Flecked']
-    
-    store.setDescription('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
-
-    store.setDescription('details', detailsList[rollDices(1, detailsList.length) - 1])
+  const isHireling = (item: string): string | null => {
+    if (item.includes('Hireling')) {
+      store.setDescription('hireling', item)
+      return null
+    }
+      
+    return item
   }
+
+  store.updateItems('packBack', {
+    1: {
+      name: '1',
+      item: 'Torches'
+    },
+    2: {
+      name: '2',
+      item: 'Rations'
+    },
+    3: {
+      name: '3',
+      item: isHireling(itemA)
+    },
+    4: {
+      name: '4',
+      item: isHireling(itemB)
+    },
+    5: {
+      name: '5',
+      item: null
+    },
+    6: {
+      name: '6',
+      item: null
+    }
+  })//TODO: fix start items generate and choose
+
+  const birthSign = ['Star', 'Wheel', 'Acorn', 'Storm', 'Moon', 'Mother']
+  store.setDescription('birthSign', birthSign[rollDices(1, 6) - 1])
+
+  const color = ['Chocolate', 'Black', 'White', 'Tan', 'Grey', 'Blue']
+  const pattern = ['Solid', 'Brindle', 'Patchy', 'Banded', 'Marbled', 'Flecked']
+    
+  store.setDescription('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
+
+  store.setDescription('details', detailsList[rollDices(1, detailsList.length) - 1])
+}
 </script>
 
 <style lang="scss">

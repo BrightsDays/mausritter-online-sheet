@@ -75,6 +75,7 @@ export interface Character {
   background: string
   bodyBack: BodyBack
   packBack: PackBack
+  hireling: string
   birthSign: string
   coat: string
   details: string
@@ -83,6 +84,6 @@ export interface Character {
 
 export type StatKeys = 'exp' | 'maxStr' | 'str' | 'maxDex' | 'dex' | 'maxWil' | 'wil' | 'maxHp' | 'hp' | 'startPips' | 'pips' | 'grit'
 
-export type DescriptionKeys = 'name' | 'background' | 'birthSign' | 'coat' | 'details'
+export type DescriptionKeys = 'name' | 'background' | 'birthSign' | 'coat' | 'details' | 'hireling'
 
 export type BackgroundKeys = 1 | 2 | 3 | 4 | 5 | 6

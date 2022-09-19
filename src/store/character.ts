@@ -60,6 +60,7 @@ export const useStore = defineStore('character', {
           item: null
         },
     },
+    hireling: '',
     birthSign: '',
     coat: '',
     details: '',
