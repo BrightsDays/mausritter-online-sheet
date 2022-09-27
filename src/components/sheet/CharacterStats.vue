@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { useStore } from '../../store/character'
 import { computed } from 'vue'
-import changeStat from '../../plugins/changeStat'
+import changeStat from '../../helpers/changeStat'
 
 const store = useStore()
 

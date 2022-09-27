@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { Item } from '../../types'
-import onDragging from '../../plugins/onDragging'
+import onDragging from '../../helpers/onDragging'
 import items from '../../data/utilityList.json'
 import spells from '../../data/spellList.json'
 import weapons from '../../data/weaponList.json'

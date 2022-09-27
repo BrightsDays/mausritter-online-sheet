@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { Condition } from '../../types'
-import onDragging from '../../plugins/onDragging'
+import onDragging from '../../helpers/onDragging'
 import conditions from '../../data/conditionList.json'
 
 const props = defineProps({

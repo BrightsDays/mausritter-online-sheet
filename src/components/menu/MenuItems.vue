@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { Item } from '../../types'
 import { type PropType } from 'vue'
-import onDragging from '../../plugins/onDragging'
+import onDragging from '../../helpers/onDragging'
 
 const props = defineProps({
   itemsList: {

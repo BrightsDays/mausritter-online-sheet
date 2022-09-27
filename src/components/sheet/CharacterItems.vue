@@ -41,7 +41,7 @@
 import CharacterInventory from './CharacterInventory.vue'
 import { useStore } from '../../store/character'
 import { computed } from 'vue'
-import changeStat from '../../plugins/changeStat'
+import changeStat from '../../helpers/changeStat'
 
 const store = useStore()
 

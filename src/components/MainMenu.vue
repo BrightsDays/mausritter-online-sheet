@@ -70,7 +70,7 @@
 <script setup lang="ts">
 import UiDetails from './ui/UiDetails.vue'
 import { useStore } from '../store/character'
-import rollDices from '../plugins/rollDices'
+import rollDices from '../helpers/rollDices'
 import MenuItems from './menu/MenuItems.vue'
 import MenuConditions from './menu/MenuConditions.vue'
 import utilityData from '../data/utilityList.json'

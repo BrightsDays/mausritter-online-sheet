@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import conditions from '../../data/conditionList.json'
-import onDragging from '../../plugins/onDragging'
+import onDragging from '../../helpers/onDragging'
 </script>
 
 <style lang="scss">
