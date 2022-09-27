@@ -74,7 +74,11 @@ export const useStore = defineStore('character', {
       this[descName] = payload
     },
     updateItems(packName: 'bodyBack' | 'packBack', payload: BodyBack | PackBack) {
-      this[packName] = payload
+      if (packName === 'bodyBack') {
+        this.bodyBack = payload as BodyBack
+      } else if (packName === 'packBack') {
+        this.packBack = payload as PackBack
+      }
     }
   }
 })

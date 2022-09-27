@@ -1,9 +1,11 @@
 import { useStore } from '../store/character'
 import { StatKeys } from '../types'
 
-export default (statName: string, event: Event) => {
-    const pin = useStore()
-    const value = (event.target as HTMLInputElement).value
+export default (statName: string, event: Event) => {//TODO: use value, not event
+  const character = useStore()
+  const value = (event.target as HTMLInputElement).value
 
-    pin.setStat(statName as StatKeys, +value)
+  if (Object.keys(character).includes(statName)) {
+    character.setStat(statName as StatKeys, +value)
+  }
 }
