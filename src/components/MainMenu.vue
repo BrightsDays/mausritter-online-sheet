@@ -62,6 +62,7 @@
       <ui-details title="Hirelings">
         {{ hireling }}
       </ui-details>
+      <ui-details title="Ignored conditions" />
       <ui-details title="Banked items" />
     </div>
   </aside>
@@ -106,7 +107,9 @@ const createCharacter = () => {
       store.setStat('maxHp', value)
     }
 
-    if (item === 'pips') store.setStat('startPips', value)
+    if (item === 'pips') {
+      store.setStat('startPips', value)
+    }
   })
     
   const background = backgroundList[store.maxHp as BackgroundKeys][store.pips as BackgroundKeys].background

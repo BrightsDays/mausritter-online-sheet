@@ -26,13 +26,13 @@
     <div class="stats__hp stats__item">
       <label class="stats__label">HP</label>
       <input
-        v-model="maxHp"
+        v-model="hp[0].max"
         type="number"
         class="stats__input"
         readonly
       >
       <input
-        v-model="hp"
+        v-model="hp[0].current"
         type="number"
         class="stats__input"
         @input="changeStat('hp', $event)"
@@ -66,8 +66,11 @@ const stats = computed(() => [
   }
 ])
 
-const maxHp = computed(() => store.maxHp)
-const hp = computed(() => store.hp)
+const hp = computed(() => [{
+    name: 'hp',
+    max: store.maxHp,
+    current: store.hp
+}])
 </script>
 
 <style lang="scss">

@@ -2,6 +2,7 @@
   <div class="info">
     <div class="info__description">
       <label class="description-input__label">Portrait/description</label>
+      <div class="info__hireling" />
     </div>
     <div class="info__stats">
       <div class="exp-input">
@@ -46,6 +47,7 @@ const level = computed(() => {
 
 <style lang="scss">
 .info {
+  position: relative;
   display: flex;
   justify-content: space-between;
   gap: 15px;
@@ -59,6 +61,16 @@ const level = computed(() => {
 
   &__stats {
     width: 40%;
+  }
+
+  &__hireling {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    width: 100px;
+    height: 100px;
+    border: 2px dashed var(--second);
+    border-radius: 5px;
   }
 }
 

@@ -16,7 +16,7 @@ import CharacterList from './components/CharacterList.vue'
   width: 900px;
   height: 776px;
   justify-content: space-between;
-  margin: 30px auto 0;
+  margin: 20px auto 0;
   font-family: 'Ubuntu', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
