@@ -2,7 +2,7 @@
   <aside class="menu">
     <div class="menu__header menu--bordered">
       <h1 class="menu__heading">
-        Character Sheet v.0.0.1
+        Character Sheet v.0.0.0
       </h1>
       <!-- <button
          class="menu__toggle"
@@ -59,10 +59,6 @@
       </ui-details>
     </div>
     <div class="menu__bank">
-      <ui-details title="Hirelings">
-        {{ hireling }}
-      </ui-details>
-      <ui-details title="Ignored conditions" />
       <ui-details title="Banked items" />
     </div>
   </aside>
@@ -80,14 +76,12 @@ import spellData from '../data/spellList.json'
 import detailsList from '../data/detailsList.json'
 import backgroundList from '../data/backgroundList.json'
 import { Item, StatKeys, BackgroundKeys } from '../types'
-import { computed } from 'vue'
 
 const store = useStore()
 
 const utilityList = utilityData.list as Item[]
 const weaponList = weaponData.list as Item[]
 const spellList = spellData.list as Item[]
-const hireling = computed(() => store.hireling)
 
 const createCharacter = () => {
   store.setDescription('hireling', '')

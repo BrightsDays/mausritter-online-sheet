@@ -2,7 +2,12 @@
   <div class="info">
     <div class="info__description">
       <label class="description-input__label">Portrait/description</label>
-      <div class="info__hireling" />
+      <div 
+        v-if="hireling"
+        class="info__hireling"
+      >
+        <label class="description-input__label">{{ hireling }}</label>
+      </div>
     </div>
     <div class="info__stats">
       <div class="exp-input">
@@ -33,6 +38,7 @@ import changeStat from '../../helpers/changeStat'
 const store = useStore()
 
 const exp = computed(() => store.exp)
+const hireling = computed(() => store.hireling)
 
 const level = computed(() => {
   let result = 1
@@ -67,9 +73,9 @@ const level = computed(() => {
     position: absolute;
     left: 10px;
     bottom: 10px;
-    width: 100px;
-    height: 100px;
-    border: 2px dashed var(--second);
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--second);
     border-radius: 5px;
   }
 }

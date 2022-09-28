@@ -39,13 +39,13 @@
     },
     "2": {
       "background": "Beetleherd",
-      "itemA":  "Hireling: Loyal beetle",
-      "itemB":  "Pole, 6\""
+      "itemA":  "Pole, 6\"",
+      "itemB":  "Hireling: Loyal beetle"
     },
     "3": {
       "background": "Ale brewer",
-      "itemA":  "Hireling: Drunken torchbearer",
-      "itemB":  "Small barrel of ale"
+      "itemA":  "Small barrel of ale",
+      "itemB":  "Hireling: Drunken torchbearer"
     },
     "4": {
       "background": "Fishermouse",
@@ -91,8 +91,8 @@
     },
     "6": {
       "background": "Merchant",
-      "itemA":  "Hireling: Pack rat",
-      "itemB":  "20p IOU from a noblemouse"
+      "itemA":  "20p IOU from a noblemouse",
+      "itemB":  "Hireling: Pack rat"
     }
   },
   "4": {
