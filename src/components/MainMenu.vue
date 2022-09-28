@@ -165,7 +165,7 @@ const createCharacter = () => {
       name: '6',
       item: null
     }
-  })//TODO: fix start items generate and choose
+  })//TODO: add choose
 
   const birthSign = ['Star', 'Wheel', 'Acorn', 'Storm', 'Moon', 'Mother']
   store.setDescription('birthSign', birthSign[rollDices(1, 6) - 1])

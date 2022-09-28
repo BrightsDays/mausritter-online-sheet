@@ -7,6 +7,7 @@
         v-for="item in stats"
         :key="item.name"
         class="stats__item"
+        :class="item.name === 'hp' && 'stats__hp'"
       >
         <label class="stats__label">{{ item.name }}</label>
         <input
@@ -19,24 +20,11 @@
           v-model="item.current"
           type="number"
           class="stats__input"
-          @input="changeStat(item.name, $event)"
+          readonly
         >
+        <button @click="growStat(item.name, item.max)">+</button>
+        <button @click="downStat(item.name)">-</button>
       </div>
-    </div>
-    <div class="stats__hp stats__item">
-      <label class="stats__label">HP</label>
-      <input
-        v-model="hp[0].max"
-        type="number"
-        class="stats__input"
-        readonly
-      >
-      <input
-        v-model="hp[0].current"
-        type="number"
-        class="stats__input"
-        @input="changeStat('hp', $event)"
-      >
     </div>
   </div>
 </template>
@@ -63,14 +51,23 @@ const stats = computed(() => [
     name: 'wil',
     max: store.maxWil,
     current: store.wil
-  }
-])
-
-const hp = computed(() => [{
+  },
+  {
     name: 'hp',
     max: store.maxHp,
     current: store.hp
-}])
+  }
+])
+
+const growStat = (stat: string, maxValue: number) => {
+  const target = stats.value.find(el => el.name === stat)
+  if (target && target.current < maxValue) changeStat(stat, target.current + 1)
+}
+
+const downStat = (stat: string) => {
+  const target = stats.value.find(el => el.name === stat)
+  if (target && target.current > 0) changeStat(stat, target.current - 1)
+}
 </script>
 
 <style lang="scss">
@@ -101,13 +98,10 @@ const hp = computed(() => [{
     border: 2px solid var(--main);
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 15px;
   }
 
   &__hp {
-    border: 2px solid var(--main);
-    border-radius: 10px;
-    overflow: hidden;
+    border-top: 2px solid var(--second);
   }
 
   &__item {
@@ -136,8 +130,12 @@ const hp = computed(() => [{
     color: var(--main);
     outline: none;
     text-align: center;
+    
+    &::-webkit-inner-spin-button {
+      appearance: none;
+    }
 
-    &:last-child {
+    &:nth-child(3) {
       color: var(--special);
       box-shadow: -5px 0px 0px -3px var(--main);
     }

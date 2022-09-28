@@ -7,21 +7,15 @@ beforeEach(() => {
   setActivePinia(createPinia())
 })
 
-const pseudoEvent = {
-  target: {
-    value: 3
-  }
-}
-
 describe('ChangeStat', () => {
   test('update stats in store', () => {
     const character = useStore()
     const statList = ['str', 'maxStr', 'dex', 'maxDex', 'wil', 'maxWil', 'hp', 'maxHp', 'pips', 'startPips']
 
     statList.forEach(stat => {
-      changeStat(stat, pseudoEvent as unknown as Event)
+      changeStat(stat, 6)
       
-      expect(character[stat as StatKeys]).toBe(pseudoEvent.target.value)
+      expect(character[stat as StatKeys]).toBe(6)
     })
   })
 
@@ -30,7 +24,7 @@ describe('ChangeStat', () => {
     const statList = ['newField', 'testField']
     
     statList.forEach(stat => {
-      changeStat(stat, pseudoEvent as unknown as Event)
+      changeStat(stat, 6)
       
       expect(character[stat as StatKeys]).toBeUndefined()
     })
