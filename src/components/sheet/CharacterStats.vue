@@ -22,8 +22,10 @@
           class="stats__input"
           readonly
         >
-        <button @click="growStat(item.name, item.max)">+</button>
-        <button @click="downStat(item.name)">-</button>
+        <ui-stat-buttons
+          :grow="() => growStat(item.name, item.max)"
+          :down="() => downStat(item.name)"
+        />
       </div>
     </div>
   </div>
@@ -33,6 +35,7 @@
 import { useStore } from '../../store/character'
 import { computed } from 'vue'
 import changeStat from '../../helpers/changeStat'
+import UiStatButtons from '../ui/UiStatButtons.vue';
 
 const store = useStore()
 
@@ -101,7 +104,7 @@ const downStat = (stat: string) => {
   }
 
   &__hp {
-    border-top: 2px solid var(--second);
+    border-top: 2px solid var(--main);
   }
 
   &__item {
