@@ -30,7 +30,7 @@
       <input
         v-model="pips"
         class="pips-input__input"
-        @click="changeStat('pips', $event)"
+        @click="updatePips($event)"
       >
     </div>
   </header>
@@ -102,6 +102,11 @@ const dropItem = (event: DragEvent) => {
 
     (event.target as HTMLElement).classList.remove('droppable')
   }
+}
+
+const updatePips = (event: Event) => {
+  const value = +(event.target as HTMLInputElement).value
+  if (value) changeStat('pips', value)
 }
 </script>
 

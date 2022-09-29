@@ -21,7 +21,7 @@
         <input
           v-model="exp"
           class="exp-input__input exp-input__exp"
-          @input="changeStat('exp', $event)"
+          @input="updateExp($event)"
         >
       </div>
       <character-stats />
@@ -49,6 +49,11 @@ const level = computed(() => {
 
   return result
 })
+
+const updateExp = (event: Event) => {
+  const value = +(event.target as HTMLInputElement).value
+  if (value) changeStat('exp', value)
+}
 </script>
 
 <style lang="scss">
