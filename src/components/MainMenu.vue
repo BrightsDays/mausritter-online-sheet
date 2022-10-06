@@ -16,7 +16,7 @@
       >
         <button
           class="menu__item"
-          @click="createCharacter()"
+          @click="createNewCharacter()"
         >
           Create new character
         </button>
@@ -85,7 +85,7 @@ const utilityList = utilityData.list as Item[]
 const weaponList = weaponData.list as Item[]
 const spellList = spellData.list as Item[]
 
-const createCharacter = () => popup.setPopup('new')
+const createNewCharacter = () => popup.setPopup('new')
 
 // const createCharacter = () => {
 //   store.setDescription('hireling', '')

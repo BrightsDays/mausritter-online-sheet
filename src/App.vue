@@ -1,8 +1,10 @@
 <template>
   <div class="app">
-    <popup-layout
-      v-if="popup.type"
-    />
+    <Transition>
+      <popup-creation
+        v-if="popup.type"
+      />
+    </Transition>
     <main-menu />
     <character-list />
   </div>
@@ -12,7 +14,7 @@
 import MainMenu from './components/MainMenu.vue'
 import CharacterList from './components/CharacterList.vue'
 import { usePopupStore } from './store/popup'
-import PopupLayout from './components/popup/PopupLayout.vue'
+import PopupCreation from './components/popup/PopupCreation.vue'
 
 const popup = usePopupStore()
 </script>
@@ -29,5 +31,15 @@ const popup = usePopupStore()
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   gap: 15px;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

@@ -10,6 +10,7 @@
           id="name"
           v-model="character.name"
           class="about-input__input"
+          readonly
         >
       </div>
       <div class="about__background about-input">
