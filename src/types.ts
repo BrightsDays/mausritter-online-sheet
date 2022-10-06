@@ -82,6 +82,12 @@ export interface Character {
   grit: number
 }
 
+export interface Popup {
+  type: PopupTypes
+}
+
+export type PopupTypes = 'new' | 'full' | null
+
 export type StatKeys = 'exp' | 'maxStr' | 'str' | 'maxDex' | 'dex' | 'maxWil' | 'wil' | 'maxHp' | 'hp' | 'startPips' | 'pips' | 'grit'
 
 export type DescriptionKeys = 'name' | 'background' | 'birthSign' | 'coat' | 'details' | 'hireling'
