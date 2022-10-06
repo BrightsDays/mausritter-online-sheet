@@ -90,6 +90,13 @@
       "image": "",
       "type": "Heavy",
       "group": "items"
+    },
+    {
+      "title": "Bow",
+      "stat": "d8",
+      "image": "",
+      "type": "Heavy ranged",
+      "group": "items"
     }
   ]
 }

@@ -18,7 +18,10 @@
       </div>
       <div class="popup__section">
         <label class="popup__label">Swap stats</label>
-        <select class="popup__select">
+        <select
+          v-model="swapStats.first"
+          class="popup__select"
+        >
           <option value="str">
             STR
           </option>
@@ -29,7 +32,10 @@
             WIL
           </option>
         </select>
-        <select class="popup__select">
+        <select
+          v-model="swapStats.second"
+          class="popup__select"
+        >
           <option value="str">
             STR
           </option>
@@ -43,12 +49,25 @@
       </div>
       <div class="popup__section">
         <label class="popup__label">Select weapon</label>
-        <select class="popup__select">
-          <option>light</option>
-          <option>medium</option>
-          <option>heavy</option>
-          <option>light ranged</option>
-          <option>heavy ranged</option>
+        <select
+          v-model="weapon"
+          class="popup__select"
+        >
+          <option value="light">
+            Light
+          </option>
+          <option value="medium">
+            Medium
+          </option>
+          <option value="heavy">
+            Heavy
+          </option>
+          <option value="light_ranged">
+            Light ranged
+          </option>
+          <option value="heavy_ranged">
+            Heavy ranged
+          </option>
         </select>
       </div>
       <div class="popup__section popup__section--buttons">
@@ -73,41 +92,74 @@
 <script setup lang="ts">
 import PopupLayout from './PopupLayout.vue'
 import rollDices from '../../helpers/rollDices'
+import rollStats from '../../helpers/rollStats'
 import detailsList from '../../data/detailsList.json'
 import backgroundList from '../../data/backgroundList.json'
-import { StatKeys, BackgroundKeys } from '../../types'
+import { BackgroundKeys, StatKeys } from '../../types'
 import { useStore } from '../../store/character'
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
 
 const characterStore = useStore()
 const popupStore = usePopupStore()
 let save = false
 
+const weapon = ref('medium')
+const weaponList = {
+  light: 'Needle',
+  medium: 'Sword',
+  heavy: 'Trashhook',
+  light_ranged: 'Sling',
+  heavy_ranged: 'Bow'
+}
+
+const statsForSwap = ref({
+  str: 0,
+  dex: 0,
+  wil: 0
+})
+const swapStats = ref({
+  first: 'str',
+  second: 'str'
+})
+
 const close = () => popupStore.setPopup(null)
 
 const createCharacter = () => {
+  rollStats(['str', 'dex', 'wil'], characterStore)
+
+  statsForSwap.value = {
+    str: characterStore.str,
+    dex: characterStore.dex,
+    wil: characterStore.wil
+  }
+}
+
+const saveCharacter = () => {
   characterStore.setDescription('hireling', '')
 
-  const statList = ['str', 'dex', 'wil', 'hp', 'pips']
+  rollStats(['hp', 'pips'], characterStore)
 
-  statList.forEach(item => {
-    const value = (item === 'hp' || item === 'pips') ?
-        rollDices(1, 6) :
-        rollDices(3, 6, 'min')
-
-    characterStore.setStat(item as StatKeys, value)
-    characterStore.setStat((`max${item.charAt(0).toUpperCase() + item.slice(1)}` as StatKeys), value)
-
-    if (item === 'hp') {
-      characterStore.setStat('hp', value)
-      characterStore.setStat('maxHp', value)
-    }
-
-    if (item === 'pips') {
-      characterStore.setStat('startPips', value)
-    }
-  })
+  if (swapStats.value.first !== swapStats.value.second) {
+    characterStore.setStat(
+      swapStats.value.first as StatKeys,
+      statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
+    )
+    characterStore.setStat(
+      (`max${(swapStats.value.first as StatKeys).charAt(0).toUpperCase()
+        + (swapStats.value.first as StatKeys).slice(1)}` as StatKeys),
+      statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
+    )
+    characterStore.setStat(
+      swapStats.value.second as StatKeys,
+      statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
+    )
+    characterStore.setStat(
+      (`max${(swapStats.value.second as StatKeys).charAt(0).toUpperCase()
+        + (swapStats.value.second as StatKeys).slice(1)}` as StatKeys),
+      statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
+    )
+  }
     
   const background = backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].background
   characterStore.setDescription('background', background)
@@ -146,23 +198,23 @@ const createCharacter = () => {
   characterStore.updateItems('packBack', {
     1: {
       name: '1',
-      item: 'Torches'
+      item: weaponList[weapon.value as keyof typeof weaponList]
     },
     2: {
       name: '2',
-      item: 'Rations'
+      item: 'Torches'
     },
     3: {
       name: '3',
-      item: isHireling(itemA)
+      item: 'Rations'
     },
     4: {
       name: '4',
-      item: isHireling(itemB)
+      item: itemA
     },
     5: {
       name: '5',
-      item: null
+      item: isHireling(itemB)
     },
     6: {
       name: '6',
@@ -177,14 +229,14 @@ const createCharacter = () => {
   const pattern = ['Solid', 'Brindle', 'Patchy', 'Banded', 'Marbled', 'Flecked']
     
   characterStore.setDescription('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
-
   characterStore.setDescription('details', detailsList[rollDices(1, detailsList.length) - 1])
-}
 
-const saveCharacter = () => {
+
+
   save = true
+
   close()
-}
+}//TODO Take two items if highted stat is < 10, or choose one
 
 onMounted(() => {
   createCharacter()

@@ -8,7 +8,9 @@ export enum ItemType {
   Improvised = 'Improvised',
   Light = 'Light',
   Medium = 'Medium',
-  Ranged = 'Light ranged',
+  Heavy = 'Heavy',
+  LightRanged = 'Light ranged',
+  HeavyRanged = 'Heavy ranged',
   Ammunition = 'Ammunition',
   Utility = 'Utility'
 }
