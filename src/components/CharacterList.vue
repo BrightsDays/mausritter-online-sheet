@@ -3,6 +3,7 @@
     <character-info />
     <character-stats />
     <character-items />
+    <character-hirelings />
   </div>
 </template>
 
@@ -10,10 +11,16 @@
 import CharacterInfo from "./sheet/CharacterAbout.vue";
 import CharacterStats from "./sheet/CharacterInfo.vue";
 import CharacterItems from "./sheet/CharacterItems.vue";
+import CharacterHirelings from "./sheet/CharacterHirelings.vue";
 </script>
 
 <style lang="scss">
 .character {
   width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: calc(100vh - 60px);
+  overflow: scroll;
 }
 </style>

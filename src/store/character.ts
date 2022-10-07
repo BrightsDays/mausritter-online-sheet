@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { BodyBack, Character, StatKeys, DescriptionKeys, PackBack } from '../types'
+import { BodyBack, Character, StatKeys, DescriptionKeys, PackBack, Hireling } from '../types'
 
 export const useStore = defineStore('character', {
   state: (): Character => ({
@@ -60,7 +60,7 @@ export const useStore = defineStore('character', {
           item: null
         },
     },
-    hireling: '',
+    hirelings: [],
     birthSign: '',
     coat: '',
     details: '',
@@ -79,6 +79,9 @@ export const useStore = defineStore('character', {
       } else if (packName === 'packBack') {
         this.packBack = payload as PackBack
       }
+    },
+    addHireling(payload: Hireling) {      
+      this.hirelings = [ ...this.hirelings, payload]
     },
     clearCharacter() {
       this.$state = {
@@ -140,6 +143,7 @@ export const useStore = defineStore('character', {
             },
         },
         hireling: '',
+        hirelings: [],
         birthSign: '',
         coat: '',
         details: '',

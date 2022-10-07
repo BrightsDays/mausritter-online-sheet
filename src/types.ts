@@ -63,6 +63,34 @@ export interface PackBack {
   6: CardCell
 }
 
+export interface HirelingBody {
+  'Main Paw': CardCell,
+  'Second Paw': CardCell
+}
+
+export interface HirelingPack {
+  1: CardCell
+  2: CardCell
+  3: CardCell
+  4: CardCell
+}
+
+export interface Hireling {
+  name: string
+  exp: number
+  maxStr: number
+  str: number
+  maxDex: number
+  dex: number
+  maxWil: number
+  wil: number
+  maxHp: number
+  hp: number
+  bodyBack: HirelingBody
+  packBack: HirelingPack
+  details: string
+}
+
 export interface Character {
   name: string
   exp: number
@@ -79,7 +107,7 @@ export interface Character {
   background: string
   bodyBack: BodyBack
   packBack: PackBack
-  hireling: string
+  hirelings: Hireling[]
   birthSign: string
   coat: string
   details: string

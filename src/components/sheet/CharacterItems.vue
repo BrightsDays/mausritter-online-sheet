@@ -116,7 +116,6 @@ const updatePips = (event: Event) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 15px 0;
     gap: 15px;
   }
 

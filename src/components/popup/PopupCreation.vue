@@ -120,6 +120,7 @@ import { BackgroundKeys, StatKeys } from '../../types'
 import { useStore } from '../../store/character'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
+import createHireling from '../../helpers/createHireling'
 
 const characterStore = useStore()
 const popupStore = usePopupStore()
@@ -144,7 +145,7 @@ const swapStats = ref({
   second: 'str'
 })
 
-let selectItem = ref(true)
+const selectItem = ref(true)
 const startItem = ref('')
 const itemsForSelect = ref({
   itemA: '',
@@ -204,7 +205,7 @@ const saveCharacter = () => {
 
   const isHireling = (item: string): string | null => {
     if (item.includes('Hireling')) {
-      characterStore.setDescription('hireling', item)
+      characterStore.addHireling(createHireling(item))
       return null
     }
       
@@ -262,12 +263,11 @@ const saveCharacter = () => {
 
   const color = ['Chocolate', 'Black', 'White', 'Tan', 'Grey', 'Blue']
   const pattern = ['Solid', 'Brindle', 'Patchy', 'Banded', 'Marbled', 'Flecked']
-    
+
   characterStore.setDescription('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
   characterStore.setDescription('details', detailsList[rollDices(1, detailsList.length) - 1])
 
   save = true
-
   close()
 }
 
