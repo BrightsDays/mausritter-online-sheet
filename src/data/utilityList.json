@@ -1,20 +1,6 @@
 {
   "list": [
     {
-      "title": "Lead coat",
-      "stat": "1 def",
-      "image": "",
-      "type": "Heavy armor",
-      "group": "items"
-    },
-    {
-      "title": "Shield & jerkin",
-      "stat": "1 def",
-      "image": "",
-      "type": "Light armor",
-      "group": "items"
-    },
-    {
       "title": "Torches",
       "stat": "",
       "image": "",

@@ -37,6 +37,7 @@ import onDragging from '../../helpers/onDragging'
 import items from '../../data/utilityList.json'
 import spells from '../../data/spellList.json'
 import weapons from '../../data/weaponList.json'
+import armors from '../../data/armorList.json'
 
 const props = defineProps({
   item: {
@@ -59,7 +60,7 @@ const useItem = (index: number) => {
 }
 
 const findItem = (title: string): Item | null => {
-  const listToFind = [...items.list, ...spells.list, ...weapons.list]
+  const listToFind = [...items.list, ...spells.list, ...weapons.list, ...armors.list]
 
   const findedItem = listToFind.filter(item => item.title === title)[0]
 

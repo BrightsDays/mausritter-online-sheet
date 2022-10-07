@@ -39,6 +39,7 @@ import onDragging from '../../helpers/onDragging'
   }
 
   &__title {
+    color: var(--special);
     font-family: 'Pirata One', sans-serif;
     font-size: 2em;
     line-height: 1;

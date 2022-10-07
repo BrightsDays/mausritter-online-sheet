@@ -54,6 +54,9 @@
       <ui-details title="Weapons">
         <menu-items :items-list="weaponList" />
       </ui-details>
+      <ui-details title="Armors">
+        <menu-items :items-list="armorList" />
+      </ui-details>
       <ui-details title="Spells">
         <menu-items :items-list="spellList" />
       </ui-details>
@@ -83,6 +86,7 @@ import MenuItems from './menu/MenuItems.vue'
 import MenuConditions from './menu/MenuConditions.vue'
 import utilityData from '../data/utilityList.json'
 import weaponData from '../data/weaponList.json'
+import armorData from '../data/armorList.json'
 import spellData from '../data/spellList.json'
 import { Item } from '../types'
 
@@ -90,6 +94,7 @@ const popup = usePopupStore()
 
 const utilityList = utilityData.list as Item[]
 const weaponList = weaponData.list as Item[]
+const armorList = armorData.list as Item[]
 const spellList = spellData.list as Item[]
 
 const createNewCharacter = () => popup.setPopup('new')
