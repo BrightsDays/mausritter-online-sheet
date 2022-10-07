@@ -123,7 +123,7 @@ export type BodyIndexes = 'Main Paw'| 'Main Body'| 'Second Paw'| 'Second Body'
 
 export type PackIndexes = '1' | '2' | '3' | '4' | '5' | '6'
 
-export type PopupTypes = 'new' | 'full' | null
+export type PopupTypes = 'new' | 'full' | 'addHireling' |null
 
 export type StatKeys = 'exp' | 'maxStr' | 'str' | 'maxDex' | 'dex' | 'maxWil' | 'wil' | 'maxHp' | 'hp' | 'startPips' | 'pips' | 'grit'
 

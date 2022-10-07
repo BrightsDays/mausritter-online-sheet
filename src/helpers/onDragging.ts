@@ -21,4 +21,4 @@ export default (event: DragEvent) => {
     if (content) event.dataTransfer.setData('text', content)
     if (id) event.dataTransfer.setData('id', id)
   }
-}
+}//TODO transfer data of all item

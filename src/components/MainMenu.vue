@@ -63,6 +63,12 @@
       <ui-details title="Conditions">
         <menu-conditions />
       </ui-details>
+      <button
+        class="menu__item menu__item--big"
+        @click.prevent="addHireling()"
+      >
+        Add hireling
+      </button>
     </div>
     <div class="menu__bank">
       <ui-details title="Banked items" />
@@ -87,6 +93,8 @@ const weaponList = weaponData.list as Item[]
 const spellList = spellData.list as Item[]
 
 const createNewCharacter = () => popup.setPopup('new')
+
+const addHireling = () => popup.setPopup('addHireling')
 </script>
 
 <style lang="scss">
@@ -123,6 +131,18 @@ const createNewCharacter = () => popup.setPopup('new')
 
     &:hover {
       background-color: var(--second-background);
+    }
+
+    &--big {
+      position: relative;
+      padding: 15px;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 2.2em;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      color: var(--main);
+      border: none;
     }
   }
 

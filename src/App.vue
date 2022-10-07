@@ -2,7 +2,12 @@
   <div class="app">
     <Transition>
       <popup-creation
-        v-if="popup.type"
+        v-if="popup.type === 'new'"
+      />
+    </Transition>
+    <Transition>
+      <popup-hireling
+        v-if="popup.type === 'addHireling'"
       />
     </Transition>
     <main-menu />
@@ -15,6 +20,7 @@ import MainMenu from './components/MainMenu.vue'
 import CharacterList from './components/CharacterList.vue'
 import { usePopupStore } from './store/popup'
 import PopupCreation from './components/popup/PopupCreation.vue'
+import PopupHireling from './components/popup/PopupHireling.vue'
 
 const popup = usePopupStore()
 </script>
