@@ -47,11 +47,30 @@
           </option>
         </select>
       </div>
+      <div
+        v-if="selectItem" 
+        class="popup__section"
+      >
+        <label class="popup__label">Select item</label>
+        <select
+          v-model="startItem"
+          class="popup__select"
+        >
+          <option
+            v-for="item in itemsForSelect"
+            :key="item"
+            :value="item"
+          >
+            {{ item }}
+          </option>
+        </select>
+      </div>
       <div class="popup__section">
         <label class="popup__label">Select weapon</label>
         <select
           v-model="weapon"
           class="popup__select"
+          def
         >
           <option value="light">
             Light
@@ -78,7 +97,9 @@
           Cancel
         </button>
         <button
-          :disabled="characterStore.name.length < 3"
+          :disabled="characterStore.name.length < 3 || 
+            (selectItem && startItem === '') ||
+            !weapon"
           class="popup__button"
           @click.prevent="saveCharacter()"
         >
@@ -104,7 +125,7 @@ const characterStore = useStore()
 const popupStore = usePopupStore()
 let save = false
 
-const weapon = ref('medium')
+const weapon = ref('')
 const weaponList = {
   light: 'Needle',
   medium: 'Sword',
@@ -123,22 +144,42 @@ const swapStats = ref({
   second: 'str'
 })
 
+let selectItem = ref(true)
+const startItem = ref('')
+const itemsForSelect = ref({
+  itemA: '',
+  itemB: ''
+})
+
 const close = () => popupStore.setPopup(null)
 
 const createCharacter = () => {
-  rollStats(['str', 'dex', 'wil'], characterStore)
+  characterStore.clearCharacter()
+
+  rollStats(['str', 'dex', 'wil', 'hp', 'pips'], characterStore)
 
   statsForSwap.value = {
     str: characterStore.str,
     dex: characterStore.dex,
     wil: characterStore.wil
   }
+
+  const background = 
+    backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].background
+  characterStore.setDescription('background', background)
+
+  itemsForSelect.value.itemA = 
+    backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA
+  itemsForSelect.value.itemB = 
+    backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB
+  
+  if (!Object.values(statsForSwap.value).filter(item => item > 9).length) {
+    selectItem.value = false
+  }
 }
 
 const saveCharacter = () => {
   characterStore.setDescription('hireling', '')
-
-  rollStats(['hp', 'pips'], characterStore)
 
   if (swapStats.value.first !== swapStats.value.second) {
     characterStore.setStat(
@@ -160,9 +201,15 @@ const saveCharacter = () => {
       statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
     )
   }
-    
-  const background = backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].background
-  characterStore.setDescription('background', background)
+
+  const isHireling = (item: string): string | null => {
+    if (item.includes('Hireling')) {
+      characterStore.setDescription('hireling', item)
+      return null
+    }
+      
+    return item
+  }
 
   characterStore.updateItems('bodyBack', {
     'Main Paw': {
@@ -183,18 +230,6 @@ const saveCharacter = () => {
     }
   })
 
-  const itemA = backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA
-  const itemB = backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB
-
-  const isHireling = (item: string): string | null => {
-    if (item.includes('Hireling')) {
-      characterStore.setDescription('hireling', item)
-      return null
-    }
-      
-    return item
-  }
-
   characterStore.updateItems('packBack', {
     1: {
       name: '1',
@@ -210,11 +245,11 @@ const saveCharacter = () => {
     },
     4: {
       name: '4',
-      item: itemA
+      item: selectItem.value ? isHireling(startItem.value) : itemsForSelect.value.itemA
     },
     5: {
       name: '5',
-      item: isHireling(itemB)
+      item: selectItem.value ? null : isHireling(itemsForSelect.value.itemB)
     },
     6: {
       name: '6',
@@ -231,12 +266,10 @@ const saveCharacter = () => {
   characterStore.setDescription('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
   characterStore.setDescription('details', detailsList[rollDices(1, detailsList.length) - 1])
 
-
-
   save = true
 
   close()
-}//TODO Take two items if highted stat is < 10, or choose one
+}
 
 onMounted(() => {
   createCharacter()
