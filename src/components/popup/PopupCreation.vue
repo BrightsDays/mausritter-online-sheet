@@ -215,46 +215,56 @@ const saveCharacter = () => {
   characterStore.updateItems('bodyBack', {
     'Main Paw': {
       name: 'Main Paw',
-      item: null
+      item: null,
+      used: '0'
     },
     'Main Body': {
       name: 'Main Body',
-      item: null
+      item: null,
+      used: '0'
     },
     'Second Paw': {
       name: 'Second Paw',
-      item: null
+      item: null,
+      used: '0'
     },
     'Second Body': {
       name: 'Second Body',
-      item: null
+      item: null,
+      used: '0'
     }
   })
 
   characterStore.updateItems('packBack', {
     1: {
       name: '1',
-      item: weaponList[weapon.value as keyof typeof weaponList]
+      item: weaponList[weapon.value as keyof typeof weaponList],
+      used: '0'
     },
     2: {
       name: '2',
-      item: 'Torches'
+      item: 'Torches',
+      used: '0'
     },
     3: {
       name: '3',
-      item: 'Rations'
+      item: 'Rations',
+      used: '0'
     },
     4: {
       name: '4',
-      item: selectItem.value ? isHireling(startItem.value) : itemsForSelect.value.itemA
+      item: selectItem.value ? isHireling(startItem.value) : itemsForSelect.value.itemA,
+      used: '0'
     },
     5: {
       name: '5',
-      item: selectItem.value ? null : isHireling(itemsForSelect.value.itemB)
+      item: selectItem.value ? null : isHireling(itemsForSelect.value.itemB),
+      used: '0'
     },
     6: {
       name: '6',
-      item: null
+      item: null,
+      used: '0'
     }
   })
 

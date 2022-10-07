@@ -13,7 +13,15 @@
   >
     <span class="items__title">{{ findedItem.title }}</span>
     <div class="items__status">
-      <ui-item-checkbox />
+      <div class="points">
+        <div
+          v-for="point in [0, 1, 2]"
+          :key="`pt_${point}`"
+          class="points__item"
+          :class="{ 'points__item--used': +props.used > point }"
+          @click="useItem(point)"
+        />
+      </div>
       <span
         v-if="findedItem.stat"
         class="items__stat"
@@ -29,14 +37,26 @@ import onDragging from '../../helpers/onDragging'
 import items from '../../data/utilityList.json'
 import spells from '../../data/spellList.json'
 import weapons from '../../data/weaponList.json'
-import UiItemCheckbox from '../ui/UiItemCheckboxes.vue'
 
 const props = defineProps({
   item: {
     type: String,
+    required: true
+  },
+  used: {
+    type: String,
     required: true,
+    default: '0'
   }
 })
+
+const emit = defineEmits({
+  pointClick: (key) => key
+})
+
+const useItem = (index: number) => {
+  emit('pointClick', index + 1)
+}
 
 const findItem = (title: string): Item | null => {
   const listToFind = [...items.list, ...spells.list, ...weapons.list]
@@ -50,3 +70,28 @@ const findItem = (title: string): Item | null => {
 
 const findedItem = findItem(props.item)
 </script>
+
+<style lang="scss">
+  .points {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    background: top;
+  
+    &__item {
+      display: block;
+      position: relative;
+      width: 15px;
+      height: 15px;
+      border: 1px solid var(--main);
+      border-radius: 50%;
+      z-index: 1;
+      cursor: pointer;
+      background: top;
+  
+      &--used {
+        background: var(--main);
+      }
+    }
+  }
+</style>

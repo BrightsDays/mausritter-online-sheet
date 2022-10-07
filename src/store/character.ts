@@ -19,45 +19,55 @@ export const useStore = defineStore('character', {
     bodyBack: {
         'Main Paw': {
           name: 'Main Paw',
-          item: null
+          item: null,
+          used: '0'
         },
         'Main Body': {
           name: 'Main Body',
-          item: null
+          item: null,
+          used: '0'
         },
         'Second Paw': {
           name: 'Second Paw',
-          item: null
+          item: null,
+          used: '0'
         },
         'Second Body': {
           name: 'Second Body',
-          item: null
+          item: null,
+          used: '0'
         }
     },
     packBack: {
         1: {
           name: '1',
-          item: null
+          item: null,
+          used: '0'
         },
         2: {
           name: '2',
-          item: null
+          item: null,
+          used: '0'
         },
         3: {
           name: '3',
-          item: null
+          item: null,
+          used: '0'
         },
         4: {
           name: '4',
-          item: null
+          item: null,
+          used: '0'
         },
         5: {
           name: '5',
-          item: null
+          item: null,
+          used: '0'
         },
         6: {
           name: '6',
-          item: null
+          item: null,
+          used: '0'
         },
     },
     hirelings: [],

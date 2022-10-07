@@ -2,9 +2,9 @@
   <div class="inventory">
     <div class="body-items">
       <div 
-        v-for="item in bodyBack" 
+        v-for="item, index in bodyBack" 
         :id="item.name.toString()"
-        :key="item.name"
+        :key="`it__${index}`"
         class="body-items__back"
         @drop="event => drop(event, 'bodyBack')"
         @dragover="allowDrop"
@@ -18,6 +18,8 @@
         <ui-item-card
           v-else
           :item="item.item"
+          :used="item.used"
+          @point-click="setBodyItemStats($event, index)"
         />
       </div>
     </div>
@@ -44,6 +46,8 @@
         <ui-item-card
           v-else
           :item="item.item"
+          :used="item.used"
+          @point-click="setPackItemStats($event, index)"
         />
       </div>
     </div>
@@ -56,7 +60,7 @@ import { useStore } from '../../store/character'
 import conditions from '../../data/conditionList.json'
 import UiItemCard from '../ui/UiItemCard.vue'
 import UiConditionCard from '../ui/uiConditionCard.vue'
-import { BodyBack, PackBack } from '../../types'
+import { BodyBack, PackBack, BodyIndexes, PackIndexes } from '../../types'
 
 const store = useStore()
 
@@ -77,13 +81,18 @@ const leaveDrag = (event: DragEvent) => {
 }
 
 const drop = (event: DragEvent, type: string) => {
-  event.preventDefault()
+  event.preventDefault()  
   
   // eslint-disable-next-line no-undef
   const firstChild: ChildNode = (event.target as Node).childNodes[0]
 
-  if ((firstChild as HTMLElement).classList.contains('body-items__name')
-      || (firstChild as HTMLElement).classList.contains('pack-items__name')) {
+  if (!firstChild) {
+    (event.target as HTMLElement).classList.remove('droppable')
+    return null
+  }
+
+  if ((firstChild as HTMLElement).classList.contains('body-items__name') ||
+      (firstChild as HTMLElement).classList.contains('pack-items__name')) {
     const slotId = event.dataTransfer
       ? event.dataTransfer.getData('id')
       : null
@@ -118,13 +127,18 @@ const drop = (event: DragEvent, type: string) => {
       ? (event.target as HTMLElement).id
       : null
 
+    const used = event.dataTransfer
+      ? event.dataTransfer.getData('used')
+      : '0'      
+
     if (data && id) {
       if (type === 'bodyBack') {
         store.updateItems('bodyBack', {
           ...bodyBack.value,
           [id]: {
             name: id,
-            item: data
+            item: data,
+            used: used
           }
         })
       }
@@ -134,7 +148,8 @@ const drop = (event: DragEvent, type: string) => {
           ...packBack.value,
           [id]: {
             name: id,
-            item: data
+            item: data,
+            used: used
           }
         })
       }
@@ -142,6 +157,50 @@ const drop = (event: DragEvent, type: string) => {
   }
 
   (event.target as HTMLElement).classList.remove('droppable')
+}
+
+const setBodyItemStats = (event: number, index: string) => {  
+  if (event > +bodyBack.value[index as BodyIndexes].used) {
+    store.updateItems('bodyBack', {
+      ...bodyBack.value,
+      [index]: {
+        name: bodyBack.value[index as BodyIndexes].name,
+        item: bodyBack.value[index as BodyIndexes].item,
+        used: event
+      }
+    })
+  } else {
+    store.updateItems('bodyBack', {
+      ...bodyBack.value,
+      [index]: {
+        name: bodyBack.value[index as BodyIndexes].name,
+        item: bodyBack.value[index as BodyIndexes].item,
+        used: +bodyBack.value[index as BodyIndexes].used - 1
+      }
+    })
+  }
+}
+
+const setPackItemStats = (event: number, index: string | number) => {
+  if (event > +packBack.value[index as PackIndexes].used) {
+    store.updateItems('packBack', {
+      ...packBack.value,
+      [index]: {
+        name: packBack.value[index as PackIndexes].name,
+        item: packBack.value[index as PackIndexes].item,
+        used: event
+      }
+    })
+  } else {
+    store.updateItems('packBack', {
+      ...packBack.value,
+      [index]: {
+        name: packBack.value[index as PackIndexes].name,
+        item: packBack.value[index as PackIndexes].item,
+        used: +packBack.value[index as PackIndexes].used - 1
+      }
+    })
+  }
 }
 </script>
 

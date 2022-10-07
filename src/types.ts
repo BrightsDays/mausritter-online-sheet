@@ -41,6 +41,7 @@ export interface Item {
 export interface CardCell {
   name: 'Main Paw' | 'Second Paw' | 'Main Body' | 'Second Body' | '1' | '2' | '3' | '4' | '5' | '6'
   item: string | null
+  used: '0' | '1' | '2' | '3'
 }
 
 export interface BodyBack {
@@ -117,6 +118,10 @@ export interface Character {
 export interface Popup {
   type: PopupTypes
 }
+
+export type BodyIndexes = 'Main Paw'| 'Main Body'| 'Second Paw'| 'Second Body'
+
+export type PackIndexes = '1' | '2' | '3' | '4' | '5' | '6'
 
 export type PopupTypes = 'new' | 'full' | null
 

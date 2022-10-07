@@ -76,7 +76,6 @@ const props = defineProps({
     height: max-content;
     margin: 5px 0 auto;
     background: top;
-    pointer-events: none;//TODO: status control
   }
 
   &__stat {
