@@ -19,7 +19,9 @@
         :key="`hr__${index}`"
         class="hirelings-item"
       >
-        <h3 class="hirelings-item__heading">{{ hireling.name }}</h3>
+        <h3 class="hirelings-item__heading">
+          {{ hireling.name }}
+        </h3>
       </div>
     </div>
   </div>

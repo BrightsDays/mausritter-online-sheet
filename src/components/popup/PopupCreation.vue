@@ -216,22 +216,22 @@ const saveCharacter = () => {
     'Main Paw': {
       name: 'Main Paw',
       item: null,
-      used: '0'
+      used: 0
     },
     'Main Body': {
       name: 'Main Body',
       item: null,
-      used: '0'
+      used: 0
     },
     'Second Paw': {
       name: 'Second Paw',
       item: null,
-      used: '0'
+      used: 0
     },
     'Second Body': {
       name: 'Second Body',
       item: null,
-      used: '0'
+      used: 0
     }
   })
 
@@ -239,32 +239,32 @@ const saveCharacter = () => {
     1: {
       name: '1',
       item: weaponList[weapon.value as keyof typeof weaponList],
-      used: '0'
+      used: 0
     },
     2: {
       name: '2',
       item: 'Torches',
-      used: '0'
+      used: 0
     },
     3: {
       name: '3',
       item: 'Rations',
-      used: '0'
+      used: 0
     },
     4: {
       name: '4',
       item: selectItem.value ? isHireling(startItem.value) : itemsForSelect.value.itemA,
-      used: '0'
+      used: 0
     },
     5: {
       name: '5',
       item: selectItem.value ? null : isHireling(itemsForSelect.value.itemB),
-      used: '0'
+      used: 0
     },
     6: {
       name: '6',
       item: null,
-      used: '0'
+      used: 0
     }
   })
 

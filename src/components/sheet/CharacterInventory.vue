@@ -128,8 +128,8 @@ const drop = (event: DragEvent, type: string) => {
       : null
 
     const used = event.dataTransfer
-      ? event.dataTransfer.getData('used')
-      : '0'      
+      ? +event.dataTransfer.getData('used')
+      : 0      
 
     if (data && id) {
       if (type === 'bodyBack') {
