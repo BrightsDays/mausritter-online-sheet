@@ -2,6 +2,12 @@
   <div
     v-if="findedItem"
     class="pack-items__item items__item"
+    :class="[
+      (findedItem.type === 'Heavy' ||
+        findedItem.type === 'Heavy armor' ||
+        findedItem.type === 'Heavy ranged') 
+        && `pack-items__item--heavy`,
+      findedItem.type === 'Light armor' && `pack-items__item--light-armor`]"
     draggable="true"
     @dragstart="onDragging"
   >
@@ -44,7 +50,3 @@ const findItem = (title: string): Item | null => {
 
 const findedItem = findItem(props.item)
 </script>
-
-<style>
-
-</style>

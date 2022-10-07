@@ -229,6 +229,14 @@ const drop = (event: DragEvent, type: string) => {
     height: calc(100% + 4px);
     min-width: 121px;
     min-height: 121px;
+
+    &--heavy {
+      height: 244px;
+    }
+
+    &--light-armor {
+      width: 244px;
+    }
   }
 
   &__back {

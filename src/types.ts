@@ -11,6 +11,8 @@ export enum ItemType {
   Heavy = 'Heavy',
   LightRanged = 'Light ranged',
   HeavyRanged = 'Heavy ranged',
+  LightArmor = 'Light armor',
+  HeavyArmor = 'Heavy armor',
   Ammunition = 'Ammunition',
   Utility = 'Utility'
 }
