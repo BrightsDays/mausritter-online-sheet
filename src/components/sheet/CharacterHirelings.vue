@@ -14,21 +14,24 @@
       v-if="characterStore.hirelings"
       class="hirelings__list"
     >
-      <div
+      <ui-hireling-crad
+        v-for="hireling, index in characterStore.hirelings" 
+        :key="`hr__${index}`"
+        :hireling="hireling"
+      />
+      <!-- <div
         v-for="hireling, index in characterStore.hirelings" 
         :key="`hr__${index}`"
         class="hirelings-item"
-      >
-        <h3 class="hirelings-item__heading">
-          {{ hireling.name }}
-        </h3>
-      </div>
+      > -->
+      <!-- </div> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useStore } from '../../store/character'
+import UiHirelingCrad from '../ui/UiHirelingCrad.vue'
 
 const characterStore = useStore()
 </script>
@@ -66,22 +69,6 @@ const characterStore = useStore()
     display: flex;
     flex-direction: column;
     gap: 15px;
-  }
-
-  &-item {
-    padding: 15px;
-    text-align: left;
-    border: 2px solid var(--main);
-    border-radius: 10px;
-
-    &__heading {
-      display: inline-block;
-      font-family: "Pirata One", sans-serif;
-      font-size: 2.6em;
-      font-weight: normal;
-      line-height: 1;
-      color: var(--main);
-    }
   }
 }
 </style>

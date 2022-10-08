@@ -13,14 +13,28 @@ export default (name: string): Hireling => {
   return {
     name: name,
     exp: 0,
-    maxStr: stats.str,
-    str: stats.str,
-    maxDex: stats.dex,
-    dex: stats.dex,
-    maxWil: stats.wil,
-    wil: stats.wil,
-    maxHp: stats.hp,
-    hp: stats.hp,
+    stats: {
+      str: {
+        name: 'str',
+        max: stats.str,
+        current: stats.str
+      },
+      dex: {
+        name: 'dex',
+        max: stats.dex,
+        current: stats.dex
+      },
+      wil: {
+        name: 'wil',
+        max: stats.wil,
+        current: stats.wil
+      },
+      hp: {
+        name: 'hp',
+        max: stats.hp,
+        current: stats.hp
+      }
+    },
     bodyBack: {
       'Main Paw': {
         name: 'Main Paw',
