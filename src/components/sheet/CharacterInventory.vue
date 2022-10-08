@@ -61,7 +61,7 @@ import conditions from '../../data/conditionList.json'
 import UiItemCard from '../ui/UiItemCard.vue'
 import UiConditionCard from '../ui/uiConditionCard.vue'
 import { BodyBack, PackBack, BodyIndexes, PackIndexes } from '../../types'
-
+//TODO Use as single components with props
 const store = useStore()
 
 const isCondition = (title: string): Boolean =>
@@ -97,7 +97,7 @@ const drop = (event: DragEvent, type: string) => {
       ? event.dataTransfer.getData('id')
       : null
   
-    if (slotId) {
+    if (slotId) {      
       if (Object.keys(bodyBack.value).includes(slotId)) {     
         store.updateItems('bodyBack', {
           ...bodyBack.value,

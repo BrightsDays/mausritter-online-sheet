@@ -36,7 +36,7 @@ import { useStore } from '../../store/character'
 import { computed } from 'vue'
 import changeStat from '../../helpers/changeStat'
 import UiStatButtons from '../ui/UiStatButtons.vue';
-
+//TODO Use as single components with props
 const store = useStore()
 
 const stats = computed(() => [

@@ -74,7 +74,9 @@
       </button>
     </div>
     <div class="menu__bank">
-      <ui-details title="Banked items" />
+      <ui-details title="Banked items">
+        <banked-items />
+      </ui-details>
     </div>
   </aside>
 </template>
@@ -89,6 +91,7 @@ import weaponData from '../data/weaponList.json'
 import armorData from '../data/armorList.json'
 import spellData from '../data/spellList.json'
 import { Item } from '../types'
+import BankedItems from './BankedItems.vue'
 
 const popup = usePopupStore()
 

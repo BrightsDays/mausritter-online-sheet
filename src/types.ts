@@ -38,6 +38,29 @@ export interface Item {
   group: 'items'
 }
 
+export interface Stats {
+  str: {
+    name: 'str'
+    max: number,
+    current: number
+  },
+  dex: {
+    name: 'dex'
+    max: number,
+    current: number
+  },
+  wil: {
+    name: 'wil'
+    max: number,
+    current: number
+  },
+  hp: {
+    name: 'hp'
+    max: number,
+    current: number
+  }
+}
+
 export interface CardCell {
   name: 'Main Paw' | 'Second Paw' | 'Main Body' | 'Second Body' | '1' | '2' | '3' | '4' | '5' | '6'
   item: string | null
@@ -79,14 +102,7 @@ export interface HirelingPack {
 export interface Hireling {
   name: string
   exp: number
-  maxStr: number
-  str: number
-  maxDex: number
-  dex: number
-  maxWil: number
-  wil: number
-  maxHp: number
-  hp: number
+  stats: Stats
   bodyBack: HirelingBody
   packBack: HirelingPack
   details: string
@@ -113,7 +129,7 @@ export interface Character {
   coat: string
   details: string
   grit: number
-}
+}//TODO Add stats field
 
 export interface Popup {
   type: PopupTypes
