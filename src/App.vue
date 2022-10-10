@@ -22,7 +22,7 @@ import { usePopupStore } from './store/popup'
 import PopupCreation from './components/popup/PopupCreation.vue'
 import PopupHireling from './components/popup/PopupHireling.vue'
 
-const popup = usePopupStore()
+const popup = usePopupStore()//TODO Move to index
 </script>
 
 <style lang="scss">

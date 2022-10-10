@@ -24,10 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import UiItemCard from './ui/UiItemCard.vue'
+import UiItemCard from '../ui/UiItemCard.vue'
 import { computed, ComputedRef, ref } from 'vue'
-import { useStore } from '../store/character'
-import { BodyBack, PackBack } from '../types'
+import { useStore } from '../../store/character'
+import { BodyBack, PackBack } from '../../types'
 
 const characterStore = useStore()
 

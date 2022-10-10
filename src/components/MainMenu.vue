@@ -91,7 +91,7 @@ import weaponData from '../data/weaponList.json'
 import armorData from '../data/armorList.json'
 import spellData from '../data/spellList.json'
 import { Item } from '../types'
-import BankedItems from './BankedItems.vue'
+import BankedItems from './menu/MenuBanked.vue'
 
 const popup = usePopupStore()
 
