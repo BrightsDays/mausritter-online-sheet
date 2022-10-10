@@ -100,6 +100,7 @@ export interface HirelingPack {
 }
 
 export interface Hireling {
+  index: number
   name: string
   exp: number
   stats: Stats
@@ -111,14 +112,7 @@ export interface Hireling {
 export interface Character {
   name: string
   exp: number
-  maxStr: number
-  str: number
-  maxDex: number
-  dex: number
-  maxWil: number
-  wil: number
-  maxHp: number
-  hp: number
+  stats: Stats
   startPips: number
   pips: number
   background: string
@@ -129,7 +123,7 @@ export interface Character {
   coat: string
   details: string
   grit: number
-}//TODO Add stats field
+}
 
 export interface Popup {
   type: PopupTypes
@@ -141,8 +135,10 @@ export type PackIndexes = '1' | '2' | '3' | '4' | '5' | '6'
 
 export type PopupTypes = 'new' | 'full' | 'addHireling' |null
 
-export type StatKeys = 'exp' | 'maxStr' | 'str' | 'maxDex' | 'dex' | 'maxWil' | 'wil' | 'maxHp' | 'hp' | 'startPips' | 'pips' | 'grit'
+export type StatKeys = 'str' | 'dex' | 'wil' | 'hp'
 
-export type DescriptionKeys = 'name' | 'background' | 'birthSign' | 'coat' | 'details' | 'hireling'
+export type ValueKeys = 'exp' | 'pips' | 'startPips'
+
+export type DescriptionKeys = 'name' | 'background' | 'birthSign' | 'coat' | 'details'
 
 export type BackgroundKeys = 1 | 2 | 3 | 4 | 5 | 6

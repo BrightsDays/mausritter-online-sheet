@@ -1,8 +1,11 @@
 import { Hireling } from '../types'
 import rollDices from './rollDices'
 import detailsList from '../data/detailsList.json'
+import { useStore } from '../store/character'
 
 export default (name: string): Hireling => {
+  const characterStore = useStore()
+
   const stats = {
     str: rollDices(2,6),
     dex: rollDices(2,6),
@@ -11,6 +14,7 @@ export default (name: string): Hireling => {
   }
 
   return {
+    index: characterStore.hirelings.length,
     name: name,
     exp: 0,
     stats: {

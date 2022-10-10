@@ -18,16 +18,15 @@
           @input="updateExp($event)"
         >
       </div>
-      <character-stats />
+      <char-stats :stats="store.stats" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import CharacterStats from './CharacterStats.vue'
 import { useStore } from '../../store/character'
 import { computed } from 'vue'
-import changeStat from '../../helpers/changeStat'
+import CharStats from '../tables/CharStats.vue'
 
 const store = useStore()
 
@@ -45,7 +44,7 @@ const level = computed(() => {
 
 const updateExp = (event: Event) => {
   const value = +(event.target as HTMLInputElement).value
-  if (value) changeStat('exp', value)
+  if (value) store.setValue('exp', value)
 }
 </script>
 

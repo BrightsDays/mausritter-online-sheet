@@ -28,9 +28,8 @@
     <div class="pips-input">
       <label class="pips-input__label">Pips</label>
       <input
-        v-model="pips"
+        v-model="store.pips"
         class="pips-input__input"
-        @click="updatePips($event)"
       >
     </div>
   </header>
@@ -41,11 +40,9 @@
 import CharacterInventory from './CharacterInventory.vue'
 import { useStore } from '../../store/character'
 import { computed } from 'vue'
-import changeStat from '../../helpers/changeStat'
 
 const store = useStore()
 
-const pips = computed(() => store.pips)
 const grit = computed(() => store.grit)
 const exp = computed(() => store.exp)
 
@@ -102,11 +99,6 @@ const dropItem = (event: DragEvent) => {
 
     (event.target as HTMLElement).classList.remove('droppable')
   }
-}
-
-const updatePips = (event: Event) => {
-  const value = +(event.target as HTMLInputElement).value
-  if (value) changeStat('pips', value)
 }
 </script>
 

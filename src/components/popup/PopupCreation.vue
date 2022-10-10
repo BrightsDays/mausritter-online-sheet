@@ -12,9 +12,9 @@
         >
       </div>
       <div class="popup__section">
-        <span class="popup__stats">STR: {{ characterStore.maxStr }}</span>
-        <span class="popup__stats">DEX: {{ characterStore.maxDex }}</span>
-        <span class="popup__stats">WIL: {{ characterStore.maxWil }}</span>
+        <span class="popup__stats">STR: {{ characterStore.stats.str.max }}</span>
+        <span class="popup__stats">DEX: {{ characterStore.stats.dex.max }}</span>
+        <span class="popup__stats">WIL: {{ characterStore.stats.wil.max }}</span>
       </div>
       <div class="popup__section">
         <label class="popup__label">Swap stats</label>
@@ -157,48 +157,49 @@ const close = () => popupStore.setPopup(null)
 const createCharacter = () => {
   characterStore.clearCharacter()
 
-  rollStats(['str', 'dex', 'wil', 'hp', 'pips'], characterStore)
+  const pips = rollDices(1, 6)
+  characterStore.setValue('pips', pips)
+  characterStore.setValue('startPips', pips)
+
+  rollStats(characterStore)
 
   statsForSwap.value = {
-    str: characterStore.str,
-    dex: characterStore.dex,
-    wil: characterStore.wil
+    str: characterStore.stats.str.current,
+    dex: characterStore.stats.dex.current,
+    wil: characterStore.stats.wil.current
   }
 
   const background = 
-    backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].background
+    backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].background
   characterStore.setDescription('background', background)
 
   itemsForSelect.value.itemA = 
-    backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA
+    backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA
   itemsForSelect.value.itemB = 
-    backgroundList[characterStore.maxHp as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB
-  
+    backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB
+
   if (!Object.values(statsForSwap.value).filter(item => item > 9).length) {
     selectItem.value = false
   }
 }
 
 const saveCharacter = () => {
-  characterStore.setDescription('hireling', '')
-
   if (swapStats.value.first !== swapStats.value.second) {
     characterStore.setStat(
       swapStats.value.first as StatKeys,
       statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
     )
-    characterStore.setStat(
-      (`max${(swapStats.value.first as StatKeys).charAt(0).toUpperCase()
-        + (swapStats.value.first as StatKeys).slice(1)}` as StatKeys),
+    characterStore.setMaxStat(
+      swapStats.value.first as StatKeys,
       statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
     )
+
     characterStore.setStat(
       swapStats.value.second as StatKeys,
       statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
     )
-    characterStore.setStat(
-      (`max${(swapStats.value.second as StatKeys).charAt(0).toUpperCase()
-        + (swapStats.value.second as StatKeys).slice(1)}` as StatKeys),
+    characterStore.setMaxStat(
+      swapStats.value.second as StatKeys,
       statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
     )
   }
