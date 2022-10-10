@@ -91,7 +91,7 @@ export const useStore = defineStore('character', {
     grit: 0
   }),
   actions: {
-    setStat(statName: StatKeys, payload: number, hirelingIndex: number) {      
+    setStat(statName: StatKeys, payload: number, hirelingIndex?: number) {      
       !(typeof hirelingIndex === 'number')
         ? this.stats[statName].current = payload
         : this.hirelings[hirelingIndex].stats[statName].current = payload

@@ -33,13 +33,13 @@
       >
     </div>
   </header>
-  <character-inventory />
+  <char-inventory />
 </template>
 
 <script setup lang="ts">
-import CharacterInventory from './CharacterInventory.vue'
 import { useStore } from '../../store/character'
 import { computed } from 'vue'
+import CharInventory from '../tables/CharInventory.vue'
 
 const store = useStore()
 

@@ -220,13 +220,6 @@ const setPackItemStats = (event: number, index: string | number) => {
 
   &__back {
     border: 1px dashed var(--second);
-  }
-
-  &__item {
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    min-width: 121px;
-    min-height: 121px;
 
     &:nth-child(1) {
       border-left: none;
@@ -247,6 +240,13 @@ const setPackItemStats = (event: number, index: string | number) => {
       border-right: none;
       border-bottom: none;
     }
+  }
+
+  &__item {
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    min-width: 121px;
+    min-height: 121px;
   }
 
   &__name {
