@@ -2,7 +2,6 @@
   <div
     class="pack-items__item conditions__item"
     draggable="true"
-    @dragstart="onDragging"
   >
     <span class="conditions__title">{{ condition.title }}</span>
     <span class="conditions__description">{{ condition.description }}</span>
@@ -15,7 +14,6 @@
 
 <script setup lang="ts">
 import { Condition } from '../../types'
-import onDragging from '../../helpers/onDragging'
 import conditions from '../../data/conditionList.json'
 
 const props = defineProps({

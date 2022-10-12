@@ -1,17 +1,16 @@
 <template>
   <div
-    v-if="findedItem"
     class="pack-items__item items__item"
     :class="[
-      (findedItem.type === 'Heavy' ||
-        findedItem.type === 'Heavy armor' ||
-        findedItem.type === 'Heavy ranged') 
+      (item.type === 'Heavy' ||
+        item.type === 'Heavy armor' ||
+        item.type === 'Heavy ranged') 
         && `pack-items__item--heavy`,
-      findedItem.type === 'Light armor' && `pack-items__item--light-armor`]"
+      item.type === 'Light armor' && `pack-items__item--light-armor`]"
     draggable="true"
-    @dragstart="onDragging"
+    @dragstart="onDragging($event, item as Card, hirelingIndex)"
   >
-    <span class="items__title">{{ findedItem.title }}</span>
+    <span class="items__title">{{ item.title }}</span>
     <div class="items__status">
       <div class="points">
         <div
@@ -23,31 +22,27 @@
         />
       </div>
       <span
-        v-if="findedItem.stat"
+        v-if="item.stat"
         class="items__stat"
-      >{{ findedItem.stat }}</span>
+      >{{ item.stat }}</span>
     </div>
-    <span class="items__type">{{ findedItem.type }}</span>
+    <span class="items__type">{{ item.type }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Item } from '../../types'
-import onDragging from '../../helpers/onDragging'
-import items from '../../data/utilityList.json'
-import spells from '../../data/spellList.json'
-import weapons from '../../data/weaponList.json'
-import armors from '../../data/armorList.json'
+import { Card } from '../../types'
+import { onDragging } from '../../helpers/dragNDrop'
 
 const props = defineProps({
   item: {
-    type: String,
+    type: Object,
     required: true
   },
-  used: {
+  hirelingIndex: {
     type: Number,
-    required: true,
-    default: 0
+    required: false,
+    default: undefined
   }
 })
 
@@ -58,18 +53,6 @@ const emit = defineEmits({
 const useItem = (index: number) => {
   emit('pointClick', index + 1)
 }
-
-const findItem = (title: string): Item | null => {
-  const listToFind = [...items.list, ...spells.list, ...weapons.list, ...armors.list]
-
-  const findedItem = listToFind.filter(item => item.title === title)[0]
-
-  return findedItem
-    ? findedItem as Item
-    : null
-}
-
-const findedItem = findItem(props.item)
 </script>
 
 <style lang="scss">

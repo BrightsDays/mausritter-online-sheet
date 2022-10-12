@@ -6,11 +6,12 @@
     <div class="hirelings-item__wrapper">
       <char-stats
         :stats="props.hireling.stats"
-        :index="props.hireling.index"
+        :hireling-index="props.hireling.index"
       />
       <char-inventory
-        :body-back="hireling.bodyBack"
-        :pack-back="hireling.packBack"
+        :body-back="props.hireling.bodyBack"
+        :pack-back="props.hireling.packBack"
+        :hireling-index="props.hireling.index"
       />
     </div>
   </div>
@@ -45,6 +46,7 @@ const props = defineProps({
 
   &__wrapper {
     display: flex;
+    margin-top: 10px;
     gap: 15px;
   }
 }

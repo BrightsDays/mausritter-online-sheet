@@ -11,8 +11,9 @@
         v-for="item, index in bodyBack"
         :id="item.name.toString()"
         :key="`it__${index}`"
+        :data-index="hirelingIndex"
         class="body-items__back"
-        @drop="event => drop(event, 'bodyBack')"
+        @drop="event => drop(event, 'bodyBack', store)"
         @dragover="allowDrop"
         @dragleave="leaveDrag"
       >
@@ -24,7 +25,6 @@
         <ui-item-card
           v-else
           :item="item.item"
-          :used="item.used"
           @point-click="setBodyItemStats($event, index)"
         />
       </div>
@@ -37,8 +37,9 @@
         v-for="item, index in packBack"
         :id="item.name.toString()"
         :key="`pb_${index}_${item.item}`"
+        :data-index="hirelingIndex"
         class="pack-items__back"
-        @drop="event => drop(event, 'packBack')"
+        @drop="event => drop(event, 'packBack', store)"
         @dragover="allowDrop"
         @dragleave="leaveDrag"
       >
@@ -55,7 +56,6 @@
         <ui-item-card
           v-else
           :item="item.item"
-          :used="item.used"
           @point-click="setPackItemStats($event, index)"
         />
       </div>
@@ -69,6 +69,7 @@ import conditions from '../../data/conditionList.json'
 import UiItemCard from '../ui/UiItemCard.vue'
 import UiConditionCard from '../ui/uiConditionCard.vue'
 import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types'
+import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
 const props = defineProps({
   bodyBack: {
@@ -78,6 +79,11 @@ const props = defineProps({
   packBack: {
     type: Object,
     required: true
+  },
+  hirelingIndex: {
+    type: Number,
+    required: false,
+    default: null
   }
 })
 
@@ -85,105 +91,6 @@ const store = useStore()
 
 const isCondition = (title: string): Boolean =>
   conditions.list.filter(item => item.title === title).length ? true : false
-
-const allowDrop = (event: DragEvent) => {
-  event.preventDefault();
-  (event.target as HTMLElement).classList.add('droppable')
-}
-
-const leaveDrag = (event: DragEvent) => {
-  event.preventDefault();
-  (event.target as HTMLElement).classList.remove('droppable')
-}
-
-const drop = async (event: DragEvent, type: string) => {
-  event.preventDefault()  
-  
-  // eslint-disable-next-line no-undef
-  const firstChild: ChildNode = (event.target as Node).childNodes[0]
-
-  if (!firstChild) {
-    (event.target as HTMLElement).classList.remove('droppable')
-    return null
-  }
-
-  if ((firstChild as HTMLElement).classList.contains('body-items__name') ||
-      (firstChild as HTMLElement).classList.contains('pack-items__name')) {
-
-    const moveFrom = async () => {
-      const slotId = event.dataTransfer
-        ? event.dataTransfer.getData('id')
-        : null
-
-      if (slotId) {
-        if (Object.keys(props.bodyBack).includes(slotId)) {
-          store.updateItems('bodyBack', {
-            ...props.bodyBack as BodyBack,
-            [slotId]: {
-              name: slotId,
-              item: null,
-              used: 0
-            }
-          })
-        }
-
-        if (Object.keys(props.packBack).includes(slotId)) {
-          store.updateItems('packBack', {
-            ...props.packBack as PackBack,
-            [slotId]: {
-              name: slotId,
-              item: null,
-              used: 0
-            }
-          })
-        }
-      }
-    }
-
-    const moveTo = () => {
-      const data = event.dataTransfer
-        ? event.dataTransfer.getData('text')
-        : null
-
-      const id = (event.target as HTMLElement).id
-        ? (event.target as HTMLElement).id
-        : null
-
-      const used = event.dataTransfer
-        ? +event.dataTransfer.getData('used')
-        : 0
-
-      if (data && id) {
-        if (type === 'bodyBack') {
-          store.updateItems('bodyBack', {
-            ...props.bodyBack as BodyBack,
-            [id]: {
-              name: id,
-              item: data,
-              used: used
-            }
-          })
-        }
-
-        if (type === 'packBack') {
-          store.updateItems('packBack', {
-            ...props.packBack as PackBack,
-            [id]: {
-              name: id,
-              item: data,
-              used: used
-            }
-          })
-        }
-      }
-    }
-
-    await moveFrom()
-    moveTo()
-  }
-
-  (event.target as HTMLElement).classList.remove('droppable')
-}
 
 const setBodyItemStats = (event: number, index: string) => {  
   if (event > +props.bodyBack[index as BodyIndexes].used) {

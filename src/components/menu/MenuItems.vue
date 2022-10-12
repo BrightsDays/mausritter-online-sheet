@@ -6,7 +6,7 @@
       :key="item.title"
       class="items__item"
       draggable="true"
-      @dragstart="onDragging"
+      @dragstart="onDragging($event, item)"
     >
       <span class="items__title">{{ item.title }}</span>
       <div class="items__status">
@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { Item } from '../../types'
 import { type PropType } from 'vue'
-import onDragging from '../../helpers/onDragging'
+import { onDragging } from '../../helpers/dragNDrop'
 
 const props = defineProps({
   itemsList: {

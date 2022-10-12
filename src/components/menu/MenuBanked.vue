@@ -28,6 +28,7 @@ import UiItemCard from '../ui/UiItemCard.vue'
 import { computed, ComputedRef, ref } from 'vue'
 import { useStore } from '../../store/character'
 import { BodyBack, PackBack } from '../../types'
+import { allowDrop, leaveDrag } from '../../helpers/dragNDrop'
 
 const characterStore = useStore()
 
@@ -41,16 +42,6 @@ const bank = ref({
     used: 0
   }
 })
-
-const allowDrop = (event: DragEvent) => {
-  event.preventDefault();
-  (event.target as HTMLElement).classList.add('droppable')
-}
-
-const leaveDrag = (event: DragEvent) => {
-  event.preventDefault();
-  (event.target as HTMLElement).classList.remove('droppable')
-}
 
 const drop = (event: DragEvent) => {
   event.preventDefault()

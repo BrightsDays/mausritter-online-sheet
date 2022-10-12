@@ -106,15 +106,18 @@ export const useStore = defineStore('character', {
       this[descName] = payload
     },
     updateItems(packName: 'bodyBack' | 'packBack', payload: BodyBack | PackBack) {
-      if (packName === 'bodyBack') {
-        this.bodyBack = payload as BodyBack
-      } else if (packName === 'packBack') {
-        this.packBack = payload as PackBack
-      }
+      if (packName === 'bodyBack') this.bodyBack = payload as BodyBack
+      if (packName === 'packBack') this.packBack = payload as PackBack
     },
 
     addHireling(payload: Hireling) {      
       this.hirelings = [ ...this.hirelings, payload]
+    },
+    updateHirelingItems(packName: 'bodyBack' | 'packBack',
+      payload: BodyBack | PackBack, hirelingIndex: number) {
+        packName === 'bodyBack'
+          ? this.hirelings[hirelingIndex].bodyBack = payload as BodyBack
+          : this.hirelings[hirelingIndex].packBack = payload as PackBack
     },
 
     clearCharacter() {

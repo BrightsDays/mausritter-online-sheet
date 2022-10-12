@@ -1,26 +1,20 @@
-export enum ItemStat {
-  Small = 'd6',
-  Medium = 'd6/d8',
-  None = ''
-}
-
-export enum ItemType {
-  Improvised = 'Improvised',
-  Light = 'Light',
-  Medium = 'Medium',
-  Heavy = 'Heavy',
-  LightRanged = 'Light ranged',
-  HeavyRanged = 'Heavy ranged',
-  LightArmor = 'Light armor',
-  HeavyArmor = 'Heavy armor',
-  Ammunition = 'Ammunition',
-  Utility = 'Utility'
-}
-
 export interface Background {
   background: string,
   itemA: string,
   itemB: string
+}
+
+export interface Card {
+  id: null | BodyIndexes | PackIndexes
+  title: string
+  stat?: null | 'd6' | 'd6/d8' | 'd10'
+  image: string
+  type?: null | ItemType
+  description?: null | string
+  clear?: null | string
+  group: 'items' | 'conditions'
+  used:  0 | 1 | 2 | 3
+  hirelingIndex: string | null
 }
 
 export interface Condition {
@@ -32,10 +26,11 @@ export interface Condition {
 
 export interface Item {
   title: string
-  stat: ItemStat
+  stat: '' | 'd6' | 'd6/d8' | 'd10'
   image: string
   type: ItemType
   group: 'items'
+  used?:  0 | 1 | 2 | 3
 }
 
 export interface Stats {
@@ -63,7 +58,7 @@ export interface Stats {
 
 export interface CardCell {
   name: 'Main Paw' | 'Second Paw' | 'Main Body' | 'Second Body' | '1' | '2' | '3' | '4' | '5' | '6'
-  item: string | null
+  item: Item | Condition | null
   used: 0 | 1 | 2 | 3
 }
 
@@ -133,7 +128,7 @@ export type BodyIndexes = 'Main Paw'| 'Main Body'| 'Second Paw'| 'Second Body'
 
 export type PackIndexes = '1' | '2' | '3' | '4' | '5' | '6'
 
-export type PopupTypes = 'new' | 'full' | 'addHireling' |null
+export type PopupTypes = 'new' | 'full' | 'addHireling' | null
 
 export type StatKeys = 'str' | 'dex' | 'wil' | 'hp'
 
@@ -142,3 +137,16 @@ export type ValueKeys = 'exp' | 'pips' | 'startPips'
 export type DescriptionKeys = 'name' | 'background' | 'birthSign' | 'coat' | 'details'
 
 export type BackgroundKeys = 1 | 2 | 3 | 4 | 5 | 6
+
+export type ItemType =
+  '' |
+  'Improvised' |
+  'Light' |
+  'Medium' |
+  'Heavy' |
+  'Light ranged' |
+  'Heavy ranged' |
+  'Light armor' |
+  'Heavy armor' |
+  'Ammunition' |
+  'Utility'
