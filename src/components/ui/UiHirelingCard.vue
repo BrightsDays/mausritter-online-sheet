@@ -8,14 +8,17 @@
         :stats="props.hireling.stats"
         :index="props.hireling.index"
       />
-      <!-- <character-inventory /> -->
+      <char-inventory
+        :body-back="hireling.bodyBack"
+        :pack-back="hireling.packBack"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// import CharacterInventory from '../sheet/CharacterInventory.vue'
 import CharStats from '../tables/CharStats.vue'
+import CharInventory from '../tables/CharInventory.vue';
 
 const props = defineProps({
   hireling: {

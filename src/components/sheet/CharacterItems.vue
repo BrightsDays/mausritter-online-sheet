@@ -33,21 +33,25 @@
       >
     </div>
   </header>
-  <char-inventory />
+  <char-inventory
+    :body-back="bodyBack"
+    :pack-back="packBack"
+  />
 </template>
 
 <script setup lang="ts">
+import { computed, ComputedRef } from 'vue'
 import { useStore } from '../../store/character'
-import { computed } from 'vue'
 import CharInventory from '../tables/CharInventory.vue'
+import { BodyBack, PackBack } from '../../types'
 
 const store = useStore()
 
+const bodyBack: ComputedRef<BodyBack> = computed(() => store.bodyBack)
+const packBack: ComputedRef<PackBack> = computed(() => store.packBack)
+
 const grit = computed(() => store.grit)
 const exp = computed(() => store.exp)
-
-const bodyBack = computed(() => store.bodyBack)
-const packBack = computed(() => store.packBack)
 
 const maxGrit = computed(() => {
   let result = 0

@@ -1,8 +1,14 @@
 <template>
-  <div class="inventory">
-    <div class="body-items">
+  <div
+    class="inventory"
+    :class="Object.keys(bodyBack).length === 2 && `inventory--hireling`"
+  >
+    <div
+      class="body-items"
+      :class="Object.keys(bodyBack).length === 2 && `body-items--hireling`"
+    >
       <div 
-        v-for="item, index in bodyBack" 
+        v-for="item, index in bodyBack"
         :id="item.name.toString()"
         :key="`it__${index}`"
         class="body-items__back"
@@ -23,7 +29,10 @@
         />
       </div>
     </div>
-    <div class="pack-items">
+    <div
+      class="pack-items"
+      :class="Object.keys(packBack).length === 4 && `pack-items--hireling`"
+    >
       <div
         v-for="item, index in packBack"
         :id="item.name.toString()"
@@ -55,20 +64,27 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue'
 import { useStore } from '../../store/character'
 import conditions from '../../data/conditionList.json'
 import UiItemCard from '../ui/UiItemCard.vue'
 import UiConditionCard from '../ui/uiConditionCard.vue'
-import { BodyBack, PackBack, BodyIndexes, PackIndexes } from '../../types'
-//TODO Use as single components with props
+import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types'
+
+const props = defineProps({
+  bodyBack: {
+    type: Object,
+    required: true
+  },
+  packBack: {
+    type: Object,
+    required: true
+  }
+})
+
 const store = useStore()
 
 const isCondition = (title: string): Boolean =>
   conditions.list.filter(item => item.title === title).length ? true : false
-
-const bodyBack: ComputedRef<BodyBack> = computed(() => store.bodyBack)
-const packBack: ComputedRef<PackBack> = computed(() => store.packBack)
 
 const allowDrop = (event: DragEvent) => {
   event.preventDefault();
@@ -80,7 +96,7 @@ const leaveDrag = (event: DragEvent) => {
   (event.target as HTMLElement).classList.remove('droppable')
 }
 
-const drop = (event: DragEvent, type: string) => {
+const drop = async (event: DragEvent, type: string) => {
   event.preventDefault()  
   
   // eslint-disable-next-line no-undef
@@ -93,111 +109,121 @@ const drop = (event: DragEvent, type: string) => {
 
   if ((firstChild as HTMLElement).classList.contains('body-items__name') ||
       (firstChild as HTMLElement).classList.contains('pack-items__name')) {
-    const slotId = event.dataTransfer
-      ? event.dataTransfer.getData('id')
-      : null
-  
-    if (slotId) {      
-      if (Object.keys(bodyBack.value).includes(slotId)) {     
-        store.updateItems('bodyBack', {
-          ...bodyBack.value,
-          [slotId]: {
-            name: slotId,
-            item: null
-          }
-        })
-      }
 
-      if (Object.keys(packBack.value).includes(slotId)) {
-        store.updateItems('packBack', {
-          ...packBack.value,
-          [slotId]: {
-            name: slotId,
-            item: null
-          }
-        })
+    const moveFrom = async () => {
+      const slotId = event.dataTransfer
+        ? event.dataTransfer.getData('id')
+        : null
+
+      if (slotId) {
+        if (Object.keys(props.bodyBack).includes(slotId)) {
+          store.updateItems('bodyBack', {
+            ...props.bodyBack as BodyBack,
+            [slotId]: {
+              name: slotId,
+              item: null,
+              used: 0
+            }
+          })
+        }
+
+        if (Object.keys(props.packBack).includes(slotId)) {
+          store.updateItems('packBack', {
+            ...props.packBack as PackBack,
+            [slotId]: {
+              name: slotId,
+              item: null,
+              used: 0
+            }
+          })
+        }
+      }
+    }
+
+    const moveTo = () => {
+      const data = event.dataTransfer
+        ? event.dataTransfer.getData('text')
+        : null
+
+      const id = (event.target as HTMLElement).id
+        ? (event.target as HTMLElement).id
+        : null
+
+      const used = event.dataTransfer
+        ? +event.dataTransfer.getData('used')
+        : 0
+
+      if (data && id) {
+        if (type === 'bodyBack') {
+          store.updateItems('bodyBack', {
+            ...props.bodyBack as BodyBack,
+            [id]: {
+              name: id,
+              item: data,
+              used: used
+            }
+          })
+        }
+
+        if (type === 'packBack') {
+          store.updateItems('packBack', {
+            ...props.packBack as PackBack,
+            [id]: {
+              name: id,
+              item: data,
+              used: used
+            }
+          })
+        }
       }
     }
 
-    const data = event.dataTransfer
-      ? event.dataTransfer.getData('text')
-      : null
-
-    const id = (event.target as HTMLElement).id
-      ? (event.target as HTMLElement).id
-      : null
-
-    const used = event.dataTransfer
-      ? +event.dataTransfer.getData('used')
-      : 0      
-
-    if (data && id) {
-      if (type === 'bodyBack') {
-        store.updateItems('bodyBack', {
-          ...bodyBack.value,
-          [id]: {
-            name: id,
-            item: data,
-            used: used
-          }
-        })
-      }
-
-      if (type === 'packBack') {
-        store.updateItems('packBack', {
-          ...packBack.value,
-          [id]: {
-            name: id,
-            item: data,
-            used: used
-          }
-        })
-      }
-    }
+    await moveFrom()
+    moveTo()
   }
 
   (event.target as HTMLElement).classList.remove('droppable')
 }
 
 const setBodyItemStats = (event: number, index: string) => {  
-  if (event > +bodyBack.value[index as BodyIndexes].used) {
+  if (event > +props.bodyBack[index as BodyIndexes].used) {
     store.updateItems('bodyBack', {
-      ...bodyBack.value,
+      ...props.bodyBack as BodyBack,
       [index]: {
-        name: bodyBack.value[index as BodyIndexes].name,
-        item: bodyBack.value[index as BodyIndexes].item,
+        name: props.bodyBack[index as BodyIndexes].name,
+        item: props.bodyBack[index as BodyIndexes].item,
         used: event
       }
     })
   } else {
     store.updateItems('bodyBack', {
-      ...bodyBack.value,
+      ...props.bodyBack as BodyBack,
       [index]: {
-        name: bodyBack.value[index as BodyIndexes].name,
-        item: bodyBack.value[index as BodyIndexes].item,
-        used: +bodyBack.value[index as BodyIndexes].used - 1
+        name: props.bodyBack[index as BodyIndexes].name,
+        item: props.bodyBack[index as BodyIndexes].item,
+        used: +props.bodyBack[index as BodyIndexes].used - 1
       }
     })
   }
 }
 
 const setPackItemStats = (event: number, index: string | number) => {
-  if (event > +packBack.value[index as PackIndexes].used) {
+  if (event > +props.packBack[index as PackIndexes].used) {
     store.updateItems('packBack', {
-      ...packBack.value,
+      ...props.packBack as PackBack,
       [index]: {
-        name: packBack.value[index as PackIndexes].name,
-        item: packBack.value[index as PackIndexes].item,
+        name: props.packBack[index as PackIndexes].name,
+        item: props.packBack[index as PackIndexes].item,
         used: event
       }
     })
   } else {
     store.updateItems('packBack', {
-      ...packBack.value,
+      ...props.packBack as PackBack,
       [index]: {
-        name: packBack.value[index as PackIndexes].name,
-        item: packBack.value[index as PackIndexes].item,
-        used: +packBack.value[index as PackIndexes].used - 1
+        name: props.packBack[index as PackIndexes].name,
+        item: props.packBack[index as PackIndexes].item,
+        used: +props.packBack[index as PackIndexes].used - 1
       }
     })
   }
@@ -208,6 +234,12 @@ const setPackItemStats = (event: number, index: string | number) => {
 .inventory {
   display: flex;
   justify-content: space-between;
+  gap: 15px;
+  text-align: center;
+
+  &--hireling {
+    padding-top: 20px;
+  }
 }
 
 .body-items {
@@ -239,6 +271,27 @@ const setPackItemStats = (event: number, index: string | number) => {
     &:nth-child(4) {
       border-right: none;
       border-bottom: none;
+    }
+  }
+
+  &--hireling {
+    grid-template-columns: 120px;
+    grid-template-rows: 120px 120px;
+
+    .body-items__back {
+      border: 1px dashed var(--second);
+
+      &:nth-child(1) {
+        border-left: none;
+        border-top: none;
+        border-right: none;
+      }
+      
+      &:nth-child(2) {
+        border-right: none;
+        border-bottom: none;
+        border-left: none;
+      }
     }
   }
 
@@ -327,6 +380,35 @@ const setPackItemStats = (event: number, index: string | number) => {
     &:nth-child(6) {
       border-right: none;
       border-bottom: none;
+    }
+  }
+
+  &--hireling {
+    grid-template-columns: 120px 120px;
+    grid-template-rows: 120px 120px;
+
+    .pack-items__back {
+      border: 1px dashed var(--second);
+
+      &:nth-child(1) {
+        border-left: none;
+        border-top: none;
+      }
+
+      &:nth-child(2) {
+        border-top: none;
+        border-right: none;
+      }
+
+      &:nth-child(3) {
+        border-left: none;
+        border-bottom: none;
+      }
+
+      &:nth-child(4) {
+        border-bottom: none;
+        border-right: none;
+      }
     }
   }
 

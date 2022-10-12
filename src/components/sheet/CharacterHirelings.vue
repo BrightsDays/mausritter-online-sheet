@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { useStore } from '../../store/character'
-import UiHirelingCrad from '../ui/UiHirelingCrad.vue'
+import UiHirelingCrad from '../ui/UiHirelingCard.vue'
 
 const characterStore = useStore()
 </script>
