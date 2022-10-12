@@ -108,7 +108,7 @@ const addHireling = () => popup.setPopup('addHireling')
 <style lang="scss">
 .menu {
   width: 250px;
-  max-height: calc(100vh - 60px);
+  max-height: 100%;
   overflow: scroll;
 
   &__header {

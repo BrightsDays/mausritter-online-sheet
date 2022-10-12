@@ -20,7 +20,7 @@ import CharacterHirelings from "./sheet/CharacterHirelings.vue";
   display: flex;
   flex-direction: column;
   gap: 15px;
-  max-height: calc(100vh - 60px);
+  max-height: 100%;
   overflow: scroll;
 }
 </style>
