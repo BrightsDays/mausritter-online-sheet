@@ -88,55 +88,107 @@ const props = defineProps({
 
 const store = useStore()
 
-const setBodyItemStats = (event: number, index: string) => {  
-  if (event > +props.bodyBack[index as BodyIndexes].item.used) {
-    store.updateItems('bodyBack', {
-      ...props.bodyBack as BodyBack,
-      [index]: {
-        name: props.bodyBack[index as BodyIndexes].name,
-        item: {
-          ...props.bodyBack[index as BodyIndexes].item,
-          used: event  
+const setBodyItemStats = (event: number, index: string) => {
+  if (typeof props.hirelingIndex !== 'number') {
+    if (event > +props.bodyBack[index as BodyIndexes].item.used) {
+      store.updateItems('bodyBack', {
+        ...props.bodyBack as BodyBack,
+        [index]: {
+          name: props.bodyBack[index as BodyIndexes].name,
+          item: {
+            ...props.bodyBack[index as BodyIndexes].item,
+            used: event  
+          }
         }
-      }
-    })
+      })
+    } else {
+      store.updateItems('bodyBack', {
+        ...props.bodyBack as BodyBack,
+        [index]: {
+          name: props.bodyBack[index as BodyIndexes].name,
+          item: {
+            ...props.bodyBack[index as BodyIndexes].item,
+            used: +props.bodyBack[index as BodyIndexes].item.used - 1  
+          }
+        }
+      })
+    }
   } else {
-    store.updateItems('bodyBack', {
-      ...props.bodyBack as BodyBack,
-      [index]: {
-        name: props.bodyBack[index as BodyIndexes].name,
-        item: {
-          ...props.bodyBack[index as BodyIndexes].item,
-          used: +props.bodyBack[index as BodyIndexes].item.used - 1  
+    if (event > +props.bodyBack[index as BodyIndexes].item.used) {
+      store.updateHirelingItems('bodyBack', {
+        ...props.bodyBack as BodyBack,
+        [index]: {
+          name: props.bodyBack[index as BodyIndexes].name,
+          item: {
+            ...props.bodyBack[index as BodyIndexes].item,
+            used: event
+          }
         }
-      }
-    })
+      }, props.hirelingIndex)
+    } else {
+      store.updateHirelingItems('bodyBack', {
+        ...props.bodyBack as BodyBack,
+        [index]: {
+          name: props.bodyBack[index as BodyIndexes].name,
+          item: {
+            ...props.bodyBack[index as BodyIndexes].item,
+            used: +props.bodyBack[index as BodyIndexes].item.used - 1
+          }
+        }
+      }, props.hirelingIndex)
+    }
   }
 }
-
+//TODO combine set items in one function
 const setPackItemStats = (event: number, index: string | number) => {
-  if (event > +props.packBack[index as PackIndexes].item.used) {
-    store.updateItems('packBack', {
-      ...props.packBack as PackBack,
-      [index]: {
-        name: props.packBack[index as PackIndexes].name,
-        item: {
-          ...props.packBack[index as PackIndexes].item,
-          used: event
+  if (typeof props.hirelingIndex !== 'number') {
+    if (event > +props.packBack[index as PackIndexes].item.used) {
+      store.updateItems('packBack', {
+        ...props.packBack as PackBack,
+        [index]: {
+          name: props.packBack[index as PackIndexes].name,
+          item: {
+            ...props.packBack[index as PackIndexes].item,
+            used: event
+          }
         }
-      }
-    })
+      })
+    } else {
+      store.updateItems('packBack', {
+        ...props.packBack as PackBack,
+        [index]: {
+          name: props.packBack[index as PackIndexes].name,
+          item: {
+            ...props.packBack[index as PackIndexes].item,
+            used: +props.packBack[index as PackIndexes].item.used - 1
+          }
+        }
+      })
+    }
   } else {
-    store.updateItems('packBack', {
-      ...props.packBack as PackBack,
-      [index]: {
-        name: props.packBack[index as PackIndexes].name,
-        item: {
-          ...props.packBack[index as PackIndexes].item,
-          used: +props.packBack[index as PackIndexes].item.used - 1
+    if (event > +props.packBack[index as PackIndexes].item.used) {
+      store.updateHirelingItems('packBack', {
+        ...props.packBack as PackBack,
+        [index]: {
+          name: props.packBack[index as PackIndexes].name,
+          item: {
+            ...props.packBack[index as PackIndexes].item,
+            used: event
+          }
         }
-      }
-    })
+      }, props.hirelingIndex)
+    } else {
+      store.updateHirelingItems('packBack', {
+        ...props.packBack as PackBack,
+        [index]: {
+          name: props.packBack[index as PackIndexes].name,
+          item: {
+            ...props.packBack[index as PackIndexes].item,
+            used: +props.packBack[index as PackIndexes].item.used - 1
+          }
+        }
+      }, props.hirelingIndex)
+    }
   }
 }
 </script>

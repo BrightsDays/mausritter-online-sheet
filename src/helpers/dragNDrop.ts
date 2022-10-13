@@ -14,7 +14,6 @@ export const onDragging = (event: DragEvent, item: Card) => {
       clear: item.clear || null,
       hirelingIndex: (event.target as Node).parentElement?.dataset.index || null
     }
-    
 
     if (((event.target as Node).childNodes[1] as HTMLElement).classList.contains('items__status')) {
       (event.target as Node).childNodes[1].childNodes[0].childNodes.forEach(point => {
