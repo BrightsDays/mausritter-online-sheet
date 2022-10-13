@@ -16,6 +16,7 @@ export default (name: string): Hireling => {
   return {
     index: characterStore.hirelings.length,
     name: name,
+    level: 1,
     exp: 0,
     stats: {
       str: {

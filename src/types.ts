@@ -97,6 +97,7 @@ export interface HirelingPack {
 export interface Hireling {
   index: number
   name: string
+  level: number
   exp: number
   stats: Stats
   bodyBack: HirelingBody

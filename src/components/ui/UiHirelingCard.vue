@@ -1,8 +1,11 @@
 <template>
   <div class="hirelings-item">
-    <h3 class="hirelings-item__heading">
-      {{ props.hireling.name }}
-    </h3>
+    <div class="hirelings-item__header">
+      <h3 class="hirelings-item__heading">
+        {{ props.hireling.name }}
+      </h3>
+      <span class="hirelings-item__details">Look: {{ props.hireling.details }}</span>
+    </div>
     <div class="hirelings-item__wrapper">
       <char-stats
         :stats="props.hireling.stats"
@@ -35,6 +38,12 @@ const props = defineProps({
   text-align: left;
   border-top: 2px solid var(--second);
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &__heading {
     display: inline-block;
     font-family: "Pirata One", sans-serif;
@@ -48,6 +57,12 @@ const props = defineProps({
     display: flex;
     margin-top: 10px;
     gap: 15px;
+  }
+
+  &__details {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1.6em;
+    color: var(--second);
   }
 }
 </style>

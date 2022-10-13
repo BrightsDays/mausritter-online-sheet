@@ -58,7 +58,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
 
   if ((firstChild as HTMLElement).classList.contains('body-items__name') ||
       (firstChild as HTMLElement).classList.contains('pack-items__name')) {     
-    //TODO list, bank
+    //TODO list, bank, drop
     const moveFrom = async () => {
       const slotId = event.dataTransfer
         ? event.dataTransfer.getData('id')
@@ -114,7 +114,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
         }
       }
     }
-    //TODO bank
+    //TODO bank, drop
     const moveTo = () => {
       const data = event.dataTransfer
         ? {

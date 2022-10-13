@@ -50,7 +50,7 @@ const props = defineProps({
     type: Object,
     required: true
   },
-  index: {
+  hirelingIndex: {
     type: Number,
     required: false,
     default: null
@@ -62,14 +62,14 @@ const characterStore = useStore()
 const growStat = (stat: StatKeys, maxValue: number) => {
   const target = props.stats[stat]
   if (target && target.current < maxValue) {
-    characterStore.setStat(stat, +target.current + 1, props.index)
+    characterStore.setStat(stat, +target.current + 1, props.hirelingIndex)
   }
 }
 
-const downStat = (stat: StatKeys) => {  
+const downStat = (stat: StatKeys) => {
   const target = props.stats[stat]
-  if (target && target.current > 0) {
-    characterStore.setStat(stat, +target.current - 1, props.index)
+  if (target && target.current > 0) {    
+    characterStore.setStat(stat, +target.current - 1, props.hirelingIndex)
   }
 }
 </script>
