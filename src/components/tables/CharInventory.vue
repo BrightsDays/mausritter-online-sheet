@@ -18,7 +18,7 @@
         @dragleave="leaveDrag"
       >
         <span
-          v-if="!item.item || isCondition(item.item)"
+          v-if="!item.item"
           class="body-items__name"
         >{{ item.name }}</span>
 
@@ -49,7 +49,7 @@
         >{{ item.name }}</span>
 
         <ui-condition-card
-          v-else-if="isCondition(item.item)"
+          v-else-if="item.item?.group === 'conditions'"
           :condition="item.item"
         />
 
@@ -65,7 +65,6 @@
 
 <script setup lang="ts">
 import { useStore } from '../../store/character'
-import conditions from '../../data/conditionList.json'
 import UiItemCard from '../ui/UiItemCard.vue'
 import UiConditionCard from '../ui/uiConditionCard.vue'
 import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types'
@@ -89,17 +88,16 @@ const props = defineProps({
 
 const store = useStore()
 
-const isCondition = (title: string): Boolean =>
-  conditions.list.filter(item => item.title === title).length ? true : false
-
 const setBodyItemStats = (event: number, index: string) => {  
-  if (event > +props.bodyBack[index as BodyIndexes].used) {
+  if (event > +props.bodyBack[index as BodyIndexes].item.used) {
     store.updateItems('bodyBack', {
       ...props.bodyBack as BodyBack,
       [index]: {
         name: props.bodyBack[index as BodyIndexes].name,
-        item: props.bodyBack[index as BodyIndexes].item,
-        used: event
+        item: {
+          ...props.bodyBack[index as BodyIndexes].item,
+          used: event  
+        }
       }
     })
   } else {
@@ -107,21 +105,25 @@ const setBodyItemStats = (event: number, index: string) => {
       ...props.bodyBack as BodyBack,
       [index]: {
         name: props.bodyBack[index as BodyIndexes].name,
-        item: props.bodyBack[index as BodyIndexes].item,
-        used: +props.bodyBack[index as BodyIndexes].used - 1
+        item: {
+          ...props.bodyBack[index as BodyIndexes].item,
+          used: +props.bodyBack[index as BodyIndexes].item.used - 1  
+        }
       }
     })
   }
 }
 
 const setPackItemStats = (event: number, index: string | number) => {
-  if (event > +props.packBack[index as PackIndexes].used) {
+  if (event > +props.packBack[index as PackIndexes].item.used) {
     store.updateItems('packBack', {
       ...props.packBack as PackBack,
       [index]: {
         name: props.packBack[index as PackIndexes].name,
-        item: props.packBack[index as PackIndexes].item,
-        used: event
+        item: {
+          ...props.packBack[index as PackIndexes].item,
+          used: event
+        }
       }
     })
   } else {
@@ -129,8 +131,10 @@ const setPackItemStats = (event: number, index: string | number) => {
       ...props.packBack as PackBack,
       [index]: {
         name: props.packBack[index as PackIndexes].name,
-        item: props.packBack[index as PackIndexes].item,
-        used: +props.packBack[index as PackIndexes].used - 1
+        item: {
+          ...props.packBack[index as PackIndexes].item,
+          used: +props.packBack[index as PackIndexes].item.used - 1
+        }
       }
     })
   }

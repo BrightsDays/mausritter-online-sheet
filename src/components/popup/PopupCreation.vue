@@ -175,9 +175,9 @@ const createCharacter = () => {
   itemsForSelect.value.itemB = 
     backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB
   // itemsForSelect.value.itemA = 
-  //   backgroundList[6][6].itemA
+  //   backgroundList[1][2].itemA
   // itemsForSelect.value.itemB = 
-  //   backgroundList[6][6].itemB //TODO test values
+  //   backgroundList[1][2].itemB //TODO test values
 
   if (!Object.values(statsForSwap.value).filter(item => item > 9).length) {
     selectItem.value = false

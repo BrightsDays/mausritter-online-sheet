@@ -14,6 +14,7 @@ export const onDragging = (event: DragEvent, item: Card) => {
       clear: item.clear || null,
       hirelingIndex: (event.target as Node).parentElement?.dataset.index || null
     }
+    
 
     if (((event.target as Node).childNodes[1] as HTMLElement).classList.contains('items__status')) {
       (event.target as Node).childNodes[1].childNodes[0].childNodes.forEach(point => {
@@ -134,16 +135,15 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
         ? (event.target as HTMLElement).id
         : null
 
-      const hirelingIndex = firstChild.parentElement?.dataset.index
-      
+      const hirelingIndex = firstChild.parentElement?.dataset.index      
+
       if (data && id && !hirelingIndex) {
-        if (type === 'bodyBack') {
+        if (type === 'bodyBack' && data.group !== 'conditions') {
           store.updateItems('bodyBack', {
             ...store.bodyBack as BodyBack,
             [id]: {
               name: id,
-              item: data,
-              used: data.used
+              item: data
             }
           })
         }
@@ -153,21 +153,19 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
             ...store.packBack as PackBack,
             [id]: {
               name: id,
-              item: data,
-              used: data.used
+              item: data
             }
           })
         }
       }
 
       if (data && id && hirelingIndex) {
-        if (type === 'bodyBack') {
+        if (type === 'bodyBack' && data.group !== 'conditions') {
           store.updateHirelingItems('bodyBack', {
             ...store.hirelings[hirelingIndex].bodyBack as BodyBack,
             [id]: {
               name: id,
-              item: data,
-              used: data.used
+              item: data
             }
           }, hirelingIndex)
         }
@@ -177,8 +175,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
             ...store.hirelings[hirelingIndex].packBack as PackBack,
             [id]: {
               name: id,
-              item: data,
-              used: data.used
+              item: data
             }
           }, hirelingIndex)
         }

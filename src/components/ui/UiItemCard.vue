@@ -17,7 +17,7 @@
           v-for="point in [0, 1, 2]"
           :key="`pt_${point}`"
           class="points__item"
-          :class="{ 'points__item--used': +props.used > point }"
+          :class="{ 'points__item--used': +props.item.used > point }"
           @click="useItem(point)"
         />
       </div>
