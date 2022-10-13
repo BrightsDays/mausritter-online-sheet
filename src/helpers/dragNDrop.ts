@@ -1,6 +1,6 @@
 import { BodyBack, PackBack, BodyIndexes, Card, PackIndexes } from '../types'
 
-export const onDragging = (event: DragEvent, item: Card, hirelingIndex?: number) => {
+export const onDragging = (event: DragEvent, item: Card) => {
   if (event.dataTransfer) {    
     const data: Card = {
       id: (event.target as Node).parentElement?.id as BodyIndexes | PackIndexes || null,
@@ -58,7 +58,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
 
   if ((firstChild as HTMLElement).classList.contains('body-items__name') ||
       (firstChild as HTMLElement).classList.contains('pack-items__name')) {     
-    //TODO list, bank, drop
+    //TODO bank, drop
     const moveFrom = async () => {
       const slotId = event.dataTransfer
         ? event.dataTransfer.getData('id')

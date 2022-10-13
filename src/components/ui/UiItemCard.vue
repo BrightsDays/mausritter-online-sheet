@@ -8,7 +8,7 @@
         && `pack-items__item--heavy`,
       item.type === 'Light armor' && `pack-items__item--light-armor`]"
     draggable="true"
-    @dragstart="onDragging($event, item as Card, hirelingIndex)"
+    @dragstart="onDragging($event, item as Card)"
   >
     <span class="items__title">{{ item.title }}</span>
     <div class="items__status">
