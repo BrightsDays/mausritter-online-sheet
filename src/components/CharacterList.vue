@@ -11,7 +11,7 @@
 import CharacterInfo from "./sheet/CharacterAbout.vue";
 import CharacterStats from "./sheet/CharacterInfo.vue";
 import CharacterItems from "./sheet/CharacterItems.vue";
-import CharacterHirelings from "./sheet/CharacterHirelings.vue";
+import CharacterHirelings from "./sheet/CharHirelingList.vue";
 </script>
 
 <style lang="scss">

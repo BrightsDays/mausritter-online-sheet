@@ -72,19 +72,19 @@
           class="popup__select"
           def
         >
-          <option value="light">
+          <option value="Light">
             Light
           </option>
-          <option value="medium">
+          <option value="Medium">
             Medium
           </option>
-          <option value="heavy">
+          <option value="Heavy">
             Heavy
           </option>
-          <option value="light_ranged">
+          <option value="Light ranged">
             Light ranged
           </option>
-          <option value="heavy_ranged">
+          <option value="Heavy ranged">
             Heavy ranged
           </option>
         </select>
@@ -114,9 +114,13 @@
 import PopupLayout from './PopupLayout.vue'
 import rollDices from '../../helpers/rollDices'
 import rollStats from '../../helpers/rollStats'
+import weaponList from '../../data/weaponList.json'
+import utilityList from '../../data/utilityList.json'
 import detailsList from '../../data/detailsList.json'
+import spellList from '../../data/spellList.json'
+import armorList from '../../data/armorList.json'
 import backgroundList from '../../data/backgroundList.json'
-import { BackgroundKeys, StatKeys } from '../../types'
+import { BackgroundKeys, Item, StatKeys } from '../../types'
 import { useStore } from '../../store/character'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
@@ -127,13 +131,6 @@ const popupStore = usePopupStore()
 let save = false
 
 const weapon = ref('')
-const weaponList = {
-  light: 'Needle',
-  medium: 'Sword',
-  heavy: 'Trashhook',
-  light_ranged: 'Sling',
-  heavy_ranged: 'Bow'
-}
 
 const statsForSwap = ref({
   str: 0,
@@ -204,13 +201,21 @@ const saveCharacter = () => {
     )
   }
 
-  const isHireling = (item: string): string | null => {
+  const findItem = (title: string) => {
+    return (
+      utilityList.list.find(item => item.title === title) as Item ||
+      weaponList.list.find(item => item.title === title) as Item ||
+      armorList.list.find(item => item.title === title) as Item ||
+      spellList.list.find(item => item.title === title) as Item )
+  }
+
+  const isHireling = (item: string): Item | null => {
     if (item.includes('Hireling')) {
       characterStore.addHireling(createHireling(item))
       return null
     }
-      
-    return item
+    
+    return findItem(item)
   }
 
   characterStore.updateItems('bodyBack', {
@@ -236,25 +241,39 @@ const saveCharacter = () => {
     }
   })
 
-  characterStore.updateItems('packBack', {
+  characterStore.updateItems('packBack', {    
     1: {
       name: '1',
-      item: weaponList[weapon.value as keyof typeof weaponList],
+      item: weaponList.list.find(item => item.type === weapon.value) as Item,
       used: 0
     },
     2: {
       name: '2',
-      item: 'Torches',
+      item: {
+        title: 'Torches',
+        stat: '',
+        image: '',
+        type: 'Utility',
+        group: 'items'
+      },
       used: 0
     },
     3: {
       name: '3',
-      item: 'Rations',
+      item: {
+        title: 'Rations',
+        stat: '',
+        image: '',
+        type: 'Utility',
+        group: 'items'
+      },
       used: 0
     },
     4: {
       name: '4',
-      item: selectItem.value ? isHireling(startItem.value) : itemsForSelect.value.itemA,
+      item: selectItem.value 
+        ? isHireling(startItem.value)
+        : findItem(startItem.value),
       used: 0
     },
     5: {

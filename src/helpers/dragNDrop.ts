@@ -187,7 +187,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
 
     await moveFrom()
     moveTo()
-  }
+  }//TODO dont drop conditions to body
 
   (event.target as HTMLElement).classList.remove('droppable')
 }

@@ -5,7 +5,7 @@
       :key="item.title"
       class="conditions__item"
       draggable="true"
-      @dragstart="onDragging($event, item)"
+      @dragstart="onDragging($event, item as Card)"
     >
       <span class="conditions__title">{{ item.title }}</span>
       <span class="conditions__description">{{ item.description }}</span>
@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import conditions from '../../data/conditionList.json'
 import { onDragging } from '../../helpers/dragNDrop'
+import { Card } from '../../types';
 </script>
 
 <style lang="scss">
