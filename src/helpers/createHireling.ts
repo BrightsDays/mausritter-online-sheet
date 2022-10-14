@@ -1,10 +1,10 @@
 import { Hireling } from '../types'
 import rollDices from './rollDices'
 import detailsList from '../data/detailsList.json'
-import { useStore } from '../store/character'
+import { useCharacterStore } from '../store/character'
 
 export default (name: string): Hireling => {
-  const characterStore = useStore()
+  const characterStore = useCharacterStore()
 
   const stats = {
     str: rollDices(2,6),

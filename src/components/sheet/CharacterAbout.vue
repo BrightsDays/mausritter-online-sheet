@@ -66,9 +66,9 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '../../store/character'
+import { useCharacterStore } from '../../store/character'
 
-const character = useStore()
+const character = useCharacterStore()
 </script>
 
 <style lang="scss">

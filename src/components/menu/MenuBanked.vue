@@ -24,94 +24,10 @@
 
 <script setup lang="ts">
 import UiItemCard from '../ui/UiItemCard.vue'
-// import { computed, ComputedRef } from 'vue'
-import { useStore } from '../../store/character'
-// import { BodyBack, PackBack } from '../../types'
+import { useCharacterStore } from '../../store/character'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
-const characterStore = useStore()
-
-// const bodyBack: ComputedRef<BodyBack> = computed(() => characterStore.bodyBack)
-// const packBack: ComputedRef<PackBack> = computed(() => characterStore.packBack)
-
-// const drop = (event: DragEvent) => {
-//   event.preventDefault()
-  
-//   // eslint-disable-next-line no-undef
-//   const firstChild: ChildNode = (event.target as Node).childNodes[0]
-  
-//   if (!firstChild) {
-//     (event.target as HTMLElement).classList.remove('droppable')
-//     return null
-//   }
-
-//   if (firstChild) {
-//     const slotId = event.dataTransfer
-//       ? event.dataTransfer.getData('id')
-//       : null
-
-//     if (slotId) {
-//       if (Object.keys(bodyBack.value).includes(slotId)) {     
-//         characterStore.updateItems('bodyBack', {
-//           ...bodyBack.value,
-//           [slotId]: {
-//             name: slotId,
-//             item: null,
-//             used: 0
-//           }
-//         })
-//       }
-
-//       if (Object.keys(packBack.value).includes(slotId)) {
-//         characterStore.updateItems('packBack', {
-//           ...packBack.value,
-//           [slotId]: {
-//             name: slotId,
-//             item: null,
-//             used: 0
-//           }
-//         })
-//       }
-
-//       if (Object.keys(bank.value).includes(slotId)) {
-//         (event.target as HTMLElement).classList.remove('droppable')
-//         return null
-//       }
-//     }
-
-//     const data = event.dataTransfer
-//       ? event.dataTransfer.getData('text')
-//       : null
-
-//     const id = (event.target as HTMLElement).id
-//       ? (event.target as HTMLElement).id
-//       : null
-
-//     const used = event.dataTransfer
-//       ? +event.dataTransfer.getData('used')
-//       : 0      
-    
-//     if (data && id) {
-//       const nextId = `bnk__${+id.substring(5) + 1}`
-      
-//       bank.value = {
-//         ...bank.value,
-//         [id]: {
-//           name: id,
-//           item: data,
-//           used: used
-//         },
-//         [nextId]: {
-//           name: nextId,
-//           item: null,
-//           used: 0
-//         }
-//       }
-//     }
-//   }
-
-//   (event.target as HTMLElement).classList.remove('droppable')
-// }
+const characterStore = useCharacterStore()
 </script>
 
 <style lang="scss">

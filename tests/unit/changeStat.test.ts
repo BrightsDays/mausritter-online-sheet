@@ -1,6 +1,6 @@
 import { setActivePinia, createPinia } from 'pinia'
-import changeStat from '../../src/helpers/changeStat'
-import { useStore } from '../../src/store/character'
+import changeStat from '../../src/helpers/rollStats'
+import { useCharacterStore } from '../../src/store/character'
 import { StatKeys } from '../../src/types'
 
 beforeEach(() => {
@@ -9,7 +9,7 @@ beforeEach(() => {
 
 describe('ChangeStat', () => {
   test('update stats in store', () => {
-    const character = useStore()
+    const character = useCharacterStore()
     const statList = ['str', 'maxStr', 'dex', 'maxDex', 'wil', 'maxWil', 'hp', 'maxHp', 'pips', 'startPips']
 
     statList.forEach(stat => {
@@ -20,7 +20,7 @@ describe('ChangeStat', () => {
   })
 
   test('don\'t add new fields', () => {
-    const character = useStore()
+    const character = useCharacterStore()
     const statList = ['newField', 'testField']
     
     statList.forEach(stat => {

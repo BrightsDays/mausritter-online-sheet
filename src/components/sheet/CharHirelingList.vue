@@ -30,10 +30,10 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '../../store/character'
+import { useCharacterStore } from '../../store/character'
 import UiHirelingCrad from './CharHirelingItem.vue'
 
-const characterStore = useStore()
+const characterStore = useCharacterStore()
 </script>
 
 <style lang="scss">

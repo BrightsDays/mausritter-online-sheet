@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '../../store/character'
+import { useCharacterStore } from '../../store/character'
 import { StatKeys } from '../../types'
 
 const props = defineProps({
@@ -57,7 +57,7 @@ const props = defineProps({
   }
 })
 
-const characterStore = useStore()
+const characterStore = useCharacterStore()
 
 const growStat = (stat: StatKeys, maxValue: number) => {
   const target = props.stats[stat]

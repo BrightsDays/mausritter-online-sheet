@@ -82,16 +82,16 @@
 </template>
 
 <script setup lang="ts">
-import UiDetails from './ui/UiDetails.vue'
-import { usePopupStore } from '../store/popup'
-import MenuItems from './menu/MenuItems.vue'
-import MenuConditions from './menu/MenuConditions.vue'
-import utilityData from '../data/utilityList.json'
-import weaponData from '../data/weaponList.json'
-import armorData from '../data/armorList.json'
-import spellData from '../data/spellList.json'
-import { Item } from '../types'
-import BankedItems from './menu/MenuBanked.vue'
+import UiDetails from '../ui/UiDetails.vue'
+import { usePopupStore } from '../../store/popup'
+import MenuItems from './MenuItems.vue'
+import MenuConditions from './MenuConditions.vue'
+import utilityData from '../../data/utilityList.json'
+import weaponData from '../../data/weaponList.json'
+import armorData from '../../data/armorList.json'
+import spellData from '../../data/spellList.json'
+import { Item } from '../../types'
+import BankedItems from './MenuBanked.vue'
 
 const popup = usePopupStore()
 

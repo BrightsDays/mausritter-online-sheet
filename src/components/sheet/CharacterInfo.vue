@@ -24,11 +24,11 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '../../store/character'
+import { useCharacterStore } from '../../store/character'
 import { computed } from 'vue'
 import CharStats from '../tables/CharStats.vue'
 
-const store = useStore()
+const store = useCharacterStore()
 
 const exp = computed(() => store.exp)
 

@@ -41,11 +41,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useStore } from '../../store/character'
+import { useCharacterStore } from '../../store/character'
 import CharInventory from '../tables/CharInventory.vue'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
-const characterStore = useStore()
+const characterStore = useCharacterStore()
 
 const grit = computed(() => characterStore.grit)
 const exp = computed(() => characterStore.exp)

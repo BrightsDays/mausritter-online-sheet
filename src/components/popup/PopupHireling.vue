@@ -63,10 +63,10 @@
 import { ref } from 'vue'
 import createHireling from '../../helpers/createHireling'
 import { usePopupStore } from '../../store/popup'
-import { useStore } from '../../store/character'
+import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
 
-const characterStore = useStore()//TODO Rename character store
+const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 
 const hireling = ref('')

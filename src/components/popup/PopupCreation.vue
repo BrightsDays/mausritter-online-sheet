@@ -121,12 +121,12 @@ import spellList from '../../data/spellList.json'
 import armorList from '../../data/armorList.json'
 import backgroundList from '../../data/backgroundList.json'
 import { BackgroundKeys, Item, StatKeys } from '../../types'
-import { useStore } from '../../store/character'
+import { useCharacterStore } from '../../store/character'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import createHireling from '../../helpers/createHireling'
 
-const characterStore = useStore()
+const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 let save = false
 
@@ -206,9 +206,6 @@ const saveCharacter = () => {
   }
 
   const findItem = (title: string) => {
-    console.log(title);
-    
-
     return (
       utilityList.list.find(item => item.title === title) as Item ||
       weaponList.list.find(item => item.title === title) as Item ||

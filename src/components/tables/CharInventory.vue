@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '../../store/character'
+import { useCharacterStore } from '../../store/character'
 import UiItemCard from '../ui/UiItemCard.vue'
 import UiConditionCard from '../ui/uiConditionCard.vue'
 import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types'
@@ -86,7 +86,7 @@ const props = defineProps({
   }
 })
 
-const store = useStore()
+const store = useCharacterStore()
 
 const setBodyItemStats = (event: number, index: string) => {
   if (typeof props.hirelingIndex !== 'number') {

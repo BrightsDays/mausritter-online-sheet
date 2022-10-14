@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { BodyBack, Character, StatKeys, DescriptionKeys, PackBack, Hireling, ValueKeys, Bank } from '../types'
 
-export const useStore = defineStore('character', {
+export const useCharacterStore = defineStore('character', {
   state: (): Character => ({
     name: '',
     exp: 0,

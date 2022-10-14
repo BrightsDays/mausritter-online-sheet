@@ -8,10 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import CharacterInfo from "./sheet/CharacterAbout.vue";
-import CharacterStats from "./sheet/CharacterInfo.vue";
-import CharacterItems from "./sheet/CharacterItems.vue";
-import CharacterHirelings from "./sheet/CharHirelingList.vue";
+import CharacterInfo from "./CharacterAbout.vue";
+import CharacterStats from "./CharacterInfo.vue";
+import CharacterItems from "./CharacterItems.vue";
+import CharacterHirelings from "./CharHirelingList.vue";
 </script>
 
 <style lang="scss">
