@@ -105,6 +105,11 @@ export interface Hireling {
   details: string
 }
 
+export interface Bank {
+  name: string
+  item: Item | null
+}
+
 export interface Character {
   name: string
   exp: number
@@ -119,6 +124,7 @@ export interface Character {
   coat: string
   details: string
   grit: number
+  bank: Bank[]
 }
 
 export interface Popup {

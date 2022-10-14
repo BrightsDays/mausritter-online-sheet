@@ -1,4 +1,4 @@
-import { BodyBack, PackBack, BodyIndexes, Card, PackIndexes } from '../types'
+import { BodyBack, PackBack, BodyIndexes, Card, PackIndexes, Bank } from '../types'
 
 export const onDragging = (event: DragEvent, item: Card) => {
   if (event.dataTransfer) {    
@@ -55,16 +55,34 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
     (event.target as HTMLElement).classList.remove('droppable')
     return null
   }
-
+  
   if ((firstChild as HTMLElement).classList.contains('body-items__name') ||
-      (firstChild as HTMLElement).classList.contains('pack-items__name')) {     
-    //TODO bank, drop
+      (firstChild as HTMLElement).classList.contains('pack-items__name') || 
+      !(firstChild as HTMLElement).classList.contains('banked-items__item')) {
+
     const moveFrom = async () => {
       const slotId = event.dataTransfer
         ? event.dataTransfer.getData('id')
         : null
 
       const hirelingIndex = event.dataTransfer?.getData('hirelingIndex')
+      
+      if (slotId && slotId.includes('bnk')) {
+        let newBank = store.bank
+
+        newBank[+slotId.substring(5)] = {
+          name: slotId,
+          item: null
+        }
+        newBank = newBank.filter((item: Bank) => item.item !== null)
+        newBank.forEach((item: Bank, index: number) => item.name = `bnk__${index}`)
+        newBank.push({
+          name: `bnk__${newBank.length}`,
+          item: null
+        })        
+
+        store.updateBankItems(newBank)
+      }
 
       if (slotId && !hirelingIndex) {
         if (Object.keys(store.bodyBack).includes(slotId)) {
@@ -114,7 +132,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
         }
       }
     }
-    //TODO bank, drop
+    
     const moveTo = () => {
       const data = event.dataTransfer
         ? {
@@ -134,7 +152,23 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
         ? (event.target as HTMLElement).id
         : null
 
-      const hirelingIndex = firstChild.parentElement?.dataset.index      
+      const hirelingIndex = firstChild.parentElement?.dataset.index
+
+      if (data && id && type === 'bank') {
+        const nextId = `bnk__${+id.substring(5) + 1}`
+
+        const newBank = store.bank
+        newBank[+id.substring(5)] = {
+          name: id,
+          item: data
+        }
+        newBank[+id.substring(5) + 1] = {
+          name: nextId,
+          item: null
+        }
+
+        store.updateBankItems(newBank)
+      }
 
       if (data && id && !hirelingIndex) {
         if (type === 'bodyBack' && data.group !== 'conditions') {
@@ -183,7 +217,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
 
     await moveFrom()
     moveTo()
-  }//TODO dont drop conditions to body
+  }
 
   (event.target as HTMLElement).classList.remove('droppable')
-}
+}//TODO drop items, prevent move from bank to bank, prevent move conditions to bank/body
