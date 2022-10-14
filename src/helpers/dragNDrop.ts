@@ -67,9 +67,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
       description: event.dataTransfer.getData('description'),
       clear: event.dataTransfer.getData('clear')
     }
-    : null   
-
-    console.log(type, data?.group);
+    : null
     
   if (!firstChild 
       || (slotId?.includes('bnk') && type === 'bank')
@@ -221,4 +219,4 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
   moveTo()
 
   ;(event.target as HTMLElement).classList.remove('droppable')
-}//TODO drop items
+}

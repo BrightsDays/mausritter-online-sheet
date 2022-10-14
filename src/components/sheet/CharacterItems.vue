@@ -5,7 +5,7 @@
     </h2>
     <div
       class="drop-input"
-      @drop="event => dropItem(event)"
+      @drop="event => drop(event, 'drop', characterStore)"
       @dragover="allowDrop"
       @dragleave="leaveDrag"
     >
@@ -28,30 +28,27 @@
     <div class="pips-input">
       <label class="pips-input__label">Pips</label>
       <input
-        v-model="store.pips"
+        v-model="characterStore.pips"
         class="pips-input__input"
       >
     </div>
   </header>
   <char-inventory
-    :body-back="bodyBack"
-    :pack-back="packBack"
+    :body-back="characterStore.bodyBack"
+    :pack-back="characterStore.packBack"
   />
 </template>
 
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue'
+import { computed } from 'vue'
 import { useStore } from '../../store/character'
 import CharInventory from '../tables/CharInventory.vue'
-import { BodyBack, PackBack } from '../../types'
+import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
-const store = useStore()
+const characterStore = useStore()
 
-const bodyBack: ComputedRef<BodyBack> = computed(() => store.bodyBack)
-const packBack: ComputedRef<PackBack> = computed(() => store.packBack)
-
-const grit = computed(() => store.grit)
-const exp = computed(() => store.exp)
+const grit = computed(() => characterStore.grit)
+const exp = computed(() => characterStore.exp)
 
 const maxGrit = computed(() => {
   let result = 0
@@ -62,48 +59,6 @@ const maxGrit = computed(() => {
 
   return result
 })
-
-const allowDrop = (event: DragEvent) => {
-  event.preventDefault();
-  (event.target as HTMLElement).classList.add('droppable')
-}
-
-const leaveDrag = (event: DragEvent) => {
-  event.preventDefault();
-  (event.target as HTMLElement).classList.remove('droppable')
-}
-
-const dropItem = (event: DragEvent) => {
-  event.preventDefault()
-
-  if (event.dataTransfer) {
-    const slotId = event.dataTransfer.getData('id')
-  
-    if (slotId) {
-      if (Object.keys(bodyBack.value).includes(slotId)) {      
-        store.updateItems('bodyBack', {
-          ...bodyBack.value,
-          [slotId]: {
-            name: slotId,
-            item: null
-          }
-        })
-      }
-
-      if (Object.keys(packBack.value).includes(slotId)) {
-        store.updateItems('packBack', {
-          ...packBack.value,
-          [slotId]: {
-            name: slotId,
-            item: null
-          }
-        })
-      }
-    }
-
-    (event.target as HTMLElement).classList.remove('droppable')
-  }
-}
 </script>
 
 <style lang="scss">
