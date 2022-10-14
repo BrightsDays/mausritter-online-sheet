@@ -59,7 +59,6 @@ export interface Stats {
 export interface CardCell {
   name: 'Main Paw' | 'Second Paw' | 'Main Body' | 'Second Body' | '1' | '2' | '3' | '4' | '5' | '6'
   item: Item | Condition | null
-  used: 0 | 1 | 2 | 3
 }
 
 export interface BodyBack {

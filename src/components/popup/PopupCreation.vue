@@ -248,8 +248,7 @@ const saveCharacter = () => {
   characterStore.updateItems('packBack', {    
     1: {
       name: '1',
-      item: weaponList.list.find(item => item.type === weapon.value) as Item,
-      used: 0
+      item: weaponList.list.find(item => item.type === weapon.value) as Item
     },
     2: {
       name: '2',
@@ -258,9 +257,9 @@ const saveCharacter = () => {
         stat: '',
         image: '',
         type: 'Utility',
-        group: 'items'
-      },
-      used: 0
+        group: 'items',
+        used: 0
+      }
     },
     3: {
       name: '3',
@@ -269,28 +268,25 @@ const saveCharacter = () => {
         stat: '',
         image: '',
         type: 'Utility',
-        group: 'items'
-      },
-      used: 0
+        group: 'items',
+        used: 0
+      }
     },
     4: {
       name: '4',
       item: selectItem.value 
         ? isHireling(startItem.value)
-        : findItem(itemsForSelect.value.itemA),
-      used: 0
+        : findItem(itemsForSelect.value.itemA)
     },
     5: {
       name: '5',
       item: selectItem.value
         ? null 
-        : isHireling(itemsForSelect.value.itemB),
-      used: 0
+        : isHireling(itemsForSelect.value.itemB)
     },
     6: {
       name: '6',
-      item: null,
-      used: 0
+      item: null
     }
   })
 

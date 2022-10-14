@@ -5,35 +5,40 @@
       "stat": "",
       "image": "",
       "type": "Spell",
-      "group": "items"
+      "group": "items",
+      "used": 0
     },
     {
       "title": "Be understood",
       "stat": "",
       "image": "",
       "type": "Spell",
-      "group": "items"
+      "group": "items",
+      "used": 0
     },
     {
       "title": "Heal",
       "stat": "",
       "image": "",
       "type": "Spell",
-      "group": "items"
+      "group": "items",
+      "used": 0
     },
     {
       "title": "Restore",
       "stat": "",
       "image": "",
       "type": "Spell",
-      "group": "items"
+      "group": "items",
+      "used": 0
     },
     {
       "title": "Darkness",
       "stat": "",
       "image": "",
       "type": "Spell",
-      "group": "items"
+      "group": "items",
+      "used": 0
     }
   ]
 }

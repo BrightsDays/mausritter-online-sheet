@@ -5,14 +5,16 @@
       "stat": "1 def",
       "image": "",
       "type": "Heavy armor",
-      "group": "items"
+      "group": "items",
+      "used": 0
     },
     {
       "title": "Shield & jerkin",
       "stat": "1 def",
       "image": "",
       "type": "Light armor",
-      "group": "items"
+      "group": "items",
+      "used": 0
     }
   ]
 }

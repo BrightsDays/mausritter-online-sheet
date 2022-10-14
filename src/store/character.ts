@@ -33,55 +33,45 @@ export const useCharacterStore = defineStore('character', {
     bodyBack: {
         'Main Paw': {
           name: 'Main Paw',
-          item: null,
-          used: 0
+          item: null
         },
         'Main Body': {
           name: 'Main Body',
-          item: null,
-          used: 0
+          item: null
         },
         'Second Paw': {
           name: 'Second Paw',
-          item: null,
-          used: 0
+          item: null
         },
         'Second Body': {
           name: 'Second Body',
-          item: null,
-          used: 0
+          item: null
         }
     },
     packBack: {
         1: {
           name: '1',
-          item: null,
-          used: 0
+          item: null
         },
         2: {
           name: '2',
-          item: null,
-          used: 0
+          item: null
         },
         3: {
           name: '3',
-          item: null,
-          used: 0
+          item: null
         },
         4: {
           name: '4',
-          item: null,
-          used: 0
+          item: null
         },
         5: {
           name: '5',
-          item: null,
-          used: 0
+          item: null
         },
         6: {
           name: '6',
-          item: null,
-          used: 0
+          item: null
         },
     },
     hirelings: [],
@@ -160,62 +150,53 @@ export const useCharacterStore = defineStore('character', {
         bodyBack: {
             'Main Paw': {
               name: 'Main Paw',
-              item: null,
-              used: 0
+              item: null
             },
             'Main Body': {
               name: 'Main Body',
-              item: null,
-              used: 0
+              item: null
             },
             'Second Paw': {
               name: 'Second Paw',
-              item: null,
-              used: 0
+              item: null
             },
             'Second Body': {
               name: 'Second Body',
-              item: null,
-              used: 0
+              item: null
             }
         },
         packBack: {
             1: {
               name: '1',
-              item: null,
-              used: 0
+              item: null
             },
             2: {
               name: '2',
-              item: null,
-              used: 0
+              item: null
             },
             3: {
               name: '3',
-              item: null,
-              used: 0
+              item: null
             },
             4: {
               name: '4',
-              item: null,
-              used: 0
+              item: null
             },
             5: {
               name: '5',
-              item: null,
-              used: 0
+              item: null
             },
             6: {
               name: '6',
-              item: null,
-              used: 0
+              item: null
             },
         },
         hirelings: [],
         birthSign: '',
         coat: '',
         details: '',
-        grit: 0
+        grit: 0,
+        bank: []
       }
     }
   }
