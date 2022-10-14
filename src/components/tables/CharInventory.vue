@@ -189,7 +189,7 @@ const setPackItemStats = (event: number, index: string | number) => {
         }
       }, props.hirelingIndex)
     }
-  }
+  }//TODO status don't uodates exactly after char creation
 }
 </script>
 
