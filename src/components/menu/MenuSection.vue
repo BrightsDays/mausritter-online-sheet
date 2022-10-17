@@ -22,6 +22,29 @@
         </button>
         <button
           class="menu__item"
+          :disabled="!characterStore.name"
+          @click="downloadCharacter()"
+        >
+          Download character
+        </button>
+        <div>
+          <input
+            id="upload"
+            ref="upload"
+            type="file"
+            accept=".json"
+            class="menu__item--upload"
+            @change="uploadCharacter($event)"
+          >
+          <label
+            for="upload"
+            class="menu__item"
+          >
+            Upload character
+          </label>
+        </div>
+        <!-- <button
+          class="menu__item"
           disabled
         >
           Save to local storage
@@ -31,25 +54,13 @@
           disabled
         >
           Load from local storage
-        </button>
-        <button
-          class="menu__item"
-          disabled
-        >
-          Download character
-        </button>
-        <button
-          class="menu__item"
-          disabled
-        >
-          Upload character
-        </button>
-        <button
+        </button> -->
+        <!-- <button
           class="menu__item"
           disabled
         >
           Save as PDF
-        </button>
+        </button> -->
       </ui-details>
       <ui-details title="Weapons">
         <menu-items :items-list="weaponList" />
@@ -92,17 +103,73 @@ import armorData from '../../data/armorList.json'
 import spellData from '../../data/spellList.json'
 import { Item } from '../../types'
 import BankedItems from './MenuBanked.vue'
+import { useCharacterStore } from '../../store/character'
 
-const popup = usePopupStore()
+const popupStore = usePopupStore()
+const characterStore = useCharacterStore()
 
 const utilityList = utilityData.list as Item[]
 const weaponList = weaponData.list as Item[]
 const armorList = armorData.list as Item[]
 const spellList = spellData.list as Item[]
 
-const createNewCharacter = () => popup.setPopup('new')
+const createNewCharacter = () => popupStore.setPopup('new')
 
-const addHireling = () => popup.setPopup('addHireling')
+const downloadCharacter = () => {
+  const character = { ...characterStore }
+
+  Object.keys(character).forEach(key => {
+    if (key.includes('_') || key.includes('$')) {
+      delete character[key as keyof typeof character]
+    }
+  })
+
+  const fileName = `${character.name}.json`
+  const fileContent = JSON.stringify(character)
+
+  const element = document.createElement('a')
+	element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(fileContent))
+	element.setAttribute('download', fileName)
+
+	element.style.display = 'none'
+	document.body.appendChild(element)
+
+	element.click()
+	document.body.removeChild(element)
+}
+
+const uploadCharacter = (event: Event) => {
+  if (event.target) {
+    const reader = new FileReader()
+
+    reader.onload = (read) => {
+      if (read?.target?.result) {
+        const testCharacter = { ...characterStore }
+
+        Object.keys(testCharacter).forEach(key => {
+          if (key.includes('_') || key.includes('$')) {
+            delete testCharacter[key as keyof typeof testCharacter]
+          }
+        })
+
+        const character = JSON.parse(read.target.result)
+        let isValid = true
+        
+        Object.keys(character).forEach((key: string) => {
+          if (!Object.keys(testCharacter).includes(key)) {
+            isValid = false
+          }
+        })
+
+        if (isValid) characterStore.fillCharacter(character)
+      }
+    }
+
+    reader.readAsText(event.target.files[0])
+  }
+}
+
+const addHireling = () => popupStore.setPopup('addHireling')
 </script>
 
 <style lang="scss">
@@ -151,6 +218,10 @@ const addHireling = () => popup.setPopup('addHireling')
       text-align: left;
       color: var(--main);
       border: none;
+    }
+
+    &--upload {
+      display: none;
     }
   }
 

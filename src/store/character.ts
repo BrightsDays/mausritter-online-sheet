@@ -118,6 +118,9 @@ export const useCharacterStore = defineStore('character', {
       this.bank = payload
     },
 
+    fillCharacter(payload: Character) {
+      this.$state = payload
+    },
     clearCharacter() {
       this.$state = {
         name: '',

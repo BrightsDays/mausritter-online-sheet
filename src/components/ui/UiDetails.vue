@@ -24,7 +24,7 @@ const props = defineProps({
   title: {type: String, default: 'Title'}
 })
 
-let isOpen = ref(false)
+const isOpen = ref(false)
 
 const toggleDetails = () => {
   isOpen.value = !isOpen.value
