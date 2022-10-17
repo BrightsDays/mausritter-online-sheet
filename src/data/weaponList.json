@@ -11,7 +11,7 @@
     {
       "title": "Needle",
       "stat": "d6",
-      "image":  "",
+      "image":  "needle",
       "type": "Light",
       "group":  "items",
       "used": 0

@@ -25,6 +25,12 @@
         v-if="item.stat"
         class="items__stat"
       >{{ item.stat }}</span>
+      <img
+        v-if="imageUrl"
+        class="items__image"
+        :src="imageUrl"
+        :alt="item.title"
+      >
     </div>
     <span class="items__type">{{ item.type }}</span>
   </div>
@@ -46,6 +52,10 @@ const props = defineProps({
   }
 })
 
+const imageUrl = props.item.image
+  ? new URL(`../../assets/img/${props.item.image}.svg`, import.meta.url).href
+  : null
+
 const emit = defineEmits({
   pointClick: (key) => key
 })
@@ -56,26 +66,26 @@ const useItem = (index: number) => {
 </script>
 
 <style lang="scss">
-  .points {
-    display: flex;
-    flex-direction: row;
-    gap: 3px;
+.points {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  background: top;
+  
+  &__item {
+    display: block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--main);
+    border-radius: 50%;
+    z-index: 1;
+    cursor: pointer;
     background: top;
   
-    &__item {
-      display: block;
-      position: relative;
-      width: 15px;
-      height: 15px;
-      border: 1px solid var(--main);
-      border-radius: 50%;
-      z-index: 1;
-      cursor: pointer;
-      background: top;
-  
-      &--used {
-        background: var(--main);
-      }
+    &--used {
+      background: var(--main);
     }
   }
+}
 </style>

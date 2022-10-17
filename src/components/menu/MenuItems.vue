@@ -41,6 +41,7 @@ const props = defineProps({
 
   &__item {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
@@ -92,6 +93,16 @@ const props = defineProps({
     text-align: left;
     pointer-events: none;
     background: top;
+  }
+
+  &__image {
+    position: absolute;
+    bottom: 0px;
+    right: 50%;
+    transform: translate(40px, 0);
+    height: 80px;
+    background: none;
+    pointer-events: none;
   }
 }
 </style>

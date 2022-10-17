@@ -87,7 +87,7 @@ const props = defineProps({
 })
 
 const store = useCharacterStore()
-
+//TODO combine set items in one function
 const setBodyItemStats = (event: number, index: string) => {
   if (typeof props.hirelingIndex !== 'number') {
     if (event > +props.bodyBack[index as BodyIndexes].item.used) {
@@ -139,7 +139,7 @@ const setBodyItemStats = (event: number, index: string) => {
     }
   }
 }
-//TODO combine set items in one function
+
 const setPackItemStats = (event: number, index: string | number) => {
   if (typeof props.hirelingIndex !== 'number') {
     if (event > +props.packBack[index as PackIndexes].item.used) {
