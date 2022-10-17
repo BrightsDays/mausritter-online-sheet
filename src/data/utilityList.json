@@ -359,6 +359,14 @@
       "type": "Utility",
       "group": "items",
       "used": 0
+    },
+    {
+      "title": "Pip purse (250)",
+      "stat": "",
+      "image": "",
+      "type": "Utility",
+      "group": "items",
+      "used": 0
     }
   ]
 }
