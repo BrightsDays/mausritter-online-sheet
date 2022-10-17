@@ -59,6 +59,7 @@
           id="look"
           v-model="character.details"
           class="details-input__input"
+          readonly
         >
       </div>
     </div>

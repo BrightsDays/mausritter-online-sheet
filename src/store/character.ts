@@ -233,6 +233,9 @@ export const useCharacterStore = defineStore('character', {
           item: null
         }]
       }
+    },
+    addExperience(exp: number) {
+      this.exp += exp
     }
   }
 })

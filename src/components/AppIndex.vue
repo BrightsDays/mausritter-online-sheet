@@ -10,6 +10,11 @@
         v-if="popup.type === 'addHireling'"
       />
     </Transition>
+    <Transition>
+      <popup-level
+        v-if="popup.type === 'levelUp'"
+      />
+    </Transition>
     <main-menu />
     <character-list />
   </div>
@@ -21,6 +26,7 @@ import CharacterList from './sheet/CharSheet.vue'
 import { usePopupStore } from '../store/popup'
 import PopupCreation from './popup/PopupCreation.vue'
 import PopupHireling from './popup/PopupHireling.vue'
+import PopupLevel from './popup/PopupLevel.vue'
 
 const popup = usePopupStore()
 </script>

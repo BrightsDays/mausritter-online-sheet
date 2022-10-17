@@ -13,10 +13,16 @@
         >
         <span class="exp-input__devider">/</span>
         <input
-          v-model="exp"
+          v-model="store.exp"
           class="exp-input__input exp-input__exp"
-          @input="updateExp($event)"
+          readonly
         >
+        <button
+          class="exp-input__add"
+          @click="levelUp"
+        >
+          +
+        </button>
       </div>
       <char-stats :stats="store.stats" />
     </div>
@@ -27,25 +33,22 @@
 import { useCharacterStore } from '../../store/character'
 import { computed } from 'vue'
 import CharStats from '../tables/CharStats.vue'
+import { usePopupStore } from '../../store/popup';
 
 const store = useCharacterStore()
-
-const exp = computed(() => store.exp)
+const popup = usePopupStore()
 
 const level = computed(() => {
   let result = 1
 
-  if (exp.value >= 1000) result = 2
-  if (exp.value >= 3000) result = 3
-  if (exp.value >= 6000) result = 3 + Math.floor(exp.value / 6000)
+  if (store.exp >= 1000) result = 2
+  if (store.exp >= 3000) result = 3
+  if (store.exp >= 6000) result = 4 + Math.floor((store.exp - 6000) / 5000)
 
   return result
 })
 
-const updateExp = (event: Event) => {
-  const value = +(event.target as HTMLInputElement).value
-  if (value) store.setValue('exp', value)
-}
+const levelUp = () => popup.setPopup('levelUp')
 </script>
 
 <style lang="scss">
@@ -104,11 +107,24 @@ const updateExp = (event: Event) => {
   }
 
   &__level {
-    width: 20%;
+    width: 15%;
   }
 
   &__exp {
-    width: 45%;
+    width: 40%;
+  }
+
+  &__add {
+    margin-right: 5px;
+    flex: 0 0 25px;
+    width: 25px;
+    height: 25px;
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--main);
+    border: 2px solid var(--main);
+    border-radius: 50%;
+    cursor: pointer;
   }
 
   &__devider {

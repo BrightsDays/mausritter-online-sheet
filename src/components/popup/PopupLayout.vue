@@ -105,6 +105,10 @@ const close = () => popupStore.setPopup(null)
     &--buttons {
       margin-top: 20px;
     }
+
+    &--info {
+      justify-content: space-around;
+    }
   }
 
   &__label {
@@ -126,6 +130,7 @@ const close = () => popupStore.setPopup(null)
   &__input {
     margin-left: 10px;
     width: 100%;
+    text-align: right;
     font-family: "Cookie", sans-serif;
     font-size: 3em;
     color: var(--main);
