@@ -72,6 +72,16 @@
       <ui-details title="Conditions">
         <menu-conditions />
       </ui-details>
+    </div>
+    <div
+      v-if="characterStore.exp >= 1000"
+      class="menu__options menu--bordered"
+    >
+      <ui-details title="Grits">
+        <menu-grits />
+      </ui-details>
+    </div>
+    <div class="menu__options menu--bordered">
       <button
         class="menu__item menu__item--big"
         @click.prevent="addHireling()"
@@ -99,6 +109,7 @@ import spellData from '../../data/spellList.json'
 import { Item } from '../../types'
 import BankedItems from './MenuBanked.vue'
 import { useCharacterStore } from '../../store/character'
+import MenuGrits from './MenuGrits.vue'
 
 const popupStore = usePopupStore()
 const characterStore = useCharacterStore()

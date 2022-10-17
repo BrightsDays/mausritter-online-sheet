@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { BodyBack, Character, StatKeys, DescriptionKeys, PackBack, Hireling, ValueKeys, Bank } from '../types'
+import { BodyBack, Character, StatKeys, DescriptionKeys, PackBack, Hireling, ValueKeys, Bank, GritList } from '../types'
 
 export const useCharacterStore = defineStore('character', {
   state: (): Character => ({
@@ -78,7 +78,20 @@ export const useCharacterStore = defineStore('character', {
     birthSign: '',
     coat: '',
     details: '',
-    grit: 0,
+    grit: {
+      'grit__1': {
+        name: 'grit__1',
+        item: null
+      },
+      'grit__2': {
+        name: 'grit__2',
+        item: null
+      },
+      'grit__3': {
+        name: 'grit__3',
+        item: null
+      }
+    },
     bank: [{
       name: 'bnk__0',
       item: null
@@ -114,6 +127,9 @@ export const useCharacterStore = defineStore('character', {
           : this.hirelings[hirelingIndex].packBack = payload as PackBack
     },
 
+    updateGrit(payload: GritList) {
+      this.grit = payload
+    },
     updateBankItems(payload: Bank[]) {
       this.bank = payload
     },
@@ -198,8 +214,24 @@ export const useCharacterStore = defineStore('character', {
         birthSign: '',
         coat: '',
         details: '',
-        grit: 0,
-        bank: []
+        grit: {
+          'grit__1': {
+            name: 'grit__0',
+            item: null
+          },
+          'grit__2': {
+            name: 'grit__1',
+            item: null
+          },
+          'grit__3': {
+            name: 'grit__3',
+            item: null
+          }
+        },
+        bank: [{
+          name: 'bnk__0',
+          item: null
+        }]
       }
     }
   }

@@ -11,20 +11,6 @@
     >
       <label class="drop-input__label">Drop item</label>
     </div>
-    <div class="grit-input">
-      <label class="grit-input__label">Grit</label>
-      <input
-        v-model="grit"
-        class="grit-input__input"
-        readonly
-      >
-      <span class="grit-input__devider">/ </span>
-      <input
-        v-model="maxGrit"
-        class="grit-input__input"
-        readonly
-      >
-    </div>
     <div class="pips-input">
       <label class="pips-input__label">Pips</label>
       <input
@@ -40,25 +26,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useCharacterStore } from '../../store/character'
 import CharInventory from '../tables/CharInventory.vue'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
 const characterStore = useCharacterStore()
-
-const grit = computed(() => characterStore.grit)
-const exp = computed(() => characterStore.exp)
-
-const maxGrit = computed(() => {
-  let result = 0
-
-  if (exp.value >= 1000) result = 1
-  if (exp.value >= 3000) result = 2
-  if (exp.value >= 6000) result = 2 + Math.floor(exp.value / 6000)
-
-  return result
-})
 </script>
 
 <style lang="scss">
@@ -116,8 +88,10 @@ const maxGrit = computed(() => {
 
 .drop-input {
   margin-left: auto;
+  width: 215px;
 
   &__label {
+    width: 100%;
     background: var(--background);
   }
   

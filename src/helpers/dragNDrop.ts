@@ -73,6 +73,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
       || (slotId?.includes('bnk') && type === 'bank')
       || (type === 'bodyBack' && data?.group === 'conditions')
       || (type === 'bank' && data?.group === 'conditions')
+      || (type === 'grit' && data?.group === 'items')
     ) {
     (event.target as HTMLElement).classList.remove('droppable')
     return null
@@ -96,6 +97,16 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
       })        
 
       store.updateBankItems(newBank)
+    }
+
+    if (slotId && slotId.includes('grit')) {
+      store.updateGrit({
+        ...store.grit,
+        [slotId]: {
+          name: slotId,
+          item: null
+        }
+      })
     }
 
     if (slotId && !hirelingIndex) {
@@ -168,6 +179,16 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
       }
 
       store.updateBankItems(newBank)
+    }
+    
+    if (data && id && type === 'grit') {
+      store.updateGrit({
+        ...store.grit,
+        [id]: {
+          name: id,
+          item: data
+        }
+      })
     }
 
     if (data && id && !hirelingIndex) {

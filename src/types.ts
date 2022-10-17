@@ -104,6 +104,17 @@ export interface Hireling {
   details: string
 }
 
+export interface GritList {
+  'grit__1': Grit,
+  'grit__2': Grit,
+  'grit__3': Grit
+}
+
+export interface Grit {
+  name: string
+  item: Condition | null
+}
+
 export interface Bank {
   name: string
   item: Item | null
@@ -122,7 +133,7 @@ export interface Character {
   birthSign: string
   coat: string
   details: string
-  grit: number
+  grit: GritList
   bank: Bank[]
 }
 
