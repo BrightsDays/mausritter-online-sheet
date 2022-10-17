@@ -21,10 +21,17 @@
 import { ref } from 'vue'
 
 const props = defineProps({
-  title: {type: String, default: 'Title'}
+  title: {
+    type: String,
+    default: 'Title'
+  },
+  isOpen: {
+    type: Boolean,
+    required: false
+  }
 })
 
-const isOpen = ref(false)
+const isOpen = ref(props.isOpen || false)
 
 const toggleDetails = () => {
   isOpen.value = !isOpen.value

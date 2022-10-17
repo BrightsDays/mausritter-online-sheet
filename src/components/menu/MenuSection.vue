@@ -13,6 +13,7 @@
       <ui-details
         title="Options"
         class="menu--bordered"
+        :is-open="true"
       >
         <button
           class="menu__item"
@@ -47,20 +48,14 @@
           class="menu__item"
           disabled
         >
-          Save to local storage
-        </button>
-        <button
-          class="menu__item"
-          disabled
-        >
-          Load from local storage
-        </button> -->
-        <!-- <button
-          class="menu__item"
-          disabled
-        >
           Save as PDF
         </button> -->
+        <button
+          class="menu__item"
+          :disabled="!characterStore.name"
+        >
+          Clear sheet
+        </button>
       </ui-details>
       <ui-details title="Weapons">
         <menu-items :items-list="weaponList" />
