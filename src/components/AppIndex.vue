@@ -27,8 +27,29 @@ import { usePopupStore } from '../store/popup'
 import PopupCreation from './popup/PopupCreation.vue'
 import PopupHireling from './popup/PopupHireling.vue'
 import PopupLevel from './popup/PopupLevel.vue'
+import { useCharacterStore } from '../store/character'
+import { onMounted } from 'vue'
 
 const popup = usePopupStore()
+const characterStore = useCharacterStore()
+
+characterStore.$subscribe(() => {
+  const character = { ...characterStore }
+
+  Object.keys(character).forEach(key => {
+    if (key.includes('_') || key.includes('$')) {
+      delete character[key as keyof typeof character]
+    }
+  })
+  
+  localStorage.setItem('mr__character', JSON.stringify(character))
+})
+
+onMounted(() => {
+  const character = localStorage.getItem('mr__character')
+
+  if (character) characterStore.fillCharacter(JSON.parse(character))
+})
 </script>
 
 <style lang="scss">
