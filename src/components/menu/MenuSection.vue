@@ -4,6 +4,12 @@
       <h1 class="menu__heading">
         Character Sheet v.0.0.0
       </h1>
+      <button
+        class="menu__info"
+        @click="popupStore.setPopup('info')"
+      >
+        i
+      </button>
     </div>
     <div class="menu__options">
       <ui-details
@@ -162,6 +168,9 @@ const addHireling = () => popupStore.setPopup('addHireling')
   overflow: scroll;
 
   &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 15px;
     text-align: left;
   }
@@ -201,6 +210,22 @@ const addHireling = () => popupStore.setPopup('addHireling')
       text-align: left;
       color: var(--main);
       border: none;
+    }
+  }
+
+  &__info {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--main);
+    border: 2px solid var(--main);
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--second-background);
     }
   }
 

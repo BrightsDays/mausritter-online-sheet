@@ -189,5 +189,18 @@ const close = () => popupStore.setPopup(null)
       pointer-events: none;
     }
   }
+
+  &__list {
+    width: 600px;
+    max-width: 100%;
+    padding: 10px 20px 30px;
+    text-align: left;
+    color: var(--main);
+    font-family: "Ubuntu", sans-serif;
+  }
+
+  &__item {
+    font-size: 2em;
+  }
 }
 </styles>
