@@ -19,6 +19,7 @@
         >
         <button
           class="exp-input__add"
+          :disabled="!store.name"
           @click="levelUp"
         >
           +
@@ -125,6 +126,10 @@ const levelUp = () => popup.setPopup('levelUp')
     border: 2px solid var(--main);
     border-radius: 50%;
     cursor: pointer;
+
+    &:hover {
+      background-color: var(--second-background);
+    }
   }
 
   &__devider {

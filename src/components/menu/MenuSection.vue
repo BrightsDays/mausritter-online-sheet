@@ -4,12 +4,8 @@
       <h1 class="menu__heading">
         Character Sheet v.0.0.0
       </h1>
-      <!-- <button
-         class="menu__toggle"
-         @click="changeColorMode()"
-     /> -->
     </div>
-    <div class="menu__options menu--bordered">
+    <div class="menu__options">
       <ui-details
         title="Options"
         class="menu--bordered"
@@ -29,7 +25,13 @@
           Download character
         </button>
         <div>
-          <input
+          <button
+            class="menu__item"
+            @click="popupStore.setPopup('upload')"
+          >
+            Upload character
+          </button>
+          <!-- <input
             id="upload"
             ref="upload"
             type="file"
@@ -42,21 +44,21 @@
             class="menu__item"
           >
             Upload character
-          </label>
+          </label> -->
         </div>
-        <!-- <button
-          class="menu__item"
-          disabled
-        >
-          Save as PDF
-        </button> -->
         <button
           class="menu__item"
           :disabled="!characterStore.name"
+          @click="popupStore.setPopup('clear')"
         >
           Clear sheet
         </button>
       </ui-details>
+    </div>
+    <div
+      v-if="characterStore.name"
+      class="menu__options menu--bordered"
+    >
       <ui-details title="Weapons">
         <menu-items :items-list="weaponList" />
       </ui-details>
@@ -81,7 +83,10 @@
         <menu-grits />
       </ui-details>
     </div>
-    <div class="menu__options menu--bordered">
+    <div
+      v-if="characterStore.name"
+      class="menu__options menu--bordered"
+    >
       <button
         class="menu__item menu__item--big"
         @click.prevent="addHireling()"
@@ -89,7 +94,10 @@
         Add hireling
       </button>
     </div>
-    <div class="menu__bank">
+    <div
+      v-if="characterStore.name"
+      class="menu__bank"
+    >
       <ui-details title="Banked items">
         <banked-items />
       </ui-details>
@@ -144,37 +152,6 @@ const downloadCharacter = () => {
 	document.body.removeChild(element)
 }
 
-const uploadCharacter = (event: Event) => {
-  if (event.target) {
-    const reader = new FileReader()
-
-    reader.onload = (read) => {
-      if (read?.target?.result) {
-        const testCharacter = { ...characterStore }
-
-        Object.keys(testCharacter).forEach(key => {
-          if (key.includes('_') || key.includes('$')) {
-            delete testCharacter[key as keyof typeof testCharacter]
-          }
-        })
-
-        const character = JSON.parse(read.target.result)
-        let isValid = true
-        
-        Object.keys(character).forEach((key: string) => {
-          if (!Object.keys(testCharacter).includes(key)) {
-            isValid = false
-          }
-        })
-
-        if (isValid) characterStore.fillCharacter(character)
-      }
-    }
-
-    reader.readAsText(event.target.files[0])
-  }
-}
-
 const addHireling = () => popupStore.setPopup('addHireling')
 </script>
 
@@ -224,10 +201,6 @@ const addHireling = () => popupStore.setPopup('addHireling')
       text-align: left;
       color: var(--main);
       border: none;
-    }
-
-    &--upload {
-      display: none;
     }
   }
 

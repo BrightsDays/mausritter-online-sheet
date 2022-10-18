@@ -15,6 +15,16 @@
         v-if="popup.type === 'levelUp'"
       />
     </Transition>
+    <Transition>
+      <popup-clear
+        v-if="popup.type === 'clear'"
+      />
+    </Transition>
+    <Transition>
+      <popup-upload
+        v-if="popup.type === 'upload'"
+      />
+    </Transition>
     <main-menu />
     <character-list />
   </div>
@@ -27,6 +37,8 @@ import { usePopupStore } from '../store/popup'
 import PopupCreation from './popup/PopupCreation.vue'
 import PopupHireling from './popup/PopupHireling.vue'
 import PopupLevel from './popup/PopupLevel.vue'
+import PopupClear from './popup/PopupClear.vue'
+import PopupUpload from './popup/PopupUpload.vue'
 import { useCharacterStore } from '../store/character'
 import { onMounted } from 'vue'
 

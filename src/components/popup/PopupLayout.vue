@@ -109,6 +109,12 @@ const close = () => popupStore.setPopup(null)
     &--info {
       justify-content: space-around;
     }
+
+    &--upload {
+      position: relative;
+      width: 280px;
+      height: 140px;
+    }
   }
 
   &__label {
@@ -117,6 +123,18 @@ const close = () => popupStore.setPopup(null)
     font-weight: normal;
     line-height: 1;
     color: var(--second);
+
+    &--upload {
+      display: flex;
+      position: absolute;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      border: dashed 2px var(--second);
+      border-radius: 15px;
+      pointer-events: none;
+    }
   }
 
   &__stats {
@@ -137,6 +155,14 @@ const close = () => popupStore.setPopup(null)
     border: none;
     border-bottom: 1px solid var(--main);
     outline: none;
+
+    &--upload {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
   }
 
   &__select {

@@ -3,7 +3,33 @@
     <h3 class="popup__header">
       New character
     </h3>
-    <form class="popup__form">
+    <form
+      v-if="!informed"
+      class="popup__form"
+    >
+      <div class="popup__section">
+        <span class="popup__label">It will clear your current character.</span>
+      </div>
+      <div class="popup__section popup__section--buttons">
+        <button
+          class="popup__button"
+          @click.prevent="userNotInformed()"
+        >
+          Cancel
+        </button>
+        <button
+          class="popup__button"
+          @click.prevent="userInformed()"
+        >
+          OK
+        </button>
+      </div>
+    </form>
+
+    <form
+      v-else
+      class="popup__form"
+    >
       <div class="popup__section">
         <label class="popup__label">Name</label>
         <input
@@ -125,6 +151,8 @@ import { useCharacterStore } from '../../store/character'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import createHireling from '../../helpers/createHireling'
+
+const informed = ref(false)
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
@@ -299,8 +327,19 @@ const saveCharacter = () => {
   close()
 }
 
-onMounted(() => {
+const userNotInformed = () => {
+  save = true
+  close()
+}
+
+const userInformed = () => {
+  informed.value = true
   createCharacter()
+}
+
+onMounted(() => {
+  if (!characterStore.name) informed.value = true
+  if (informed.value) createCharacter()
 })
 
 onUnmounted(() => {

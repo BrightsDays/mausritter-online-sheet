@@ -6,7 +6,7 @@ export const usePopupStore = defineStore('popup', {
     type: null
   }),
   actions: {
-    setPopup(payload: PopupTypes) {
+    setPopup(payload: PopupTypes, ) {
       this.type = payload
     }
   }
