@@ -1,30 +1,16 @@
 <template>
   <div class="app">
-    <Transition>
-      <popup-creation
-        v-if="popup.type === 'new'"
-      />
-    </Transition>
-    <Transition>
-      <popup-hireling
-        v-if="popup.type === 'addHireling'"
-      />
-    </Transition>
-    <Transition>
-      <popup-level
-        v-if="popup.type === 'levelUp'"
-      />
-    </Transition>
-    <Transition>
-      <popup-clear
-        v-if="popup.type === 'clear'"
-      />
-    </Transition>
-    <Transition>
-      <popup-upload
-        v-if="popup.type === 'upload'"
-      />
-    </Transition>
+    <template
+      v-for="item in popups"
+      :key="`pu__${item}`"
+    >
+      <Transition>
+        <component
+          :is="activePopup(item)"
+          v-if="popup.type === item"
+        />
+      </Transition>
+    </template>
     <main-menu />
     <character-list />
   </div>
@@ -44,6 +30,25 @@ import { onMounted } from 'vue'
 
 const popup = usePopupStore()
 const characterStore = useCharacterStore()
+
+const popups = ['new', 'full', 'addHireling', 'levelUp', 'clear', 'upload']
+
+const activePopup = (type: string) => {
+  switch (type) {
+    case 'new':
+      return PopupCreation
+    case 'addHireling':
+      return PopupHireling
+    case 'levelUp':
+      return PopupLevel
+    case 'clear':
+      return PopupClear
+    case 'upload':
+      return PopupUpload
+    default:
+      return null
+  }
+}
 
 characterStore.$subscribe(() => {
   const character = { ...characterStore }
