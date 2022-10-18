@@ -8,7 +8,7 @@
       class="popup__form"
     >
       <div class="popup__section">
-        <span class="popup__label">It will clear your current character.</span>
+        <span class="popup__label">This will delete your current character.</span>
       </div>
       <div class="popup__section popup__section--buttons">
         <button

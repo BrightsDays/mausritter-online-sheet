@@ -1,7 +1,7 @@
 {
   "name": "mausritter-online-sheet",
   "author": "brightsdays",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",

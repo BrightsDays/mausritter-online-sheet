@@ -39,6 +39,86 @@
       "type": "Spell",
       "group": "items",
       "used": 0
+    },
+    {
+      "title": "Fireball",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Fear",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Ghost Beetle",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Light",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Invisible Ring",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Knock",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Grease",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Grow",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Invisibility",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Catnip",
+      "stat": "",
+      "image": "",
+      "type": "Spell",
+      "group": "items",
+      "used": 0
     }
   ]
 }
