@@ -93,7 +93,7 @@ const updatePips = (eventTarget: HTMLInputElement) =>
 
 .drop-input {
   margin-left: auto;
-  width: 215px;
+  width: 211px;
 
   &__label {
     width: 100%;

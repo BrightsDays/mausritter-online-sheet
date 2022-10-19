@@ -165,7 +165,8 @@ const addHireling = () => popupStore.setPopup('addHireling')
 .menu {
   width: 250px;
   max-height: 100%;
-  overflow: scroll;
+  padding-right: 4px;
+  overflow-y: scroll;
 
   &__header {
     display: flex;

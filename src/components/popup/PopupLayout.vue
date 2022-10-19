@@ -2,7 +2,7 @@
   <div class="popup">
     <div 
       class="popup__shadow"
-      @click.native="close()"
+      @click="close()"
     />
     <div class="popup__box">
       <button
@@ -173,6 +173,10 @@ const close = () => popupStore.setPopup(null)
     border: none;
     outline: none;
     cursor: pointer;
+
+    option {
+      font-size: 1em;
+    }
   }
 
   &__button {
