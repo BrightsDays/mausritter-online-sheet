@@ -14,8 +14,10 @@
     <div class="pips-input">
       <label class="pips-input__label">Pips</label>
       <input
-        v-model="characterStore.pips"
+        v-maska="'###'"
         class="pips-input__input"
+        :value="characterStore.pips"
+        @input="updatePips($event.target as HTMLInputElement)"
       >
     </div>
   </header>
@@ -31,6 +33,9 @@ import CharInventory from '../tables/CharInventory.vue'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
 const characterStore = useCharacterStore()
+
+const updatePips = (eventTarget: HTMLInputElement) => 
+  characterStore.setValue('pips', +eventTarget.value)
 </script>
 
 <style lang="scss">

@@ -107,7 +107,17 @@ export const useCharacterStore = defineStore('character', {
       this.stats[statName].max = payload
     },
     setValue(value: ValueKeys, payload: number) {
-      this[value] = payload
+      if (value !== 'pips') {
+        this[value] = payload
+      } else {
+        if (+payload > 250) {
+          this[value] = 250
+        } else if (+payload === 0) {
+          this[value] = 0
+        } else {
+          this[value] = payload
+        }
+      }
     },
     setDescription(descName: DescriptionKeys, payload: string) {
       this[descName] = payload

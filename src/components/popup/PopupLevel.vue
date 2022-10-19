@@ -7,8 +7,10 @@
       <div class="popup__section">
         <label class="popup__label">Value</label>
         <input
-          v-model="experience"
+          v-maska="'######'"
+          :value="experience"
           class="popup__input"
+          @input="setExperience($event.target as HTMLInputElement)"
         >
       </div>
       <div class="popup__section popup__section--info">
@@ -24,7 +26,7 @@
           Cancel
         </button>
         <button
-          :disabled="!experience"
+          :disabled="+experience === 0"
           class="popup__button"
           @click.prevent="addExperience(experience)"
         >
@@ -40,13 +42,21 @@ import { ref, computed } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
-import rollDices from '../../helpers/rollDices';
-import { StatKeys } from '../../types';
+import rollDices from '../../helpers/rollDices'
+import { StatKeys } from '../../types'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 
 const experience = ref(0)
+
+const setExperience = (eventTraget: HTMLInputElement) => {
+  if (+eventTraget.value === 0) {
+    experience.value = 0
+  } else {
+    experience.value = +eventTraget.value
+  }
+}
 
 let currentLevel = 1
 

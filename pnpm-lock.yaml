@@ -9,6 +9,7 @@ specifiers:
   eslint: ^8.25.0
   eslint-plugin-vue: ^9.6.0
   jest: ^29.1.2
+  maska: ^1.5.0
   pinia: ^2.0.23
   sass: ^1.55.0
   ts-jest: ^29.0.3
@@ -19,6 +20,7 @@ specifiers:
   vue-tsc: ^1.0.5
 
 dependencies:
+  maska: 1.5.0
   pinia: 2.0.23_bfjwoga25wxjazzogo7o372nwq
   sass: 1.55.0
   vue: 3.2.40
@@ -2969,6 +2971,10 @@ packages:
     dependencies:
       tmpl: 1.0.5
     dev: true
+
+  /maska/1.5.0:
+    resolution: {integrity: sha512-BwZXzs5gHeu6wtn3iWFqrKRtcsM3sTpkHvfAngVNVNlN7tl9ZyQUeHTz11s9Sy7Bq1MoQ+xyR/+IzghY8nR84Q==}
+    dev: false
 
   /mdn-data/2.0.28:
     resolution: {integrity: sha512-aylIc7Z9y4yzHYAJNuESG3hfhC+0Ibp/MAMiaOZgNv4pmEdFyfZhhhny4MNiAfWdBQ1RQ2mfDWmM1x8SvGyp8g==}
