@@ -70,6 +70,7 @@ onMounted(() => {
 
   if (character) characterStore.fillCharacter(JSON.parse(character))
 })
+//TODO Fix all bem-css
 </script>
 
 <style lang="scss">
