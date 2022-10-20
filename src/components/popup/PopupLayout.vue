@@ -88,6 +88,10 @@ const close = () => popupStore.setPopup(null)
     font-weight: normal;
     line-height: 1;
     color: var(--main);
+
+    &--small {
+      font-size: 2.6em;
+    }
   }
 
   &__form {
@@ -204,7 +208,18 @@ const close = () => popupStore.setPopup(null)
   }
 
   &__item {
-    font-size: 2em;
+    font-size: 1.6em;
+    margin-bottom: 10px;
+  }
+
+  &__link {
+    font-size: 1em;
+    color: var(--second);
+
+    &:hover {
+      color: var(--main);
+      text-decoration: none;
+    }
   }
 }
 </styles>

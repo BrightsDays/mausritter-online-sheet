@@ -1,15 +1,36 @@
 <template>
   <popup-layout>
     <h3 class="popup__header">
-      Version 0.1.1
+      About
     </h3>
     <form class="popup__form">
       <div class="popup__section">
-        <ul class="popup__list">
+        <h4 class="popup__header popup__header--small">
+          Version 0.1.1
+        </h4>
+      </div>
+      <div class="popup__section">
+        <ol class="popup__list">
           <li class="popup__item">
-            It's first version of app
+            This is the first version of app, and it does not contain images 
+            (including caharacter portraits), information/error messages and pdf download 
+            option (but you can use the browser's "print page" function);
           </li>
-        </ul>
+          <li class="popup__item">
+            Currently, you can create a new mouse, manipulate with items and hirelings, 
+            level up, and save/load character as .json file;
+          </li>
+          <li class="popup__item">
+            If you notice any bug or have an idea to update the app, please contact me: 
+            <a
+              class="popup__link"
+              href="https://brightsdays.github.io/contacts"
+              target="_blank"
+            >
+              brightsdays
+            </a>.
+          </li>
+        </ol>
       </div>
     </form>
   </popup-layout>
