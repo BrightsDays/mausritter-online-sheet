@@ -249,23 +249,19 @@ const saveCharacter = () => {
   characterStore.updateItems('bodyBack', {
     'Main Paw': {
       name: 'Main Paw',
-      item: null,
-      used: 0
+      item: null
     },
     'Main Body': {
       name: 'Main Body',
-      item: null,
-      used: 0
+      item: null
     },
     'Second Paw': {
       name: 'Second Paw',
-      item: null,
-      used: 0
+      item: null
     },
     'Second Body': {
       name: 'Second Body',
-      item: null,
-      used: 0
+      item: null
     }
   })
 

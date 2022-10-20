@@ -66,8 +66,8 @@ const uploadCharacter = (event: Event) => {
   if (event.target) {
     const reader = new FileReader()
 
-    reader.onload = (read) => {
-      if (read?.target?.result) {
+    reader.onload = () => {
+      if (reader.result) {
         const testCharacter = { ...characterStore }
 
         Object.keys(testCharacter).forEach(key => {
@@ -76,7 +76,7 @@ const uploadCharacter = (event: Event) => {
           }
         })
 
-        const character = JSON.parse(read.target.result)
+        const character = JSON.parse(reader.result as string)
         let isValid = true
         
         Object.keys(character).forEach((key: string) => {
@@ -88,8 +88,9 @@ const uploadCharacter = (event: Event) => {
         if (isValid) characterStore.fillCharacter(character)
       }
     }
-
-    reader.readAsText(event.target.files[0])
+    
+    const result = (event.target as HTMLInputElement).files
+    if (result) reader.readAsText(result[0])
   }
 
   close()

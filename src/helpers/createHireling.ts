@@ -43,35 +43,29 @@ export default (name: string): Hireling => {
     bodyBack: {
       'Main Paw': {
         name: 'Main Paw',
-        item: null,
-        used: 0
+        item: null
       },
       'Second Paw': {
         name: 'Second Paw',
-        item: null,
-        used: 0
+        item: null
       }
     },
     packBack: {
       1: {
         name: '1',
-        item: null,
-        used: 0
+        item: null
       },
       2: {
         name: '2',
-        item: null,
-        used: 0
+        item: null
       },
       3: {
         name: '3',
-        item: null,
-        used: 0
+        item: null
       },
       4: {
         name: '4',
-        item: null,
-        used: 0
+        item: null
       }
     },
     details: detailsList[rollDices(1, detailsList.length) - 1]
