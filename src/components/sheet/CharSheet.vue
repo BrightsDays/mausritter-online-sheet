@@ -16,7 +16,7 @@ import CharacterHirelings from "./CharHirelingList.vue";
 
 <style lang="scss">
 .character {
-  width: 620px;
+  width: 626px;
   display: flex;
   padding-right: 4px;
   flex-direction: column;

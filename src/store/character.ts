@@ -127,8 +127,15 @@ export const useCharacterStore = defineStore('character', {
       if (packName === 'packBack') this.packBack = payload as PackBack
     },
 
-    addHireling(payload: Hireling) {      
+    addHireling(payload: Hireling) {
       this.hirelings = [ ...this.hirelings, payload]
+    },
+    removeHireling(payload: number) {
+      const index = this.hirelings.findIndex(hireling => {
+        return hireling.index === payload
+      })
+
+      this.hirelings.splice(index, 1)
     },
     updateHirelingItems(packName: 'bodyBack' | 'packBack',
       payload: BodyBack | PackBack, hirelingIndex: number) {

@@ -4,7 +4,15 @@
       <h3 class="hirelings-item__heading">
         {{ props.hireling.name }}
       </h3>
-      <span class="hirelings-item__details">Look: {{ props.hireling.details }}</span>
+      <button
+        class="hirelings-item__remove"
+        @click="removeHireling(props.hireling.index)"
+      >
+        remove
+      </button>
+    </div>
+    <div class="hirelings-item__details">
+      Look: {{ props.hireling.details }}
     </div>
     <div class="hirelings-item__wrapper">
       <char-stats
@@ -22,7 +30,10 @@
 
 <script setup lang="ts">
 import CharStats from '../tables/CharStats.vue'
-import CharInventory from '../tables/CharInventory.vue';
+import CharInventory from '../tables/CharInventory.vue'
+import { useCharacterStore } from '../../store/character'
+
+const characterStore = useCharacterStore()
 
 const props = defineProps({
   hireling: {
@@ -30,6 +41,10 @@ const props = defineProps({
     required: true
   }
 })
+
+const removeHireling = (index: number) => {
+  characterStore.removeHireling(index)
+}
 </script>
 
 <style lang="scss">
@@ -60,9 +75,25 @@ const props = defineProps({
   }
 
   &__details {
+    margin-top: 10px;
     font-family: "Ubuntu", sans-serif;
     font-size: 1.6em;
     color: var(--second);
+  }
+
+  &__remove {
+    padding: 5px 10px;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--main);
+    border: 2px solid var(--main);
+    border-radius: 15px;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--second-background);
+    }
   }
 }
 </style>
