@@ -263,6 +263,14 @@ const setPackItemStats = (event: number, index: string | number) => {
     height: calc(100% + 4px);
     min-width: 121px;
     min-height: 121px;
+    
+    .items__image {
+      bottom: 0px;
+    }
+
+    .items__image--heavy {
+      bottom: 30px;
+    }
   }
 
   &__name {
@@ -311,6 +319,14 @@ const setPackItemStats = (event: number, index: string | number) => {
 
     &--light-armor {
       width: 244px;
+    }
+    
+    .items__image {
+      bottom: 0px;
+    }
+
+    .items__image--heavy {
+      bottom: 30px;
     }
   }
 

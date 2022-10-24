@@ -77,7 +77,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
     ) {
     (event.target as HTMLElement).classList.remove('droppable')
     return null
-  }
+  }//TODO green light to valid drop, not red to invalid
   
   const moveFrom = async () => {
     const hirelingIndex = event.dataTransfer?.getData('hirelingIndex')

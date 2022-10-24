@@ -5,7 +5,7 @@
       (item.type === 'Heavy' ||
         item.type === 'Heavy armor' ||
         item.type === 'Heavy ranged') 
-        && `pack-items__item--heavy`,
+        && 'pack-items__item--heavy',
       item.type === 'Light armor' && `pack-items__item--light-armor`]"
     draggable="true"
     @dragstart="onDragging($event, item as Card)"
@@ -28,6 +28,8 @@
       <img
         v-if="imageUrl"
         class="items__image"
+        :class="(item.type === 'Heavy' ||
+          item.type === 'Heavy ranged') && 'items__image--heavy'"
         :src="imageUrl"
         :alt="item.title"
       >

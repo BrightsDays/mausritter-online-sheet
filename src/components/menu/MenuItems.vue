@@ -14,6 +14,14 @@
           v-if="item.stat"
           class="items__stat"
         >{{ item.stat }}</span>
+        <img
+          v-if="imageUrl(item.image)"
+          class="items__image"
+          :class="(item.type === 'Heavy' ||
+            item.type === 'Heavy ranged') && 'items__image--heavy'"
+          :src="imageUrl(item.image)"
+          :alt="item.title"
+        >
       </div>
       <span class="items__type">{{ item.type }}</span>
     </div>
@@ -31,6 +39,12 @@ const props = defineProps({
     required: true,
   }
 })
+
+const imageUrl = (item: string) => {
+  return item
+    ? new URL(`../../assets/img/${item}.svg`, import.meta.url).href
+    : null
+}
 </script>
 
 <style lang="scss">
@@ -81,6 +95,7 @@ const props = defineProps({
 
   &__stat {
     display: inline-block;
+    margin-left: auto;
     padding: 5px;
     font-size: 1.6em;
     border: 1px solid var(--main);
@@ -97,12 +112,15 @@ const props = defineProps({
 
   &__image {
     position: absolute;
-    bottom: 0px;
     right: 50%;
-    transform: translate(40px, 0);
+    transform: translate(50px, 0);
     height: 80px;
     background: none;
     pointer-events: none;
+
+    &--heavy {
+      height: 160px;
+    }
   }
 }
 </style>
