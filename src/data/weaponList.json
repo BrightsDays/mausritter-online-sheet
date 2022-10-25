@@ -3,7 +3,7 @@
     {
       "title": "Improvised",
       "stat": "d6",
-      "image": "improvised",
+      "image": "Improvised",
       "type": "Improvised",
       "group": "items",
       "used": 0
@@ -11,7 +11,7 @@
     {
       "title": "Needle",
       "stat": "d6",
-      "image": "needle",
+      "image": "Needle",
       "type": "Light",
       "group":  "items",
       "used": 0
@@ -19,7 +19,7 @@
     {
       "title": "Dagger",
       "stat": "d6",
-      "image":  "dagger",
+      "image":  "Dagger",
       "type": "Light",
       "group":  "items",
       "used": 0
@@ -27,7 +27,7 @@
     {
       "title": "Sword",
       "stat": "d6/d8",
-      "image":  "sword",
+      "image": "Sword",
       "type": "Medium",
       "group":  "items",
       "used": 0
@@ -35,7 +35,7 @@
     {
       "title": "Axe",
       "stat": "d6/d8",
-      "image":  "axe",
+      "image":  "Axe",
       "type": "Medium",
       "group":  "items",
       "used": 0
@@ -43,7 +43,7 @@
     {
       "title": "Mace",
       "stat": "d6/d8",
-      "image":  "mace",
+      "image":  "Mace",
       "type": "Medium",
       "group":  "items",
       "used": 0
@@ -51,7 +51,7 @@
     {
       "title": "Hammer",
       "stat": "d6/d8",
-      "image": "hammer",
+      "image": "Hammer",
       "type": "Medium",
       "group": "items",
       "used": 0
@@ -59,7 +59,7 @@
     {
       "title": "Pickaxe",
       "stat": "d6/d8",
-      "image": "pickaxe",
+      "image": "Pickaxe",
       "type": "Medium",
       "group": "items",
       "used": 0
@@ -67,7 +67,7 @@
     {
       "title": "Trashhook",
       "stat": "d10",
-      "image": "trashhook",
+      "image": "Trashhook",
       "type": "Heavy",
       "group": "items",
       "used": 0
@@ -75,7 +75,7 @@
     {
       "title": "Spear",
       "stat": "d10",
-      "image": "spear",
+      "image": "Spear",
       "type": "Heavy",
       "group": "items",
       "used": 0
@@ -83,7 +83,7 @@
     {
       "title": "Warhammer",
       "stat": "d10",
-      "image": "warhammer",
+      "image": "Warhammer",
       "type": "Heavy",
       "group": "items",
       "used": 0
@@ -91,7 +91,7 @@
     {
       "title": "Sling",
       "stat": "d6",
-      "image":  "sling",
+      "image":  "Sling",
       "type": "Light ranged",
       "group":  "items",
       "used": 0
@@ -99,7 +99,7 @@
     {
       "title": "Bow",
       "stat": "d8",
-      "image": "bow",
+      "image": "Bow",
       "type": "Heavy ranged",
       "group": "items",
       "used": 0
@@ -107,7 +107,7 @@
     {
       "title": "Stones",
       "stat": "",
-      "image": "stones",
+      "image": "Stones",
       "type": "Ammunition",
       "group": "items",
       "used": 0
@@ -115,7 +115,7 @@
     {
       "title": "Arrows",
       "stat": "",
-      "image": "arrows",
+      "image": "Arrows",
       "type": "Ammunition",
       "group": "items",
       "used": 0
