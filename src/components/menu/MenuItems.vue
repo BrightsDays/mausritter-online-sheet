@@ -43,7 +43,7 @@ const props = defineProps({
 const imageUrl = (item: string) => {
   return item
     ? new URL(`../../assets/img/${item}.svg`, import.meta.url).href
-    : null
+    : undefined
 }
 </script>
 
