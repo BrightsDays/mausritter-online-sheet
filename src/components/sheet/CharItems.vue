@@ -9,7 +9,10 @@
       @dragover="allowDrop"
       @dragleave="leaveDrag"
     >
-      <label class="drop-input__label">Drop item</label>
+      <label
+        id="drop"
+        class="drop-input__label"
+      >Drop item</label>
     </div>
     <div class="pips-input">
       <label class="pips-input__label">Pips</label>

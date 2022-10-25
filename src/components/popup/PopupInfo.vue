@@ -6,6 +6,23 @@
     <form class="popup__form">
       <div class="popup__section">
         <h4 class="popup__header popup__header--small">
+          Version 0.1.2
+        </h4>
+      </div>
+      <div class="popup__section">
+        <ol class="popup__list">
+          <li class="popup__item">
+            Bug with opportunity to drag'n'drop illegal items fixed;
+          </li>
+          <li class="popup__item">
+            Images for all simple weapons added.
+          </li>
+        </ol>
+      </div>
+    </form>
+    <form class="popup__form">
+      <div class="popup__section">
+        <h4 class="popup__header popup__header--small">
           Version 0.1.1
         </h4>
       </div>

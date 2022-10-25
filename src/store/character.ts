@@ -233,11 +233,11 @@ export const useCharacterStore = defineStore('character', {
         details: '',
         grit: {
           'grit__1': {
-            name: 'grit__0',
+            name: 'grit__1',
             item: null
           },
           'grit__2': {
-            name: 'grit__1',
+            name: 'grit__2',
             item: null
           },
           'grit__3': {

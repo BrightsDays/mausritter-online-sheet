@@ -27,7 +27,7 @@ import UiItemCard from '../ui/UiItemCard.vue'
 import { useCharacterStore } from '../../store/character'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
-const characterStore = useCharacterStore()
+const characterStore = useCharacterStore()//TODO fix image changing
 </script>
 
 <style lang="scss">
@@ -55,9 +55,14 @@ const characterStore = useCharacterStore()
   .banked-items__card {
     margin: -6px;
     border: 1px solid var(--main);
+    overflow: hidden;
 
     .points {
       opacity: 1;
+    }
+
+    .items__image--heavy {
+      bottom: -80px;
     }
   }
 }

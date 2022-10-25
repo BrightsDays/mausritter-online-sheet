@@ -68,17 +68,7 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
       clear: event.dataTransfer.getData('clear')
     }
     : null
-    
-  if (!firstChild 
-      || (slotId?.includes('bnk') && type === 'bank')
-      || (type === 'bodyBack' && data?.group === 'conditions')
-      || (type === 'bank' && data?.group === 'conditions')
-      || (type === 'grit' && data?.group === 'items')
-    ) {
-    (event.target as HTMLElement).classList.remove('droppable')
-    return null
-  }//TODO green light to valid drop, not red to invalid
-  
+
   const moveFrom = async () => {
     const hirelingIndex = event.dataTransfer?.getData('hirelingIndex')
 
@@ -235,9 +225,27 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
       }
     }
   }
+  
+  const cases = {
+    items: firstChild && data?.group === 'items'
+      && !slotId?.includes('bnk') 
+      && (type === 'bodyBack' || type === 'packBack' || type === 'bank' || type === 'drop'),
+    bankItems: firstChild && data?.group === 'items'
+      && slotId?.includes('bnk') && type !== 'bank' 
+      && (type === 'bodyBack' || type === 'packBack' || type === 'drop'),
+    conditions: firstChild && data?.group === 'conditions'
+      && (type === 'packBack' || type === 'grit' || type === 'drop'),
+    drop: type === 'drop' && (data?.group === 'items' || data?.group === 'conditions')
+  }
+  
+  if ((event.target as HTMLElement).id
+      && (cases.items || cases.bankItems || cases.conditions || cases.drop)) {        
+      await moveFrom()
+      moveTo()
+  } else {
+    (event.target as HTMLElement).classList.remove('droppable')
+    return null
+  }
 
-  await moveFrom()
-  moveTo()
-
-  ;(event.target as HTMLElement).classList.remove('droppable')
+  (event.target as HTMLElement).classList.remove('droppable')
 }
