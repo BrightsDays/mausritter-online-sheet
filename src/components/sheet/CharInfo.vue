@@ -22,7 +22,7 @@
           :disabled="!store.name"
           @click="levelUp"
         >
-          +
+          <p>+</p>
         </button>
       </div>
       <char-stats :stats="store.stats" />
@@ -116,16 +116,25 @@ const levelUp = () => popup.setPopup('levelUp')
   }
 
   &__add {
+    display: flex;
+    justify-content: center;
     margin-right: 5px;
     flex: 0 0 25px;
     width: 25px;
     height: 25px;
-    font-size: 2em;
-    font-weight: bold;
     color: var(--main);
+    text-align: center;
     border: 2px solid var(--main);
     border-radius: 50%;
     cursor: pointer;
+
+    p {
+      margin-top: -2px;
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 2em;
+      font-weight: bold;
+      background: none;
+    }
 
     &:hover {
       background-color: var(--second-background);

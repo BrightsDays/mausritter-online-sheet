@@ -27,13 +27,13 @@
             class="stat-buttons__button stat-buttons__button--grow"
             @click="growStat(item.name, item.max)"
           >
-            +
+            <p>+</p>
           </button>
           <button
             class="stat-buttons__button stat-buttons__button--down"
             @click="downStat(item.name)"
           >
-            -
+            <p>-</p>
           </button>
         </div>
       </div>
@@ -153,13 +153,22 @@ const downStat = (stat: StatKeys) => {
   padding: 5px;
 
   &__button {
+    display: flex;
+    justify-content: center;
+    padding: 0;
     width: 25px;
     height: 25px;
-    font-size: 2em;
-    font-weight: bold;
     color: var(--main);
     border: 2px solid var(--main);
     cursor: pointer;
+
+    p {
+      margin-top: -2px;
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 2em;
+      font-weight: bold;
+      background: none;
+    }
 
     &--grow {
       border-radius: 10px 10px 0 0;

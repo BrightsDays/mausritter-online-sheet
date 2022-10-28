@@ -30,7 +30,7 @@
         <ol class="popup__list">
           <li class="popup__item">
             This is the first version of app, and it does not contain images 
-            (including caharacter portraits), information/error messages and pdf download 
+            (including character portraits), information/error messages and pdf download 
             option (but you can use the browser's "print page" function);
           </li>
           <li class="popup__item">

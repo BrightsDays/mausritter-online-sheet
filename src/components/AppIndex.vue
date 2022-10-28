@@ -4,12 +4,14 @@
       v-for="item in popups"
       :key="`pu__${item}`"
     >
-      <Transition>
-        <component
-          :is="activePopup(item)"
-          v-if="popup.type === item"
-        />
-      </Transition>
+      <Teleport to="body">
+        <Transition>
+          <component
+            :is="activePopup(item)"
+            v-if="popup.type === item"
+          />
+        </Transition>
+      </Teleport>
     </template>
     <main-menu />
     <character-list />
