@@ -3,7 +3,7 @@
     <h3 class="popup__header">
       Add hireling
     </h3>
-    <form class="popup__form">
+    <div class="popup__form">
       <div class="popup__section">
         <label class="popup__label">Select hireling</label>
         <select
@@ -55,12 +55,12 @@
           Create
         </button>
       </div>
-    </form>
+    </div>
   </popup-layout>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import createHireling from '../../helpers/createHireling'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
@@ -73,8 +73,17 @@ const hireling = ref('')
 
 const close = () => popupStore.setPopup(null)
 
-const saveHireling = (hireling: string) => {
-  characterStore.addHireling(createHireling(`Hireling: ${hireling}`))
-  close()
+const saveHireling = (hirelingName: string) => {
+  if (hireling.value) {
+    characterStore.addHireling(createHireling(`Hireling: ${hirelingName}`))
+    hireling.value = ''
+    close()
+  }
 }
+
+onMounted(() => {
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') saveHireling(hireling.value)
+  })
+})
 </script>

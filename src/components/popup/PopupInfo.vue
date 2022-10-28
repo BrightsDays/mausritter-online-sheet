@@ -3,7 +3,27 @@
     <h3 class="popup__header">
       About
     </h3>
-    <form class="popup__form">
+    <section class="popup__form">
+      <div class="popup__section">
+        <h4 class="popup__header popup__header--small">
+          Version 0.1.3
+        </h4>
+      </div>
+      <div class="popup__section">
+        <ol class="popup__list">
+          <li class="popup__item">
+            Option to create custom items added;
+          </li>
+          <li class="popup__item">
+            Keyboard control in popups added;
+          </li>
+          <li class="popup__item">
+            Some visual bugs fixed.
+          </li>
+        </ol>
+      </div>
+    </section>
+    <section class="popup__form">
       <div class="popup__section">
         <h4 class="popup__header popup__header--small">
           Version 0.1.2
@@ -19,8 +39,8 @@
           </li>
         </ol>
       </div>
-    </form>
-    <form class="popup__form">
+    </section>
+    <section class="popup__form">
       <div class="popup__section">
         <h4 class="popup__header popup__header--small">
           Version 0.1.1
@@ -37,19 +57,19 @@
             Currently, you can create a new mouse, manipulate with items and hirelings, 
             level up, and save/load character as .json file;
           </li>
-          <li class="popup__item">
-            If you notice any bug or have an idea to update the app, please contact me: 
-            <a
-              class="popup__link"
-              href="https://brightsdays.github.io/contacts"
-              target="_blank"
-            >
-              brightsdays
-            </a>.
-          </li>
         </ol>
       </div>
-    </form>
+    </section>
+    <section class="popup__info">
+      If you notice any bug or have an idea to update the app,<br> please contact me: 
+      <a
+        class="popup__link"
+        href="https://brightsdays.github.io/contacts"
+        target="_blank"
+      >
+        brightsdays
+      </a>.
+    </section>
   </popup-layout>
 </template>
 

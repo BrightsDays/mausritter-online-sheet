@@ -3,7 +3,7 @@
     <h3 class="popup__header">
       Add custom item
     </h3>
-    <form
+    <div
       v-if="emptySlot"
       class="popup__form"
     >
@@ -24,25 +24,25 @@
             Utility
           </option>
           <option>
-            Light Weapon
+            Light weapon
           </option>
           <option>
-            Medium Weapon
+            Medium weapon
           </option>
           <option>
-            Heavy Weapon
+            Heavy weapon
           </option>
           <option>
-            Light Ranged
+            Light ranged
           </option>
           <option>
-            Heavy Ranged
+            Heavy ranged
           </option>
           <option>
-            Light Armor
+            Light armor
           </option>
           <option>
-            Heavy Armor
+            Heavy armor
           </option>
           <option>
             Spell
@@ -80,15 +80,15 @@
           Cancel
         </button>
         <button
-          :disabled="!item.title || item.title.length < 3"
+          :disabled="item.title.length < 3"
           class="popup__button"
           @click.prevent="addItem()"
         >
           Create
         </button>
       </div>
-    </form>
-    <form
+    </div>
+    <div
       v-else
       class="popup__form"
     >
@@ -98,7 +98,7 @@
           Empty the space to add custom items.
         </span>
       </div>
-    </form>
+    </div>
   </popup-layout>
 </template>
 
@@ -123,75 +123,79 @@ const emptySlot = ref('')
 const close = () => popupStore.setPopup(null)
 
 const addItem = () => {
-  const newItem = {
-    title: item.value.title,
-    stat: '',
-    image: item.value.type === 'Spell' ? 'Spell' : '',
-    type: item.value.type,
-    group: 'items',
-    used: 0
-  }
+  if (item.value.title.length >= 3) {
+    const newItem = {
+      title: item.value.title,
+      stat: '',
+      image: item.value.type === 'Spell' ? 'Spell' : '',
+      type: item.value.type,
+      group: 'items',
+      used: 0
+    }
 
-  if (item.value.type === 'Utility') {
-    switch (item.value.size) {
-      case '1 x 2':
-        newItem.type = 'Hight Utility'
+    if (item.value.type === 'Utility') {
+      switch (item.value.size) {
+        case '1 x 2':
+          newItem.type = 'Hight utility'
+          break
+        case '2 x 1':
+          newItem.type = 'Wide utility'
+          break
+        case '2 x 2':
+          newItem.type = 'Big utility'
+          break
+        default:
+          break
+      }
+    }
+
+    switch (item.value.type) {
+      case 'Light weapon':
+        newItem.type = 'Light'
         break
-      case '2 x 1':
-        newItem.type = 'Wide Utility'
+      case 'Medium weapon':
+        newItem.type = 'Medium'
         break
-      case '2 x 2':
-        newItem.type = 'Big Utility'
+      case 'Heavy weapon':
+        newItem.type = 'Heavy'
         break
       default:
         break
     }
-  }
 
-  switch (item.value.type) {
-    case 'Light Weapon':
-      newItem.type = 'Light'
-      break
-    case 'Medium Weapon':
-      newItem.type = 'Medium'
-      break
-    case 'Heavy Weapon':
-      newItem.type = 'Heavy'
-      break
-    default:
-      break
-  }
-
-  switch (item.value.type) {
-    case 'Light Weapon' || 'Light Ranged':
-      newItem.stat = 'd6'
-      break
-    case 'Medium Weapon':
-      newItem.stat = 'd8/d10'
-      break
-    case 'Heavy Weapon':
-      newItem.stat = 'd10'
-      break
-    case 'Heavy Ranged':
-      newItem.stat = 'd8'
-      break
-    case 'Light Armor' || 'Heavy Armor':
-      newItem.stat = '1 def'
-      break
-    default:
-      newItem.stat = ''
-      break
-  }
-
-  characterStore.updateItems('packBack', {
-    ...characterStore.packBack as PackBack,
-    [emptySlot.value]: {
-      name: emptySlot.value,
-      item: newItem
+    switch (item.value.type) {
+      case 'Light weapon' || 'Light ranged':
+        newItem.stat = 'd6'
+        break
+      case 'Medium weapon':
+        newItem.stat = 'd8/d10'
+        break
+      case 'Heavy weapon':
+        newItem.stat = 'd10'
+        break
+      case 'Heavy ranged':
+        newItem.stat = 'd8'
+        break
+      case 'Light armor' || 'Heavy armor':
+        newItem.stat = '1 def'
+        break
+      default:
+        newItem.stat = ''
+        break
     }
-  })
 
-  close()
+    characterStore.updateItems('packBack', {
+      ...characterStore.packBack as PackBack,
+      [emptySlot.value]: {
+        name: emptySlot.value,
+        item: newItem
+      }
+    })
+
+    item.value.title = ''
+
+    close()
+  }
 }
 
 onMounted(() => {
@@ -202,6 +206,10 @@ onMounted(() => {
     } else {
       return true
     }
+  })
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') addItem()
   })
 })
 </script>

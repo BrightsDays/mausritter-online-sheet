@@ -3,7 +3,7 @@
     <h3 class="popup__header">
       New character
     </h3>
-    <form
+    <div
       v-if="!informed"
       class="popup__form"
     >
@@ -24,9 +24,9 @@
           OK
         </button>
       </div>
-    </form>
+    </div>
 
-    <form
+    <div
       v-else
       class="popup__form"
     >
@@ -131,7 +131,7 @@
           Create
         </button>
       </div>
-    </form>
+    </div>
   </popup-layout>
 </template>
 
@@ -208,118 +208,127 @@ const createCharacter = () => {
 }
 
 const saveCharacter = () => {
-  if (swapStats.value.first !== swapStats.value.second) {
-    characterStore.setStat(
-      swapStats.value.first as StatKeys,
-      statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
-    )
-    characterStore.setMaxStat(
-      swapStats.value.first as StatKeys,
-      statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
-    )
+  if (characterStore.name.length >= 3
+      && (!selectItem.value || startItem.value !== '')
+      && weapon) {//TODO fix this position
+    if (swapStats.value.first !== swapStats.value.second) {
+      characterStore.setStat(
+        swapStats.value.first as StatKeys,
+        statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
+      )
+      characterStore.setMaxStat(
+        swapStats.value.first as StatKeys,
+        statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
+      )
 
-    characterStore.setStat(
-      swapStats.value.second as StatKeys,
-      statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
-    )
-    characterStore.setMaxStat(
-      swapStats.value.second as StatKeys,
-      statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
-    )
-  }
-
-  const findItem = (title: string) => {
-    return (
-      utilityList.list.find(item => item.title === title) as Item ||
-      weaponList.list.find(item => item.title === title) as Item ||
-      armorList.list.find(item => item.title === title) as Item ||
-      spellList.list.find(item => item.title === title) as Item )
-  }
-
-  const isHireling = (item: string): Item | null => {
-    if (item.includes('Hireling')) {
-      characterStore.addHireling(createHireling(item))
-      return null
+      characterStore.setStat(
+        swapStats.value.second as StatKeys,
+        statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
+      )
+      characterStore.setMaxStat(
+        swapStats.value.second as StatKeys,
+        statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
+      )
     }
-    
-    return findItem(item)
-  }
 
-  characterStore.updateItems('bodyBack', {
-    'Main Paw': {
-      name: 'Main Paw',
-      item: null
-    },
-    'Main Body': {
-      name: 'Main Body',
-      item: null
-    },
-    'Second Paw': {
-      name: 'Second Paw',
-      item: null
-    },
-    'Second Body': {
-      name: 'Second Body',
-      item: null
+    const findItem = (title: string) => {
+      return (
+        utilityList.list.find(item => item.title === title) as Item ||
+        weaponList.list.find(item => item.title === title) as Item ||
+        armorList.list.find(item => item.title === title) as Item ||
+        spellList.list.find(item => item.title === title) as Item )
     }
-  })
 
-  characterStore.updateItems('packBack', {    
-    1: {
-      name: '1',
-      item: weaponList.list.find(item => item.type === weapon.value) as Item
-    },
-    2: {
-      name: '2',
-      item: {
-        title: 'Torches',
-        stat: '',
-        image: '',
-        type: 'Utility',
-        group: 'items',
-        used: 0
+    const isHireling = (item: string): Item | null => {
+      if (item.includes('Hireling')) {
+        characterStore.addHireling(createHireling(item))
+        return null
       }
-    },
-    3: {
-      name: '3',
-      item: {
-        title: 'Rations',
-        stat: '',
-        image: '',
-        type: 'Utility',
-        group: 'items',
-        used: 0
-      }
-    },
-    4: {
-      name: '4',
-      item: selectItem.value 
-        ? isHireling(startItem.value)
-        : findItem(itemsForSelect.value.itemA)
-    },
-    5: {
-      name: '5',
-      item: selectItem.value
-        ? null 
-        : isHireling(itemsForSelect.value.itemB)
-    },
-    6: {
-      name: '6',
-      item: null
+      
+      return findItem(item)
     }
-  })
 
-  const birthSign = ['Star', 'Wheel', 'Acorn', 'Storm', 'Moon', 'Mother']
-  characterStore.setDescription('birthSign', birthSign[rollDices(1, 6) - 1])
+    characterStore.updateItems('bodyBack', {
+      'Main Paw': {
+        name: 'Main Paw',
+        item: null
+      },
+      'Main Body': {
+        name: 'Main Body',
+        item: null
+      },
+      'Second Paw': {
+        name: 'Second Paw',
+        item: null
+      },
+      'Second Body': {
+        name: 'Second Body',
+        item: null
+      }
+    })
 
-  const color = ['Chocolate', 'Black', 'White', 'Tan', 'Grey', 'Blue']
-  const pattern = ['Solid', 'Brindle', 'Patchy', 'Banded', 'Marbled', 'Flecked']
+    characterStore.updateItems('packBack', {    
+      1: {
+        name: '1',
+        item: weaponList.list.find(item => item.type === weapon.value) as Item
+      },
+      2: {
+        name: '2',
+        item: {
+          title: 'Torches',
+          stat: '',
+          image: '',
+          type: 'Utility',
+          group: 'items',
+          used: 0
+        }
+      },
+      3: {
+        name: '3',
+        item: {
+          title: 'Rations',
+          stat: '',
+          image: '',
+          type: 'Utility',
+          group: 'items',
+          used: 0
+        }
+      },
+      4: {
+        name: '4',
+        item: selectItem.value 
+          ? isHireling(startItem.value)
+          : findItem(itemsForSelect.value.itemA)
+      },
+      5: {
+        name: '5',
+        item: selectItem.value
+          ? null 
+          : isHireling(itemsForSelect.value.itemB)
+      },
+      6: {
+        name: '6',
+        item: null
+      }
+    })
 
-  characterStore.setDescription('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
-  characterStore.setDescription('details', detailsList[rollDices(1, detailsList.length) - 1])
+    const birthSign = ['Star', 'Wheel', 'Acorn', 'Storm', 'Moon', 'Mother']
+    characterStore.setDescription('birthSign', birthSign[rollDices(1, 6) - 1])
 
-  save = true
-  close()
+    const color = ['Chocolate', 'Black', 'White', 'Tan', 'Grey', 'Blue']
+    const pattern = ['Solid', 'Brindle', 'Patchy', 'Banded', 'Marbled', 'Flecked']
+
+    characterStore.setDescription('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
+    characterStore.setDescription('details', detailsList[rollDices(1, detailsList.length) - 1])
+
+    save = true
+
+    selectItem.value = true
+    startItem.value = ''
+    weapon.value = ''
+
+    close()
+  }
 }
 
 const userNotInformed = () => {
@@ -328,12 +337,14 @@ const userNotInformed = () => {
 }
 
 const userInformed = () => {
+  save = false
   informed.value = true
   createCharacter()
 }
 
 onMounted(() => {
   if (!characterStore.name) informed.value = true
+  if (characterStore.name) save = true
   if (informed.value) createCharacter()
 })
 

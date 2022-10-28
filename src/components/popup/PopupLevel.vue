@@ -3,7 +3,7 @@
     <h3 class="popup__header">
       Add experience
     </h3>
-    <form class="popup__form">
+    <div class="popup__form">
       <div class="popup__section">
         <label class="popup__label">Value</label>
         <input
@@ -33,12 +33,12 @@
           Add
         </button>
       </div>
-    </form>
+    </div>
   </popup-layout>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
@@ -71,42 +71,52 @@ const level = computed(() => {
 const close = () => popupStore.setPopup(null)
 
 const addExperience = (exp: number) => {
-  let newHp = 0
-  
-  if (level.value) {
-    for (let index = 1; index <= level.value; index++) {
-      ['str', 'dex', 'wil'].forEach((stat: string) => {
-        const newRoll = rollDices(1, 20)
+  if (experience.value > 0) {
+    let newHp = 0
+    
+    if (level.value) {
+      for (let index = 1; index <= level.value; index++) {
+        ['str', 'dex', 'wil'].forEach((stat: string) => {
+          const newRoll = rollDices(1, 20)
 
-        if (newRoll > characterStore.stats[stat as StatKeys].max) {
-          characterStore.setStat(stat as StatKeys, characterStore.stats[stat as StatKeys].max + 1)
-          characterStore.setMaxStat(stat as StatKeys, characterStore.stats[stat as StatKeys].max + 1)
+          if (newRoll > characterStore.stats[stat as StatKeys].max) {
+            characterStore.setStat(stat as StatKeys, characterStore.stats[stat as StatKeys].max + 1)
+            characterStore.setMaxStat(stat as StatKeys, characterStore.stats[stat as StatKeys].max + 1)
+          }
+        })
+
+        if ((characterStore.level + index) === 2) {
+          const roll = rollDices(2, 6)
+          newHp = roll > newHp ? roll : newHp
+        } else if ((characterStore.level + index) === 3) {
+          const roll = rollDices(3, 6)
+          newHp = roll > newHp ? roll : newHp
+        } else {
+          const roll = rollDices(4, 6)
+          newHp = roll > newHp ? roll : newHp
         }
-      })
+      }
 
-      if ((characterStore.level + index) === 2) {
-        const roll = rollDices(2, 6)
-        newHp = roll > newHp ? roll : newHp
-      } else if ((characterStore.level + index) === 3) {
-        const roll = rollDices(3, 6)
-        newHp = roll > newHp ? roll : newHp
+      if (newHp > characterStore.stats.hp.max) {
+        characterStore.setStat('hp', newHp)
+        characterStore.setMaxStat('hp', newHp)
       } else {
-        const roll = rollDices(4, 6)
-        newHp = roll > newHp ? roll : newHp
+        characterStore.setStat('hp', characterStore.stats.hp.max + 1)
+        characterStore.setMaxStat('hp', characterStore.stats.hp.max + 1)
       }
     }
 
-    if (newHp > characterStore.stats.hp.max) {
-      characterStore.setStat('hp', newHp)
-      characterStore.setMaxStat('hp', newHp)
-    } else {
-      characterStore.setStat('hp', characterStore.stats.hp.max + 1)
-      characterStore.setMaxStat('hp', characterStore.stats.hp.max + 1)
-    }
+    characterStore.addExperience(+exp)
+
+    experience.value = 0
+
+    close()
   }
-
-  characterStore.addExperience(+exp)
-
-  close()
 }
+
+onMounted(() => {
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') addExperience(experience.value)
+  })
+})
 </script>

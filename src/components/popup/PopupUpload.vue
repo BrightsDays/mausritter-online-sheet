@@ -3,7 +3,7 @@
     <h3 class="popup__header">
       Upload character
     </h3>
-    <form
+    <div
       v-if="!informed"
       class="popup__form"
     >
@@ -19,13 +19,13 @@
         </button>
         <button
           class="popup__button"
-          @click.prevent="informed = true"
+          @click.prevent="informUser()"
         >
           Upload
         </button>
       </div>
-    </form>
-    <form
+    </div>
+    <div
       v-else
       class="popup__form"
     >
@@ -45,7 +45,7 @@
           Upload character
         </label>
       </div>
-    </form>
+    </div>
   </popup-layout>
 </template>
 
@@ -61,6 +61,8 @@ const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 
 const close = () => popupStore.setPopup(null)
+
+const informUser = () => informed.value = true
 
 const uploadCharacter = (event: Event) => {
   if (event.target) {
@@ -98,5 +100,9 @@ const uploadCharacter = (event: Event) => {
 
 onMounted(() => {
   if (!characterStore.name) informed.value = true
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') informUser()
+  })
 })
 </script>

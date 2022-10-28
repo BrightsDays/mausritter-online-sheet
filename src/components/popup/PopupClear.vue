@@ -3,7 +3,7 @@
     <h3 class="popup__header">
       Be careful
     </h3>
-    <form class="popup__form">
+    <div class="popup__form">
       <div class="popup__section">
         <span class="popup__label">This will delete your current character.</span>
       </div>
@@ -21,7 +21,7 @@
           OK
         </button>
       </div>
-    </form>
+    </div>
   </popup-layout>
 </template>
 
@@ -29,6 +29,7 @@
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
+import { onMounted } from 'vue';
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
@@ -39,4 +40,10 @@ const clearCharacter = () => {
   characterStore.clearCharacter()
   close()
 }
+
+onMounted(() => {
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') clearCharacter()
+  })
+})
 </script>

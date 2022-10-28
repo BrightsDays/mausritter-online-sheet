@@ -30,18 +30,18 @@
 </template>
 
 <script setup lang="ts">
-// import { onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { usePopupStore } from '../../store/popup'
 
 const popupStore = usePopupStore()
 
 const close = () => popupStore.setPopup(null)
 
-// onMounted(() => {  
-//   window.addEventListener("keydown", (event) => {
-//     console.log(event)
-//   })
-// })
+onMounted(() => {
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') close()   
+  })
+})
 </script>
 
 <styles lang="scss">
@@ -211,11 +211,19 @@ const close = () => popupStore.setPopup(null)
     max-width: 100%;
     padding: 10px 20px 30px;
     text-align: left;
-    color: var(--main);
-    font-family: "Ubuntu", sans-serif;
   }
 
   &__item {
+    color: var(--main);
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1.6em;
+    margin-bottom: 10px;
+  }
+
+  &__info {
+    text-align: center;
+    color: var(--main);
+    font-family: "Ubuntu", sans-serif;
     font-size: 1.6em;
     margin-bottom: 10px;
   }

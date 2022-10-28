@@ -5,11 +5,11 @@
       (item.type === 'Heavy' ||
         item.type === 'Heavy armor' ||
         item.type === 'Heavy ranged' ||
-        item.type === 'Hight Utility')
+        item.type === 'Hight utility')
         && 'pack-items__item--hight',
-      (item.type === 'Light armor' || item.type === 'Wide Utility')
+      (item.type === 'Light armor' || item.type === 'Wide utility')
         && `pack-items__item--wide`,
-      item.type === 'Big Utility' && `pack-items__item--big`]"
+      item.type === 'Big utility' && `pack-items__item--big`]"
     draggable="true"
     @dragstart="onDragging($event, item as Card)"
   >
