@@ -96,7 +96,6 @@
         <select
           v-model="weapon"
           class="popup__select"
-          def
         >
           <option value="Light">
             Light

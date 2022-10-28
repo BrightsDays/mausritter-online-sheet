@@ -313,12 +313,17 @@ const setPackItemStats = (event: number, index: string | number) => {
     min-width: 121px;
     min-height: 121px;
 
-    &--heavy {
+    &--hight {
       height: 244px;
     }
 
-    &--light-armor {
+    &--wide {
       width: 244px;
+    }
+
+    &--big {
+      width: 244px;
+      height: 244px;
     }
     
     .items__image {

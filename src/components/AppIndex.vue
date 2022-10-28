@@ -28,13 +28,14 @@ import PopupLevel from './popup/PopupLevel.vue'
 import PopupClear from './popup/PopupClear.vue'
 import PopupUpload from './popup/PopupUpload.vue'
 import PopupInfo from './popup/PopupInfo.vue'
+import PopupItem from './popup/PopupItem.vue'
 import { useCharacterStore } from '../store/character'
 import { onMounted } from 'vue'
 
 const popup = usePopupStore()
 const characterStore = useCharacterStore()
 
-const popups = ['new', 'full', 'addHireling', 'levelUp', 'clear', 'upload', 'info']
+const popups = ['new', 'full', 'addHireling', 'levelUp', 'clear', 'upload', 'info', 'addCustomItem']
 
 const activePopup = (type: string) => {
   switch (type) {
@@ -42,6 +43,8 @@ const activePopup = (type: string) => {
       return PopupCreation
     case 'addHireling':
       return PopupHireling
+    case 'addCustomItem':
+      return PopupItem
     case 'levelUp':
       return PopupLevel
     case 'clear':

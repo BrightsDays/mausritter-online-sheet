@@ -4,9 +4,12 @@
     :class="[
       (item.type === 'Heavy' ||
         item.type === 'Heavy armor' ||
-        item.type === 'Heavy ranged') 
-        && 'pack-items__item--heavy',
-      item.type === 'Light armor' && `pack-items__item--light-armor`]"
+        item.type === 'Heavy ranged' ||
+        item.type === 'Hight Utility')
+        && 'pack-items__item--hight',
+      (item.type === 'Light armor' || item.type === 'Wide Utility')
+        && `pack-items__item--wide`,
+      item.type === 'Big Utility' && `pack-items__item--big`]"
     draggable="true"
     @dragstart="onDragging($event, item as Card)"
   >

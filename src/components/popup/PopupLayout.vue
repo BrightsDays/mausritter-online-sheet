@@ -30,11 +30,18 @@
 </template>
 
 <script setup lang="ts">
+// import { onMounted } from 'vue'
 import { usePopupStore } from '../../store/popup'
 
 const popupStore = usePopupStore()
 
 const close = () => popupStore.setPopup(null)
+
+// onMounted(() => {  
+//   window.addEventListener("keydown", (event) => {
+//     console.log(event)
+//   })
+// })
 </script>
 
 <styles lang="scss">
@@ -43,8 +50,8 @@ const close = () => popupStore.setPopup(null)
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   align-items: center;
   justify-content: space-around;
   background: none;
@@ -83,6 +90,7 @@ const close = () => popupStore.setPopup(null)
   }
 
   &__header {
+    text-align: center;
     font-family: "Pirata One", sans-serif;
     font-size: 4.2em;
     font-weight: normal;

@@ -37,20 +37,6 @@
           >
             Upload character
           </button>
-          <!-- <input
-            id="upload"
-            ref="upload"
-            type="file"
-            accept=".json"
-            class="menu__item--upload"
-            @change="uploadCharacter($event)"
-          >
-          <label
-            for="upload"
-            class="menu__item"
-          >
-            Upload character
-          </label> -->
         </div>
         <button
           class="menu__item"
@@ -80,14 +66,17 @@
       <ui-details title="Conditions">
         <menu-conditions />
       </ui-details>
-    </div>
-    <div
-      v-if="characterStore.exp >= 1000"
-      class="menu__options menu--bordered"
-    >
-      <ui-details title="Grits">
-        <menu-grits />
-      </ui-details>
+      <div
+        v-if="characterStore.name"
+        class="menu__options"
+      >
+        <button
+          class="menu__item menu__item--big"
+          @click.prevent="addCustomItem()"
+        >
+          Add custom item
+        </button>
+      </div>
     </div>
     <div
       v-if="characterStore.name"
@@ -99,6 +88,14 @@
       >
         Add hireling
       </button>
+    </div>
+    <div
+      v-if="characterStore.exp >= 1000"
+      class="menu__options menu--bordered"
+    >
+      <ui-details title="Grits">
+        <menu-grits />
+      </ui-details>
     </div>
     <div
       v-if="characterStore.name"
@@ -157,6 +154,8 @@ const downloadCharacter = () => {
 	element.click()
 	document.body.removeChild(element)
 }
+
+const addCustomItem = () => popupStore.setPopup('addCustomItem')
 
 const addHireling = () => popupStore.setPopup('addHireling')
 </script>

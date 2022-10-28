@@ -145,7 +145,7 @@ export type BodyIndexes = 'Main Paw'| 'Main Body'| 'Second Paw'| 'Second Body'
 
 export type PackIndexes = '1' | '2' | '3' | '4' | '5' | '6'
 
-export type PopupTypes = 'new' | 'full' | 'addHireling' | 'levelUp' | 'clear' | 'upload' | 'info' | null
+export type PopupTypes = 'new' | 'full' | 'addHireling' | 'levelUp' | 'clear' | 'upload' | 'info' | 'addCustomItem' | null
 
 export type StatKeys = 'str' | 'dex' | 'wil' | 'hp'
 
