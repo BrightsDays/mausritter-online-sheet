@@ -97,6 +97,17 @@ export const useCharacterStore = defineStore('character', {
       item: null
     }]
   }),
+  getters: {
+    level: (state) => {
+      let result = 1
+    
+      if (state.exp >= 1000) result = 2
+      if (state.exp >= 3000) result = 3
+      if (state.exp >= 6000) result = 4 + Math.floor((state.exp - 6000) / 5000)
+    
+      return result
+    }
+  },
   actions: {
     setStat(statName: StatKeys, payload: number, hirelingIndex?: number) {      
       !(typeof hirelingIndex === 'number')

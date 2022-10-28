@@ -58,12 +58,6 @@ const setExperience = (eventTraget: HTMLInputElement) => {
   }
 }
 
-let currentLevel = 1
-
-if (+characterStore.exp >= 1000) currentLevel = 2
-if (+characterStore.exp >= 3000) currentLevel = 3
-if (+characterStore.exp >= 6000) currentLevel = 4 + Math.floor((+characterStore.exp - 6000) / 5000)
-
 const level = computed(() => {
   let nextLevel = 1
 
@@ -71,14 +65,14 @@ const level = computed(() => {
   if (+characterStore.exp + +experience.value >= 3000) nextLevel = 3
   if (+characterStore.exp + +experience.value >= 6000) nextLevel = 4 + Math.floor(((+characterStore.exp + +experience.value) - 6000) / 5000)
   
-  return (nextLevel - currentLevel)
+  return (nextLevel - characterStore.level)
 })
 
 const close = () => popupStore.setPopup(null)
 
 const addExperience = (exp: number) => {
   let newHp = 0
-
+  
   if (level.value) {
     for (let index = 1; index <= level.value; index++) {
       ['str', 'dex', 'wil'].forEach((stat: string) => {
@@ -90,10 +84,10 @@ const addExperience = (exp: number) => {
         }
       })
 
-      if ((currentLevel + index) === 2) {
+      if ((characterStore.level + index) === 2) {
         const roll = rollDices(2, 6)
         newHp = roll > newHp ? roll : newHp
-      } else if ((currentLevel + index) === 3) {
+      } else if ((characterStore.level + index) === 3) {
         const roll = rollDices(3, 6)
         newHp = roll > newHp ? roll : newHp
       } else {
@@ -101,14 +95,14 @@ const addExperience = (exp: number) => {
         newHp = roll > newHp ? roll : newHp
       }
     }
-  }
 
-  if (newHp > characterStore.stats.hp.max) {
-    characterStore.setStat('hp', newHp)
-    characterStore.setMaxStat('hp', newHp)
-  } else {
-    characterStore.setStat('hp', characterStore.stats.hp.max + 1)
-    characterStore.setMaxStat('hp', characterStore.stats.hp.max + 1)
+    if (newHp > characterStore.stats.hp.max) {
+      characterStore.setStat('hp', newHp)
+      characterStore.setMaxStat('hp', newHp)
+    } else {
+      characterStore.setStat('hp', characterStore.stats.hp.max + 1)
+      characterStore.setMaxStat('hp', characterStore.stats.hp.max + 1)
+    }
   }
 
   characterStore.addExperience(+exp)
