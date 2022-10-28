@@ -15,16 +15,10 @@
       class="hirelings__list"
     >
       <ui-hireling-crad
-        v-for="hireling, index in characterStore.hirelings" 
-        :key="`hr__${index}`"
+        v-for="hireling in characterStore.hirelings" 
+        :key="`hr__${hireling}`"
         :hireling="hireling"
       />
-      <!-- <div
-        v-for="hireling, index in characterStore.hirelings" 
-        :key="`hr__${index}`"
-        class="hirelings-item"
-      > -->
-      <!-- </div> -->
     </div>
   </div>
 </template>

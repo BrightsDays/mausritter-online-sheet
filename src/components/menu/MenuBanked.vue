@@ -2,9 +2,9 @@
   <div class="banked">
     <div class="banked-items">
       <div
-        v-for="item, index in characterStore.bank"
+        v-for="item in characterStore.bank"
         :id="`${item.name}`"
-        :key="`pb_${index}_${item}`"
+        :key="`pb__${item}`"
         class="banked-items__item"
         @drop="event => drop(event, 'bank', characterStore)"
         @dragover="allowDrop"

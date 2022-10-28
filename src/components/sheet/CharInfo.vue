@@ -7,7 +7,7 @@
       <div class="exp-input">
         <label class="exp-input__label">Level / Exp</label>
         <input
-          v-model="level"
+          v-model="store.level"
           class="exp-input__input exp-input__level"
           readonly
         >
@@ -32,22 +32,11 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
-import { computed } from 'vue'
 import CharStats from '../tables/CharStats.vue'
-import { usePopupStore } from '../../store/popup';
+import { usePopupStore } from '../../store/popup'
 
 const store = useCharacterStore()
 const popup = usePopupStore()
-
-const level = computed(() => {
-  let result = 1
-
-  if (store.exp >= 1000) result = 2
-  if (store.exp >= 3000) result = 3
-  if (store.exp >= 6000) result = 4 + Math.floor((store.exp - 6000) / 5000)
-
-  return result
-})
 
 const levelUp = () => popup.setPopup('levelUp')
 </script>

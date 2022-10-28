@@ -10,7 +10,7 @@
       <div 
         v-for="item, index in bodyBack"
         :id="item.name.toString()"
-        :key="`it__${index}`"
+        :key="`it__${item}`"
         :data-index="hirelingIndex"
         class="body-items__back"
         @drop="event => drop(event, 'bodyBack', store)"
@@ -36,7 +36,7 @@
       <div
         v-for="item, index in packBack"
         :id="item.name.toString()"
-        :key="`pb_${index}_${item.item}`"
+        :key="`pb__${item}`"
         :data-index="hirelingIndex"
         class="pack-items__back"
         @drop="event => drop(event, 'packBack', store)"
