@@ -11,7 +11,7 @@
     {
       "title": "Be understood",
       "stat": "",
-      "image": "",
+      "image": "BeUnderstood",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -35,7 +35,7 @@
     {
       "title": "Darkness",
       "stat": "",
-      "image": "",
+      "image": "Darkness",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -43,7 +43,7 @@
     {
       "title": "Fireball",
       "stat": "",
-      "image": "",
+      "image": "Fireball",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -51,7 +51,7 @@
     {
       "title": "Fear",
       "stat": "",
-      "image": "",
+      "image": "Fear",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -59,7 +59,7 @@
     {
       "title": "Ghost Beetle",
       "stat": "",
-      "image": "",
+      "image": "GhostBeetle",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -91,7 +91,7 @@
     {
       "title": "Grease",
       "stat": "",
-      "image": "",
+      "image": "Grease",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -115,7 +115,7 @@
     {
       "title": "Catnip",
       "stat": "",
-      "image": "",
+      "image": "Catnip",
       "type": "Spell",
       "group": "items",
       "used": 0
