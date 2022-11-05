@@ -53,6 +53,8 @@ const characterStore = useCharacterStore()//TODO fix image changing
   }
 
   .banked-items__card {
+    width: 121px;
+    height: 121px;
     margin: -6px;
     border: 1px solid var(--main);
     overflow: hidden;
@@ -63,6 +65,15 @@ const characterStore = useCharacterStore()//TODO fix image changing
 
     .items__image--heavy {
       bottom: -80px;
+    }
+
+    .items__image--width {
+      right: -80px;
+    }
+
+    .items__image--big {
+      right: -5px;
+      bottom: -100px;
     }
   }
 }

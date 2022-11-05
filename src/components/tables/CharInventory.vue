@@ -324,6 +324,12 @@ const setPackItemStats = (event: number, index: string | number) => {
     &--big {
       width: 244px;
       height: 244px;
+
+      .items__image {
+        transform: translate(100px, 0);
+        width: 200px;
+        height: 200px;
+      }
     }
     
     .items__image {

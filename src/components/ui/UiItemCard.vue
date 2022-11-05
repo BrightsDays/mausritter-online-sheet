@@ -31,8 +31,12 @@
       <img
         v-if="imageUrl"
         class="items__image"
-        :class="(item.type === 'Heavy' ||
-          item.type === 'Heavy ranged') && 'items__image--heavy'"
+        :class="[(item.type === 'Heavy' || item.type === 'Heavy armor' || 
+                   item.type === 'Heavy ranged') && 'items__image--heavy',
+                 (item.type === 'Light armor' ||
+                   item.type === 'Wide utility') && 'items__image--width',
+                 item.type === 'Big utility' && 'items__image--big',
+        ]"
         :src="imageUrl"
         :alt="item.title"
       >

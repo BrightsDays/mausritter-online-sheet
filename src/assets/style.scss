@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Pirata+One&family=Ubuntu&display=swap');
 
+body {
+  overflow: hidden;
+}
+
 :root {
   --background: #30363d;
   --second-background: rgba(147, 147, 147, 0.3);

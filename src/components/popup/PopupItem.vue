@@ -135,14 +135,20 @@ const addItem = () => {
 
     if (item.value.type === 'Utility') {
       switch (item.value.size) {
+        case '1 x 1':
+          newItem.image = 'Smallpack'
+          break
         case '1 x 2':
           newItem.type = 'Hight utility'
+          newItem.image = 'Hightpack'
           break
         case '2 x 1':
           newItem.type = 'Wide utility'
+          newItem.image = 'Widepack'
           break
         case '2 x 2':
           newItem.type = 'Big utility'
+          newItem.image = 'Bigpack'
           break
         default:
           break
@@ -178,9 +184,6 @@ const addItem = () => {
         break
       case 'Light armor' || 'Heavy armor':
         newItem.stat = '1 def'
-        break
-      default:
-        newItem.stat = ''
         break
     }
 
