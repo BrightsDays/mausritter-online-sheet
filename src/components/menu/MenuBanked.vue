@@ -68,7 +68,7 @@ const characterStore = useCharacterStore()//TODO fix image changing
     }
 
     .items__image--width {
-      right: -80px;
+      right: 0px;
     }
 
     .items__image--big {

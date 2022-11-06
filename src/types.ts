@@ -166,4 +166,7 @@ export type ItemType =
   'Light armor' |
   'Heavy armor' |
   'Ammunition' |
-  'Utility'
+  'Utility' |
+  'Heavy utility' |
+  'Wide utility' |
+  'Big utility'

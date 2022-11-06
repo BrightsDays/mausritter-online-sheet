@@ -5,7 +5,7 @@
       (item.type === 'Heavy' ||
         item.type === 'Heavy armor' ||
         item.type === 'Heavy ranged' ||
-        item.type === 'Hight utility')
+        item.type === 'Height utility')
         && 'pack-items__item--hight',
       (item.type === 'Light armor' || item.type === 'Wide utility')
         && `pack-items__item--wide`,
@@ -32,7 +32,8 @@
         v-if="imageUrl"
         class="items__image"
         :class="[(item.type === 'Heavy' || item.type === 'Heavy armor' || 
-                   item.type === 'Heavy ranged') && 'items__image--heavy',
+                   item.type === 'Heavy ranged' || item.type === 'Height utility') 
+                   && 'items__image--heavy',
                  (item.type === 'Light armor' ||
                    item.type === 'Wide utility') && 'items__image--width',
                  item.type === 'Big utility' && 'items__image--big',

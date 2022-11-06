@@ -17,8 +17,12 @@
         <img
           v-if="imageUrl(item.image)"
           class="items__image"
-          :class="(item.type === 'Heavy' ||
-            item.type === 'Heavy ranged') && 'items__image--heavy'"
+          :class="[(item.type === 'Heavy' || item.type === 'Heavy armor' || 
+                     item.type === 'Heavy ranged') && 'items__image--heavy',
+                   (item.type === 'Light armor' ||
+                     item.type === 'Wide utility') && 'items__image--width',
+                   item.type === 'Big utility' && 'items__image--big',
+          ]"
           :src="imageUrl(item.image)"
           :alt="item.title"
         >
@@ -67,6 +71,7 @@ const imageUrl = (item: string) => {
     cursor: move;
     position: relative;
     left: 0.5px;
+    overflow: hidden;
   }
 
   &__title {
@@ -121,6 +126,15 @@ const imageUrl = (item: string) => {
     &--heavy {
       height: 160px;
     }
+
+    &--width {
+      width: 160px;
+      transform: translate(80px, 0);
+    }
+  }
+
+  .items__image--width {
+    right: 0px;
   }
 }
 </style>

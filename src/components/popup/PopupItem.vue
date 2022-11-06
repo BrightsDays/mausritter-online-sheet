@@ -139,12 +139,12 @@ const addItem = () => {
           newItem.image = 'Smallpack'
           break
         case '1 x 2':
-          newItem.type = 'Hight utility'
-          newItem.image = 'Hightpack'
+          newItem.type = 'Height utility'
+          newItem.image = 'Heightpack'
           break
         case '2 x 1':
           newItem.type = 'Wide utility'
-          newItem.image = 'Widepack'
+          newItem.image = 'Widthpack'
           break
         case '2 x 2':
           newItem.type = 'Big utility'
