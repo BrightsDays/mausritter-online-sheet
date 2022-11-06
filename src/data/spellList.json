@@ -3,7 +3,7 @@
     {
       "title": "Magic missile",
       "stat": "",
-      "image": "",
+      "image": "MagicMissle",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -19,7 +19,7 @@
     {
       "title": "Heal",
       "stat": "",
-      "image": "",
+      "image": "Heal",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -27,7 +27,7 @@
     {
       "title": "Restore",
       "stat": "",
-      "image": "",
+      "image": "Restore",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -75,7 +75,7 @@
     {
       "title": "Invisible Ring",
       "stat": "",
-      "image": "",
+      "image": "InvisibleRing",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -83,7 +83,7 @@
     {
       "title": "Knock",
       "stat": "",
-      "image": "",
+      "image": "Knock",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -99,7 +99,7 @@
     {
       "title": "Grow",
       "stat": "",
-      "image": "",
+      "image": "Grow",
       "type": "Spell",
       "group": "items",
       "used": 0
@@ -107,7 +107,7 @@
     {
       "title": "Invisibility",
       "stat": "",
-      "image": "",
+      "image": "Invisibility",
       "type": "Spell",
       "group": "items",
       "used": 0

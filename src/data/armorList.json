@@ -3,7 +3,7 @@
     {
       "title": "Lead coat",
       "stat": "1 def",
-      "image": "",
+      "image": "HeavyArmor",
       "type": "Heavy armor",
       "group": "items",
       "used": 0
@@ -11,7 +11,7 @@
     {
       "title": "Shield & jerkin",
       "stat": "1 def",
-      "image": "",
+      "image": "LightArmor",
       "type": "Light armor",
       "group": "items",
       "used": 0
