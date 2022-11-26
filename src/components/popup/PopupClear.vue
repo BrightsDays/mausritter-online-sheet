@@ -29,7 +29,7 @@
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { useNotificationsStore } from '../../store/notifications'
 
 const characterStore = useCharacterStore()
@@ -49,9 +49,11 @@ const clearCharacter = () => {
   close()
 }
 
-onMounted(() => {
-  window.addEventListener('keyup', (event) => {
-    if (event.key === 'Enter') clearCharacter()
-  })
-})
+const clearByClick = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') clearCharacter()
+}
+
+onMounted(() => window.addEventListener('keyup', clearByClick))
+
+onUnmounted(() => window.removeEventListener('keyup', clearByClick))
 </script>
