@@ -13,6 +13,9 @@
         </Transition>
       </Teleport>
     </template>
+    <Teleport to="body">
+      <AppNotification />
+    </Teleport>
     <main-menu />
     <character-list />
   </div>
@@ -31,6 +34,7 @@ import PopupInfo from './popup/PopupInfo.vue'
 import PopupItem from './popup/PopupItem.vue'
 import { useCharacterStore } from '../store/character'
 import { onMounted } from 'vue'
+import AppNotification from './notification/AppNotification.vue'
 
 const popup = usePopupStore()
 const characterStore = useCharacterStore()

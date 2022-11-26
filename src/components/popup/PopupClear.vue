@@ -30,19 +30,27 @@ import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
 import { onMounted } from 'vue';
+import { useNotificationsStore } from '../../store/notifications'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
+const notificationStore = useNotificationsStore()
 
 const close = () => popupStore.setPopup(null)
 
 const clearCharacter = () => {
   characterStore.clearCharacter()
+
+  notificationStore.setNotification({
+    type: 'info',
+    message: 'Character sheet has been cleared'
+  })
+
   close()
 }
 
 onMounted(() => {
-  window.addEventListener('keydown', (event) => {
+  window.addEventListener('keyup', (event) => {
     if (event.key === 'Enter') clearCharacter()
   })
 })

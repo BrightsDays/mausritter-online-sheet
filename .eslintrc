@@ -9,5 +9,8 @@
   ],
   "plugins": [
     "@typescript-eslint"
-  ]
+  ],
+  "rules": {
+    "vue/no-setup-props-destructure": "off"
+  }
 }

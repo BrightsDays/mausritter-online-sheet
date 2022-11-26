@@ -141,6 +141,15 @@ export interface Popup {
   type: PopupTypes
 }
 
+export interface Notification {
+  type: 'info' | 'error'
+  message: string
+}
+
+export interface NotificationList {
+  notificationList: Notification[]
+}
+
 export type BodyIndexes = 'Main Paw'| 'Main Body'| 'Second Paw'| 'Second Body'
 
 export type PackIndexes = '1' | '2' | '3' | '4' | '5' | '6'
