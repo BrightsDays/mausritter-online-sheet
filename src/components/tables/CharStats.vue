@@ -139,6 +139,10 @@ const downStat = (stat: StatKeys) => {
       appearance: none;
     }
 
+    &[type=number] {
+      -moz-appearance:textfield;
+    }
+
     &:nth-child(3) {
       color: var(--special);
       box-shadow: -5px 0px 0px -3px var(--main);
