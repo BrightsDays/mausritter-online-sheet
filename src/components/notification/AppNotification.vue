@@ -17,14 +17,13 @@
 </template>
 
 <script setup lang="ts">
-import { useNotificationsStore } from '../../store/notifications';
+import { useNotificationsStore } from '../../store/notifications'
 
 const notificationsStore = useNotificationsStore()
 const notificationList = notificationsStore.notificationList
 </script>
 
 <style lang="scss" scoped>
-
 .notification-list {
     display: flex;
     position: fixed;
@@ -59,9 +58,11 @@ const notificationList = notificationsStore.notificationList
   display: inline-block;
   margin-right: 10px;
 }
+
 .list-enter-active, .list-leave-active {
   transition: all 1s;
 }
+
 .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);

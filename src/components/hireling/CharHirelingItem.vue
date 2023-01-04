@@ -32,8 +32,10 @@
 import CharStats from '../tables/CharStats.vue'
 import CharInventory from '../tables/CharInventory.vue'
 import { useCharacterStore } from '../../store/character'
+import { usePopupStore } from '../../store/popup'
 
 const characterStore = useCharacterStore()
+const popupStore = usePopupStore()
 
 const props = defineProps({
   hireling: {
@@ -43,7 +45,8 @@ const props = defineProps({
 })
 
 const removeHireling = (index: number) => {
-  characterStore.removeHireling(index)
+  popupStore.setPopup('removeHireling')
+  characterStore.setHirelingIndex(index)
 }
 </script>
 

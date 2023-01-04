@@ -26,7 +26,8 @@ import MainMenu from './menu/MenuSection.vue'
 import CharacterList from './sheet/CharSheet.vue'
 import { usePopupStore } from '../store/popup'
 import PopupCreation from './popup/PopupCreation.vue'
-import PopupHireling from './popup/PopupHireling.vue'
+import PopupHirelingAdd from './popup/PopupHirelingAdd.vue'
+import PopupHirelingRemove from './popup/PopupHirelingRemove.vue'
 import PopupLevel from './popup/PopupLevel.vue'
 import PopupClear from './popup/PopupClear.vue'
 import PopupUpload from './popup/PopupUpload.vue'
@@ -39,14 +40,16 @@ import AppNotification from './notification/AppNotification.vue'
 const popup = usePopupStore()
 const characterStore = useCharacterStore()
 
-const popups = ['new', 'full', 'addHireling', 'levelUp', 'clear', 'upload', 'info', 'addCustomItem']
+const popups = ['new', 'full', 'addHireling', 'removeHireling', 'levelUp', 'clear', 'upload', 'info', 'addCustomItem']
 
 const activePopup = (type: string) => {
   switch (type) {
     case 'new':
       return PopupCreation
     case 'addHireling':
-      return PopupHireling
+      return PopupHirelingAdd
+    case 'removeHireling':
+      return PopupHirelingRemove
     case 'addCustomItem':
       return PopupItem
     case 'levelUp':

@@ -141,6 +141,9 @@ export const useCharacterStore = defineStore('character', {
     addHireling(payload: Hireling) {
       this.hirelings = [ ...this.hirelings, payload]
     },
+    setHirelingIndex(payload: number) {
+      this.hirelingIndex = payload
+    },
     removeHireling(payload: number) {
       const index = this.hirelings.findIndex(hireling => {
         return hireling.index === payload

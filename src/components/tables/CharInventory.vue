@@ -312,6 +312,7 @@ const setPackItemStats = (event: number, index: string | number) => {
     height: calc(100% + 4px);
     min-width: 121px;
     min-height: 121px;
+    background-color: var(--background);
 
     &--hight {
       height: 244px;
