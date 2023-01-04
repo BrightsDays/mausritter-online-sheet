@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import MainMenu from './menu/MenuSection.vue'
-import CharacterList from './sheet/CharSheet.vue'
+import CharacterList from './character/CharSheet.vue'
 import { usePopupStore } from '../store/popup'
 import PopupCreation from './popup/PopupCreation.vue'
 import PopupHirelingAdd from './popup/PopupHirelingAdd.vue'

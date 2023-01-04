@@ -150,11 +150,13 @@ import { useCharacterStore } from '../../store/character'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import createHireling from '../../helpers/createHireling'
+import { useNotificationsStore } from '../../store/notifications'
 
 const informed = ref(false)
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
+const notificationStore = useNotificationsStore()
 let save = false
 
 const weapon = ref('')
@@ -192,14 +194,20 @@ const createCharacter = () => {
     dex: characterStore.stats.dex.current,
     wil: characterStore.stats.wil.current
   }
+  notificationStore.setNotification({
+    type: 'info',
+    message: `New character was rolled: 
+      STR: ${characterStore.stats.str.current}, DEX: ${characterStore.stats.dex.current}, WIL: ${characterStore.stats.wil.current}, 
+      HP: ${characterStore.stats.hp.max}, Pips: ${pips}`
+  })
 
-  const background = 
+  const background =
     backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].background
   characterStore.setDescription('background', background)
 
-  itemsForSelect.value.itemA = 
+  itemsForSelect.value.itemA =
     backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA
-  itemsForSelect.value.itemB = 
+  itemsForSelect.value.itemB =
     backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB
 
   if (!Object.values(statsForSwap.value).filter(item => item > 9).length) {
@@ -337,6 +345,10 @@ const userNotInformed = () => {
 }
 
 const userInformed = () => {
+  notificationStore.setNotification({
+    type: 'info',
+    message: 'Character sheet has been cleared'
+  })
   save = false
   informed.value = true
   createCharacter()

@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
-import CharStats from '../tables/CharStats.vue'
+import CharStats from '../character/CharStats.vue'
 import { usePopupStore } from '../../store/popup'
 
 const store = useCharacterStore()

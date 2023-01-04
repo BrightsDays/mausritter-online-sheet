@@ -65,9 +65,11 @@ import createHireling from '../../helpers/createHireling'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
+import { useNotificationsStore } from '../../store/notifications'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
+const notificationStore = useNotificationsStore()
 
 const hireling = ref('')
 
@@ -76,6 +78,12 @@ const close = () => popupStore.setPopup(null)
 const saveHireling = (hirelingName: string) => {
   if (hireling.value) {
     characterStore.addHireling(createHireling(`Hireling: ${hirelingName}`))
+
+    notificationStore.setNotification({
+      type: 'info',
+      message: `Hireling: ${hirelingName} was added`
+    })
+
     hireling.value = ''
     close()
   }

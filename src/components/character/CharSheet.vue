@@ -11,7 +11,7 @@
 import CharacterInfo from "./CharAbout.vue"
 import CharacterStats from "./CharInfo.vue"
 import CharacterItems from "./CharItems.vue"
-import CharacterHirelings from "../hireling/CharHirelingList.vue"
+import CharacterHirelings from "../hireling/HirelingList.vue"
 </script>
 
 <style lang="scss">

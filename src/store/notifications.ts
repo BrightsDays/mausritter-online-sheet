@@ -13,7 +13,7 @@ export const useNotificationsStore = defineStore('notifications', {
         })
         
         this.notificationList.splice(index, 1)
-      }, 5000)
+      }, 8000)
     },
 
     setNotification(payload: Notification) {

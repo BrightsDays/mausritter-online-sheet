@@ -53,16 +53,27 @@
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue'
+import { useNotificationsStore } from '../../store/notifications'
 
 const informed = ref(false)
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
+const notificationStore = useNotificationsStore()
 
 const close = () => popupStore.setPopup(null)
 
-const informUser = () => informed.value = true
+const informUser = () => {
+  informed.value = true
+
+  characterStore.clearCharacter()
+
+  notificationStore.setNotification({
+    type: 'info',
+    message: 'Character sheet has been cleared'
+  })
+}
 
 const uploadCharacter = (event: Event) => {
   if (event.target) {
@@ -94,6 +105,11 @@ const uploadCharacter = (event: Event) => {
     const result = (event.target as HTMLInputElement).files
     if (result) reader.readAsText(result[0])
   }
+
+  notificationStore.setNotification({
+    type: 'info',
+    message: 'Character uplaoaded'
+  })
 
   close()
 }

@@ -2,17 +2,17 @@
   <div
     class="hirelings"
   >
-    <div class="hirelings__header">
-      <h2 class="hirelings__heading">
+    <div class="header">
+      <h2 class="heading">
         Hirelings
       </h2>
-      <span class="hirelings__count">
+      <span class="count">
         {{ characterStore.hirelings.length }}
       </span>
     </div>
     <div
       v-if="characterStore.hirelings"
-      class="hirelings__list"
+      class="list"
     >
       <ui-hireling-crad
         v-for="hireling in characterStore.hirelings" 
@@ -25,23 +25,23 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
-import UiHirelingCrad from './CharHirelingItem.vue'
+import UiHirelingCrad from './HirelingItem.vue'
 
 const characterStore = useCharacterStore()
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .hirelings {
   display: flex;
   flex-direction: column;
   gap: 15px;
 
-  &__header {
+  .header {
     display: flex;
     justify-content: space-between;
   }
 
-  &__heading {
+  .heading {
     display: inline-block;
     font-family: "Pirata One", sans-serif;
     font-size: 4em;
@@ -50,7 +50,7 @@ const characterStore = useCharacterStore()
     color: var(--main);
   }
 
-  &__count {
+  .count {
     display: inline-block;
     font-family: "Pirata One", sans-serif;
     font-size: 4em;
@@ -59,7 +59,7 @@ const characterStore = useCharacterStore()
     color: var(--second);
   }
 
-  &__list {
+  .list {
     display: flex;
     flex-direction: column;
     gap: 15px;

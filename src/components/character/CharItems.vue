@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
-import CharInventory from '../tables/CharInventory.vue'
+import CharInventory from '../character/CharInventory.vue'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
 const characterStore = useCharacterStore()

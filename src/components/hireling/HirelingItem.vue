@@ -29,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import CharStats from '../tables/CharStats.vue'
-import CharInventory from '../tables/CharInventory.vue'
+import CharStats from '../character/CharStats.vue'
+import CharInventory from '../character/CharInventory.vue'
 import { useCharacterStore } from '../../store/character'
 import { usePopupStore } from '../../store/popup'
 

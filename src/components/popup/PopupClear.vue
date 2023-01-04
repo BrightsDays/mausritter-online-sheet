@@ -29,7 +29,7 @@
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue'
 import { useNotificationsStore } from '../../store/notifications'
 
 const characterStore = useCharacterStore()

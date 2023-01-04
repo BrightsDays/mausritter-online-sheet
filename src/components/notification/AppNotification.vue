@@ -32,6 +32,7 @@ const notificationList = notificationsStore.notificationList
     max-width: 30%;
     flex-direction: column;
     gap: 20px;
+    z-index: 3;
     
   .notification {
     padding: 20px;
@@ -42,14 +43,15 @@ const notificationList = notificationsStore.notificationList
       color: var(--main);
       font-family: 'Ubuntu', sans-serif;
       font-size: 1.6em;
+      white-space: pre-line;
     }
 
     &.info {
-      background: rgba(57, 199, 57, 0.6);
+      background: rgb(65, 152, 65);
     }
 
     &.error {
-      background: rgba(219, 79, 79, 0.6);
+      background: rgb(179, 61, 61);
     }
   }
 }
