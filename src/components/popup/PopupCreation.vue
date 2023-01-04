@@ -43,7 +43,7 @@
         <span class="popup__stats">WIL: {{ characterStore.stats.wil.max }}</span>
       </div>
       <div class="popup__section">
-        <label class="popup__label">Swap stats</label>
+        <label class="popup__label">Swap stats *</label>
         <select
           v-model="swapStats.first"
           class="popup__select"
@@ -73,9 +73,10 @@
           </option>
         </select>
       </div>
+      <span class="popup__comment">* This change will only take effect after character creation</span>
       <div
         v-if="selectItem" 
-        class="popup__section"
+        class="popup__section popup__section--select"
       >
         <label class="popup__label">Select item</label>
         <select
@@ -91,7 +92,7 @@
           </option>
         </select>
       </div>
-      <div class="popup__section">
+      <div class="popup__section popup__section--select">
         <label class="popup__label">Select weapon</label>
         <select
           v-model="weapon"

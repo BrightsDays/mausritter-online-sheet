@@ -110,6 +110,7 @@ onMounted(() => {
   }
 
   &__section {
+    position: relative;
     display: flex;
     justify-items: center;
     justify-content: space-between;
@@ -126,6 +127,15 @@ onMounted(() => {
       position: relative;
       width: 280px;
       height: 140px;
+    }
+
+    &--select::after {
+      content: '⌄';
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 2em;
+      color: var(--main);
     }
   }
 
@@ -167,6 +177,7 @@ onMounted(() => {
     border: none;
     border-bottom: 1px solid var(--main);
     outline: none;
+    appearance: none;
 
     &--upload {
       position: relative;
@@ -178,13 +189,16 @@ onMounted(() => {
   }
 
   &__select {
+    position: relative;
     margin: -2px 0 0 10px;
     font-family: "Pirata One", sans-serif;
     font-size: 3em;
+    padding-right: 15px;
     color: var(--main);
     border: none;
     outline: none;
     cursor: pointer;
+    appearance: none;
 
     option {
       font-size: 1em;
@@ -236,6 +250,14 @@ onMounted(() => {
       color: var(--main);
       text-decoration: none;
     }
+  }
+
+  &__comment {
+    font-family: "Pirata One", sans-serif;
+    font-size: 1.8em;
+    font-weight: normal;
+    line-height: 1;
+    color: var(--second);
   }
 }
 </styles>
