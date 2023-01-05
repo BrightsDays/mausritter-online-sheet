@@ -1,69 +1,55 @@
 <template>
-  <div class="select">
+  <div class="input">
     <label class="label">{{ label }}</label>
-    <select
-      class="input"
-      def
+    <input
+      v-if="type === 'text'"
+      class="text"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     >
-      <option
-        v-for="option in options"
-        :key="option"
-      >
-        {{ option }}
-      </option>
-    </select>
+    <input
+      v-if="type === 'number'"
+      v-maska="'######'"
+      class="text"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+    >
   </div>
 </template>
 
 <script setup lang="ts">
 const {
   label,
-  options,
+  type,
   modelValue
 } = defineProps<{
   label: string
-  options: string[]
-  modelValue: string
+  type: 'text' | 'number'
+  modelValue: string | number
 }>()
 
 const emit = defineEmits(['update:modelValue'])
 </script>
 
 <style lang="scss" scoped>
-.select {
+.input {
   display: flex;
   position: relative;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   width: 100%;
   gap: 20px;
-  &::after {
-    content: '⌄';
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 2.6em;
-    color: var(--main);
-  }
 
-  .input {
-    position: relative;
-    margin: -2px 0 0 10px;
-    font-family: "Pirata One", sans-serif;
+  .text {
+    width: 100%;
+    text-align: right;
+    font-family: "Cookie", sans-serif;
     font-size: 3em;
-    padding-right: 20px;
     color: var(--main);
     border: none;
+    border-bottom: 1px solid var(--main);
     outline: none;
-    cursor: pointer;
     appearance: none;
-
-    option {
-      font-size: 1em;
-      direction: rtl;
-    }
   }
+
   .label {
     font-family: "Pirata One", sans-serif;
     font-size: 3.2em;
