@@ -1,36 +1,30 @@
 <template>
-  <popup-layout>
-    <h3 class="popup__header">
-      Be careful
-    </h3>
-    <div class="popup__form">
-      <div class="popup__section">
-        <span class="popup__label">Do you want to remove hireling?</span>
-      </div>
-      <div class="popup__section popup__section--buttons">
-        <button
-          class="popup__button"
-          @click.prevent="close()"
-        >
-          No
-        </button>
-        <button
-          class="popup__button"
-          @click.prevent="removeHireling()"
-        >
-          Yes
-        </button>
-      </div>
-    </div>
-  </popup-layout>
+  <new-popup-layout title="Be careful">
+    <template #body>
+      <span class="content">Do you want to remove hireling?</span>
+    </template>
+    <template #footer>
+      <UiButton
+        text="No"
+        type="big"
+        @click.prevent="close()"
+      />
+      <UiButton
+        text="Yes"
+        type="big"
+        @click.prevent="removeHireling()"
+      />
+    </template>
+  </new-popup-layout>
 </template>
 
 <script setup lang="ts">
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import PopupLayout from './PopupLayout.vue'
+import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
 import { onMounted, onUnmounted } from 'vue'
 import { useNotificationsStore } from '../../store/notifications'
+import UiButton from '../ui/UiButton.vue'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
@@ -59,3 +53,11 @@ onMounted(() => window.addEventListener('keyup', clearByClick))
 
 onUnmounted(() => window.removeEventListener('keyup', clearByClick))
 </script>
+
+<style lang="scss" scoped>
+.content {
+  font-family: "Pirata One", sans-serif;
+  font-size: 3.2em;
+  color: var(--second);
+}
+</style>

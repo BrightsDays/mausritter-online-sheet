@@ -1,121 +1,72 @@
 <template>
-  <popup-layout>
-    <h3 class="popup__header">
-      Add custom item
-    </h3>
-    <div
-      v-if="emptySlot"
-      class="popup__form"
-    >
-      <div class="popup__section">
-        <label class="popup__label">Title</label>
-        <input
-          v-model="item.title"
-          class="popup__input"
-        >
-      </div>
-      <div class="popup__section">
-        <label class="popup__label">Item type</label>
-        <select
-          v-model="item.type"
-          class="popup__select"
-        >
-          <option>
-            Utility
-          </option>
-          <option>
-            Light weapon
-          </option>
-          <option>
-            Medium weapon
-          </option>
-          <option>
-            Heavy weapon
-          </option>
-          <option>
-            Light ranged
-          </option>
-          <option>
-            Heavy ranged
-          </option>
-          <option>
-            Light armor
-          </option>
-          <option>
-            Heavy armor
-          </option>
-          <option>
-            Spell
-          </option>
-        </select>
-      </div>
-      <div
+  <new-popup-layout
+    v-if="emptySlot"
+    title="Add custom item"
+  >
+    <template #body>
+      <UiInput
+        v-model="item.title"
+        label="Title"
+        type="text"
+      />
+      <UiSelect
+        v-model="item.type"
+        label="Item type"
+        :options="typeList"
+      />
+      <UiSelect
         v-if="item.type === 'Utility'"
-        class="popup__section"
-      >
-        <label class="popup__label">Item size</label>
-        <select
-          v-model="item.size"
-          class="popup__select"
-        >
-          <option>
-            1 x 1
-          </option>
-          <option>
-            1 x 2
-          </option>
-          <option>
-            2 x 1
-          </option>
-          <option>
-            2 x 2
-          </option>
-        </select>
-      </div>
-      <div class="popup__section popup__section--buttons">
-        <button
-          class="popup__button"
-          @click.prevent="close()"
-        >
-          Cancel
-        </button>
-        <button
-          :disabled="item.title.length < 3"
-          class="popup__button"
-          @click.prevent="addItem()"
-        >
-          Create
-        </button>
-      </div>
-    </div>
-    <div
-      v-else
-      class="popup__form"
-    >
-      <div class="popup__section">
-        <span class="popup__label">
-          Sorry, you have not space in your backpack!<br>
-          Empty the space to add custom items.
-        </span>
-      </div>
-    </div>
-  </popup-layout>
+        v-model="item.size"
+        label="Item size"
+        :options="sizeList"
+      />
+    </template>
+    <template #footer>
+      <UiButton
+        text="Cancel"
+        type="big"
+        @click.prevent="close()"
+      />
+      <UiButton
+        :disabled="item.title.length < 3"
+        text="Create"
+        type="big"
+        @click.prevent="addItem()"
+      />
+    </template>
+  </new-popup-layout>
+  <new-popup-layout v-else>
+    <template #body>
+      <span class="content">
+        Sorry, you have not space in your backpack!<br>
+        Empty the space to add custom items.
+      </span>
+    </template>
+  </new-popup-layout>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import PopupLayout from './PopupLayout.vue'
-import { PackBack, PackIndexes } from '../../types';
+import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
+import { PackBack, PackIndexes } from '../../types'
+import UiButton from '../ui/UiButton.vue'
+import UiSelect from '../ui/UiSelect.vue'
+import UiInput from '../ui/UiInput.vue'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 
+const typeList = [
+  'Utility', 'Light weapon', 'Medium weapon', 'Heavy weapon', 'Light ranged',
+  'Heavy ranged', 'Light armor', 'Heavy armor', 'Spell'
+]
+const sizeList = ['Small', 'Tall', 'Wide', 'Big']
 const item = ref({
   title: '',
   type: 'Utility',
-  size: '1 x 1'
+  size: sizeList[0]
 })
 
 const emptySlot = ref('')
@@ -135,18 +86,18 @@ const addItem = () => {
 
     if (item.value.type === 'Utility') {
       switch (item.value.size) {
-        case '1 x 1':
+        case 'Small':
           newItem.image = 'Smallpack'
           break
-        case '1 x 2':
+        case 'Tall':
           newItem.type = 'Height utility'
           newItem.image = 'Heightpack'
           break
-        case '2 x 1':
+        case 'Wide':
           newItem.type = 'Wide utility'
           newItem.image = 'Widthpack'
           break
-        case '2 x 2':
+        case 'Big':
           newItem.type = 'Big utility'
           newItem.image = 'Bigpack'
           break
@@ -216,3 +167,11 @@ onMounted(() => {
   })
 })
 </script>
+
+<style lang="scss" scoped>
+.content {
+  font-family: "Pirata One", sans-serif;
+  font-size: 3.2em;
+  color: var(--second);
+}
+</style>

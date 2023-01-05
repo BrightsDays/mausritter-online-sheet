@@ -123,21 +123,6 @@ onMounted(() => {
     &--info {
       justify-content: space-around;
     }
-
-    &--upload {
-      position: relative;
-      width: 280px;
-      height: 140px;
-    }
-
-    &--select::after {
-      content: '⌄';
-      position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 2em;
-      color: var(--main);
-    }
   }
 
   &__label {
@@ -146,18 +131,6 @@ onMounted(() => {
     font-weight: normal;
     line-height: 1;
     color: var(--second);
-
-    &--upload {
-      display: flex;
-      position: absolute;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      border: dashed 2px var(--second);
-      border-radius: 15px;
-      pointer-events: none;
-    }
   }
 
   &__stats {
@@ -179,14 +152,6 @@ onMounted(() => {
     border-bottom: 1px solid var(--main);
     outline: none;
     appearance: none;
-
-    &--upload {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-    }
   }
 
   &__select {

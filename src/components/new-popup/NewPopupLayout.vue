@@ -32,7 +32,10 @@
       <div class="body">
         <slot name="body" />
       </div>
-      <div class="footer">
+      <div
+        v-if="$slots.footer"
+        class="footer"
+      >
         <slot name="footer" />
       </div>
     </div>
@@ -124,7 +127,15 @@ onMounted(() => {
     }
 
     .body {
+      display: flex;
+      flex-direction: column;
       overflow-y: auto;
+      gap: 10px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

@@ -1,62 +1,26 @@
 <template>
-  <popup-layout>
-    <h3 class="popup__header">
-      Add hireling
-    </h3>
-    <div class="popup__form">
-      <div class="popup__section">
-        <label class="popup__label">Select hireling</label>
-        <select
-          v-model="hireling"
-          class="popup__select"
-          def
-        >
-          <option>
-            Torchbearer
-          </option>
-          <option>
-            Labourer
-          </option>
-          <option>
-            Tunnel digger
-          </option>
-          <option>
-            Blacksmith
-          </option>
-          <option>
-            Local guide
-          </option>
-          <option>
-            Mouse-at-arms
-          </option>
-          <option>
-            Scholar
-          </option>
-          <option>
-            Knight
-          </option>
-          <option>
-            Interpreter
-          </option>
-        </select>
-      </div>
-      <div class="popup__section popup__section--buttons">
-        <button
-          class="popup__button"
-          @click.prevent="close()"
-        >
-          Cancel
-        </button>
-        <button
-          :disabled="!hireling"
-          class="popup__button"
-          @click.prevent="saveHireling(hireling)"
-        >
-          Create
-        </button>
-      </div>
-    </div>
-  </popup-layout>
+  <new-popup-layout title="Add hireling">
+    <template #body>
+      <UiSelect
+        v-model="hireling"
+        label="Select hireling"
+        :options="hirelingList"
+      />
+    </template>
+    <template #footer>
+      <UiButton
+        text="Cancel"
+        type="big"
+        @click.prevent="close()"
+      />
+      <UiButton
+        :disabled="!hireling"
+        text="Create"
+        type="big"
+        @click.prevent="saveHireling(hireling)"
+      />
+    </template>
+  </new-popup-layout>
 </template>
 
 <script setup lang="ts">
@@ -64,14 +28,20 @@ import { onMounted, ref } from 'vue'
 import createHireling from '../../helpers/createHireling'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import PopupLayout from './PopupLayout.vue'
+import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
 import { useNotificationsStore } from '../../store/notifications'
+import UiSelect from '../ui/UiSelect.vue'
+import UiButton from '../ui/UiButton.vue'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 const notificationStore = useNotificationsStore()
 
-const hireling = ref('')
+const hirelingList = [
+  'Torchbearer', 'Labourer', 'Tunnel digger', 'Blacksmith', 'Local guide',
+  'Mouse-at-arms', 'Scholar', 'Knight', 'Interpreter'
+]
+const hireling = ref(hirelingList[0])
 
 const close = () => popupStore.setPopup(null)
 

@@ -94,7 +94,6 @@ import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
     text-align: left;
     font-family: "Pirata One", sans-serif;
     font-size: 2.6em;
-    line-height: 1;
     color: var(--main);
   }
 
@@ -113,11 +112,11 @@ import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
   }
 }
 .info {
+  width: 100%;
   text-align: center;
   color: var(--main);
   font-family: "Ubuntu", sans-serif;
   font-size: 1.6em;
-  margin-bottom: 10px;
 
   .link {
     font-size: 1em;

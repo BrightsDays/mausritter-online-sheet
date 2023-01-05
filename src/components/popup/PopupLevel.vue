@@ -1,50 +1,42 @@
 <template>
-  <popup-layout>
-    <h3 class="popup__header">
-      Add experience
-    </h3>
-    <div class="popup__form">
-      <div class="popup__section">
-        <label class="popup__label">Value</label>
-        <input
-          v-maska="'######'"
-          :value="experience"
-          class="popup__input"
-          @input="setExperience($event.target as HTMLInputElement)"
-        >
-      </div>
-      <div class="popup__section popup__section--info">
-        <span class="popup__label">
-          You will gain {{ level }} levels
-        </span>
-      </div>
-      <div class="popup__section popup__section--buttons">
-        <button
-          class="popup__button"
-          @click.prevent="close()"
-        >
-          Cancel
-        </button>
-        <button
-          :disabled="+experience === 0"
-          class="popup__button"
-          @click.prevent="addExperience(experience)"
-        >
-          Add
-        </button>
-      </div>
-    </div>
-  </popup-layout>
+  <new-popup-layout title="Add experience">
+    <template #body>
+      <UiInput
+        v-model="experience"
+        label="Value"
+        type="number"
+        @input="setExperience($event.target as HTMLInputElement)"
+      />
+      <span class="content">
+        You will gain {{ level }} levels
+      </span>
+    </template>
+    <template #footer>
+      <UiButton
+        text="Cancel"
+        type="big"
+        @click.prevent="close()"
+      />
+      <UiButton
+        :disabled="+experience === 0"
+        text="Add"
+        type="big"
+        @click.prevent="addExperience(experience)"
+      />
+    </template>
+  </new-popup-layout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import PopupLayout from './PopupLayout.vue'
+import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
 import rollDices from '../../helpers/rollDices'
 import { StatKeys } from '../../types'
 import { useNotificationsStore } from '../../store/notifications'
+import UiButton from '../ui/UiButton.vue'
+import UiInput from '../ui/UiInput.vue'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
@@ -143,3 +135,12 @@ onMounted(() => {
   })
 })
 </script>
+
+<style lang="scss" scoped>
+.content {
+  font-family: "Pirata One", sans-serif;
+  font-size: 3.2em;
+  color: var(--second);
+  text-align: center;
+}
+</style>
