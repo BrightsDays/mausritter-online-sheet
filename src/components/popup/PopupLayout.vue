@@ -44,7 +44,7 @@ onMounted(() => {
 })
 </script>
 
-<styles lang="scss">
+<styles lang="scss" scoped>
 .popup {
   display: flex;
   position: absolute;
@@ -70,6 +70,7 @@ onMounted(() => {
   &__box {
     position: relative;
     width: fit-content;
+    max-height: 90vh;
     padding: 40px 30px 30px;
     background: var(--background);
     border: 2px var(--main) solid;
@@ -217,38 +218,6 @@ onMounted(() => {
     &:disabled, &[disabled] {
       color: var(--second);
       pointer-events: none;
-    }
-  }
-
-  &__list {
-    width: 600px;
-    max-width: 100%;
-    padding: 10px 20px 30px;
-    text-align: left;
-  }
-
-  &__item {
-    color: var(--main);
-    font-family: "Ubuntu", sans-serif;
-    font-size: 1.6em;
-    margin-bottom: 10px;
-  }
-
-  &__info {
-    text-align: center;
-    color: var(--main);
-    font-family: "Ubuntu", sans-serif;
-    font-size: 1.6em;
-    margin-bottom: 10px;
-  }
-
-  &__link {
-    font-size: 1em;
-    color: var(--second);
-
-    &:hover {
-      color: var(--main);
-      text-decoration: none;
     }
   }
 

@@ -41,7 +41,7 @@ const popup = usePopupStore()
 const levelUp = () => popup.setPopup('levelUp')
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .info {
   position: relative;
   display: flex;
