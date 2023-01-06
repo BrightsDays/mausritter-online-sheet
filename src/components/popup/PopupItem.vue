@@ -49,7 +49,7 @@
 import { onMounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
+import NewPopupLayout from './PopupLayout.vue'
 import { PackBack, PackIndexes } from '../../types'
 import UiButton from '../ui/UiButton.vue'
 import UiSelect from '../ui/UiSelect.vue'

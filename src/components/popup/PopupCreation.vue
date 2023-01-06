@@ -1,143 +1,88 @@
 <template>
-  <popup-layout>
-    <h3 class="popup__header">
-      New character
-    </h3>
-    <div
-      v-if="!informed"
-      class="popup__form"
-    >
-      <div class="popup__section">
-        <span class="popup__label">This will delete your current character.</span>
+  <new-popup-layout
+    v-if="!informed"
+    title="New character"
+  >
+    <template #body>
+      <span class="content">This will delete your current character.</span>
+    </template>
+    <template #footer>
+      <UiButton
+        text="Cancel"
+        type="big"
+        @click.prevent="userNotInformed()"
+      />
+      <UiButton
+        text="OK"
+        type="big"
+        @click.prevent="userInformed()"
+      />
+    </template>
+  </new-popup-layout>
+  <new-popup-layout
+    v-else
+    title="New character"
+  >
+    <template #body>
+      <UiInput
+        v-model="characterStore.name"
+        label="Name"
+        type="text"
+      />
+      <div class="content">
+        <span class="stat">STR: {{ characterStore.stats.str.max }}</span>
+        <span class="stat">DEX: {{ characterStore.stats.dex.max }}</span>
+        <span class="stat">WIL: {{ characterStore.stats.wil.max }}</span>
       </div>
-      <div class="popup__section popup__section--buttons">
-        <button
-          class="popup__button"
-          @click.prevent="userNotInformed()"
-        >
-          Cancel
-        </button>
-        <button
-          class="popup__button"
-          @click.prevent="userInformed()"
-        >
-          OK
-        </button>
+      <div class="swap">
+        <span class="content">Swap stats *</span>
+        <div class="inputs">
+          <UiSelect
+            v-model="swapStats.first"
+            :options="['str', 'dex', 'wil']"
+            to-uppercase
+          />
+          <span class="content center">and</span>
+          <UiSelect
+            v-model="swapStats.second"
+            :options="['str', 'dex', 'wil']"
+            to-uppercase
+          />
+        </div>
       </div>
-    </div>
-
-    <div
-      v-else
-      class="popup__form"
-    >
-      <div class="popup__section">
-        <label class="popup__label">Name</label>
-        <input
-          v-model="characterStore.name"
-          class="popup__input"
-        >
-      </div>
-      <div class="popup__section">
-        <span class="popup__stats">STR: {{ characterStore.stats.str.max }}</span>
-        <span class="popup__stats">DEX: {{ characterStore.stats.dex.max }}</span>
-        <span class="popup__stats">WIL: {{ characterStore.stats.wil.max }}</span>
-      </div>
-      <div class="popup__section">
-        <label class="popup__label">Swap stats *</label>
-        <select
-          v-model="swapStats.first"
-          class="popup__select"
-        >
-          <option value="str">
-            STR
-          </option>
-          <option value="dex">
-            DEX
-          </option>
-          <option value="wil">
-            WIL
-          </option>
-        </select>
-        <select
-          v-model="swapStats.second"
-          class="popup__select"
-        >
-          <option value="str">
-            STR
-          </option>
-          <option value="dex">
-            DEX
-          </option>
-          <option value="wil">
-            WIL
-          </option>
-        </select>
-      </div>
-      <span class="popup__comment">* This change will only take effect after character creation</span>
-      <div
+      <span class="content small">* This change will only take effect after character creation</span>
+      <UiSelect
         v-if="selectItem" 
-        class="popup__section popup__section--select"
-      >
-        <label class="popup__label">Select item</label>
-        <select
-          v-model="startItem"
-          class="popup__select"
-        >
-          <option
-            v-for="item in itemsForSelect"
-            :key="item"
-            :value="item"
-          >
-            {{ item }}
-          </option>
-        </select>
-      </div>
-      <div class="popup__section popup__section--select">
-        <label class="popup__label">Select weapon</label>
-        <select
-          v-model="weapon"
-          class="popup__select"
-        >
-          <option value="Light">
-            Light
-          </option>
-          <option value="Medium">
-            Medium
-          </option>
-          <option value="Heavy">
-            Heavy
-          </option>
-          <option value="Light ranged">
-            Light ranged
-          </option>
-          <option value="Heavy ranged">
-            Heavy ranged
-          </option>
-        </select>
-      </div>
-      <div class="popup__section popup__section--buttons">
-        <button
-          class="popup__button"
-          @click.prevent="close()"
-        >
-          Cancel
-        </button>
-        <button
-          :disabled="characterStore.name.length < 3 || 
-            (selectItem && startItem === '') ||
-            !weapon"
-          class="popup__button"
-          @click.prevent="saveCharacter()"
-        >
-          Create
-        </button>
-      </div>
-    </div>
-  </popup-layout>
+        v-model="startItem"
+        label="Select item"
+        :options="Object.values(itemsForSelect)"
+      />
+      <UiSelect
+        v-model="weapon"
+        label="Select weapon"
+        :options="weaponsForSelect"
+      />
+    </template>
+    <template #footer>
+      <UiButton
+        text="Cancel"
+        type="big"
+        @click.prevent="close()"
+      />
+      <UiButton
+        :disabled="characterStore.name.length < 3 || 
+          (selectItem && startItem === '') ||
+          !weapon"
+        text="Create"
+        type="big"
+        @click.prevent="saveCharacter()"
+      />
+    </template>
+  </new-popup-layout>
 </template>
 
 <script setup lang="ts">
-import PopupLayout from './PopupLayout.vue'
+import NewPopupLayout from './PopupLayout.vue'
 import rollDices from '../../helpers/rollDices'
 import rollStats from '../../helpers/rollStats'
 import weaponList from '../../data/weaponList.json'
@@ -152,6 +97,9 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import createHireling from '../../helpers/createHireling'
 import { useNotificationsStore } from '../../store/notifications'
+import UiButton from '../ui/UiButton.vue'
+import UiInput from '../ui/UiInput.vue'
+import UiSelect from '../ui/UiSelect.vue'
 
 const informed = ref(false)
 
@@ -159,8 +107,6 @@ const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 const notificationStore = useNotificationsStore()
 let save = false
-
-const weapon = ref('')
 
 const statsForSwap = ref({
   str: 0,
@@ -172,12 +118,14 @@ const swapStats = ref({
   second: 'str'
 })
 
-const selectItem = ref(true)
-const startItem = ref('')
 const itemsForSelect = ref({
   itemA: '',
   itemB: ''
 })
+const weaponsForSelect = ['Light', 'Medium', 'Heavy', 'Light ranged', 'Heavy ranged']
+const startItem = ref(weaponsForSelect[0])
+const weapon = ref(weaponsForSelect[0])
+const selectItem = ref(true)
 
 const close = () => popupStore.setPopup(null)
 
@@ -220,23 +168,23 @@ const saveCharacter = () => {
   if (characterStore.name.length >= 3
       && (!selectItem.value || startItem.value !== '')
       && weapon) {//TODO fix this position
-    if (swapStats.value.first !== swapStats.value.second) {
+    if (swapStats.value.first !== swapStats.value.second) {      
       characterStore.setStat(
         swapStats.value.first as StatKeys,
-        statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
+        statsForSwap.value[swapStats.value.second.toLowerCase() as 'str' | 'dex' | 'wil']
       )
       characterStore.setMaxStat(
         swapStats.value.first as StatKeys,
-        statsForSwap.value[swapStats.value.second as 'str' | 'dex' | 'wil']
+        statsForSwap.value[swapStats.value.second.toLowerCase() as 'str' | 'dex' | 'wil']
       )
 
       characterStore.setStat(
         swapStats.value.second as StatKeys,
-        statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
+        statsForSwap.value[swapStats.value.first.toLowerCase() as 'str' | 'dex' | 'wil']
       )
       characterStore.setMaxStat(
         swapStats.value.second as StatKeys,
-        statsForSwap.value[swapStats.value.first as 'str' | 'dex' | 'wil']
+        statsForSwap.value[swapStats.value.first.toLowerCase() as 'str' | 'dex' | 'wil']
       )
     }
 
@@ -365,3 +313,39 @@ onUnmounted(() => {
   if (!save) characterStore.clearCharacter()
 })
 </script>
+
+<style lang="scss" scoped>
+.content {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Pirata One", sans-serif;
+  font-size: 3.2em;
+  color: var(--second);
+
+  &.small {
+    text-align: center;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1.4em;
+    color: var(--second);
+  }
+
+  &.center {
+    margin: 0 auto;
+  }
+
+  .stat {
+    font-size: 1em;
+  }
+}
+
+.swap {
+  display: flex;
+  justify-content: space-between;
+
+  .inputs {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+}
+</style>

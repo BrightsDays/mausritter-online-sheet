@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
+import NewPopupLayout from './PopupLayout.vue'
 </script>
 
 <style lang="scss" scoped>

@@ -24,7 +24,7 @@
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import { useNotificationsStore } from '../../store/notifications'
-import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
+import NewPopupLayout from './PopupLayout.vue'
 import { onMounted, onUnmounted } from 'vue'
 import UiButton from '../ui/UiButton.vue'
 

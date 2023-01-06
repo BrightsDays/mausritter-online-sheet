@@ -1,6 +1,9 @@
 <template>
   <div class="select">
-    <label class="label">{{ label }}</label>
+    <label
+      v-if="label"
+      class="label"
+    >{{ label }}</label>
     <select
       class="input"
       def
@@ -9,8 +12,9 @@
       <option
         v-for="option in options"
         :key="option"
+        :value="option"
       >
-        {{ option }}
+        {{ toUppercase ? option.toUpperCase() : option }}
       </option>
     </select>
   </div>
@@ -20,10 +24,12 @@
 const {
   label,
   options,
+  toUppercase,
   modelValue
 } = defineProps<{
-  label: string
+  label?: string
   options: string[]
+  toUppercase?: boolean
   modelValue: string
 }>()
 
@@ -38,21 +44,11 @@ const emit = defineEmits(['update:modelValue'])
   align-items: baseline;
   width: 100%;
   gap: 20px;
-  &::after {
-    content: '⌄';
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 2.6em;
-    color: var(--main);
-  }
 
   .input {
     position: relative;
-    margin: -2px 0 0 10px;
     font-family: "Pirata One", sans-serif;
     font-size: 3em;
-    padding-right: 20px;
     color: var(--main);
     border: none;
     outline: none;

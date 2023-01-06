@@ -1,30 +1,43 @@
 <template>
   <div class="popup">
     <div 
-      class="popup__shadow"
+      class="shadow"
       @click="close()"
     />
-    <div class="popup__box">
-      <button
-        class="popup__close"
-        @click.prevent="close()"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          xmlns="http://www.w3.org/2000/svg"
+    <div class="box">
+      <div class="header">
+        <button
+          class="close"
+          @click.prevent="close()"
         >
-          <path
-            d="M1 1L8 8M15 15L8 8M8 8L15 1L1 15"
-            stroke="#272727"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-      <slot />
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 1L8 8M15 15L8 8M8 8L15 1L1 15"
+              stroke="#272727"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <h2 class="title">
+          {{ title }}
+        </h2>
+      </div>
+      <div class="body">
+        <slot name="body" />
+      </div>
+      <div
+        v-if="$slots.footer"
+        class="footer"
+      >
+        <slot name="footer" />
+      </div>
     </div>
   </div>
 </template>
@@ -32,6 +45,12 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { usePopupStore } from '../../store/popup'
+
+const {
+  title
+} = defineProps<{
+  title?: string
+}>()
 
 const popupStore = usePopupStore()
 
@@ -57,7 +76,7 @@ onMounted(() => {
   background: none;
   z-index: 2;
 
-  &__shadow {
+  .shadow {
     position: absolute;
     top: 0;
     left: 0;
@@ -67,131 +86,53 @@ onMounted(() => {
     opacity: 0.2;
   }
 
-  &__box {
+  .box {
+    display: flex;
     position: relative;
     width: fit-content;
     max-height: 90vh;
     padding: 40px 30px 30px;
+    flex-direction: column;
+    gap: 20px;
     background: var(--background);
     border: 2px var(--main) solid;
     border-radius: 15px;
     z-index: 2;
-  }
 
-  &__close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    border: none;
-    cursor: pointer;
+    .header {
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        border: none;
+        cursor: pointer;
 
-    svg path {
-      stroke: var(--main);
-    }
-  }
+        svg path {
+          stroke: var(--main);
+        }
+      }
 
-  &__header {
-    text-align: center;
-    font-family: "Pirata One", sans-serif;
-    font-size: 4.2em;
-    font-weight: normal;
-    line-height: 1;
-    color: var(--main);
-
-    &--small {
-      font-size: 2.6em;
-    }
-  }
-
-  &__form {
-    display: flex;
-    margin: 20px auto 0;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  &__section {
-    position: relative;
-    display: flex;
-    justify-items: center;
-    justify-content: space-between;
-
-    &--buttons {
-      margin-top: 20px;
+      .title {
+        text-align: center;
+        font-family: "Pirata One", sans-serif;
+        font-size: 4.2em;
+        font-weight: normal;
+        line-height: 1;
+        color: var(--main);
+      }
     }
 
-    &--info {
-      justify-content: space-around;
+    .body {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      gap: 10px;
     }
-  }
 
-  &__label {
-    font-family: "Pirata One", sans-serif;
-    font-size: 3.2em;
-    font-weight: normal;
-    line-height: 1;
-    color: var(--second);
-  }
-
-  &__stats {
-    font-family: "Pirata One", sans-serif;
-    font-size: 3.2em;
-    font-weight: normal;
-    line-height: 1;
-    color: var(--main);
-  }
-
-  &__input {
-    margin-left: 10px;
-    width: 100%;
-    text-align: right;
-    font-family: "Cookie", sans-serif;
-    font-size: 3em;
-    color: var(--main);
-    border: none;
-    border-bottom: 1px solid var(--main);
-    outline: none;
-    appearance: none;
-  }
-
-  &__select {
-    position: relative;
-    margin: -2px 0 0 10px;
-    font-family: "Pirata One", sans-serif;
-    font-size: 3em;
-    padding-right: 15px;
-    color: var(--main);
-    border: none;
-    outline: none;
-    cursor: pointer;
-    appearance: none;
-
-    option {
-      font-size: 1em;
+    .footer {
+      display: flex;
+      justify-content: space-between;
     }
-  }
-
-  &__button {
-    font-family: "Pirata One", sans-serif;
-    font-size: 3.2em;
-    font-weight: normal;
-    line-height: 1;
-    color: var(--main);
-    border: none;
-    cursor: pointer;
-
-    &:disabled, &[disabled] {
-      color: var(--second);
-      pointer-events: none;
-    }
-  }
-
-  &__comment {
-    font-family: "Pirata One", sans-serif;
-    font-size: 1.8em;
-    font-weight: normal;
-    line-height: 1;
-    color: var(--second);
   }
 }
 </styles>

@@ -49,7 +49,7 @@ import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import { onMounted, ref } from 'vue'
 import { useNotificationsStore } from '../../store/notifications'
-import NewPopupLayout from '../new-popup/NewPopupLayout.vue'
+import NewPopupLayout from './PopupLayout.vue'
 import UiButton from '../ui/UiButton.vue'
 
 const informed = ref(false)
