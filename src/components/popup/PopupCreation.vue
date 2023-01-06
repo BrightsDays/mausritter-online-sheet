@@ -123,7 +123,7 @@ const itemsForSelect = ref({
   itemB: ''
 })
 const weaponsForSelect = ['Light', 'Medium', 'Heavy', 'Light ranged', 'Heavy ranged']
-const startItem = ref(weaponsForSelect[0])
+const startItem = ref('')
 const weapon = ref(weaponsForSelect[0])
 const selectItem = ref(true)
 
@@ -158,6 +158,7 @@ const createCharacter = () => {
     backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA
   itemsForSelect.value.itemB =
     backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB
+  startItem.value = itemsForSelect.value.itemA
 
   if (!Object.values(statsForSwap.value).filter(item => item > 9).length) {
     selectItem.value = false
@@ -189,6 +190,8 @@ const saveCharacter = () => {
     }
 
     const findItem = (title: string) => {
+      console.log(title, spellList.list.find(item => item.title === title));
+      
       return (
         utilityList.list.find(item => item.title === title) as Item ||
         weaponList.list.find(item => item.title === title) as Item ||
