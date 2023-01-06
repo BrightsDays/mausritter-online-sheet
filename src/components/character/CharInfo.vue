@@ -1,7 +1,23 @@
 <template>
   <div class="info">
-    <div class="info__description">
-      <label class="description-input__label">Portrait</label>
+    <div
+      class="portrait"
+      :class="{ 'uploaded': store.portrait }"
+      :style="{ backgroundImage: `url(${store.portrait})` }"
+    >
+      <input
+        id="upload"
+        ref="upload"
+        type="file"
+        class="input"
+        accept="image/png, image/jpeg"
+        @change="uploadImage($event as InputEvent)"
+      >
+      <label
+        v-if="!store.portrait"
+        for="upload"
+        class="label"
+      >Upload portrait</label>
     </div>
     <div class="info__stats">
       <div class="exp-input">
@@ -39,6 +55,19 @@ const store = useCharacterStore()
 const popup = usePopupStore()
 
 const levelUp = () => popup.setPopup('levelUp')
+
+const uploadImage = (event: InputEvent) => {
+  const files = (event.target as HTMLInputElement).files
+  const reader = new FileReader()
+  
+  reader.onload = () => {
+    if (reader.result) store.setPortrait(reader.result.toString())
+  }
+
+  if (files && files[0]) {
+    reader.readAsDataURL(files[0])
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -48,10 +77,37 @@ const levelUp = () => popup.setPopup('levelUp')
   justify-content: space-between;
   gap: 15px;
 
-  &__description {
+  .portrait {
+    position: relative;
     width: 60%;
     border: 2px dashed var(--second);
     border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &.uploaded {
+      border: 2px solid var(--main);
+    }
+
+    .input {
+      outline: none;
+      appearance: none;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .label {
+      position: absolute;
+      display: inline-block;
+      top: 10px;
+      left: 50%;
+      margin-left: -60px;
+      font-family: 'Ubuntu', sans-serif;
+      color: var(--second);
+      font-size: 1.7em;
+    }
   }
 
   &__stats {
@@ -133,17 +189,6 @@ const levelUp = () => popup.setPopup('levelUp')
   &__devider {
     font-size: 1.8em;
     color: var(--main);
-  }
-}
-
-.description-input {
-  &__label {
-    display: inline-block;
-    font-family: 'Ubuntu', sans-serif;
-    color: var(--second);
-    font-size: 1.7em;
-    line-height: 1;
-    margin-top: 5px;
   }
 }
 </style>

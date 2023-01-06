@@ -1,7 +1,7 @@
 <template>
   <div class="details">
     <div
-      :class="['details__summary', {'details__summary--open': isOpen}]"
+      :class="['summary', {'open': isOpen}]"
       @click="toggleDetails()"
     >
       {{ props.title }}
@@ -9,7 +9,7 @@
     <transition name="fade">
       <div
         v-if="isOpen"
-        class="details__content"
+        class="content"
       >
         <slot />
       </div>
@@ -38,13 +38,11 @@ const toggleDetails = () => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .details {
   padding: 15px;
-  border-top: 1px solid var(--summary);
-  border-bottom: 1px solid var(--summary);
 
-  &__summary {
+  .summary {
     position: relative;
     list-style: none;
     font-size: 2.2em;
@@ -75,7 +73,7 @@ const toggleDetails = () => {
       transform: rotate(40deg);
     }
 
-    &--open {
+    .open {
       &:before {
         transform: rotate(40deg);
       }
@@ -86,7 +84,7 @@ const toggleDetails = () => {
     }
   }
 
-  &__content {
+  .content {
     padding-top: 10px;
 
     .points {

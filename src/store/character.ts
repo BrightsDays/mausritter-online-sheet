@@ -95,7 +95,8 @@ export const useCharacterStore = defineStore('character', {
     bank: [{
       name: 'bnk__0',
       item: null
-    }]
+    }],
+    portrait: ''
   }),
   getters: {
     level: (state) => {
@@ -136,6 +137,9 @@ export const useCharacterStore = defineStore('character', {
     updateItems(packName: 'bodyBack' | 'packBack', payload: BodyBack | PackBack) {
       if (packName === 'bodyBack') this.bodyBack = payload as BodyBack
       if (packName === 'packBack') this.packBack = payload as PackBack
+    },
+    setPortrait(payload: string) {
+      this.portrait = payload
     },
 
     addHireling(payload: Hireling) {
@@ -262,7 +266,8 @@ export const useCharacterStore = defineStore('character', {
         bank: [{
           name: 'bnk__0',
           item: null
-        }]
+        }],
+        portrait: ''
       }
     },
     addExperience(exp: number) {

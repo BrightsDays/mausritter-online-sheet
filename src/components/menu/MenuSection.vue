@@ -88,6 +88,13 @@
       >
         Add hireling
       </button>
+      <button
+        disabled
+        class="menu__item menu__item--big"
+        @click.prevent="addHireling()"
+      >
+        Add warband
+      </button>
     </div>
     <div
       v-if="characterStore.exp >= 1000"
