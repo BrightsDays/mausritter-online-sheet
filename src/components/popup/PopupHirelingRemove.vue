@@ -46,11 +46,12 @@ const removeHireling = () => {
 }
 
 const clearByClick = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') removeHireling()
+  if (event.key === 'Enter') {
+  event.preventDefault()
+  removeHireling()
+  }
 }
-
 onMounted(() => window.addEventListener('keyup', clearByClick))
-
 onUnmounted(() => window.removeEventListener('keyup', clearByClick))
 </script>
 

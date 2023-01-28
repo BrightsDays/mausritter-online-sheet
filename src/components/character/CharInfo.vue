@@ -2,8 +2,8 @@
   <div class="info">
     <div
       class="portrait"
-      :class="{ 'uploaded': store.portrait }"
-      :style="{ backgroundImage: `url(${store.portrait})` }"
+      :class="{ 'uploaded': characterStore.portrait }"
+      :style="{ backgroundImage: `url(${characterStore.portrait})` }"
     >
       <input
         id="upload"
@@ -14,34 +14,54 @@
         @change="uploadImage($event as InputEvent)"
       >
       <label
-        v-if="!store.portrait"
+        v-if="!characterStore.portrait"
         for="upload"
         class="label"
       >Upload portrait</label>
+      <button
+        v-if="characterStore.portrait"
+        class="clear"
+        @click.prevent="characterStore.setPortrait(null)"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 1L8 8M15 15L8 8M8 8L15 1L1 15"
+            stroke="#272727"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
     </div>
     <div class="info__stats">
       <div class="exp-input">
         <label class="exp-input__label">Level / Exp</label>
         <input
-          v-model="store.level"
+          v-model="characterStore.level"
           class="exp-input__input exp-input__level"
           readonly
         >
         <span class="exp-input__devider">/</span>
         <input
-          v-model="store.exp"
+          v-model="characterStore.exp"
           class="exp-input__input exp-input__exp"
           readonly
         >
         <button
           class="exp-input__add"
-          :disabled="!store.name"
+          :disabled="!characterStore.name"
           @click="levelUp"
         >
           <p>+</p>
         </button>
       </div>
-      <char-stats :stats="store.stats" />
+      <char-stats :stats="characterStore.stats" />
     </div>
   </div>
 </template>
@@ -51,7 +71,7 @@ import { useCharacterStore } from '../../store/character'
 import CharStats from '../character/CharStats.vue'
 import { usePopupStore } from '../../store/popup'
 
-const store = useCharacterStore()
+const characterStore = useCharacterStore()
 const popup = usePopupStore()
 
 const levelUp = () => popup.setPopup('levelUp')
@@ -61,7 +81,7 @@ const uploadImage = (event: InputEvent) => {
   const reader = new FileReader()
   
   reader.onload = () => {
-    if (reader.result) store.setPortrait(reader.result.toString())
+    if (reader.result) characterStore.setPortrait(reader.result.toString())
   }
 
   if (files && files[0]) {
@@ -107,6 +127,30 @@ const uploadImage = (event: InputEvent) => {
       font-family: 'Ubuntu', sans-serif;
       color: var(--second);
       font-size: 1.7em;
+    }
+
+    .clear {
+      display: flex;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 25px;
+      height: 25px;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--background);
+      border: none;
+      border-radius: 5px;
+      opacity: 0.6;
+      cursor: pointer;
+
+      svg path {
+        stroke: var(--main);
+      }
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 

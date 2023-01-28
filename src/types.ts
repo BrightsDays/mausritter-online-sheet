@@ -136,7 +136,7 @@ export interface Character {
   details: string
   grit: GritList
   bank: Bank[]
-  portrait: string
+  portrait: string | null
 }
 
 export interface Popup {

@@ -96,7 +96,7 @@ export const useCharacterStore = defineStore('character', {
       name: 'bnk__0',
       item: null
     }],
-    portrait: ''
+    portrait: null
   }),
   getters: {
     level: (state) => {
@@ -138,7 +138,7 @@ export const useCharacterStore = defineStore('character', {
       if (packName === 'bodyBack') this.bodyBack = payload as BodyBack
       if (packName === 'packBack') this.packBack = payload as PackBack
     },
-    setPortrait(payload: string) {
+    setPortrait(payload: string | null) {
       this.portrait = payload
     },
 

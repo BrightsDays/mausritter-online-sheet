@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import NewPopupLayout from './PopupLayout.vue'
@@ -152,6 +152,13 @@ const addItem = () => {
   }
 }
 
+const addItemByClick = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+    event.preventDefault()
+    addItem()
+  }
+}
+
 onMounted(() => {
   Object.keys(characterStore.packBack).every(item => {
     if (!characterStore.packBack[item as PackIndexes].item) {
@@ -162,10 +169,10 @@ onMounted(() => {
     }
   })
 
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') addItem()
-  })
+  window.addEventListener('keydown', addItemByClick)
 })
+
+onUnmounted(() => window.removeEventListener('keydown', addItemByClick))
 </script>
 
 <style lang="scss" scoped>

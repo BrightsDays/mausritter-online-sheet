@@ -189,9 +189,7 @@ const saveCharacter = () => {
       )
     }
 
-    const findItem = (title: string) => {
-      console.log(title, spellList.list.find(item => item.title === title));
-      
+    const findItem = (title: string) => {      
       return (
         utilityList.list.find(item => item.title === title) as Item ||
         weaponList.list.find(item => item.title === title) as Item ||
@@ -306,14 +304,30 @@ const userInformed = () => {
   createCharacter()
 }
 
+const createByClick = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+    event.preventDefault()
+
+    if (!informed.value) {
+      userInformed()
+    } else if (characterStore.name) {
+      saveCharacter()
+      close()
+    }
+  }
+}
+
 onMounted(() => {
   if (!characterStore.name) informed.value = true
   if (characterStore.name) save = true
   if (informed.value) createCharacter()
+
+  window.addEventListener('keyup', createByClick)
 })
 
 onUnmounted(() => {
   if (!save) characterStore.clearCharacter()
+  window.removeEventListener('keyup', createByClick)
 })
 </script>
 

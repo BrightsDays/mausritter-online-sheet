@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useNotificationsStore } from '../../store/notifications'
 import NewPopupLayout from './PopupLayout.vue'
 import UiButton from '../ui/UiButton.vue'
@@ -110,13 +110,17 @@ const uploadCharacter = (event: Event) => {
   close()
 }
 
+const informByClick = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+    event.preventDefault()
+    informUser()
+  }
+}
 onMounted(() => {
   if (!characterStore.name) informed.value = true
-
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') informUser()
-  })
+  window.addEventListener('keydown', informByClick)
 })
+onUnmounted(() => window.removeEventListener('keydown', informByClick))
 </script>
 
 <style lang="scss" scoped>

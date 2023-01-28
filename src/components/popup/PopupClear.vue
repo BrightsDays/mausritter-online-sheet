@@ -46,11 +46,12 @@ const clearCharacter = () => {
 }
 
 const clearByClick = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') clearCharacter()
+  if (event.key === 'Enter') {
+    event.preventDefault()
+    clearCharacter()
+  }
 }
-
 onMounted(() => window.addEventListener('keyup', clearByClick))
-
 onUnmounted(() => window.removeEventListener('keyup', clearByClick))
 </script>
 

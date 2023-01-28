@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import NewPopupLayout from './PopupLayout.vue'
@@ -129,11 +129,14 @@ const addExperience = (exp: number) => {
   }
 }
 
-onMounted(() => {
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') addExperience(experience.value)
-  })
-})
+const levelUpByClick = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+    event.preventDefault()
+    addExperience(experience.value)
+  }
+}
+onMounted(() => window.addEventListener('keydown', levelUpByClick))
+onUnmounted(() => window.removeEventListener('keydown', levelUpByClick))
 </script>
 
 <style lang="scss" scoped>

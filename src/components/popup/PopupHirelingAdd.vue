@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import createHireling from '../../helpers/createHireling'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
@@ -46,22 +46,22 @@ const hireling = ref(hirelingList[0])
 const close = () => popupStore.setPopup(null)
 
 const saveHireling = (hirelingName: string) => {
-  if (hireling.value) {
-    characterStore.addHireling(createHireling(`Hireling: ${hirelingName}`))
+  characterStore.addHireling(createHireling(`Hireling: ${hirelingName}`))
 
-    notificationStore.setNotification({
-      type: 'info',
-      message: `Hireling: ${hirelingName} was added`
-    })
-
-    hireling.value = ''
-    close()
-  }
+  notificationStore.setNotification({
+    type: 'info',
+    message: `Hireling: ${hirelingName} was added`
+  })
+    
+  close()
 }
 
-onMounted(() => {
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') saveHireling(hireling.value)
-  })
-})
+const addByClick = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+  event.preventDefault()
+  saveHireling(hireling.value)
+}
+}
+onMounted(() => window.addEventListener('keydown', addByClick))
+onUnmounted(() => window.removeEventListener('keydown', addByClick))
 </script>

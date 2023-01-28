@@ -10,10 +10,10 @@
             Notifications added;
           </li>
           <li class="item">
-            Item images added;
+            Portraits upload added;
           </li>
           <li class="item">
-            Bugs fixed.
+            Some visual bugs fixed.
           </li>
         </ol>
       </section>
@@ -94,6 +94,7 @@ import NewPopupLayout from './PopupLayout.vue'
     text-align: left;
     font-family: "Pirata One", sans-serif;
     font-size: 2.6em;
+    font-weight: normal;
     color: var(--main);
   }
 

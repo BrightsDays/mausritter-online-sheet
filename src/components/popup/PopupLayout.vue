@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { usePopupStore } from '../../store/popup'
 
 const {
@@ -56,11 +56,14 @@ const popupStore = usePopupStore()
 
 const close = () => popupStore.setPopup(null)
 
-onMounted(() => {
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') close()   
-  })
-})
+const closeByClick =  (event: KeyboardEvent) => {
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    close()
+  }   
+}
+onMounted(() => window.addEventListener('keydown', closeByClick))
+onUnmounted(() => window.removeEventListener('keydown', closeByClick))
 </script>
 
 <styles lang="scss" scoped>
