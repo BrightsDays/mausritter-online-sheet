@@ -1,9 +1,13 @@
 <template>
-  <app-index />
+  <BlockMobile v-if="isMobile()" />
+  <app-index v-else />
 </template>
 
 <script setup lang="ts">
 import AppIndex from './components/AppIndex.vue'
+import BlockMobile from './components/BlockMobile.vue';
+
+const isMobile = () => screen.width <= 760
 </script>
 
 <style lang="scss">
