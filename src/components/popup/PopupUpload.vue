@@ -104,7 +104,7 @@ const uploadCharacter = (event: Event) => {
 
   notificationStore.setNotification({
     type: 'info',
-    message: 'Character uplaoaded'
+    message: 'Character uploaded'
   })
 
   close()

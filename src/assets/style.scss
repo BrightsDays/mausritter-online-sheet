@@ -46,3 +46,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--main);
 }
+
+input {
+  -webkit-appearance: none;
+  -webkit-border-radius:0px;
+}
