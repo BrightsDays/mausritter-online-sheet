@@ -1,5 +1,8 @@
 <template>
-  <div class="character">
+  <div
+    class="character"
+    :class="{'disabled': !characterStore.name}"
+  >
     <character-info />
     <character-stats />
     <character-items />
@@ -12,6 +15,9 @@ import CharacterInfo from "./CharAbout.vue"
 import CharacterStats from "./CharInfo.vue"
 import CharacterItems from "./CharItems.vue"
 import CharacterHirelings from "../hireling/HirelingList.vue"
+import { useCharacterStore } from "../../store/character"
+
+const characterStore = useCharacterStore()
 </script>
 
 <style lang="scss">
@@ -23,5 +29,10 @@ import CharacterHirelings from "../hireling/HirelingList.vue"
   gap: 15px;
   max-height: 100%;
   overflow-y: scroll;
+
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
 }
 </style>
