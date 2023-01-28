@@ -125,7 +125,7 @@ onMounted(() => {
     .body {
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
+      overflow-y: scroll;
       gap: 10px;
     }
 
