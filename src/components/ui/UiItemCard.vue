@@ -49,6 +49,7 @@
 <script setup lang="ts">
 import { Card } from '../../types'
 import { onDragging } from '../../helpers/dragNDrop'
+import { computed } from 'vue'
 
 const props = defineProps({
   item: {
@@ -62,9 +63,9 @@ const props = defineProps({
   }
 })
 
-const imageUrl = props.item.image
+const imageUrl = computed(() => props.item.image
   ? new URL(`../../assets/img/${props.item.image}.svg`, import.meta.url).href
-  : null
+  : null)
 
 const emit = defineEmits({
   pointClick: (key) => key
