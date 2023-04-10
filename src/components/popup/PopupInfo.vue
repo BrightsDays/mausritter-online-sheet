@@ -3,6 +3,19 @@
     <template #body>
       <section class="section">
         <h4 class="header">
+          Version 0.1.5
+        </h4>
+        <ol class="list">
+          <li class="item">
+            Item images added;
+          </li>
+          <li class="item">
+            Bugs fixed.
+          </li>
+        </ol>
+      </section>
+      <section class="section">
+        <h4 class="header">
           Version 0.1.4
         </h4>
         <ol class="list">

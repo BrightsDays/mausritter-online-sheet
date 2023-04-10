@@ -2,7 +2,7 @@
   <aside class="menu">
     <div class="menu__header menu--bordered">
       <h1 class="menu__heading">
-        Character Sheet v.0.1.4
+        Character Sheet v.0.1.5
       </h1>
       <button
         class="menu__info"

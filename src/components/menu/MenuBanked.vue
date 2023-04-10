@@ -27,7 +27,7 @@ import UiItemCard from '../ui/UiItemCard.vue'
 import { useCharacterStore } from '../../store/character'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
-const characterStore = useCharacterStore()//TODO fix image changing
+const characterStore = useCharacterStore()
 </script>
 
 <style lang="scss">
