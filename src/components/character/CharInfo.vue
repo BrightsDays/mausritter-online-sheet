@@ -17,7 +17,9 @@
         v-if="!characterStore.portrait"
         for="upload"
         class="label"
-      >Upload portrait</label>
+      >
+        Upload portrait (up to 2 MB)
+      </label>
       <button
         v-if="characterStore.portrait"
         class="clear"
@@ -70,16 +72,27 @@
 import { useCharacterStore } from '../../store/character'
 import CharStats from '../character/CharStats.vue'
 import { usePopupStore } from '../../store/popup'
+import { useNotificationsStore } from '../../store/notifications'
 
 const characterStore = useCharacterStore()
 const popup = usePopupStore()
+const notificationStore = useNotificationsStore()
 
 const levelUp = () => popup.setPopup('levelUp')
 
 const uploadImage = (event: InputEvent) => {
   const files = (event.target as HTMLInputElement).files
   const reader = new FileReader()
-  
+
+  if (files && files.length > 0 && files[0].size / 1024 ** 2 > 2) {
+    notificationStore.setNotification({
+      type: 'error',
+      message: `Your file is to big`
+    })
+
+    return
+  }
+
   reader.onload = () => {
     if (reader.result) characterStore.setPortrait(reader.result.toString())
   }
@@ -121,12 +134,13 @@ const uploadImage = (event: InputEvent) => {
     .label {
       position: absolute;
       display: inline-block;
-      top: 10px;
-      left: 50%;
-      margin-left: -60px;
+      width: 100%;
+      left: 0;
+      top: 30%;
       font-family: 'Ubuntu', sans-serif;
       color: var(--second);
       font-size: 1.7em;
+      pointer-events: none;
     }
 
     .clear {
