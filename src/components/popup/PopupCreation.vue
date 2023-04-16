@@ -235,7 +235,7 @@ const saveCharacter = () => {
         item: {
           title: 'Torches',
           stat: '',
-          image: '',
+          image: 'Torches',
           type: 'Utility',
           group: 'items',
           used: 0
@@ -246,7 +246,7 @@ const saveCharacter = () => {
         item: {
           title: 'Rations',
           stat: '',
-          image: '',
+          image: 'Rations',
           type: 'Utility',
           group: 'items',
           used: 0

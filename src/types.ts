@@ -104,6 +104,12 @@ export interface Hireling {
   details: string
 }
 
+export interface Warband {
+  level: number
+  exp: number
+  stats: Stats
+}
+
 export interface GritList {
   'grit__1': Grit,
   'grit__2': Grit,
@@ -118,6 +124,12 @@ export interface Grit {
 export interface Bank {
   name: string
   item: Item | null
+}
+
+export interface ChangeStatEvent {
+  stat: StatKeys
+  maxValue: number
+  
 }
 
 export interface Character {
@@ -137,6 +149,7 @@ export interface Character {
   grit: GritList
   bank: Bank[]
   portrait: string | null
+  warband: Warband | null
 }
 
 export interface Popup {

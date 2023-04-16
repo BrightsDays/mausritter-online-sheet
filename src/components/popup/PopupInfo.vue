@@ -10,6 +10,9 @@
             Item images added;
           </li>
           <li class="item">
+            Warband added;
+          </li>
+          <li class="item">
             Bugs fixed.
           </li>
         </ol>

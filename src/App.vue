@@ -14,9 +14,9 @@ const isMobile = () => screen.width <= 760
 .app {
   display: flex;
   width: 900px;
-  height: calc(100vh - 40px);
+  height: 100vh;
   justify-content: space-between;
-  margin: 20px auto;
+  margin: 0 auto;
   font-family: 'Ubuntu', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

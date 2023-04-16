@@ -3,7 +3,7 @@
     {
       "title": "Torches",
       "stat": "",
-      "image": "",
+      "image": "Torches",
       "type": "Utility",
       "group": "items",
       "used": 0
@@ -11,7 +11,7 @@
     {
       "title": "Lantern",
       "stat": "",
-      "image": "",
+      "image": "Lantern",
       "type": "Utility",
       "group": "items",
       "used": 0
@@ -19,7 +19,7 @@
     {
       "title": "Rations",
       "stat": "",
-      "image": "",
+      "image": "Rations",
       "type": "Utility",
       "group": "items",
       "used": 0
@@ -27,7 +27,7 @@
     {
       "title": "Cookpots",
       "stat": "",
-      "image": "",
+      "image": "Cookpots",
       "type": "Utility",
       "group": "items",
       "used": 0

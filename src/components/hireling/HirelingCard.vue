@@ -15,9 +15,11 @@
       Look: {{ props.hireling.details }}
     </div>
     <div class="hirelings-item__wrapper">
-      <char-stats
+      <CharStats
         :stats="props.hireling.stats"
         :hireling-index="props.hireling.index"
+        @grow-stat="growStat($event)"
+        @down-stat="downStat($event)"
       />
       <char-inventory
         :body-back="props.hireling.bodyBack"
@@ -33,6 +35,7 @@ import CharStats from '../character/CharStats.vue'
 import CharInventory from '../character/CharInventory.vue'
 import { useCharacterStore } from '../../store/character'
 import { usePopupStore } from '../../store/popup'
+import { ChangeStatEvent } from '../../types'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
@@ -43,6 +46,22 @@ const props = defineProps({
     required: true
   }
 })
+
+const growStat = (event: ChangeStatEvent) => {
+  const target = characterStore.hirelings[props.hireling.index].stats[event.stat]
+
+  if (target && target.current < event.maxValue) {
+    characterStore.setHirelingStat(event.stat, +target.current + 1, props.hireling.index)
+  }
+}
+
+const downStat = (event: ChangeStatEvent) => {
+  const target = characterStore.hirelings[props.hireling.index].stats[event.stat]
+  
+  if (target && target.current > 0) {
+    characterStore.setHirelingStat(event.stat, +target.current - 1, props.hireling.index)
+  }
+}
 
 const removeHireling = (index: number) => {
   popupStore.setPopup('removeHireling')

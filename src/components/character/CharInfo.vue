@@ -63,7 +63,11 @@
           <p>+</p>
         </button>
       </div>
-      <char-stats :stats="characterStore.stats" />
+      <char-stats
+        :stats="characterStore.stats"
+        @grow-stat="growStat($event)"
+        @down-stat="downStat($event)"
+      />
     </div>
   </div>
 </template>
@@ -73,6 +77,7 @@ import { useCharacterStore } from '../../store/character'
 import CharStats from '../character/CharStats.vue'
 import { usePopupStore } from '../../store/popup'
 import { useNotificationsStore } from '../../store/notifications'
+import { ChangeStatEvent } from '../../types'
 
 const characterStore = useCharacterStore()
 const popup = usePopupStore()
@@ -99,6 +104,20 @@ const uploadImage = (event: InputEvent) => {
 
   if (files && files[0]) {
     reader.readAsDataURL(files[0])
+  }
+}
+
+const growStat = (event: ChangeStatEvent) => {
+  const target = characterStore.stats[event.stat]
+  if (target && target.current < event.maxValue) {
+    characterStore.setStat(event.stat, +target.current + 1)
+  }
+}
+
+const downStat = (event: ChangeStatEvent) => {
+  const target = characterStore.stats[event.stat]
+  if (target && target.current > 0) {    
+    characterStore.setStat(event.stat, +target.current - 1)
   }
 }
 </script>

@@ -42,7 +42,6 @@
 </template>
 
 <script setup lang="ts">
-import { useCharacterStore } from '../../store/character'
 import { StatKeys } from '../../types'
 
 const props = defineProps({
@@ -57,20 +56,14 @@ const props = defineProps({
   }
 })
 
-const characterStore = useCharacterStore()
+const emit = defineEmits(['growStat', 'downStat'])
 
 const growStat = (stat: StatKeys, maxValue: number) => {
-  const target = props.stats[stat]
-  if (target && target.current < maxValue) {
-    characterStore.setStat(stat, +target.current + 1, props.hirelingIndex)
-  }
+  emit('growStat', { stat, maxValue })
 }
 
 const downStat = (stat: StatKeys) => {
-  const target = props.stats[stat]
-  if (target && target.current > 0) {    
-    characterStore.setStat(stat, +target.current - 1, props.hirelingIndex)
-  }
+  emit('downStat', { stat })
 }
 </script>
 

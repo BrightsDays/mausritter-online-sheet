@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
-import UiHirelingCrad from './HirelingItem.vue'
+import UiHirelingCrad from './HirelingCard.vue'
 
 const characterStore = useCharacterStore()
 </script>

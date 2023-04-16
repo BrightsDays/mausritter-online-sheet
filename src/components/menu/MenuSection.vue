@@ -89,11 +89,10 @@
         Add hireling
       </button>
       <button
-        disabled
         class="menu__item menu__item--big"
-        @click.prevent="addHireling()"
+        @click.prevent="characterStore.addWarband()"
       >
-        Add warband
+        Warband
       </button>
     </div>
     <div
@@ -171,6 +170,7 @@ const addHireling = () => popupStore.setPopup('addHireling')
 .menu {
   width: 250px;
   max-height: 100%;
+  padding-top: 20px;
   padding-right: 4px;
   overflow-y: scroll;
 

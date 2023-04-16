@@ -96,7 +96,8 @@ export const useCharacterStore = defineStore('character', {
       name: 'bnk__0',
       item: null
     }],
-    portrait: null
+    portrait: null,
+    warband: null
   }),
   getters: {
     level: (state) => {
@@ -110,10 +111,8 @@ export const useCharacterStore = defineStore('character', {
     }
   },
   actions: {
-    setStat(statName: StatKeys, payload: number, hirelingIndex?: number) {      
-      !(typeof hirelingIndex === 'number')
-        ? this.stats[statName].current = payload
-        : this.hirelings[hirelingIndex].stats[statName].current = payload
+    setStat(statName: StatKeys, payload: number) {      
+      this.stats[statName].current = payload
     },
     setMaxStat(statName: StatKeys, payload: number) {
       this.stats[statName].max = payload
@@ -148,6 +147,9 @@ export const useCharacterStore = defineStore('character', {
     setHirelingIndex(payload: number) {
       this.hirelingIndex = payload
     },
+    setHirelingStat(statName: StatKeys, payload: number, hirelingIndex: number) {      
+      this.hirelings[hirelingIndex].stats[statName].current = payload
+    },
     removeHireling(payload: number) {
       const index = this.hirelings.findIndex(hireling => {
         return hireling.index === payload
@@ -160,6 +162,38 @@ export const useCharacterStore = defineStore('character', {
         packName === 'bodyBack'
           ? this.hirelings[hirelingIndex].bodyBack = payload as BodyBack
           : this.hirelings[hirelingIndex].packBack = payload as PackBack
+    },
+
+    addWarband() {
+      this.warband = {
+        level: 1,
+        exp: 0,
+        stats: {
+          str: {
+            name: 'str',
+            max: 6,
+            current: 1
+          },
+          dex: {
+            name: 'dex',
+            max: 6,
+            current: 1
+          },
+          wil: {
+            name: 'wil',
+            max: 6,
+            current: 1
+          },
+          hp: {
+            name: 'hp',
+            max: 6,
+            current: 1
+          }
+        }
+      }
+    },//TODO: Test data
+    setWarbandStat(statName: StatKeys, payload: number) {
+      if (this.warband) this.warband.stats[statName].current = payload
     },
 
     updateGrit(payload: GritList) {
@@ -267,7 +301,8 @@ export const useCharacterStore = defineStore('character', {
           name: 'bnk__0',
           item: null
         }],
-        portrait: ''
+        portrait: '',
+        warband: null
       }
     },
     addExperience(exp: number) {
