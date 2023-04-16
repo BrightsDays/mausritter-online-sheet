@@ -108,6 +108,8 @@ export interface Warband {
   level: number
   exp: number
   stats: Stats
+  bodyBack: HirelingBody
+  packBack: HirelingPack
 }
 
 export interface GritList {

@@ -47,6 +47,29 @@
         </button>
       </ui-details>
     </div>
+    <div 
+      v-if="characterStore.warband"
+      class="menu__options menu--bordered"
+    >
+      <template v-if="$route.path === '/'">
+        <router-link to="/warband">
+          <button
+            class="menu__item menu__item--big"
+          >
+            Show warband
+          </button>
+        </router-link>
+      </template>
+      <template v-else>
+        <router-link to="/">
+          <button
+            class="menu__item menu__item--big"
+          >
+            Show character
+          </button>
+        </router-link>
+      </template>
+    </div>
     <div
       v-if="characterStore.name"
       class="menu__options menu--bordered"
@@ -89,10 +112,11 @@
         Add hireling
       </button>
       <button
+        v-if="!characterStore.warband"
         class="menu__item menu__item--big"
         @click.prevent="characterStore.addWarband()"
       >
-        Warband
+        Form warband
       </button>
     </div>
     <div
@@ -123,7 +147,7 @@ import utilityData from '../../data/utilityList.json'
 import weaponData from '../../data/weaponList.json'
 import armorData from '../../data/armorList.json'
 import spellData from '../../data/spellList.json'
-import { Item } from '../../types'
+import { Item } from '../../types/index'
 import BankedItems from './MenuBanked.vue'
 import { useCharacterStore } from '../../store/character'
 import MenuGrits from './MenuGrits.vue'
@@ -170,7 +194,7 @@ const addHireling = () => popupStore.setPopup('addHireling')
 .menu {
   width: 250px;
   max-height: 100%;
-  padding-top: 20px;
+  padding: 10px;
   padding-right: 4px;
   overflow-y: scroll;
 

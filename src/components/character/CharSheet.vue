@@ -4,19 +4,12 @@
     :class="{'disabled': !characterStore.name}"
   >
     <CharAbout />
-    <CharInfo />
-    <CharItems />
-    <HirelingsList v-if="characterStore.hirelings.length" />
-    <WarbandCard v-if="characterStore.warband" />
+    <RouterView />
   </div>
 </template>
 
 <script setup lang="ts">
 import CharAbout from "./CharAbout.vue"
-import CharInfo from "./CharInfo.vue"
-import CharItems from "./CharItems.vue"
-import HirelingsList from "../hireling/HirelingsList.vue"
-import WarbandCard from '../warband/WarbandCard.vue'
 import { useCharacterStore } from "../../store/character"
 
 const characterStore = useCharacterStore()
@@ -26,8 +19,7 @@ const characterStore = useCharacterStore()
 .character {
   width: 626px;
   display: flex;
-  padding-top: 20px;
-  padding-right: 4px;
+  padding: 20px 4px 20px 0;
   flex-direction: column;
   gap: 15px;
   max-height: 100%;

@@ -77,7 +77,7 @@ import { useCharacterStore } from '../../store/character'
 import CharStats from '../character/CharStats.vue'
 import { usePopupStore } from '../../store/popup'
 import { useNotificationsStore } from '../../store/notifications'
-import { ChangeStatEvent } from '../../types'
+import { ChangeStatEvent } from '../../types/index'
 
 const characterStore = useCharacterStore()
 const popup = usePopupStore()

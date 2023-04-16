@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { Card } from '../../types'
+import { Card } from '../../types/types/types'
 import { onDragging } from '../../helpers/dragNDrop'
 import { computed } from 'vue'
 

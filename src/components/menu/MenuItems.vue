@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { Item, Card } from '../../types'
+import { Item, Card } from '../../types/types/types'
 import { type PropType } from 'vue'
 import { onDragging } from '../../helpers/dragNDrop'
 

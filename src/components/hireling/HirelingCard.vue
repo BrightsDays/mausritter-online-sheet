@@ -35,7 +35,7 @@ import CharStats from '../character/CharStats.vue'
 import CharInventory from '../character/CharInventory.vue'
 import { useCharacterStore } from '../../store/character'
 import { usePopupStore } from '../../store/popup'
-import { ChangeStatEvent } from '../../types'
+import { ChangeStatEvent } from '../../types/types/types'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()

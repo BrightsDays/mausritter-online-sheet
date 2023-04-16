@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import AppIndex from './components/AppIndex.vue'
-import BlockMobile from './components/BlockMobile.vue';
+import BlockMobile from './components/BlockMobile.vue'
 
 const isMobile = () => screen.width <= 760
 </script>

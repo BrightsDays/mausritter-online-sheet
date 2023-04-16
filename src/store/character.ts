@@ -189,6 +189,34 @@ export const useCharacterStore = defineStore('character', {
             max: 6,
             current: 1
           }
+        },
+        bodyBack: {
+          'Main Paw': {
+            name: 'Main Paw',
+            item: null
+          },
+          'Second Paw': {
+            name: 'Second Paw',
+            item: null
+          }
+        },
+        packBack: {
+          1: {
+            name: '1',
+            item: null
+          },
+          2: {
+            name: '2',
+            item: null
+          },
+          3: {
+            name: '3',
+            item: null
+          },
+          4: {
+            name: '4',
+            item: null
+          }
         }
       }
     },//TODO: Test data

@@ -67,7 +67,7 @@
 import { useCharacterStore } from '../../store/character'
 import UiItemCard from '../ui/UiItemCard.vue'
 import UiConditionCard from '../ui/uiConditionCard.vue'
-import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types'
+import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types/types/types'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
 const props = defineProps({

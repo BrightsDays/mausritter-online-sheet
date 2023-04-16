@@ -10,18 +10,19 @@
         disband
       </button>
     </div>
-    <div class="hirelings-item__wrapper">
+    <div
+      v-if="characterStore.warband" 
+      class="hirelings-item__wrapper"
+    >
       <CharStats
-        v-if="characterStore.warband"
         :stats="characterStore.warband.stats"
         @grow-stat="growStat($event)"
         @down-stat="downStat($event)"
       />
-      <!-- <char-inventory
-        :body-back="props.hireling.bodyBack"
-        :pack-back="props.hireling.packBack"
-        :hireling-index="props.hireling.index"
-      /> -->
+      <CharInventory
+        :body-back="characterStore.warband.bodyBack"
+        :pack-back="characterStore.warband.packBack"
+      />
     </div>
   </div>
 </template>
@@ -30,6 +31,7 @@
 import { useCharacterStore } from '../../store/character'
 import { ChangeStatEvent } from '../../types'
 import CharStats from '../character/CharStats.vue'
+import CharInventory from '../character/CharInventory.vue'
 
 const characterStore = useCharacterStore()
 

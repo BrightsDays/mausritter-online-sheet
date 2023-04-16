@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import conditions from '../../data/conditionList.json'
 import { onDragging } from '../../helpers/dragNDrop'
-import { Card } from '../../types';
+import { Card } from '../../types/types/types';
 </script>
 
 <style lang="scss">
