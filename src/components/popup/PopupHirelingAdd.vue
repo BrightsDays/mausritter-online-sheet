@@ -1,5 +1,5 @@
 <template>
-  <new-popup-layout title="Add hireling">
+  <PopupLayout title="Add hireling">
     <template #body>
       <UiSelect
         v-model="hireling"
@@ -20,15 +20,15 @@
         @click.prevent="saveHireling(hireling)"
       />
     </template>
-  </new-popup-layout>
+  </PopupLayout>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
-import createHireling from '../../helpers/createHireling'
+import createHireling from '../../helpers/createSimpleCard'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import NewPopupLayout from './PopupLayout.vue'
+import PopupLayout from './PopupLayout.vue'
 import { useNotificationsStore } from '../../store/notifications'
 import UiSelect from '../ui/UiSelect.vue'
 import UiButton from '../ui/UiButton.vue'

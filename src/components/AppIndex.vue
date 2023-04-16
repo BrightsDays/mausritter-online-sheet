@@ -36,11 +36,13 @@ import PopupItem from './popup/PopupItem.vue'
 import { useCharacterStore } from '../store/character'
 import { onMounted } from 'vue'
 import AppNotification from './notification/AppNotification.vue'
+import PopupWarbandForm from './popup/PopupWarbandForm.vue'
+import PopupWarbandRemove from './popup/PopupWarbandRemove.vue'
 
 const popup = usePopupStore()
 const characterStore = useCharacterStore()
 
-const popups = ['new', 'full', 'addHireling', 'removeHireling', 'levelUp', 'clear', 'upload', 'info', 'addCustomItem']
+const popups = ['new', 'full', 'addHireling', 'removeHireling', 'formWarband', 'disbandWarband', 'levelUp', 'clear', 'upload', 'info', 'addCustomItem']
 
 const activePopup = (type: string) => {
   switch (type) {
@@ -48,6 +50,10 @@ const activePopup = (type: string) => {
       return PopupCreation
     case 'addHireling':
       return PopupHirelingAdd
+    case 'formWarband':
+      return PopupWarbandForm
+    case 'disbandWarband':
+      return PopupWarbandRemove
     case 'removeHireling':
       return PopupHirelingRemove
     case 'addCustomItem':

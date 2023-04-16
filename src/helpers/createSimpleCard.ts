@@ -1,9 +1,9 @@
-import { Hireling } from '../types'
+import { SimpleCard } from '../types'
 import rollDices from './rollDices'
 import detailsList from '../data/detailsList.json'
 import { useCharacterStore } from '../store/character'
 
-export default (name: string): Hireling => {
+export default (name?: string): SimpleCard => {
   const characterStore = useCharacterStore()
 
   const stats = {
@@ -13,9 +13,7 @@ export default (name: string): Hireling => {
     hp: rollDices(1,6)
   }
 
-  return {
-    index: characterStore.hirelings.length,
-    name: name,
+  const simpleCard: SimpleCard = {
     level: 1,
     exp: 0,
     stats: {
@@ -67,7 +65,14 @@ export default (name: string): Hireling => {
         name: '4',
         item: null
       }
-    },
-    details: detailsList[rollDices(1, detailsList.length) - 1]
+    }
   }
+
+  if (name) {
+    simpleCard.index = characterStore.hirelings.length
+    simpleCard.name = name
+    simpleCard.details = detailsList[rollDices(1, detailsList.length) - 1]
+  }
+
+  return simpleCard
 }

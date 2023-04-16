@@ -1,27 +1,27 @@
 <template>
-  <div class="hirelings-item">
-    <div class="hirelings-item__header">
-      <h3 class="hirelings-item__heading">
-        {{ props.hireling.name }}
+  <div class="hireling">
+    <div class="header">
+      <h3 class="heading">
+        {{ props.hireling.name }} (Level {{ props.hireling.level }})
       </h3>
       <button
-        class="hirelings-item__remove"
+        class="remove"
         @click="removeHireling(props.hireling.index)"
       >
         remove
       </button>
     </div>
-    <div class="hirelings-item__details">
+    <div class="details">
       Look: {{ props.hireling.details }}
     </div>
-    <div class="hirelings-item__wrapper">
+    <div class="wrapper">
       <CharStats
         :stats="props.hireling.stats"
         :hireling-index="props.hireling.index"
         @grow-stat="growStat($event)"
         @down-stat="downStat($event)"
       />
-      <char-inventory
+      <CharInventory
         :body-back="props.hireling.bodyBack"
         :pack-back="props.hireling.packBack"
         :hireling-index="props.hireling.index"
@@ -35,7 +35,7 @@ import CharStats from '../character/CharStats.vue'
 import CharInventory from '../character/CharInventory.vue'
 import { useCharacterStore } from '../../store/character'
 import { usePopupStore } from '../../store/popup'
-import { ChangeStatEvent } from '../../types/types/types'
+import { ChangeStatEvent } from '../../types/index'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
@@ -69,19 +69,19 @@ const removeHireling = (index: number) => {
 }
 </script>
 
-<style lang="scss">
-.hirelings-item {
+<style lang="scss" scoped>
+.hireling {
   padding-top: 10px;
   text-align: left;
   border-top: 2px solid var(--second);
 
-  &__header {
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  &__heading {
+  .heading {
     display: inline-block;
     font-family: "Pirata One", sans-serif;
     font-size: 2.6em;
@@ -90,20 +90,20 @@ const removeHireling = (index: number) => {
     color: var(--main);
   }
 
-  &__wrapper {
+  .wrapper {
     display: flex;
     margin-top: 10px;
     gap: 15px;
   }
 
-  &__details {
+  .details {
     margin-top: 10px;
     font-family: "Ubuntu", sans-serif;
     font-size: 1.6em;
     color: var(--second);
   }
 
-  &__remove {
+  .remove {
     padding: 5px 10px;
     font-family: "Ubuntu", sans-serif;
     font-size: 1.3em;

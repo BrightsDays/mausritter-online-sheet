@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { BodyBack, Character, StatKeys, DescriptionKeys, PackBack, Hireling, ValueKeys, Bank, GritList } from '../types'
+import { BodyBack, Character, StatKeys, DescriptionKeys, PackBack, SimpleCard, ValueKeys, Bank, GritList } from '../types'
 
 export const useCharacterStore = defineStore('character', {
   state: (): Character => ({
@@ -141,7 +141,7 @@ export const useCharacterStore = defineStore('character', {
       this.portrait = payload
     },
 
-    addHireling(payload: Hireling) {
+    addHireling(payload: SimpleCard) {
       this.hirelings = [ ...this.hirelings, payload]
     },
     setHirelingIndex(payload: number) {
@@ -164,64 +164,14 @@ export const useCharacterStore = defineStore('character', {
           : this.hirelings[hirelingIndex].packBack = payload as PackBack
     },
 
-    addWarband() {
-      this.warband = {
-        level: 1,
-        exp: 0,
-        stats: {
-          str: {
-            name: 'str',
-            max: 6,
-            current: 1
-          },
-          dex: {
-            name: 'dex',
-            max: 6,
-            current: 1
-          },
-          wil: {
-            name: 'wil',
-            max: 6,
-            current: 1
-          },
-          hp: {
-            name: 'hp',
-            max: 6,
-            current: 1
-          }
-        },
-        bodyBack: {
-          'Main Paw': {
-            name: 'Main Paw',
-            item: null
-          },
-          'Second Paw': {
-            name: 'Second Paw',
-            item: null
-          }
-        },
-        packBack: {
-          1: {
-            name: '1',
-            item: null
-          },
-          2: {
-            name: '2',
-            item: null
-          },
-          3: {
-            name: '3',
-            item: null
-          },
-          4: {
-            name: '4',
-            item: null
-          }
-        }
-      }
-    },//TODO: Test data
+    addWarband(payload: SimpleCard) {
+      this.warband = payload
+    },
     setWarbandStat(statName: StatKeys, payload: number) {
       if (this.warband) this.warband.stats[statName].current = payload
+    },
+    removeWarband() {
+      this.warband = null
     },
 
     updateGrit(payload: GritList) {

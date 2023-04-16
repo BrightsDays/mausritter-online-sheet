@@ -1,27 +1,33 @@
 <template>
-  <div class="hirelings-item">
-    <div class="hirelings-item__header">
-      <h3 class="hirelings-item__heading">
-        Warband
+  <div
+    v-if="warband"
+    class="warband"
+  >
+    <div class="header">
+      <h3 class="heading">
+        Warband (Level {{ warband.level }})
       </h3>
       <button
-        class="hirelings-item__remove"
+        class="remove"
+        @click="popupStore.setPopup('disbandWarband')"
       >
         disband
       </button>
     </div>
+    <div class="details">
+      Your warband is formed by 20 fighting mice, plus one follower (luggage porter, cook, armourer) for every fighter.
+    </div>
     <div
-      v-if="characterStore.warband" 
-      class="hirelings-item__wrapper"
+      class="wrapper"
     >
       <CharStats
-        :stats="characterStore.warband.stats"
+        :stats="warband.stats"
         @grow-stat="growStat($event)"
         @down-stat="downStat($event)"
       />
       <CharInventory
-        :body-back="characterStore.warband.bodyBack"
-        :pack-back="characterStore.warband.packBack"
+        :body-back="warband.bodyBack"
+        :pack-back="warband.packBack"
       />
     </div>
   </div>
@@ -32,11 +38,15 @@ import { useCharacterStore } from '../../store/character'
 import { ChangeStatEvent } from '../../types'
 import CharStats from '../character/CharStats.vue'
 import CharInventory from '../character/CharInventory.vue'
+import router from '../../router'
+import { usePopupStore } from '../../store/popup'
 
+const { warband } = useCharacterStore()
 const characterStore = useCharacterStore()
+const popupStore = usePopupStore()
 
 const growStat = (event: ChangeStatEvent) => {
-  const target = characterStore.warband?.stats[event.stat]
+  const target = warband?.stats[event.stat]
 
   if (target && target.current < event.maxValue) {
     characterStore.setWarbandStat(event.stat, +target.current + 1)
@@ -44,14 +54,65 @@ const growStat = (event: ChangeStatEvent) => {
 }
 
 const downStat = (event: ChangeStatEvent) => {
-  const target = characterStore.warband?.stats[event.stat]
+  const target = warband?.stats[event.stat]
   
   if (target && target.current > 0) {    
     characterStore.setWarbandStat(event.stat, +target.current - 1)
   }
 }
+
+const disband = () => {
+  characterStore.removeWarband()
+  router.push('/')
+}
 </script>
 
 <style lang="scss" scoped>
+.warband {
+  padding-top: 10px;
+  text-align: left;
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .heading {
+    display: inline-block;
+    font-family: "Pirata One", sans-serif;
+    font-size: 4em;
+    font-weight: normal;
+    line-height: 1;
+    color: var(--main);
+  }
+
+  .wrapper {
+    display: flex;
+    margin-top: 10px;
+    gap: 15px;
+  }
+
+  .details {
+    margin-top: 10px;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1.6em;
+    color: var(--second);
+  }
+
+  .remove {
+    padding: 5px 10px;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--main);
+    border: 2px solid var(--main);
+    border-radius: 15px;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--second-background);
+    }
+  }
+}
 </style>

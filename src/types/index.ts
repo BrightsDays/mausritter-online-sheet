@@ -93,23 +93,15 @@ export interface HirelingPack {
   4: CardCell
 }
 
-export interface Hireling {
-  index: number
-  name: string
+export interface SimpleCard {
+  index?: number
+  name?: string
   level: number
   exp: number
   stats: Stats
   bodyBack: HirelingBody
   packBack: HirelingPack
-  details: string
-}
-
-export interface Warband {
-  level: number
-  exp: number
-  stats: Stats
-  bodyBack: HirelingBody
-  packBack: HirelingPack
+  details?: string
 }
 
 export interface GritList {
@@ -171,7 +163,7 @@ export type BodyIndexes = 'Main Paw'| 'Main Body'| 'Second Paw'| 'Second Body'
 
 export type PackIndexes = '1' | '2' | '3' | '4' | '5' | '6'
 
-export type PopupTypes = 'new' | 'full' | 'addHireling' | 'removeHireling' | 'levelUp' | 'clear' | 'upload' | 'info' | 'addCustomItem' | null
+export type PopupTypes = 'new' | 'full' | 'addHireling' | 'removeHireling' | 'formWarband' | 'disbandWarband' | 'levelUp' | 'clear' | 'upload' | 'info' | 'addCustomItem' | null
 
 export type StatKeys = 'str' | 'dex' | 'wil' | 'hp'
 
