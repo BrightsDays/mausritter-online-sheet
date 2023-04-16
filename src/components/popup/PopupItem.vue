@@ -125,7 +125,7 @@ const addItem = () => {
         newItem.stat = 'd6'
         break
       case 'Medium weapon':
-        newItem.stat = 'd8/d10'
+        newItem.stat = 'd6/d8'
         break
       case 'Heavy weapon':
         newItem.stat = 'd10'

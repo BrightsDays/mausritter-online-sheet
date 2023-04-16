@@ -76,16 +76,14 @@ const addExperience = (exp: number) => {
           if (newRoll > characterStore.stats[stat as StatKeys].max) {
             notificationStore.setNotification({
               type: 'info',
-              message: `New ${stat} roll is equal ${newRoll} - it's more than previous, so  
-              charater stat increase by 1`
+              message: `New ${stat} roll is equal ${newRoll} - it's more than previous, so charater stat increase by 1`
             })
             characterStore.setStat(stat as StatKeys, characterStore.stats[stat as StatKeys].max + 1)
             characterStore.setMaxStat(stat as StatKeys, characterStore.stats[stat as StatKeys].max + 1)
           } else {
             notificationStore.setNotification({
               type: 'info',
-              message: `New ${stat} roll is equal ${newRoll} - it's less than previous, so  
-              charater stat don't increase`
+              message: `New ${stat} roll is equal ${newRoll} - it's less than previous, so charater stat don't increase`
             })
           }
         })
