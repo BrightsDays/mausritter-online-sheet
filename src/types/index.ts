@@ -15,6 +15,7 @@ export interface Card {
   group: 'items' | 'conditions'
   used:  0 | 1 | 2 | 3
   hirelingIndex: string | null
+  warband: string | null
 }
 
 export interface Condition {

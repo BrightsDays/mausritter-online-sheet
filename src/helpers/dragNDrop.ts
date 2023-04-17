@@ -12,7 +12,8 @@ export const onDragging = (event: DragEvent, item: Card) => {
       used: 0,
       description: item.description || null,
       clear: item.clear || null,
-      hirelingIndex: (event.target as Node).parentElement?.dataset.index || null
+      hirelingIndex: (event.target as Node).parentElement?.dataset.index || null,
+      warband: (event.target as Node).parentElement?.dataset.warband || null
     }
 
     if (((event.target as Node).childNodes[1] as HTMLElement).classList.contains('items__status')) {
@@ -33,6 +34,7 @@ export const onDragging = (event: DragEvent, item: Card) => {
     if (data.description) event.dataTransfer.setData('description', data.description)
     if (data.clear) event.dataTransfer.setData('clear', data.clear)
     if (data.hirelingIndex) event.dataTransfer.setData('hirelingIndex', data.hirelingIndex.toString())
+    if (data.warband) event.dataTransfer.setData('warband', data.warband.toString())
   }
 }
 
@@ -69,8 +71,9 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
     }
     : null
 
-  const moveFrom = async () => {
+  const moveFrom = async () => {    
     const hirelingIndex = event.dataTransfer?.getData('hirelingIndex')
+    const warband = event.dataTransfer?.getData('warband') === 'warband' ? true : false
 
     if (slotId && slotId.includes('bnk')) {
       let newBank = store.bank
@@ -98,8 +101,32 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
         }
       })
     }
+    
+    if (slotId && !hirelingIndex && warband) {
+      if (Object.keys(store.bodyBack).includes(slotId)) {
+        store.updateWarbandItems('bodyBack', {
+          ...store.warband.bodyBack as BodyBack,
+          [slotId]: {
+            name: slotId,
+            item: null,
+            used: 0
+          }
+        })
+      }
 
-    if (slotId && !hirelingIndex) {
+      if (Object.keys(store.packBack).includes(slotId)) {
+        store.updateWarbandItems('packBack', {
+          ...store.warband.packBack as PackBack,
+          [slotId]: {
+            name: slotId,
+            item: null,
+            used: 0
+          }
+        })
+      }
+    }
+
+    if (slotId && !hirelingIndex && !warband) {
       if (Object.keys(store.bodyBack).includes(slotId)) {
         store.updateItems('bodyBack', {
           ...store.bodyBack as BodyBack,
@@ -148,12 +175,13 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
     }
   }
     
-  const moveTo = () => {  
+  const moveTo = () => {
     const id = (event.target as HTMLElement).id
       ? (event.target as HTMLElement).id
       : null
 
     const hirelingIndex = firstChild.parentElement?.dataset.index
+    const warband = firstChild.parentElement?.dataset.warband === 'warband' ? true : false
 
     if (data && id && type === 'bank') {
       const nextId = `bnk__${+id.substring(5) + 1}`
@@ -181,7 +209,29 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
       })
     }
 
-    if (data && id && !hirelingIndex) {
+    if (data && id && !hirelingIndex && warband) {
+      if (type === 'bodyBack') {        
+        store.updateWarbandItems('bodyBack', {
+          ...store.warband.bodyBack as BodyBack,
+          [id]: {
+            name: id,
+            item: data
+          }
+        })
+      }
+
+      if (type === 'packBack') {
+        store.updateWarbandItems('packBack', {
+          ...store.warband.packBack as PackBack,
+          [id]: {
+            name: id,
+            item: data
+          }
+        })
+      }
+    }
+
+    if (data && id && !hirelingIndex && !warband) {
       if (type === 'bodyBack') {
         store.updateItems('bodyBack', {
           ...store.bodyBack as BodyBack,
@@ -236,10 +286,10 @@ export const drop = async (event: DragEvent, type: string, store: any) => {
     conditions: firstChild && data?.group === 'conditions'
       && (type === 'packBack' || type === 'grit' || type === 'drop'),
     drop: type === 'drop' && (data?.group === 'items' || data?.group === 'conditions')
-  }
-  
+  }  
+
   if ((event.target as HTMLElement).id
-      && (cases.items || cases.bankItems || cases.conditions || cases.drop)) {        
+      && (cases.items || cases.bankItems || cases.conditions || cases.drop)) {
       await moveFrom()
       moveTo()
   } else {

@@ -3,17 +3,7 @@
     <h2 class="items__heading">
       Inventory
     </h2>
-    <div
-      class="drop-input"
-      @drop="event => drop(event, 'drop', characterStore)"
-      @dragover="allowDrop"
-      @dragleave="leaveDrag"
-    >
-      <label
-        id="drop"
-        class="drop-input__label"
-      >Drop item</label>
-    </div>
+    <UiDrop />
     <div class="pips-input">
       <label class="pips-input__label">Pips</label>
       <input
@@ -33,7 +23,7 @@
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
 import CharInventory from '../character/CharInventory.vue'
-import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
+import UiDrop from '../ui/UiDrop.vue'
 
 const characterStore = useCharacterStore()
 
@@ -91,20 +81,6 @@ const updatePips = (eventTarget: HTMLInputElement) =>
     font-size: 1.4em;
     border: none;
     outline: none;
-  }
-}
-
-.drop-input {
-  margin-left: auto;
-  width: 211px;
-
-  &__label {
-    width: 100%;
-    background: var(--background);
-  }
-  
-  &:after {
-    content: '';
   }
 }
 

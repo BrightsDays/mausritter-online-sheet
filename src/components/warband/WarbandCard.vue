@@ -17,6 +17,7 @@
     <div class="details">
       Your warband is formed by 20 fighting mice, plus one follower (luggage porter, cook, armourer) for every fighter.
     </div>
+    <UiDrop />
     <div
       class="wrapper"
     >
@@ -28,8 +29,22 @@
       <CharInventory
         :body-back="warband.bodyBack"
         :pack-back="warband.packBack"
+        is-warband="warband"
       />
     </div>
+  </div>
+  <div
+    v-else
+    class="warband column"
+  >
+    <span class="details">
+      You have not formed warband.
+    </span>
+    <UiButton
+      text="Form warband"
+      :type="'big'"
+      @click="popupStore.setPopup('formWarband')"
+    />
   </div>
 </template>
 
@@ -38,10 +53,11 @@ import { useCharacterStore } from '../../store/character'
 import { ChangeStatEvent } from '../../types'
 import CharStats from '../character/CharStats.vue'
 import CharInventory from '../character/CharInventory.vue'
-import router from '../../router'
 import { usePopupStore } from '../../store/popup'
+import UiDrop from '../ui/UiDrop.vue'
+import UiButton from '../ui/UiButton.vue'
 
-const { warband } = useCharacterStore()
+const { warband } = $(useCharacterStore())
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 
@@ -60,17 +76,18 @@ const downStat = (event: ChangeStatEvent) => {
     characterStore.setWarbandStat(event.stat, +target.current - 1)
   }
 }
-
-const disband = () => {
-  characterStore.removeWarband()
-  router.push('/')
-}
 </script>
 
 <style lang="scss" scoped>
 .warband {
   padding-top: 10px;
   text-align: left;
+
+  &.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   .header {
     display: flex;

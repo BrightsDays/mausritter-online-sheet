@@ -12,6 +12,7 @@
         :id="item.name.toString()"
         :key="`it__${item}`"
         :data-index="hirelingIndex"
+        :data-warband="isWarband"
         class="body-items__back"
         @drop="event => drop(event, 'bodyBack', store)"
         @dragover="allowDrop"
@@ -38,6 +39,7 @@
         :id="item.name.toString()"
         :key="`pb__${item}`"
         :data-index="hirelingIndex"
+        :data-warband="isWarband"
         class="pack-items__back"
         @drop="event => drop(event, 'packBack', store)"
         @dragover="allowDrop"
@@ -81,6 +83,11 @@ const props = defineProps({
   },
   hirelingIndex: {
     type: Number,
+    required: false,
+    default: null
+  },
+  isWarband: {
+    type: String || null,
     required: false,
     default: null
   }

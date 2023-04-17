@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { onDragging } from '../../helpers/dragNDrop'
-import { Card } from '../../types/types/types';
+import { Card } from '../../types/index'
 
 const props = defineProps({
   condition: {

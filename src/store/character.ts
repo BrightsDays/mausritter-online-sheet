@@ -170,6 +170,11 @@ export const useCharacterStore = defineStore('character', {
     setWarbandStat(statName: StatKeys, payload: number) {
       if (this.warband) this.warband.stats[statName].current = payload
     },
+    updateWarbandItems(packName: 'bodyBack' | 'packBack', payload: BodyBack | PackBack) {
+      packName === 'bodyBack'
+        ? this.warband.bodyBack = payload as BodyBack
+        : this.warband.packBack = payload as PackBack
+    },
     removeWarband() {
       this.warband = null
     },
