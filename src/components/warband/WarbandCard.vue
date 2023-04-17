@@ -17,7 +17,7 @@
     <div class="details">
       Your warband is formed by 20 fighting mice, plus one follower (luggage porter, cook, armourer) for every fighter.
     </div>
-    <UiDrop />
+    <UiDrop :width="243" />
     <div
       class="wrapper"
     >

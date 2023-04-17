@@ -1,6 +1,7 @@
 <template>
   <div
     class="input"
+    :style="{ width: `${width}px`}"
     @drop="event => drop(event, 'drop', characterStore)"
     @dragover="allowDrop"
     @dragleave="leaveDrag"
@@ -16,6 +17,12 @@
 import { useCharacterStore } from '../../store/character'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
 
+const {
+  width = 221
+} = defineProps<{
+  width?: number
+}>()
+
 const characterStore = useCharacterStore()
 </script>
 
@@ -26,7 +33,6 @@ const characterStore = useCharacterStore()
   font-family: 'Ubuntu', sans-serif;
   color: var(--main);
   margin-left: auto;
-  width: 211px;
   text-align: center;
 
   .label {
