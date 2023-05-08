@@ -46,7 +46,6 @@
       @click="popupStore.setPopup('formWarband')"
     />
   </div>
-  <UiItemCard :item="warband.packBack[1].item" />
 </template>
 
 <script setup lang="ts">
@@ -57,7 +56,6 @@ import CharInventory from '../character/CharInventory.vue'
 import { usePopupStore } from '../../store/popup'
 import UiDrop from '../ui/UiDrop.vue'
 import UiButton from '../ui/UiButton.vue'
-import UiItemCard from '../ui/UiItemCard.vue'
 
 const { warband } = $(useCharacterStore())
 const characterStore = useCharacterStore()

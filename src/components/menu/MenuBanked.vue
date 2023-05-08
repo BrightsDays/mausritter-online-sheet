@@ -9,7 +9,10 @@
       @dragover="allowDrop"
       @dragleave="leaveDrag"
     >
-      <div v-if="!item.item" />
+      <div
+        v-if="!item.item"
+        class="dotted"
+      />
              
       <UiItemCard
         v-else
@@ -32,7 +35,6 @@ const characterStore = useCharacterStore()
 .banked {
   display: grid;
   grid-template-columns: 120px 120px;
-  border: 1px solid var(--main);
 
   .item {
     display: flex;
@@ -44,14 +46,12 @@ const characterStore = useCharacterStore()
     height: 120px;
     color: var(--main);
 
-    &::before {
+    .dotted::before {
       content: '';
       display: block;
       position: absolute;
-      top: -1px;
-      left: -1px;
-      width: 100%;
-      height: 100%;
+      width: calc(100% - 2px);
+      height: calc(100% - 2px);
       border: 1px dashed var(--second);
       z-index: -1;
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="items">
     <UiItemCard
-      v-for="item in props.itemsList"
+      v-for="item in itemsList"
       :id="item.title"
       :key="item.title"
       draggable="true"
@@ -14,16 +14,14 @@
 
 <script setup lang="ts">
 import { Item, Card } from '../../types/'
-import { type PropType } from 'vue'
 import { onDragging } from '../../helpers/dragNDrop'
 import UiItemCard from '../ui/UiItemCard.vue'
 
-const props = defineProps({
-  itemsList: {
-    type: Object as PropType<Item[]>,
-    required: true,
-  }
-})
+const {
+  itemsList
+} = defineProps<{
+  itemsList: Item[]
+}>()
 </script>
 
 <style lang="scss" scoped>
