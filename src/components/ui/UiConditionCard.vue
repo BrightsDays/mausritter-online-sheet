@@ -35,11 +35,12 @@ const {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  width: 121px;
-  height: 121px;
+  width: 120px;
+  height: 120px;
   padding: 10px;
-  border: 1px solid var(--main);
+  box-shadow: inset 0px 0px 0px 1px var(--main);
   color: var(--main);
+  background-color: var(--background);
   cursor: move;
   z-index: 1;
 

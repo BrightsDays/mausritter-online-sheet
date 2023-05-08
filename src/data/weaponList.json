@@ -13,15 +13,15 @@
       "stat": "d6",
       "image": "Needle",
       "type": "Light",
-      "group":  "items",
+      "group": "items",
       "used": 0
     },
     {
       "title": "Dagger",
       "stat": "d6",
-      "image":  "Dagger",
+      "image": "Dagger",
       "type": "Light",
-      "group":  "items",
+      "group": "items",
       "used": 0
     },
     {
@@ -29,23 +29,23 @@
       "stat": "d6/d8",
       "image": "Sword",
       "type": "Medium",
-      "group":  "items",
+      "group": "items",
       "used": 0
     },
     {
       "title": "Axe",
       "stat": "d6/d8",
-      "image":  "Axe",
+      "image": "Axe",
       "type": "Medium",
-      "group":  "items",
+      "group": "items",
       "used": 0
     },
     {
       "title": "Mace",
       "stat": "d6/d8",
-      "image":  "Mace",
+      "image": "Mace",
       "type": "Medium",
-      "group":  "items",
+      "group": "items",
       "used": 0
     },
     {
@@ -89,18 +89,18 @@
       "used": 0
     },
     {
-      "title": "Sling",
-      "stat": "d6",
-      "image":  "Sling",
-      "type": "Light ranged",
-      "group":  "items",
-      "used": 0
-    },
-    {
       "title": "Bow",
       "stat": "d8",
       "image": "Bow",
       "type": "Heavy ranged",
+      "group": "items",
+      "used": 0
+    },
+    {
+      "title": "Sling",
+      "stat": "d6",
+      "image": "Sling",
+      "type": "Light ranged",
       "group": "items",
       "used": 0
     },

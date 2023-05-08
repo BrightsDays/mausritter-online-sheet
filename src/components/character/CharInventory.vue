@@ -25,7 +25,7 @@
           {{ item.name }}
         </span>
 
-        <UiNewItemCard
+        <UiItemCard
           v-else
           :item="item.item"
           @point-click="setBodyItemStats($event, index)"
@@ -59,7 +59,7 @@
           :condition="item.item"
         />
 
-        <UiNewItemCard
+        <UiItemCard
           v-else
           :item="item.item"
           @point-click="setPackItemStats($event, index)"
@@ -74,7 +74,7 @@ import { useCharacterStore } from '../../store/character'
 import UiConditionCard from '../ui/UiConditionCard.vue'
 import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
-import UiNewItemCard from '../ui/UiNewItemCard.vue'
+import UiItemCard from '../ui/UiItemCard.vue'
 
 const props = defineProps({
   bodyBack: {

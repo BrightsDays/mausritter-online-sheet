@@ -40,10 +40,11 @@ const toggleDetails = () => {
 
 <style lang="scss" scoped>
 .details {
-  padding: 15px;
+  padding: 15px 0;
 
   .summary {
     position: relative;
+    padding: 0 15px;
     list-style: none;
     font-size: 2.2em;
     font-weight: 500;

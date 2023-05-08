@@ -214,7 +214,7 @@ const addHireling = () => popupStore.setPopup('addHireling')
   &__item {
     display: block;
     width: 100%;
-    padding: 10px 0 10px 10px;
+    padding: 10px 0 10px 15px;
     font-size: 2em;
     font-weight: 500;
     cursor: pointer;

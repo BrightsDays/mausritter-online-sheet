@@ -16,9 +16,9 @@ export const onDragging = (event: DragEvent, item: Card) => {
       warband: (event.target as Node).parentElement?.dataset.warband || null
     }
 
-    if (((event.target as Node).childNodes[1] as HTMLElement).classList.contains('items__status')) {
+    if (((event.target as Node).childNodes[1] as HTMLElement).classList.contains('status')) {
       (event.target as Node).childNodes[1].childNodes[0].childNodes.forEach(point => {
-        if ((point as HTMLElement).classList?.contains('points__item--used')) {
+        if ((point as HTMLElement).classList?.contains('used')) {
           data.used += 1
         }
       })
@@ -30,7 +30,7 @@ export const onDragging = (event: DragEvent, item: Card) => {
     event.dataTransfer.setData('image', data.image)
     if (data.type) event.dataTransfer.setData('type', data.type)
     if (data.group) event.dataTransfer.setData('group', data.group)
-    event.dataTransfer.setData('used', data.used.toString())
+    event.dataTransfer.setData('used', data.used.toString())    
     if (data.description) event.dataTransfer.setData('description', data.description)
     if (data.clear) event.dataTransfer.setData('clear', data.clear)
     if (data.hirelingIndex) event.dataTransfer.setData('hirelingIndex', data.hirelingIndex.toString())

@@ -18,10 +18,10 @@ import { Card, Condition } from '../../types/'
 import UiConditionCard from '../ui/UiConditionCard.vue'
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .conditions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-left: -14px;
+  grid-template-columns: 120px 120px;
+  border: 1px solid var(--main);
 }
 </style>
