@@ -21,9 +21,11 @@
         <span
           v-if="!item.item"
           class="body-items__name"
-        >{{ item.name }}</span>
+        >
+          {{ item.name }}
+        </span>
 
-        <ui-item-card
+        <UiNewItemCard
           v-else
           :item="item.item"
           @point-click="setBodyItemStats($event, index)"
@@ -48,14 +50,16 @@
         <span
           v-if="!item.item"
           class="pack-items__name"
-        >{{ item.name }}</span>
+        >
+          {{ item.name }}
+        </span>
 
         <ui-condition-card
           v-else-if="item.item?.group === 'conditions'"
           :condition="item.item"
         />
 
-        <ui-item-card
+        <UiNewItemCard
           v-else
           :item="item.item"
           @point-click="setPackItemStats($event, index)"
@@ -67,10 +71,10 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
-import UiItemCard from '../ui/UiItemCard.vue'
-import UiConditionCard from '../ui/uiConditionCard.vue'
-import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types/types/types'
+import UiConditionCard from '../ui/UiConditionCard.vue'
+import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types'
 import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
+import UiNewItemCard from '../ui/UiNewItemCard.vue'
 
 const props = defineProps({
   bodyBack: {
@@ -204,8 +208,8 @@ const setPackItemStats = (event: number, index: string | number) => {
 .inventory {
   display: flex;
   justify-content: space-between;
-  gap: 15px;
   text-align: center;
+  gap: 10px;
 
   &--hireling {
     padding-top: 20px;
@@ -215,69 +219,32 @@ const setPackItemStats = (event: number, index: string | number) => {
 .body-items {
   display: grid;
   position: relative;
+  width: 242px;
+  height: 242px;
   grid-template-columns: 120px 120px;
   grid-template-rows: 120px 120px;
-  border: 2px solid var(--main);
+  border: 1px solid var(--main);
   overflow: hidden;
 
   &__back {
-    border: 1px dashed var(--second);
+    position: relative;
 
-    &:nth-child(1) {
-      border-left: none;
-      border-top: none;
-    }
-    
-    &:nth-child(2) {
-      border-right: none;
-      border-top: none;
-    }
-
-    &:nth-child(3) {
-      border-left: none;
-      border-bottom: none;
-    }
-
-    &:nth-child(4) {
-      border-right: none;
-      border-bottom: none;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 100%;
+      height: 100%;
+      border: 1px dashed var(--second);
     }
   }
 
   &--hireling {
+    width: 122px;
     grid-template-columns: 120px;
     grid-template-rows: 120px 120px;
-
-    .body-items__back {
-      border: 1px dashed var(--second);
-
-      &:nth-child(1) {
-        border-left: none;
-        border-top: none;
-        border-right: none;
-      }
-      
-      &:nth-child(2) {
-        border-right: none;
-        border-bottom: none;
-        border-left: none;
-      }
-    }
-  }
-
-  &__item {
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    min-width: 121px;
-    min-height: 121px;
-    
-    .items__image {
-      bottom: 0px;
-    }
-
-    .items__image--heavy {
-      bottom: 30px;
-    }
   }
 
   &__name {
@@ -296,14 +263,17 @@ const setPackItemStats = (event: number, index: string | number) => {
 .pack-items {
   position: relative;
   display: grid;
+  width: 362px;
+  height: 242px;
   grid-template-columns: 120px 120px 120px;
   grid-template-rows: 120px 120px;
-  border: 2px solid var(--main);
+  border: 1px solid var(--main);
   overflow: hidden;
 
   &__list {
     position: absolute;
     display: grid;
+    height: 240px;
     grid-template-columns: 120px 120px 120px;
     grid-template-rows: 120px 120px;
     width: 100%;
@@ -312,102 +282,25 @@ const setPackItemStats = (event: number, index: string | number) => {
     background: none;
   }
 
-  &__item {
-    border: 2px solid var(--main);
-    margin: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    min-width: 121px;
-    min-height: 121px;
-    background-color: var(--background);
-
-    &--hight {
-      height: 244px;
-    }
-
-    &--wide {
-      width: 244px;
-    }
-
-    &--big {
-      width: 244px;
-      height: 244px;
-
-      .items__image {
-        transform: translate(100px, 0);
-        width: 200px;
-        height: 200px;
-      }
-    }
-    
-    .items__image {
-      bottom: 0px;
-    }
-
-    .items__image--heavy {
-      bottom: 30px;
-    }
-  }
-
   &__back {
-    border: 1px dashed var(--second);
+    position: relative;
 
-    &:nth-child(1) {
-      border-left: none;
-      border-top: none;
-    }
-    
-    &:nth-child(2) {
-      border-top: none;
-    }
-
-    &:nth-child(3) {
-      border-top: none;
-      border-right: none;
-    }
-
-    &:nth-child(4) {
-      border-left: none;
-      border-bottom: none;
-    }
-
-    &:nth-child(5) {
-      border-bottom: none;
-    }
-
-    &:nth-child(6) {
-      border-right: none;
-      border-bottom: none;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 100%;
+      height: 100%;
+      border: 1px dashed var(--second);
     }
   }
 
   &--hireling {
+    width: 242px;
     grid-template-columns: 120px 120px;
     grid-template-rows: 120px 120px;
-
-    .pack-items__back {
-      border: 1px dashed var(--second);
-
-      &:nth-child(1) {
-        border-left: none;
-        border-top: none;
-      }
-
-      &:nth-child(2) {
-        border-top: none;
-        border-right: none;
-      }
-
-      &:nth-child(3) {
-        border-left: none;
-        border-bottom: none;
-      }
-
-      &:nth-child(4) {
-        border-bottom: none;
-        border-right: none;
-      }
-    }
   }
 
   &__name {

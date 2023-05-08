@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { Item, Card } from '../../types/types/types'
+import { Item, Card } from '../../types/'
 import { type PropType } from 'vue'
 import { onDragging } from '../../helpers/dragNDrop'
 
@@ -68,6 +68,7 @@ const imageUrl = (item: string) => {
     padding: 5px;
     border: 1px solid var(--main);
     color: var(--main);
+    background-color: var(--background);
     cursor: move;
     position: relative;
     left: 0.5px;
