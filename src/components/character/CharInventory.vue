@@ -54,7 +54,7 @@
           {{ item.name }}
         </span>
 
-        <ui-condition-card
+        <UiConditionCard
           v-else-if="item.item?.group === 'conditions'"
           :condition="item.item"
         />
