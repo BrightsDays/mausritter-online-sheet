@@ -1,4 +1,4 @@
-import { SimpleCard } from '../types'
+import { SimpleCard } from '../types/cards'
 import rollDices from './rollDices'
 import detailsList from '../data/detailsList.json'
 import { useCharacterStore } from '../store/character'
@@ -47,10 +47,10 @@ export default (name?: string, warband?: boolean): SimpleCard => {
       'Main Paw': {
         name: 'Main Paw',
         item: !warband ? null : {
-          title: 'Improvised',
+          title: 'Club',
           stat: 'd6',
-          image: 'Improvised',
-          type: 'Improvised',
+          image: 'Club',
+          type: 'Light',
           group: 'items',
           used:  0
         }

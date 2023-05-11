@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
-import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
+import { allowDrop, leaveDrag, drop } from '../../composables/dragNDrop'
 import UiConditionCard from '../ui/UiConditionCard.vue'
 
 const characterStore = useCharacterStore()

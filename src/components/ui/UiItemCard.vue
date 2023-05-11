@@ -45,8 +45,9 @@
 </template>
 
 <script setup lang="ts">
-import { Card, Item } from '../../types/index'
-import { onDragging } from '../../helpers/dragNDrop'
+import { Item } from '../../types/inventory'
+import { Card } from '../../types/cards'
+import { onDragging } from '../../composables/dragNDrop'
 import { computed } from 'vue'
 
 const {

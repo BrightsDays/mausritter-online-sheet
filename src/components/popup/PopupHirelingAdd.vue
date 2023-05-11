@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
-import createHireling from '../../helpers/createSimpleCard'
+import createHireling from '../../composables/createSimpleCard'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'

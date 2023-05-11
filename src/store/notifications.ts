@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { Notification, NotificationList } from '../types'
+import { Notification, NotificationList } from '../types/popup'
 
 export const useNotificationsStore = defineStore('notifications', {
   state: (): NotificationList => ({

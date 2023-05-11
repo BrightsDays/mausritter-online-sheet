@@ -13,8 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { Item, Card } from '../../types/'
-import { onDragging } from '../../helpers/dragNDrop'
+import { Item } from '../../types/inventory'
+import { Card } from '../../types/cards'
+import { onDragging } from '../../composables/dragNDrop'
 import UiItemCard from '../ui/UiItemCard.vue'
 
 const {

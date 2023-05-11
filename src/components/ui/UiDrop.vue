@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
-import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
+import { allowDrop, leaveDrag, drop } from '../../composables/dragNDrop'
 
 const {
   width = 221

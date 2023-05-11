@@ -1,4 +1,5 @@
-import { BodyBack, PackBack, BodyIndexes, Card, PackIndexes, Bank } from '../types'
+import { BodyBack, PackBack, BodyIndexes, PackIndexes } from '../types/inventory'
+import { Card, Bank } from '../types/cards'
 
 export const onDragging = (event: DragEvent, item: Card) => {
   if (event.dataTransfer) {    

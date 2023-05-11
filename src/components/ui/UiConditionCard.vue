@@ -18,8 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { onDragging } from '../../helpers/dragNDrop'
-import { Card, Condition } from '../../types/index'
+import { onDragging } from '../../composables/dragNDrop'
+import { Card } from '../../types/cards'
+import { Condition } from '../../types/inventory'
 
 const {
   condition

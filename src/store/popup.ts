@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { Popup, PopupTypes } from '../types'
+import { Popup, PopupTypes } from '../types/popup'
 
 export const usePopupStore = defineStore('popup', {
   state: (): Popup => ({

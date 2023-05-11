@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
-import createSimpleCard from '../../helpers/createSimpleCard'
+import createSimpleCard from '../../composables/createSimpleCard'
 import { useCharacterStore } from '../../store/character'
 import { usePopupStore } from '../../store/popup'
 import UiButton from '../ui/UiButton.vue'

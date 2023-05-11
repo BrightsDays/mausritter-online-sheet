@@ -5,15 +5,27 @@
   >
     <div class="header">
       <h3 class="heading">
-        Warband (Level {{ warband.level }})
+        Warband
       </h3>
-      <button
-        class="remove"
+      <UiButton
+        type="simple"
+        text="Disband"
         @click="popupStore.setPopup('disbandWarband')"
-      >
-        disband
-      </button>
+      />
     </div>
+    <!-- <div class="level">
+      <span class="details big">
+        Level: {{ warband.level }}
+      </span>
+      <span class="details big">
+        Experience: {{ warband.exp }}
+      </span>
+      <UiButton
+        type="simple"
+        text="Add exp"
+        disabled
+      />
+    </div> -->
     <div class="details">
       Your warband is formed by 20 fighting mice, plus one follower (luggage porter, cook, armourer) for every fighter.
     </div>
@@ -50,7 +62,7 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
-import { ChangeStatEvent } from '../../types'
+import { ChangeStatEvent } from '../../types/character'
 import CharStats from '../character/CharStats.vue'
 import CharInventory from '../character/CharInventory.vue'
 import { usePopupStore } from '../../store/popup'
@@ -89,19 +101,35 @@ const downStat = (event: ChangeStatEvent) => {
     align-items: center;
   }
 
-  .header {
+  .header,.level {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-  }
+    align-items: baseline;
+    margin-bottom: 5px;
 
-  .heading {
-    display: inline-block;
-    font-family: "Pirata One", sans-serif;
-    font-size: 4em;
-    font-weight: normal;
-    line-height: 1;
-    color: var(--main);
+    .heading {
+      display: inline-block;
+      font-family: "Pirata One", sans-serif;
+      font-size: 4em;
+      font-weight: normal;
+      line-height: 1;
+      color: var(--main);
+    }
+
+    .remove {
+      padding: 5px 10px;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: var(--main);
+      border: 2px solid var(--main);
+      border-radius: 15px;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--second-background);
+      }
+    }
   }
 
   .wrapper {
@@ -115,20 +143,11 @@ const downStat = (event: ChangeStatEvent) => {
     font-family: "Ubuntu", sans-serif;
     font-size: 1.6em;
     color: var(--second);
-  }
 
-  .remove {
-    padding: 5px 10px;
-    font-family: "Ubuntu", sans-serif;
-    font-size: 1.3em;
-    font-weight: bold;
-    color: var(--main);
-    border: 2px solid var(--main);
-    border-radius: 15px;
-    cursor: pointer;
-
-    &:hover {
-      background: var(--second-background);
+    &.big {
+      font-size: 2em;
+      line-height: 1;
+      color: var(--main);
     }
   }
 }

@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
-import { BodyBack, Character, StatKeys, DescriptionKeys, PackBack, SimpleCard, ValueKeys, Bank, GritList } from '../types'
+import { Character, StatKeys, DescriptionKeys, ValueKeys } from '../types/character'
+import { BodyBack, PackBack } from '../types/inventory'
+import { SimpleCard, Bank, GritList } from '../types/cards'
 
 export const useCharacterStore = defineStore('character', {
   state: (): Character => ({

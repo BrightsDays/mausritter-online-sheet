@@ -45,6 +45,8 @@ a {
 ::-webkit-scrollbar-thumb {
   background: var(--second);
   border-radius: 2px;
+  border-top: 20px solid var(--background);
+  border-bottom: 20px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {

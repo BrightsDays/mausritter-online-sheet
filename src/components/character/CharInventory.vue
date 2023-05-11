@@ -72,8 +72,8 @@
 <script setup lang="ts">
 import { useCharacterStore } from '../../store/character'
 import UiConditionCard from '../ui/UiConditionCard.vue'
-import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types'
-import { allowDrop, leaveDrag, drop } from '../../helpers/dragNDrop'
+import { BodyBack, BodyIndexes, PackBack, PackIndexes } from '../../types/inventory'
+import { allowDrop, leaveDrag, drop } from '../../composables/dragNDrop'
 import UiItemCard from '../ui/UiItemCard.vue'
 
 const props = defineProps({

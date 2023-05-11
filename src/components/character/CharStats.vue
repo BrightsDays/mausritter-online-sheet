@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { StatKeys } from '../../types/types/types'
+import { StatKeys } from '../../types/character'
 
 const props = defineProps({
   stats: {

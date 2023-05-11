@@ -2,29 +2,43 @@
   <div class="hireling">
     <div class="header">
       <h3 class="heading">
-        {{ props.hireling.name }} (Level {{ props.hireling.level }})
+        {{ hireling.name }} (Level {{ hireling.level }})
       </h3>
       <button
+        v-if="typeof hireling.index === 'number'"
         class="remove"
-        @click="removeHireling(props.hireling.index)"
+        @click="removeHireling(hireling.index)"
       >
-        remove
+        Remove
       </button>
     </div>
+    <!-- <div class="level">
+      <span class="details big">
+        Level: {{ hireling.level }}
+      </span>
+      <span class="details big">
+        Experience: {{ hireling.exp }}
+      </span>
+      <UiButton
+        type="simple"
+        text="Add exp"
+        disabled
+      />
+    </div> -->
     <div class="details">
-      Look: {{ props.hireling.details }}
+      Look: {{ hireling.details }}
     </div>
     <div class="wrapper">
       <CharStats
-        :stats="props.hireling.stats"
-        :hireling-index="props.hireling.index"
+        :stats="hireling.stats"
+        :hireling-index="hireling.index"
         @grow-stat="growStat($event)"
         @down-stat="downStat($event)"
       />
       <CharInventory
-        :body-back="props.hireling.bodyBack"
-        :pack-back="props.hireling.packBack"
-        :hireling-index="props.hireling.index"
+        :body-back="hireling.bodyBack"
+        :pack-back="hireling.packBack"
+        :hireling-index="hireling.index"
       />
     </div>
   </div>
@@ -35,31 +49,36 @@ import CharStats from '../character/CharStats.vue'
 import CharInventory from '../character/CharInventory.vue'
 import { useCharacterStore } from '../../store/character'
 import { usePopupStore } from '../../store/popup'
-import { ChangeStatEvent } from '../../types/index'
+import { SimpleCard } from '../../types/cards'
+import { ChangeStatEvent } from '../../types/character'
+// import UiButton from '../ui/UiButton.vue'
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 
-const props = defineProps({
-  hireling: {
-    type: Object,
-    required: true
-  }
-})
+const {
+  hireling
+} = defineProps<{
+  hireling: SimpleCard
+}>()
 
 const growStat = (event: ChangeStatEvent) => {
-  const target = characterStore.hirelings[props.hireling.index].stats[event.stat]
+  if (typeof hireling.index === 'number') {
+  const target = characterStore.hirelings[hireling.index].stats[event.stat]
 
   if (target && target.current < event.maxValue) {
-    characterStore.setHirelingStat(event.stat, +target.current + 1, props.hireling.index)
+    characterStore.setHirelingStat(event.stat, +target.current + 1, hireling.index)
+  }
   }
 }
 
 const downStat = (event: ChangeStatEvent) => {
-  const target = characterStore.hirelings[props.hireling.index].stats[event.stat]
-  
-  if (target && target.current > 0) {
-    characterStore.setHirelingStat(event.stat, +target.current - 1, props.hireling.index)
+  if (typeof hireling.index === 'number') {
+    const target = characterStore.hirelings[hireling.index].stats[event.stat]
+    
+    if (target && target.current > 0) {
+      characterStore.setHirelingStat(event.stat, +target.current - 1, hireling.index)
+    }
   }
 }
 
@@ -75,19 +94,34 @@ const removeHireling = (index: number) => {
   text-align: left;
   border-top: 2px solid var(--second);
 
-  .header {
+  .header,.level {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-  }
+    align-items: baseline;
 
-  .heading {
-    display: inline-block;
-    font-family: "Pirata One", sans-serif;
-    font-size: 2.6em;
-    font-weight: normal;
-    line-height: 1;
-    color: var(--main);
+    .heading {
+      display: inline-block;
+      font-family: "Pirata One", sans-serif;
+      font-size: 2.6em;
+      font-weight: normal;
+      line-height: 1;
+      color: var(--main);
+    }
+
+    .remove {
+      padding: 5px 10px;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: var(--main);
+      border: 2px solid var(--main);
+      border-radius: 15px;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--second-background);
+      }
+    }
   }
 
   .wrapper {
@@ -101,20 +135,11 @@ const removeHireling = (index: number) => {
     font-family: "Ubuntu", sans-serif;
     font-size: 1.6em;
     color: var(--second);
-  }
 
-  .remove {
-    padding: 5px 10px;
-    font-family: "Ubuntu", sans-serif;
-    font-size: 1.3em;
-    font-weight: bold;
-    color: var(--main);
-    border: 2px solid var(--main);
-    border-radius: 15px;
-    cursor: pointer;
-
-    &:hover {
-      background: var(--second-background);
+    &.big {
+      font-size: 2em;
+      line-height: 1;
+      color: var(--main);
     }
   }
 }

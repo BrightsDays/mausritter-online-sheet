@@ -1,4 +1,4 @@
-import { StatKeys } from '../types'
+import { StatKeys } from '../types/character'
 import rollDices from './rollDices'
 
 export default (store: any) => {

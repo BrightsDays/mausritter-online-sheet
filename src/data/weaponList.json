@@ -119,6 +119,14 @@
       "type": "Ammunition",
       "group": "items",
       "used": 0
+    },
+    {
+      "title": "Club",
+      "stat": "d6",
+      "image": "Club",
+      "type": "Light",
+      "group": "items",
+      "used": 0
     }
   ]
 }
