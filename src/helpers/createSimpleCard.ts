@@ -3,13 +3,18 @@ import rollDices from './rollDices'
 import detailsList from '../data/detailsList.json'
 import { useCharacterStore } from '../store/character'
 
-export default (name?: string): SimpleCard => {
+export default (name?: string, warband?: boolean): SimpleCard => {
   const characterStore = useCharacterStore()
 
-  const stats = {
+  const stats = !warband ? {
     str: rollDices(2,6),
     dex: rollDices(2,6),
     wil: rollDices(2,6),
+    hp: rollDices(1,6)
+  } : {
+    str: 10,
+    dex: 10,
+    wil: 10,
     hp: rollDices(1,6)
   }
 
@@ -41,7 +46,14 @@ export default (name?: string): SimpleCard => {
     bodyBack: {
       'Main Paw': {
         name: 'Main Paw',
-        item: null
+        item: !warband ? null : {
+          title: 'Improvised',
+          stat: 'd6',
+          image: 'Improvised',
+          type: 'Improvised',
+          group: 'items',
+          used:  0
+        }
       },
       'Second Paw': {
         name: 'Second Paw',

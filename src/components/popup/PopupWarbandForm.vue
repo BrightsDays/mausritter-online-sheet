@@ -36,7 +36,7 @@ const notificationStore = useNotificationsStore()
 const close = () => popupStore.setPopup(null)
 
 const form = () => {
-  characterStore.addWarband(createSimpleCard())
+  characterStore.addWarband(createSimpleCard(undefined, true))
   
   notificationStore.setNotification({
     type: 'info',

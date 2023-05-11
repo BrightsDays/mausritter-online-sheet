@@ -80,17 +80,26 @@
       <ui-details title="Armors">
         <menu-items :items-list="armorList" />
       </ui-details>
-      <ui-details title="Spells">
+      <ui-details
+        v-if="$route.name !== 'Warband'"
+        title="Spells"
+      >
         <menu-items :items-list="spellList" />
       </ui-details>
-      <ui-details title="Utilities">
+      <ui-details
+        v-if="$route.name !== 'Warband'"
+        title="Utilities"
+      >
         <menu-items :items-list="utilityList" />
       </ui-details>
-      <ui-details title="Conditions">
+      <ui-details
+        v-if="$route.name !== 'Warband'"
+        title="Conditions"
+      >
         <menu-conditions />
       </ui-details>
       <div
-        v-if="characterStore.name"
+        v-if="characterStore.name && $route.name !== 'Warband'"
         class="menu__options"
       >
         <button
@@ -102,7 +111,7 @@
       </div>
     </div>
     <div
-      v-if="characterStore.name"
+      v-if="characterStore.name && $route.name !== 'Warband'"
       class="menu__options menu--bordered"
     >
       <button
@@ -120,7 +129,7 @@
       </button>
     </div>
     <div
-      v-if="characterStore.exp >= 1000"
+      v-if="characterStore.exp >= 1000 && $route.name !== 'Warband'"
       class="menu__options menu--bordered"
     >
       <ui-details title="Grits">
@@ -128,7 +137,7 @@
       </ui-details>
     </div>
     <div
-      v-if="characterStore.name"
+      v-if="characterStore.name && $route.name !== 'Warband'"
       class="menu__bank"
     >
       <ui-details title="Banked items">
