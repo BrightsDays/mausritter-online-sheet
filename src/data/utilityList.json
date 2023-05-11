@@ -35,7 +35,7 @@
     {
       "title": "Bottle of milk",
       "stat": "",
-      "image": "",
+      "image": "Bottle_of_milk",
       "type": "Utility",
       "group": "items",
       "used": 0
@@ -43,7 +43,7 @@
     {
       "title": "Incense stick",
       "stat": "",
-      "image": "",
+      "image": "Incense_stick",
       "type": "Utility",
       "group": "items",
       "used": 0
@@ -51,7 +51,7 @@
     {
       "title": "Shears",
       "stat": "",
-      "image": "",
+      "image": "Shears",
       "type": "Utility",
       "group": "items",
       "used": 0
@@ -59,7 +59,7 @@
     {
       "title": "Flask of coffee",
       "stat": "",
-      "image": "",
+      "image": "Flask_of_coffee",
       "type": "Utility",
       "group": "items",
       "used": 0
