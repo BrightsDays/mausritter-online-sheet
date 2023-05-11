@@ -1,7 +1,9 @@
 <template>
-  <new-popup-layout
+  <PopupLayout
     v-if="emptySlot"
+    :ok-button-disabled="item.title.length < 3"
     title="Add custom item"
+    @ok="addItem()"
   >
     <template #body>
       <UiInput
@@ -21,37 +23,24 @@
         :options="sizeList"
       />
     </template>
-    <template #footer>
-      <UiButton
-        text="Cancel"
-        type="big"
-        @click.prevent="close()"
-      />
-      <UiButton
-        :disabled="item.title.length < 3"
-        text="Create"
-        type="big"
-        @click.prevent="addItem()"
-      />
-    </template>
-  </new-popup-layout>
-  <new-popup-layout v-else>
+  </PopupLayout>
+
+  <PopupLayout v-else>
     <template #body>
       <span class="content">
         Sorry, you have not space in your backpack!<br>
         Empty the space to add custom items.
       </span>
     </template>
-  </new-popup-layout>
+  </PopupLayout>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import NewPopupLayout from './PopupLayout.vue'
+import PopupLayout from './PopupLayout.vue'
 import { PackBack, PackIndexes } from '../../types/inventory'
-import UiButton from '../ui/UiButton.vue'
 import UiSelect from '../ui/UiSelect.vue'
 import UiInput from '../ui/UiInput.vue'
 
@@ -152,13 +141,6 @@ const addItem = () => {
   }
 }
 
-const addItemByClick = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') {
-    event.preventDefault()
-    addItem()
-  }
-}
-
 onMounted(() => {
   Object.keys(characterStore.packBack).every(item => {
     if (!characterStore.packBack[item as PackIndexes].item) {
@@ -168,11 +150,7 @@ onMounted(() => {
       return true
     }
   })
-
-  window.addEventListener('keydown', addItemByClick)
 })
-
-onUnmounted(() => window.removeEventListener('keydown', addItemByClick))
 </script>
 
 <style lang="scss" scoped>

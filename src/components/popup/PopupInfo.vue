@@ -1,5 +1,8 @@
 <template>
-  <new-popup-layout title="About">
+  <PopupLayout
+    title="About"
+    buttons="0"
+  >
     <template #body>
       <section class="section">
         <h4 class="header">
@@ -89,11 +92,11 @@
         >brightsdays</a>.
       </section>
     </template>
-  </new-popup-layout>
+  </PopupLayout>
 </template>
 
 <script setup lang="ts">
-import NewPopupLayout from './PopupLayout.vue'
+import PopupLayout from './PopupLayout.vue'
 </script>
 
 <style lang="scss" scoped>

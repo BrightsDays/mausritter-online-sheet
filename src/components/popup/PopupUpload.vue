@@ -1,27 +1,7 @@
 <template>
-  <new-popup-layout
-    v-if="!informed"
+  <NewPopupLayout
     title="Upload character"
-  >
-    <template #body>
-      <span class="content">This will delete your current character.</span>
-    </template>
-    <template #footer>
-      <UiButton
-        text="Cancel"
-        type="big"
-        @click.prevent="close()"
-      />
-      <UiButton
-        text="Upload"
-        type="big"
-        @click.prevent="informUser()"
-      />
-    </template>
-  </new-popup-layout>
-  <new-popup-layout
-    v-else
-    title="Upload character"
+    buttons="0"
   >
     <template #body>
       <div class="upload">
@@ -41,35 +21,20 @@
         </label>
       </div>
     </template>
-  </new-popup-layout>
+  </NewPopupLayout>
 </template>
 
 <script setup lang="ts">
 import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import { onMounted, onUnmounted, ref } from 'vue'
 import { useNotificationsStore } from '../../store/notifications'
 import NewPopupLayout from './PopupLayout.vue'
-import UiButton from '../ui/UiButton.vue'
-
-const informed = ref(false)
 
 const characterStore = useCharacterStore()
 const popupStore = usePopupStore()
 const notificationStore = useNotificationsStore()
 
 const close = () => popupStore.setPopup(null)
-
-const informUser = () => {
-  informed.value = true
-
-  characterStore.clearCharacter()
-
-  notificationStore.setNotification({
-    type: 'info',
-    message: 'Character sheet has been cleared'
-  })
-}
 
 const uploadCharacter = (event: Event) => {
   if (event.target) {
@@ -109,18 +74,6 @@ const uploadCharacter = (event: Event) => {
 
   close()
 }
-
-const informByClick = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') {
-    event.preventDefault()
-    informUser()
-  }
-}
-onMounted(() => {
-  if (!characterStore.name) informed.value = true
-  window.addEventListener('keydown', informByClick)
-})
-onUnmounted(() => window.removeEventListener('keydown', informByClick))
 </script>
 
 <style lang="scss" scoped>

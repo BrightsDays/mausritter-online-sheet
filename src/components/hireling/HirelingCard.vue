@@ -2,7 +2,7 @@
   <div class="hireling">
     <div class="header">
       <h3 class="heading">
-        {{ hireling.name }} (Level {{ hireling.level }})
+        {{ hireling.name }}
       </h3>
       <button
         v-if="typeof hireling.index === 'number'"

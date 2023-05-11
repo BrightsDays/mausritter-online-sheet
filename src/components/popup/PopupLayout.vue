@@ -2,13 +2,13 @@
   <div class="popup">
     <div 
       class="shadow"
-      @click="close()"
+      @click="cancelHandler()"
     />
     <div class="box">
       <div class="header">
         <button
           class="close"
-          @click.prevent="close()"
+          @click.prevent="cancelHandler()"
         >
           <svg
             width="16"
@@ -33,10 +33,20 @@
         <slot name="body" />
       </div>
       <div
-        v-if="$slots.footer"
+        v-if="buttons !== '0'"
         class="footer"
       >
-        <slot name="footer" />
+        <UiButton
+          :text="cancelButtonText"
+          type="big"
+          @click.prevent="cancelHandler()"
+        />
+        <UiButton
+          :disabled="okButtonDisabled"
+          :text="okButtonText"
+          type="big"
+          @click.prevent="okHandler()"
+        />
       </div>
     </div>
   </div>
@@ -45,25 +55,61 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 import { usePopupStore } from '../../store/popup'
+import UiButton from '../ui/UiButton.vue'
 
 const {
-  title
+  title,
+  buttons = '2',
+  okButtonDisabled = false,
+  okClosePrevent = false,
+  cancelButtonText = 'Cancel',
+  okButtonText = 'OK'
 } = defineProps<{
   title?: string
+  buttons?: '0' | '1' | '2'
+  okButtonDisabled?: boolean
+  okClosePrevent?: boolean
+  cancelButtonText?: string
+  okButtonText?: string
 }>()
+
+const emit = defineEmits(['ok', 'cancel'])
 
 const popupStore = usePopupStore()
 
-const close = () => popupStore.setPopup(null)
+const cancelHandler = () => {
+  popupStore.setPopup(null)
+  emit('cancel')
+}
 
-const closeByClick =  (event: KeyboardEvent) => {
+const okHandler = () => {
+  if (!okClosePrevent) popupStore.setPopup(null)
+  emit('ok')
+}
+
+const closeByClick = (event: KeyboardEvent) => {
   if (event.key === 'Escape') {
     event.preventDefault()
-    close()
+    cancelHandler()
   }   
 }
-onMounted(() => window.addEventListener('keydown', closeByClick))
-onUnmounted(() => window.removeEventListener('keydown', closeByClick))
+
+// const okByClick = (event: KeyboardEvent) => {
+//   if (event.key === 'Enter') {
+//     event.preventDefault()
+//     okHandler()
+//   }
+// }
+
+onMounted(async () => {
+  window.addEventListener('keydown', closeByClick)
+  // window.addEventListener('keydown', okByClick)
+})
+
+onUnmounted(async () => {
+  window.removeEventListener('keydown', closeByClick)
+  // window.addEventListener('keydown', okByClick)
+})
 </script>
 
 <styles lang="scss" scoped>

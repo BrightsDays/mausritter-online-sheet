@@ -1,5 +1,6 @@
 export interface Popup {
-  type: PopupTypes
+  type: PopupTypes,
+  nextPopup: 'new' | 'upload' | null
 }
 
 export interface Notification {
@@ -11,4 +12,4 @@ export interface NotificationList {
   notificationList: Notification[]
 }
 
-export type PopupTypes = 'new' | 'full' | 'addHireling' | 'removeHireling' | 'formWarband' | 'disbandWarband' | 'levelUp' | 'clear' | 'upload' | 'info' | 'addCustomItem' | null
+export type PopupTypes = 'new' | 'inform' | 'full' | 'addHireling' | 'removeHireling' | 'formWarband' | 'disbandWarband' | 'levelUp' | 'clear' | 'upload' | 'info' | 'addCustomItem' | null

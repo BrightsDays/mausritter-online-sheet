@@ -19,7 +19,7 @@
       >
         <button
           class="menu__item"
-          @click="createNewCharacter()"
+          @click="createCharacter('new')"
         >
           Create new character
         </button>
@@ -33,7 +33,7 @@
         <div>
           <button
             class="menu__item"
-            @click="popupStore.setPopup('upload')"
+            @click="createCharacter('upload')"
           >
             Upload character
           </button>
@@ -169,7 +169,14 @@ const weaponList = weaponData.list as Item[]
 const armorList = armorData.list as Item[]
 const spellList = spellData.list as Item[]
 
-const createNewCharacter = () => popupStore.setPopup('new')
+const createCharacter = (option: 'new' | 'upload') => {
+  if (!characterStore.name) {
+    popupStore.setPopup(option)
+  } else {
+    popupStore.setNextPopup(option)
+    popupStore.setPopup('inform')
+  }
+}
 
 const downloadCharacter = () => {
   const character = { ...characterStore }

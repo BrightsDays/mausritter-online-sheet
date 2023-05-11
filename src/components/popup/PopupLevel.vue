@@ -1,5 +1,10 @@
 <template>
-  <new-popup-layout title="Add experience">
+  <PopupLayout
+    title="Add experience"
+    ok-button-text="Add"
+    :ok-button-disabled="+experience === 0"
+    @ok="addExperience(experience)"
+  >
     <template #body>
       <UiInput
         v-model="experience"
@@ -11,35 +16,18 @@
         You will gain {{ level }} levels
       </span>
     </template>
-    <template #footer>
-      <UiButton
-        text="Cancel"
-        type="big"
-        @click.prevent="close()"
-      />
-      <UiButton
-        :disabled="+experience === 0"
-        text="Add"
-        type="big"
-        @click.prevent="addExperience(experience)"
-      />
-    </template>
-  </new-popup-layout>
+  </PopupLayout>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
-import NewPopupLayout from './PopupLayout.vue'
-import UiButton from '../ui/UiButton.vue'
+import PopupLayout from './PopupLayout.vue'
 import UiInput from '../ui/UiInput.vue'
 import { levelUp } from '../../composables/levelUp'
 
 const characterStore = useCharacterStore()
-const popupStore = usePopupStore()
 
-const experience = ref(0)
+let experience = $ref(0)
 
 const setExperience = (eventTraget: HTMLInputElement) => {
   if (+eventTraget.value === 0) {
@@ -49,35 +37,23 @@ const setExperience = (eventTraget: HTMLInputElement) => {
   }
 }
 
-const level = computed(() => {
+const level = $computed(() => {
   let nextLevel = 1
 
-  if (+characterStore.exp + +experience.value >= 1000) nextLevel = 2
-  if (+characterStore.exp + +experience.value >= 3000) nextLevel = 3
-  if (+characterStore.exp + +experience.value >= 6000) nextLevel = 4 + Math.floor(((+characterStore.exp + +experience.value) - 6000) / 5000)
+  if (+characterStore.exp + +experience >= 1000) nextLevel = 2
+  if (+characterStore.exp + +experience >= 3000) nextLevel = 3
+  if (+characterStore.exp + +experience >= 6000) nextLevel = 4 + Math.floor(((+characterStore.exp + +experience) - 6000) / 5000)
   
   return (nextLevel - characterStore.level)
 })
 
-const close = () => popupStore.setPopup(null)
-
 const addExperience = (exp: number) => {
-  if (experience.value > 0) {
-    levelUp(level.value)
+  if (experience > 0) {
+    levelUp(level)
     characterStore.addExperience(+exp)
-    experience.value = 0
-    close()
+    experience = 0
   }
 }
-
-const levelUpByClick = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') {
-    event.preventDefault()
-    addExperience(experience.value)
-  }
-}
-onMounted(() => window.addEventListener('keydown', levelUpByClick))
-onUnmounted(() => window.removeEventListener('keydown', levelUpByClick))
 </script>
 
 <style lang="scss" scoped>

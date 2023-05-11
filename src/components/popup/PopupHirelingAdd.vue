@@ -1,5 +1,10 @@
 <template>
-  <PopupLayout title="Add hireling">
+  <PopupLayout
+    title="Add hireling"
+    ok-button-text="Create"
+    :ok-button-disabled="!hireling"
+    @ok="saveHireling(hireling)"
+  >
     <template #body>
       <UiSelect
         v-model="hireling"
@@ -7,43 +12,24 @@
         :options="hirelingList"
       />
     </template>
-    <template #footer>
-      <UiButton
-        text="Cancel"
-        type="big"
-        @click.prevent="close()"
-      />
-      <UiButton
-        :disabled="!hireling"
-        text="Create"
-        type="big"
-        @click.prevent="saveHireling(hireling)"
-      />
-    </template>
   </PopupLayout>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
 import createHireling from '../../composables/createSimpleCard'
-import { usePopupStore } from '../../store/popup'
 import { useCharacterStore } from '../../store/character'
 import PopupLayout from './PopupLayout.vue'
 import { useNotificationsStore } from '../../store/notifications'
 import UiSelect from '../ui/UiSelect.vue'
-import UiButton from '../ui/UiButton.vue'
 
 const characterStore = useCharacterStore()
-const popupStore = usePopupStore()
 const notificationStore = useNotificationsStore()
 
 const hirelingList = [
   'Torchbearer', 'Labourer', 'Tunnel digger', 'Blacksmith', 'Local guide',
   'Mouse-at-arms', 'Scholar', 'Knight', 'Interpreter'
 ]
-const hireling = ref(hirelingList[0])
-
-const close = () => popupStore.setPopup(null)
+const hireling = $ref(hirelingList[0])
 
 const saveHireling = (hirelingName: string) => {
   characterStore.addHireling(createHireling(`Hireling: ${hirelingName}`))
@@ -52,16 +38,5 @@ const saveHireling = (hirelingName: string) => {
     type: 'info',
     message: `Hireling: ${hirelingName} was added`
   })
-    
-  close()
 }
-
-const addByClick = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') {
-  event.preventDefault()
-  saveHireling(hireling.value)
-}
-}
-onMounted(() => window.addEventListener('keydown', addByClick))
-onUnmounted(() => window.removeEventListener('keydown', addByClick))
 </script>

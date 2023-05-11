@@ -2,6 +2,7 @@
   <button
     class="button"
     :class="type"
+    :disabled="disabled"
   >
     {{ text }}
   </button>
@@ -10,10 +11,12 @@
 <script setup lang="ts">
 const {
   text,
-  type
+  type,
+  disabled = false
 } = defineProps<{
   text: string
   type: 'simple' | 'big'
+  disabled?: boolean
 }>()
 </script>
 

@@ -1,27 +1,12 @@
 <template>
-  <new-popup-layout
-    v-if="!informed"
+  <PopupLayout
     title="New character"
-  >
-    <template #body>
-      <span class="content">This will delete your current character.</span>
-    </template>
-    <template #footer>
-      <UiButton
-        text="Cancel"
-        type="big"
-        @click.prevent="userNotInformed()"
-      />
-      <UiButton
-        text="OK"
-        type="big"
-        @click.prevent="userInformed()"
-      />
-    </template>
-  </new-popup-layout>
-  <new-popup-layout
-    v-else
-    title="New character"
+    ok-button-text="Create"
+    :ok-button-disabled="characterStore.name.length < 3 || 
+      (selectItem && startItem === '') ||
+      !weapon"
+    @cancel="characterStore.clearCharacter()"
+    @ok="saveCharacter()"
   >
     <template #body>
       <UiInput
@@ -63,26 +48,11 @@
         :options="weaponsForSelect"
       />
     </template>
-    <template #footer>
-      <UiButton
-        text="Cancel"
-        type="big"
-        @click.prevent="close()"
-      />
-      <UiButton
-        :disabled="characterStore.name.length < 3 || 
-          (selectItem && startItem === '') ||
-          !weapon"
-        text="Create"
-        type="big"
-        @click.prevent="saveCharacter()"
-      />
-    </template>
-  </new-popup-layout>
+  </PopupLayout>
 </template>
 
 <script setup lang="ts">
-import NewPopupLayout from './PopupLayout.vue'
+import PopupLayout from './PopupLayout.vue'
 import rollDices from '../../composables/rollDices'
 import rollStats from '../../composables/rollStats'
 import weaponList from '../../data/weaponList.json'
@@ -94,20 +64,14 @@ import backgroundList from '../../data/backgroundList.json'
 import { BackgroundKeys, StatKeys } from '../../types/character'
 import { Item } from '../../types/inventory'
 import { useCharacterStore } from '../../store/character'
-import { onMounted, onUnmounted, ref } from 'vue'
-import { usePopupStore } from '../../store/popup'
+import { onMounted, ref } from 'vue'
 import createHireling from '../../composables/createSimpleCard'
 import { useNotificationsStore } from '../../store/notifications'
-import UiButton from '../ui/UiButton.vue'
 import UiInput from '../ui/UiInput.vue'
 import UiSelect from '../ui/UiSelect.vue'
 
-const informed = ref(false)
-
 const characterStore = useCharacterStore()
-const popupStore = usePopupStore()
 const notificationStore = useNotificationsStore()
-let save = false
 
 const statsForSwap = ref({
   str: 0,
@@ -127,8 +91,6 @@ const weaponsForSelect = ['Light', 'Medium', 'Heavy', 'Light ranged', 'Heavy ran
 const startItem = ref('')
 const weapon = ref(weaponsForSelect[0])
 const selectItem = ref(true)
-
-const close = () => popupStore.setPopup(null)
 
 const createCharacter = () => {
   characterStore.clearCharacter()
@@ -166,7 +128,7 @@ const createCharacter = () => {
   }
 }
 
-const saveCharacter = () => {
+const saveCharacter = () => {  
   if (characterStore.name.length >= 3
       && (!selectItem.value || startItem.value !== '')
       && weapon) {//TODO fix this position
@@ -280,56 +242,13 @@ const saveCharacter = () => {
     characterStore.setDescription('coat', `${color[rollDices(1, 6) - 1]} ${pattern[rollDices(1, 6) - 1]}`)
     characterStore.setDescription('details', detailsList[rollDices(1, detailsList.length) - 1])
 
-    save = true
-
     selectItem.value = true
     startItem.value = ''
     weapon.value = ''
-
-    close()
   }
 }
 
-const userNotInformed = () => {
-  save = true
-  close()
-}
-
-const userInformed = () => {
-  notificationStore.setNotification({
-    type: 'info',
-    message: 'Character sheet has been cleared'
-  })
-  save = false
-  informed.value = true
-  createCharacter()
-}
-
-const createByClick = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') {
-    event.preventDefault()
-
-    if (!informed.value) {
-      userInformed()
-    } else if (characterStore.name) {
-      saveCharacter()
-      close()
-    }
-  }
-}
-
-onMounted(() => {
-  if (!characterStore.name) informed.value = true
-  if (characterStore.name) save = true
-  if (informed.value) createCharacter()
-
-  window.addEventListener('keyup', createByClick)
-})
-
-onUnmounted(() => {
-  if (!save) characterStore.clearCharacter()
-  window.removeEventListener('keyup', createByClick)
-})
+onMounted(() => createCharacter())
 </script>
 
 <style lang="scss" scoped>
