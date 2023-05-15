@@ -11,12 +11,10 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": [
-      "vite/client"
-    ]
+      "vite/client",
+      "vue/ref-macros"
+    ],
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["node_modules"],
-  "compilerOptions": {
-    "types": ["vue/ref-macros"]
-  },
+  "exclude": ["node_modules"]
 }
