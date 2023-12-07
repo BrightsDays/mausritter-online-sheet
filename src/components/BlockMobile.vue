@@ -10,7 +10,7 @@
 .block {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   padding: 10vh 10vw;
 
   .info {

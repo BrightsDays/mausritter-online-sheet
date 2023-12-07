@@ -119,7 +119,7 @@ onUnmounted(async () => {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   align-items: center;
   justify-content: space-around;
   background: none;
@@ -139,7 +139,7 @@ onUnmounted(async () => {
     display: flex;
     position: relative;
     width: fit-content;
-    max-height: 90vh;
+    max-height: 90svh;
     padding: 40px 30px 30px;
     flex-direction: column;
     gap: 20px;

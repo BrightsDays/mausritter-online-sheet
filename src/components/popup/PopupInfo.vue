@@ -4,92 +4,50 @@
     buttons="0"
   >
     <template #body>
-      <section class="section">
-        <h4 class="header">
-          Version 0.1.5
-        </h4>
-        <ol class="list">
-          <li class="item">
-            Item images added;
-          </li>
-          <li class="item">
-            Warband added;
-          </li>
-          <li class="item">
-            Bugs fixed.
-          </li>
-        </ol>
-      </section>
-      <section class="section">
-        <h4 class="header">
-          Version 0.1.4
-        </h4>
-        <ol class="list">
-          <li class="item">
-            Notifications added;
-          </li>
-          <li class="item">
-            Portraits upload added;
-          </li>
-          <li class="item">
-            Some visual bugs fixed.
-          </li>
-        </ol>
-      </section>
-      <section class="section">
-        <h4 class="header">
-          Version 0.1.3
-        </h4>
-        <ol class="list">
-          <li class="item">
-            Option to create custom items added;
-          </li>
-          <li class="item">
-            Keyboard control in popups added;
-          </li>
-          <li class="item">
-            Some visual bugs fixed.
-          </li>
-        </ol>
-      </section>
-      <section class="section">
-        <h4 class="header">
-          Version 0.1.2
-        </h4>
-        <ol class="list">
-          <li class="item">
-            Bug with opportunity to drag'n'drop illegal items fixed;
-          </li>
-          <li class="item">
-            Images for all simple weapons added.
-          </li>
-        </ol>
-      </section>
-      <section class="section">
-        <h4 class="header">
-          Version 0.1.1
-        </h4>
-        <ol class="list">
-          <li class="item">
-            This is the first version of app, and it does not contain images 
-            (including character portraits), information/error messages and pdf download 
-            option (but you can use the browser's "print page" function);
-          </li>
-          <li class="item">
-            Currently, you can create a new mouse, manipulate with items and hirelings, 
-            level up, and save/load character as .json file;
-          </li>
-        </ol>
-      </section>
-    </template>
-    <template #footer>
       <section class="info">
-        If you notice any bug or have an idea to update the app,<br> please contact me: 
+        Mausritter is a sword-and-whiskers role-playing game by 
         <a
           class="link"
-          href="https://brightsdays.github.io/contacts"
+          href="https://losing.games/"
           target="_blank"
-        >brightsdays</a>.
+        >Losing Games</a> - fast, simple, and perfect for new players. 
+        Players take on the roles of brave mice, finding adventures in a 
+        world where danger lurks in every corner.
+      </section>
+      <section class="info">
+        This web application will assist you in building and using your character 
+        in the game, especially if you play online. You can use items, store them 
+        in the bank, add hirelings, and form warbands. Additionally, you can export 
+        your character info as a .json file for use on other devices.
+      </section>
+      <section class="info">
+        Currently, it's like a demo version; in the near future, I will add all item 
+        images and complete testing. However, you can already use it for your games!
+      </section>
+      <section class="info">
+        If you notice any bugs or have ideas to update the app, please contact me.
+      </section>
+      <section class="info centered">
+        Game created by <a
+          class="link"
+          href="https://losing.games/"
+          target="_blank"
+        >Isaac Williams</a><br>
+        Official game page: <a
+          class="link"
+          href="https://mausritter.com"
+          target="_blank"
+        >mausritter.com</a><br>
+        Read the instructions on <a
+          class="link"
+          href="https://github.com/BrightsDays/mausritter-online-sheet"
+          target="_blank"
+        >GitHub</a><br>
+        Application by <a
+          class="link"
+          href="https://brightsdays.github.io/"
+          target="_blank"
+        >brightsdays</a>
       </section>
     </template>
   </PopupLayout>
@@ -100,50 +58,25 @@ import PopupLayout from './PopupLayout.vue'
 </script>
 
 <style lang="scss" scoped>
-.section {
-  display: flex;
-  margin: 20px auto 0;
-  flex-direction: column;
-  gap: 10px;
-  &:first-child {
-    margin-top: 0;
-  }
-
-  .header {
-    text-align: left;
-    font-family: "Pirata One", sans-serif;
-    font-size: 2.6em;
-    font-weight: normal;
-    color: var(--main);
-  }
-
-  .list {
-    width: 600px;
-    max-width: 100%;
-    padding: 0 0 0 20px;
-    text-align: left;
-
-    .item {
-      color: var(--main);
-      font-family: "Ubuntu", sans-serif;
-      font-size: 1.6em;
-      margin-bottom: 10px;
-    }
-  }
-}
 .info {
-  width: 100%;
-  text-align: center;
+  width: 600px;
+  max-width: 100%;
   color: var(--main);
   font-family: "Ubuntu", sans-serif;
-  font-size: 1.6em;
+  font-size: 1.6rem;
+  line-height: 2rem;
+  &.centered {
+    padding-top: 10px;
+    text-align: center;
+    border-top: 1px solid var(--second);
+  }
 
   .link {
     font-size: 1em;
     color: var(--second);
+    text-decoration: underline;
 
     &:hover {
-      color: var(--main);
       text-decoration: none;
     }
   }
