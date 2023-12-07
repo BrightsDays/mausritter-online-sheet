@@ -5,7 +5,7 @@
         {{ hireling.name }}
       </h3>
       <button
-        v-if="hireling.index"
+        v-if="typeof hireling.index === 'number'"
         class="remove"
         @click="removeHireling(hireling.index)"
       >
@@ -83,7 +83,7 @@ const downStat = (event: ChangeStatEvent) => {
 }
 
 const removeHireling = (index: number | undefined) => {
-  if (index) {
+  if (typeof index === 'number') {
     popupStore.setPopup('removeHireling')
     characterStore.setHirelingIndex(index)
   }
