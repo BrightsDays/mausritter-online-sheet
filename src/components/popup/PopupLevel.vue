@@ -31,9 +31,9 @@ let experience = $ref(0)
 
 const setExperience = (eventTraget: HTMLInputElement) => {
   if (+eventTraget.value === 0) {
-    experience.value = 0
+    experience = 0
   } else {
-    experience.value = +eventTraget.value
+    experience = +eventTraget.value
   }
 }
 

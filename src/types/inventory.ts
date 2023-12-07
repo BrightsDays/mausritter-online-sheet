@@ -66,4 +66,5 @@ export type ItemType =
   'Utility' |
   'Heavy utility' |
   'Wide utility' |
+  'Height utility' |
   'Big utility'

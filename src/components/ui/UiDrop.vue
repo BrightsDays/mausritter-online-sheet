@@ -9,7 +9,7 @@
     <label
       id="drop"
       class="label"
-    >Drop item</label>
+    >Drop item here to remove</label>
   </div>
 </template>
 

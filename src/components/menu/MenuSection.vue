@@ -11,6 +11,29 @@
         i
       </button>
     </div>
+    <div 
+      v-if="characterStore.warband"
+      class="menu__options menu--bordered"
+    >
+      <template v-if="$route.path === '/'">
+        <router-link to="/warband">
+          <button
+            class="menu__item menu__item--big"
+          >
+            Show warband
+          </button>
+        </router-link>
+      </template>
+      <template v-else>
+        <router-link to="/">
+          <button
+            class="menu__item menu__item--big"
+          >
+            Show character
+          </button>
+        </router-link>
+      </template>
+    </div>
     <div class="menu__options">
       <ui-details
         title="Options"
@@ -46,29 +69,6 @@
           Clear sheet
         </button>
       </ui-details>
-    </div>
-    <div 
-      v-if="characterStore.warband"
-      class="menu__options menu--bordered"
-    >
-      <template v-if="$route.path === '/'">
-        <router-link to="/warband">
-          <button
-            class="menu__item menu__item--big"
-          >
-            Show warband
-          </button>
-        </router-link>
-      </template>
-      <template v-else>
-        <router-link to="/">
-          <button
-            class="menu__item menu__item--big"
-          >
-            Show character
-          </button>
-        </router-link>
-      </template>
     </div>
     <div
       v-if="characterStore.name"
