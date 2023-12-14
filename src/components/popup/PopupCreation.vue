@@ -37,7 +37,7 @@
       </div>
       <span class="content small">* This change will only take effect after character creation</span>
       <UiSelect
-        v-if="selectItem" 
+        v-if="selectItem && startItem" 
         v-model="startItem"
         label="Select item"
         :options="Object.values(itemsForSelect)"

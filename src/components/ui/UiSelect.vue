@@ -4,27 +4,31 @@
       v-if="label"
       class="label"
     >{{ label }}</label>
-    <select
+
+    <button
       class="input"
-      def
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      @click.stop="clickHandler()"
     >
-      <option
-        v-for="option in options"
-        :key="option"
-        :value="option"
-      >
-        {{ toUppercase ? option.toUpperCase() : option }}
-      </option>
-    </select>
+      {{ toUppercase ? selectedOption.toUpperCase() : selectedOption }}
+    </button>
+
+    <UiSelectList
+      v-if="showOptions"
+      :to-upper-case="toUppercase"
+      :options="options"
+      @close="showOptions = false"
+      @select="(val) => selectHandler(val)"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import UiSelectList from './UiSelectList.vue'
+
 const {
   label,
   options,
-  toUppercase,
+  toUppercase = false,
   modelValue
 } = defineProps<{
   label?: string
@@ -34,6 +38,20 @@ const {
 }>()
 
 const emit = defineEmits(['update:modelValue'])
+
+let showOptions = $ref(false)
+let selectedOption = $ref(options[0])
+
+const clickHandler = () => {
+  const list = document.querySelector('#select-list')
+  showOptions = !list ? true : false
+}
+
+const selectHandler = (option: string) => {
+  selectedOption = option
+  showOptions = false
+  emit('update:modelValue', option)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -47,20 +65,20 @@ const emit = defineEmits(['update:modelValue'])
 
   .input {
     position: relative;
+    width: 100%;
     font-family: "Pirata One", sans-serif;
     font-size: 3em;
+    text-align: right;
     color: var(--main);
     border: none;
     outline: none;
     cursor: pointer;
     appearance: none;
-
-    option {
-      font-size: 1em;
-      direction: rtl;
-    }
+    white-space: nowrap;
   }
+
   .label {
+    width: 100%;
     font-family: "Pirata One", sans-serif;
     font-size: 3.2em;
     color: var(--second);

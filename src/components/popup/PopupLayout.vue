@@ -174,7 +174,7 @@ onUnmounted(async () => {
     .body {
       display: flex;
       flex-direction: column;
-      overflow-y: scroll;
+      // overflow-y: scroll;
       gap: 10px;
     }
 
