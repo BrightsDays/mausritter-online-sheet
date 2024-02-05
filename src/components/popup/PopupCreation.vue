@@ -131,8 +131,9 @@ const createCharacter = () => {
 
   if (!Object.values(statsForSwap.value).filter(item => item > 9).length) {
     extraItems.value = true
-    if (Object.values(statsForSwap.value).filter(item => item > 7).length) {
-      selectItem.value = true
+    selectItem.value = true
+    if (!Object.values(statsForSwap.value).filter(item => item > 7).length) {
+      selectItem.value = false
     }
   }
 }
@@ -176,6 +177,17 @@ const saveCharacter = () => {
       }
       
       return findItem(item)
+    }
+
+    let extraItemA = null
+    let extraItemB = null
+    if (extraItems.value) {
+      extraItemA = selectItem.value
+        ? isHireling(startItem.value)
+        : findItem(itemsForSelect.value.itemA)
+      extraItemB = selectItem.value
+        ? null 
+        : isHireling(itemsForSelect.value.itemB)
     }
 
     characterStore.updateItems('bodyBack', {
@@ -222,23 +234,19 @@ const saveCharacter = () => {
       },
       3: {
         name: '3',
-        item: findItem(backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA)
+        item: isHireling(backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA)
       },
       4: {
         name: '4',
-        item: findItem(backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB)
+        item: isHireling(backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB)
       },
       5: {
         name: '5',
-        item: (extraItems.value && selectItem.value) 
-          ? isHireling(startItem.value)
-          : findItem(itemsForSelect.value.itemA)
+        item: extraItemA
       },
       6: {
         name: '6',
-        item: (extraItems.value && selectItem.value)
-          ? null 
-          : isHireling(itemsForSelect.value.itemB)
+        item: extraItemB
       }
     })
 

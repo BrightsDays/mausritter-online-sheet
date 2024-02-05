@@ -1,7 +1,7 @@
 <template>
   <div class="block">
     <span class="info">
-      Sorry, this app doesn't work on smartphones right now =(
+      Sorry, this app doesn't work on smartphones
     </span>
   </div>
 </template>
