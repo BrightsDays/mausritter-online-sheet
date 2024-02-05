@@ -37,7 +37,7 @@
       </div>
       <span class="content small">* This change will only take effect after character creation</span>
       <UiSelect
-        v-if="selectItem && startItem" 
+        v-if="selectItem && startItem"
         v-model="startItem"
         label="Select item"
         :options="Object.values(itemsForSelect)"
@@ -90,7 +90,8 @@ const itemsForSelect = ref({
 const weaponsForSelect = ['Light', 'Medium', 'Heavy', 'Light ranged', 'Heavy ranged']
 const startItem = ref('')
 const weapon = ref(weaponsForSelect[0])
-const selectItem = ref(true)
+const extraItems = ref(false)
+const selectItem = ref(false)
 
 const createCharacter = () => {
   characterStore.clearCharacter()
@@ -117,14 +118,22 @@ const createCharacter = () => {
     backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].background
   characterStore.setDescription('background', background)
 
+  const extraItemsKeys = {
+    keyA: rollDices(1, 6),
+    keyB: rollDices(1, 6)
+  }
+
   itemsForSelect.value.itemA =
-    backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA
+    backgroundList[extraItemsKeys.keyA as BackgroundKeys][extraItemsKeys.keyB as BackgroundKeys].itemA
   itemsForSelect.value.itemB =
-    backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB
+    backgroundList[extraItemsKeys.keyA as BackgroundKeys][extraItemsKeys.keyB as BackgroundKeys].itemB
   startItem.value = itemsForSelect.value.itemA
 
   if (!Object.values(statsForSwap.value).filter(item => item > 9).length) {
-    selectItem.value = false
+    extraItems.value = true
+    if (Object.values(statsForSwap.value).filter(item => item > 7).length) {
+      selectItem.value = true
+    }
   }
 }
 
@@ -172,7 +181,7 @@ const saveCharacter = () => {
     characterStore.updateItems('bodyBack', {
       'Main Paw': {
         name: 'Main Paw',
-        item: null
+        item: weaponList.list.find(item => item.type === weapon.value) as Item
       },
       'Main Body': {
         name: 'Main Body',
@@ -191,10 +200,6 @@ const saveCharacter = () => {
     characterStore.updateItems('packBack', {    
       1: {
         name: '1',
-        item: weaponList.list.find(item => item.type === weapon.value) as Item
-      },
-      2: {
-        name: '2',
         item: {
           title: 'Torches',
           stat: '',
@@ -204,8 +209,8 @@ const saveCharacter = () => {
           used: 0
         }
       },
-      3: {
-        name: '3',
+      2: {
+        name: '2',
         item: {
           title: 'Rations',
           stat: '',
@@ -215,21 +220,25 @@ const saveCharacter = () => {
           used: 0
         }
       },
+      3: {
+        name: '3',
+        item: findItem(backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemA)
+      },
       4: {
         name: '4',
-        item: selectItem.value 
-          ? isHireling(startItem.value)
-          : findItem(itemsForSelect.value.itemA)
+        item: findItem(backgroundList[characterStore.stats.hp.max as BackgroundKeys][characterStore.pips as BackgroundKeys].itemB)
       },
       5: {
         name: '5',
-        item: selectItem.value
-          ? null 
-          : isHireling(itemsForSelect.value.itemB)
+        item: (extraItems.value && selectItem.value) 
+          ? isHireling(startItem.value)
+          : findItem(itemsForSelect.value.itemA)
       },
       6: {
         name: '6',
-        item: null
+        item: (extraItems.value && selectItem.value)
+          ? null 
+          : isHireling(itemsForSelect.value.itemB)
       }
     })
 
