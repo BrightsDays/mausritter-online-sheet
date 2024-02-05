@@ -1,5 +1,10 @@
 <template>
   <div class="block">
+    <img
+      class="image"
+      src="../assets/img/mobile.svg"
+      alt="mouse"
+    >
     <span class="info">
       Sorry, this app doesn't work on smartphones
     </span>
@@ -9,9 +14,16 @@
 <style lang="scss" scoped>
 .block {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100vw;
   height: 100svh;
   padding: 10vh 10vw;
+  gap: 3vh;
+
+  .image {
+    width: 100%;
+  }
 
   .info {
     display: inline-flex;
