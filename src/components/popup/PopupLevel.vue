@@ -49,7 +49,7 @@ const level = $computed(() => {
 
 const addExperience = (exp: number) => {
   if (experience > 0) {
-    levelUp(level)
+    if (level) levelUp(level)
     characterStore.addExperience(+exp)
     experience = 0
   }
