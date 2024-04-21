@@ -291,7 +291,7 @@ export const useCharacterStore = defineStore('character', {
       }
     },
     addExperience(exp: number) {
-      this.exp += exp
+      this.exp = +this.exp + +exp
     }
   }
 })
